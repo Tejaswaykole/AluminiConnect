@@ -3,15 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
-// Initialize TanStack Query Client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      retry: 2,
-    },
-  },
-});
+import { queryClient } from '../api/client';
 
 export default function RootLayout() {
   return (

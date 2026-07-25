@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { QueryClient } from '@tanstack/react-query';
 
 const API_URL = 'http://localhost:8000/api/v1';
 
@@ -23,3 +24,13 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
