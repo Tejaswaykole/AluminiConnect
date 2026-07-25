@@ -21,41 +21,55 @@ class GroqProvider(BaseAIProvider):
             "Content-Type": "application/json"
         }
         
-        payload = {
-            "model": self.model,
-            "messages": messages,
-            "temperature": ai_settings.AI_TEMPERATURE,
-            "max_tokens": ai_settings.AI_MAX_TOKENS,
-        }
+        models_to_try = [self.model] + ai_settings.GROQ_FALLBACK_MODELS
+        last_exception = None
         
-        if response_format:
-            payload["response_format"] = response_format
+        for current_model in models_to_try:
+            payload = {
+                "model": current_model,
+                "messages": messages,
+                "temperature": ai_settings.AI_TEMPERATURE,
+                "max_tokens": ai_settings.AI_MAX_TOKENS,
+            }
+            
+            if response_format:
+                payload["response_format"] = response_format
 
-        for attempt in range(ai_settings.AI_RETRY_COUNT):
-            try:
-                async with httpx.AsyncClient(timeout=ai_settings.AI_TIMEOUT) as client:
-                    response = await client.post(
-                        f"{self.base_url}/chat/completions",
-                        headers=headers,
-                        json=payload
-                    )
-                    
-                    if response.status_code == 429:
-                        if attempt == ai_settings.AI_RETRY_COUNT - 1:
-                            raise AIRateLimitError("Groq API rate limit exceeded.")
-                        await asyncio.sleep(2 ** attempt)  # Exponential backoff
-                        continue
+            for attempt in range(ai_settings.AI_RETRY_COUNT):
+                try:
+                    async with httpx.AsyncClient(timeout=ai_settings.AI_TIMEOUT) as client:
+                        response = await client.post(
+                            f"{self.base_url}/chat/completions",
+                            headers=headers,
+                            json=payload
+                        )
                         
-                    response.raise_for_status()
-                    return response.json()
-                    
-            except httpx.TimeoutException:
-                if attempt == ai_settings.AI_RETRY_COUNT - 1:
-                    raise AITimeoutError("Request to Groq API timed out.")
-            except httpx.HTTPStatusError as e:
-                raise AIProviderError(f"Groq API returned an error: {e.response.text}")
-            except Exception as e:
-                raise AIProviderError(f"Unexpected error communicating with Groq: {str(e)}")
+                        if response.status_code == 429:
+                            if attempt == ai_settings.AI_RETRY_COUNT - 1:
+                                last_exception = AIRateLimitError(f"Groq API rate limit exceeded for model {current_model}.")
+                                break  # Try next model
+                            await asyncio.sleep(2 ** attempt)  # Exponential backoff
+                            continue
+                            
+                        response.raise_for_status()
+                        return response.json()
+                        
+                except httpx.TimeoutException:
+                    if attempt == ai_settings.AI_RETRY_COUNT - 1:
+                        last_exception = AITimeoutError(f"Request to Groq API timed out for model {current_model}.")
+                        break  # Try next model
+                except httpx.HTTPStatusError as e:
+                    if e.response.status_code in (400, 401, 403, 404):
+                        raise AIProviderError(f"Groq API returned a client error: {e.response.text}")
+                    last_exception = AIProviderError(f"Groq API returned an error for model {current_model}: {e.response.text}")
+                    break  # Try next model on server error
+                except Exception as e:
+                    last_exception = AIProviderError(f"Unexpected error communicating with Groq on model {current_model}: {str(e)}")
+                    break  # Try next model
+
+        if last_exception:
+            raise last_exception
+        raise AIProviderError("Failed to generate response using all available Groq models.")
 
     async def generate_text(self, system_prompt: str, user_prompt: str, **kwargs) -> str:
         messages = [
