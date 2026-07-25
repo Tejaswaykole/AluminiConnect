@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
 import { queryClient } from '../api/client';
+import '../../global.css';
 
 export default function RootLayout() {
   return (

@@ -14,11 +14,11 @@ export function Input({ label, error, className = '', isPassword = false, ...pro
 
   return (
     <View className={`w-full ${className}`}>
-      {label && (
+      {label ? (
         <Typography variant="caption" color="muted" className="mb-1 font-medium">
           {label}
         </Typography>
-      )}
+      ) : null}
       <View className="relative w-full">
         <TextInput
           className={`w-full bg-background-surface border ${error ? 'border-status-error' : 'border-border-strong'} rounded-md px-4 py-3 text-text font-sans ${isPassword ? 'pr-12' : ''}`}
@@ -26,7 +26,7 @@ export function Input({ label, error, className = '', isPassword = false, ...pro
           secureTextEntry={isPassword && !isPasswordVisible}
           {...props}
         />
-        {isPassword && (
+        {isPassword ? (
           <TouchableOpacity 
             className="absolute right-4 top-0 bottom-0 justify-center"
             onPress={() => setIsPasswordVisible(!isPasswordVisible)}
@@ -36,13 +36,13 @@ export function Input({ label, error, className = '', isPassword = false, ...pro
               {isPasswordVisible ? 'Hide' : 'Show'}
             </Typography>
           </TouchableOpacity>
-        )}
+        ) : null}
       </View>
-      {error && (
+      {error ? (
         <Typography variant="caption" color="error" className="mt-1">
           {error}
         </Typography>
-      )}
+      ) : null}
     </View>
   );
 }
