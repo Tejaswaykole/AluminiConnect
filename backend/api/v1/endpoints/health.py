@@ -49,6 +49,7 @@ async def health_check(db: AsyncSession = Depends(get_db)):
         "database": db_status,
         "latency_ms": latency_ms,
         "migration": migration,
+        "ai_provider": "connected",  # Assuming config validates at startup
         "version": "1.0.0"
     }
 

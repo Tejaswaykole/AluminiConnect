@@ -1,36 +1,39 @@
-# Alumni Connect
+# AlmaBridge (Alumni Connect)
 
-This repository contains the front-end application for Alumni Connect.
+AlmaBridge is a comprehensive university networking platform connecting students, alumni, and placement officers. It features an intelligent AI layer for career guidance, resume analysis, and networking recommendations.
 
-## Architecture & Folder Structure
+## Architecture
+- **Frontend**: React Native (Expo) using NativeWind (TailwindCSS) and Zustand.
+- **Backend**: FastAPI (Python) using SQLAlchemy and Pydantic.
+- **AI Integration**: Modular architecture powered by Groq (LLama3-70b-8192).
 
-This project follows a feature-sliced design approach to maintain a scalable, maintainable, and modular codebase.
+## Developer Setup
 
-### Directory Layout
+### Prerequisites
+- Node.js (v18+)
+- Python (v3.10+)
+- PostgreSQL (or Supabase instance)
 
-- `src/assets/`: Static assets such as images, global styles (`theme.css`), and fonts.
-- `src/core/`: Application-wide configurations, constants, theme tokens, and base API clients.
-- `src/shared/`: Highly reusable, domain-agnostic UI components (e.g., standard buttons, inputs), hooks, and types used across multiple features.
-- `src/features/`: Feature-specific modules. Each feature (e.g., `auth`, `directory`) encapsulates its own components, logic, and state.
-- `src/layouts/`: Structural page layouts (e.g., `MainLayout`, `AuthLayout`).
-- `src/pages/`: Route-level components that compose features and layouts.
-- `src/routes/`: Application routing configuration.
+### Backend Setup
+1. `cd backend`
+2. Create virtual environment: `python -m venv venv`
+3. Activate environment: `source venv/bin/activate` (or `venv\Scripts\activate` on Windows)
+4. Install dependencies: `pip install -r requirements.txt`
+5. Create a `.env` file (see `.env.example`). *Note: Ensure you include a `GROQ_API_KEY` to run AI Services.*
+6. Run server: `uvicorn main:app --reload`
 
-### UI Philosophy
+### Frontend Setup
+1. `cd frontend`
+2. Install dependencies: `npm install`
+3. Start Expo: `npx expo start`
 
-The UI design language for this application is strict:
-- **Minimal, Professional, Clean:** No heavy shadows, no glassmorphism, no complex gradient backgrounds.
-- **Accessible & Responsive:** High contrast colors, semantic HTML, mobile-first design.
-- **Fast & Easy to Use:** Performance is prioritized over decorative animations.
+## Documentation
+- [Architecture Guide](docs/architecture.md)
+- [Frontend Design System](docs/design-system.md)
+- [AI Integration](docs/ai-integration.md)
+- [Security Guide](docs/security-guide.md)
+- [Testing Guide](docs/testing-guide.md)
 
-### Development Guidelines
-
-1. **Never duplicate code:** Use `src/shared/` for reusable elements.
-2. **Feature Cohesion:** Keep feature-specific logic within `src/features/[feature-name]/`.
-3. **No Unrelated Changes:** When working on a task, do not modify files outside of that scope.
-4. **Strict Types:** TypeScript strict mode is enabled. Use proper types and avoid `any`.
-
-## Getting Started
-
-1. `npm install`
-2. `npm run dev`
+## Testing
+- Backend tests (pytest): `cd backend && pytest tests/`
+- Frontend tests (jest): `cd frontend && npm test`
