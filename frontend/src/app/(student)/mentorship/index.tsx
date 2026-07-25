@@ -45,7 +45,7 @@ export default function MentorshipScreen() {
                   <Typography variant="caption" color="muted">{item.position} at {item.company}</Typography>
                 </View>
                 <View className="bg-status-success/10 px-2 py-1 rounded-md">
-                  <Typography variant="caption" color="success" className="font-medium">Active</Typography>
+                  <Typography variant="caption" color="primary" className="font-medium">Active</Typography>
                 </View>
               </View>
             </Card>

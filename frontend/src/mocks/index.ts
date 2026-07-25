@@ -120,3 +120,99 @@ export const NOTIFICATION_MOCKS = [
     type: 'event',
   }
 ];
+
+export const ALUMNI_USER = {
+  id: 'a0',
+  name: 'Jane Doe',
+  role: 'alumni',
+  avatar: 'https://i.pravatar.cc/150?u=a0',
+  company: 'Global Tech',
+  position: 'Product Manager',
+  industry: 'Technology',
+  experience: '5 years',
+  education: 'B.S. in Computer Science',
+  graduationYear: '2021',
+  location: 'Seattle, WA',
+  skills: ['Product Strategy', 'Agile', 'UI/UX Design'],
+  bio: 'Passionate about building products that make a difference. Always open to helping students.',
+  availableForMentorship: true,
+  socialLinks: {
+    linkedin: 'linkedin.com/in/janedoe',
+    twitter: '@janedoe',
+  },
+  contact: 'jane.doe@example.com',
+};
+
+export const STUDENT_MOCKS = [
+  {
+    id: 's1',
+    name: 'Alex Johnson',
+    avatar: 'https://i.pravatar.cc/150?u=u1',
+    college: 'College of Engineering',
+    department: 'Computer Science',
+    graduationYear: '2026',
+    skills: ['React', 'TypeScript', 'Python'],
+    interests: ['Machine Learning', 'Open Source'],
+    projects: ['AI Chatbot', 'Portfolio Website'],
+    careerGoals: 'To become a full-stack developer at a top tech company.',
+  },
+  {
+    id: 's2',
+    name: 'Maria Garcia',
+    avatar: 'https://i.pravatar.cc/150?u=u2',
+    college: 'College of Design',
+    department: 'Graphic Design',
+    graduationYear: '2025',
+    skills: ['Figma', 'Adobe CC', 'UI/UX'],
+    interests: ['User Research', 'Typography'],
+    projects: ['App Redesign', 'Brand Identity'],
+    careerGoals: 'Lead product designer focusing on accessibility.',
+  },
+  {
+    id: 's3',
+    name: 'David Kim',
+    avatar: 'https://i.pravatar.cc/150?u=u3',
+    college: 'Business School',
+    department: 'Finance',
+    graduationYear: '2024',
+    skills: ['Financial Modeling', 'Excel', 'Data Analysis'],
+    interests: ['Investment Banking', 'Fintech'],
+    projects: ['Market Analysis Report', 'Startup Valuation'],
+    careerGoals: 'Financial analyst in the tech sector.',
+  }
+];
+
+export const PLACEMENT_USER = {
+  id: 'p1',
+  name: 'Placement Coordinator',
+  role: 'placement',
+  avatar: 'https://i.pravatar.cc/150?u=p1',
+};
+
+export const ADMIN_USER = {
+  id: 'ad1',
+  name: 'System Admin',
+  role: 'admin',
+  avatar: 'https://i.pravatar.cc/150?u=ad1',
+};
+
+export const DRIVE_MOCKS = [
+  {
+    id: 'd1',
+    title: 'Tech Giants Recruitment Drive',
+    company: 'Multiple Companies',
+    date: '2026-09-10',
+    status: 'Upcoming',
+    registeredCount: 150,
+    description: 'Annual placement drive featuring top tech companies.',
+  },
+  {
+    id: 'd2',
+    title: 'Fintech Hiring Marathon',
+    company: 'FinCorp',
+    date: '2026-08-25',
+    status: 'Ongoing',
+    registeredCount: 85,
+    description: 'Exclusive hiring for finance and engineering students.',
+  }
+];
