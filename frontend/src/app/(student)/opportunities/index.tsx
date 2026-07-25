@@ -7,7 +7,8 @@ import { FilterChip } from '../../../components/FilterChip';
 import { Card } from '../../../components/Card';
 import { Badge } from '../../../components/Badge';
 import { ScreenContainer } from '../../../components/ScreenContainer';
-import { OPPORTUNITY_MOCKS } from '../../../mocks';
+import { useOpportunities } from '../../../hooks/queries';
+import { LoadingState, ErrorState, EmptyState } from '../../../components';
 
 const CATEGORIES = ['All', 'Internship', 'Full-time', 'Part-time', 'Remote'];
 
@@ -16,7 +17,12 @@ export default function OpportunitiesScreen() {
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const filteredOpportunities = OPPORTUNITY_MOCKS.filter(opp => {
+  const { data: opportunities, isLoading, isError, refetch } = useOpportunities();
+
+  if (isLoading) return <LoadingState message="Loading opportunities..." />;
+  if (isError) return <ErrorState onRetry={refetch} />;
+
+  const filteredOpportunities = (opportunities || []).filter(opp => {
     const matchesSearch = opp.title.toLowerCase().includes(search.toLowerCase()) || 
                           opp.company.toLowerCase().includes(search.toLowerCase());
     const matchesFilter = activeFilter === 'All' || 
@@ -57,12 +63,7 @@ export default function OpportunitiesScreen() {
         data={filteredOpportunities}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={
-          <View className="py-12 items-center justify-center">
-            <Typography variant="h3" color="muted" className="mb-2">No opportunities found</Typography>
-            <Typography variant="caption" color="muted">Try adjusting your filters.</Typography>
-          </View>
-        }
+        ListEmptyComponent={<EmptyState title="No opportunities found" message="Try adjusting your filters." />}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => router.push(`/opportunities/${item.id}`)}>
             <Card className="mb-4">

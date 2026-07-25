@@ -5,20 +5,36 @@ import { ScreenContainer } from '../../components/ScreenContainer';
 import { Section } from '../../components/Section';
 import { Card } from '../../components/Card';
 import { Avatar } from '../../components/Avatar';
-import { CURRENT_USER, EVENT_MOCKS, OPPORTUNITY_MOCKS } from '../../mocks';
+import { LoadingState, ErrorState } from '../../components';
+import { useCurrentUser, useEvents, useOpportunities } from '../../hooks/queries';
 
 export default function StudentDashboard() {
   const router = useRouter();
+  
+  const { data: user, isLoading: userLoading, isError: userError, refetch: refetchUser } = useCurrentUser();
+  const { data: events, isLoading: eventsLoading, isError: eventsError, refetch: refetchEvents } = useEvents();
+  const { data: opportunities, isLoading: oppsLoading, isError: oppsError, refetch: refetchOpps } = useOpportunities();
+
+  if (userLoading || eventsLoading || oppsLoading) {
+    return <LoadingState message="Loading dashboard..." />;
+  }
+
+  if (userError || eventsError || oppsError) {
+    const handleRetry = () => { refetchUser(); refetchEvents(); refetchOpps(); };
+    return <ErrorState onRetry={handleRetry} message="Failed to load your dashboard." />;
+  }
+
+  if (!user) return null;
 
   return (
     <ScreenContainer scrollable>
       {/* Header */}
       <View className="flex-row justify-between items-center mb-8">
         <View className="flex-row items-center flex-1">
-          <Avatar url={CURRENT_USER.avatar} fallbackInitials="AJ" size="md" className="mr-4" />
+          <Avatar url={user.avatar} fallbackInitials="AJ" size="md" className="mr-4" />
           <View>
             <Typography variant="body" color="muted">Welcome back,</Typography>
-            <Typography variant="h2">{CURRENT_USER.name}</Typography>
+            <Typography variant="h2">{user.name}</Typography>
           </View>
         </View>
         <TouchableOpacity onPress={() => router.push('/notifications')} className="p-2 relative">
@@ -63,7 +79,7 @@ export default function StudentDashboard() {
       {/* Upcoming Events */}
       <Section title="Upcoming Events" onSeeAll={() => router.push('/events')}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="-mx-4 px-4 pb-2">
-          {EVENT_MOCKS.map((event) => (
+          {(events || []).map((event) => (
             <TouchableOpacity 
               key={event.id}
               onPress={() => router.push(`/events/${event.id}`)}
@@ -84,7 +100,7 @@ export default function StudentDashboard() {
 
       {/* Recommended Opportunities */}
       <Section title="Recommended For You" onSeeAll={() => router.push('/opportunities')}>
-        {OPPORTUNITY_MOCKS.slice(0, 2).map((opp) => (
+        {(opportunities || []).slice(0, 2).map((opp) => (
           <TouchableOpacity key={opp.id} onPress={() => router.push(`/opportunities/${opp.id}`)}>
             <Card className="mb-3 flex-row items-center">
               <View className="w-12 h-12 bg-secondary/10 rounded-lg items-center justify-center mr-4">

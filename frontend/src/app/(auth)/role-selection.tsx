@@ -6,12 +6,13 @@ import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
 import { ScreenContainer } from '../../components/ScreenContainer';
 
-type Role = 'student' | 'alumni' | 'placement';
+type Role = 'student' | 'alumni' | 'placement' | 'admin';
 
 const ROLES = [
   { id: 'student', title: 'Student', description: 'Currently enrolled at the university.' },
   { id: 'alumni', title: 'Alumni', description: 'Graduated from the university.' },
   { id: 'placement', title: 'Placement Cell', description: 'University placement coordinator.' },
+  { id: 'admin', title: 'Administrator', description: 'System administrator.' },
 ] as const;
 
 export default function RoleSelectionScreen() {
