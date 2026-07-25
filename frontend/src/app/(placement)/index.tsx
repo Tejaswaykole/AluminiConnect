@@ -22,7 +22,7 @@ export default function PlacementDashboard() {
           </View>
         </View>
         <TouchableOpacity onPress={() => router.push('/notifications')} className="p-2 relative">
-          <Typography className="text-2xl">🔔</Typography>
+          <MaterialIcons name="notifications" size={24} color="#154539" />
           <View className="absolute top-2 right-2 w-2.5 h-2.5 bg-status-error rounded-full" />
         </TouchableOpacity>
       </View>
@@ -44,10 +44,10 @@ export default function PlacementDashboard() {
       {/* Quick Actions */}
       <View className="flex-row flex-wrap justify-between mb-8">
         {[
-          { id: 'students', icon: '🎓', label: 'Students', route: '/students' },
-          { id: 'jobs', icon: '💼', label: 'Jobs', route: '/opportunities' },
-          { id: 'drives', icon: '🏢', label: 'Drives', route: '/drives' },
-          { id: 'reports', icon: '📊', label: 'Reports', route: '/reports' },
+          { id: 'students', icon: 'school', label: 'Students', route: '/students' },
+          { id: 'jobs', icon: 'work', label: 'Jobs', route: '/opportunities' },
+          { id: 'drives', icon: 'business', label: 'Drives', route: '/drives' },
+          { id: 'reports', icon: 'bar-chart', label: 'Reports', route: '/reports' },
         ].map((action) => (
           <TouchableOpacity 
             key={action.id} 
@@ -90,7 +90,7 @@ export default function PlacementDashboard() {
           <TouchableOpacity key={opp.id} onPress={() => router.push(`/opportunities/${opp.id}`)}>
             <Card className="mb-3 flex-row items-center">
               <View className="w-12 h-12 bg-secondary/10 rounded-lg items-center justify-center mr-4">
-                <Typography className="text-xl">🏢</Typography>
+                <MaterialIcons name="business" size={24} color="#154539" />
               </View>
               <View className="flex-1">
                 <Typography variant="body" className="font-semibold mb-0.5">{opp.title}</Typography>

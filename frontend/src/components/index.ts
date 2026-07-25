@@ -13,3 +13,6 @@ export * from './ScreenContainer';
 export * from './SearchBar';
 export * from './Section';
 export * from './Typography';
+
+export * from './Sidebar';
+export * from './ResponsiveLayout';

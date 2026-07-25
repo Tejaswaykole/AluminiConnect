@@ -10,7 +10,7 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChangeText, placeholder = 'Search...', className = '' }: SearchBarProps) {
   return (
-    <View className={`flex-row items-center bg-background-surface border border-border-strong rounded-lg px-3 py-2 ${className}`}>
+    <View className={`flex-row items-center bg-surface border border-border-strong rounded-lg px-3 py-2 ${className}`}>
       <Typography variant="body" color="muted" className="mr-2">🔍</Typography>
       <TextInput
         className="flex-1 text-text font-sans"

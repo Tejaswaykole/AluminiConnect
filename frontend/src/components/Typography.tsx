@@ -1,7 +1,7 @@
 import { Text, TextProps } from 'react-native';
 
 interface TypographyProps extends TextProps {
-  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'caption';
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body-lg' | 'body' | 'body-sm' | 'label-md' | 'caption';
   color?: 'default' | 'muted' | 'inverse' | 'primary' | 'error';
   align?: 'left' | 'center' | 'right';
   className?: string;
@@ -18,11 +18,15 @@ export function Typography({
   const baseClasses = 'font-sans';
   
   const variants = {
-    h1: 'text-4xl font-bold leading-tight',
-    h2: 'text-2xl font-semibold leading-snug',
-    h3: 'text-xl font-medium leading-normal',
-    body: 'text-base font-normal leading-relaxed',
-    caption: 'text-sm font-normal leading-normal',
+    h1: 'text-3xl font-semibold leading-[1.2] tracking-[-0.02em]',
+    h2: 'text-[28px] font-semibold leading-[1.2] tracking-[-0.01em]',
+    h3: 'text-2xl font-semibold leading-[1.3]',
+    h4: 'text-xl font-semibold leading-[1.4]',
+    'body-lg': 'text-lg font-normal leading-[1.6]',
+    body: 'text-base font-normal leading-[1.6]',
+    'body-sm': 'text-sm font-normal leading-[1.5]',
+    'label-md': 'text-[13px] font-medium leading-none',
+    caption: 'text-xs font-medium leading-none tracking-[0.02em]',
   };
 
   const colors = {

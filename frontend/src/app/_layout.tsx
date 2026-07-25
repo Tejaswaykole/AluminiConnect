@@ -22,8 +22,7 @@ export default function RootLayout() {
           <Stack.Screen name="(auth)" />
           <Stack.Screen name="(student)" />
           <Stack.Screen name="(alumni)" />
-          <Stack.Screen name="(placement)" />
-          <Stack.Screen name="(admin)" />
+          <Stack.Screen name="(institution)" />
         </Stack>
       </QueryClientProvider>
     </SafeAreaProvider>

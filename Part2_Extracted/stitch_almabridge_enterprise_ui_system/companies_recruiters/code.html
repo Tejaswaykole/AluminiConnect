@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduCore Admin - Companies &amp; Recruiters</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#bceddc",
+                        "inverse-primary": "#a0d1c0",
+                        "tertiary-container": "#784840",
+                        "on-surface": "#1a1c1b",
+                        "outline-variant": "#c0c8c4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "secondary": "#5e5e5e",
+                        "on-tertiary-fixed-variant": "#683a33",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "primary-container": "#2f5d50",
+                        "surface": "#f9faf7",
+                        "on-secondary-container": "#626262",
+                        "tertiary-fixed-dim": "#f7b7ac",
+                        "on-primary-container": "#a3d4c3",
+                        "surface-dim": "#d9dad8",
+                        "tertiary": "#5d322a",
+                        "on-tertiary-container": "#fbbaaf",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#e4e2e2",
+                        "background": "#f9faf7",
+                        "surface-tint": "#396759",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#464747",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-primary-fixed": "#002019",
+                        "on-background": "#1a1c1b",
+                        "inverse-surface": "#2e3130",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#e1dfdf",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1ee",
+                        "primary-fixed-dim": "#a0d1c0",
+                        "on-surface-variant": "#404945",
+                        "on-tertiary-fixed": "#33110b",
+                        "surface-variant": "#e2e3e0",
+                        "surface-container-low": "#f3f4f1",
+                        "outline": "#717975",
+                        "on-primary-fixed-variant": "#204f42",
+                        "surface-container-highest": "#e2e3e0",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#edeeec",
+                        "primary": "#154539",
+                        "surface-bright": "#f9faf7",
+                        "surface-container-high": "#e7e8e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sidebar-width": "260px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xl": "40px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "2xl": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "h4": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h1-mobile": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e4e4e4; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d0d0d0; }
+        
+        .drawer-shadow {
+            box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+        }
+
+        .shimmer-ai {
+            background: linear-gradient(90deg, #f9faf7 25%, #ffffff 50%, #f9faf7 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Sidebar Navigation -->
+<aside class="flex flex-col h-screen w-sidebar-width bg-surface border-r border-outline-variant z-50 fixed left-0 top-0">
+<div class="p-lg">
+<h1 class="font-h3 text-h3 text-primary tracking-tight">EduCore Admin</h1>
+<p class="text-label-sm text-on-surface-variant/60 uppercase tracking-widest mt-1">Global System</p>
+</div>
+<nav class="flex-1 overflow-y-auto mt-4 px-2 space-y-1">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-md text-on-surface-variant px-4 py-3 opacity-80 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md bg-surface-container text-primary border-l-4 border-primary px-4 py-3 rounded-lg shadow-sm" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md text-body-md">Placement Cell</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-4 py-3 opacity-80 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md text-body-md">Students</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-4 py-3 opacity-80 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md text-body-md">Alumni</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-4 py-3 opacity-80 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-body-md text-body-md">Staff</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-4 py-3 opacity-80 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-4 py-3 opacity-80 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="p-lg border-t border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-md text-label-md truncate">Admin Profile</p>
+<p class="text-label-sm text-on-surface-variant truncate">University Registrar</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="flex justify-between items-center h-16 px-lg ml-sidebar-width w-[calc(100%-260px)] sticky top-0 bg-surface/80 backdrop-blur-md z-40 border-b border-outline-variant">
+<div class="flex items-center gap-xl w-1/2">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Search companies, recruiters, or departments..." type="text"/>
+</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Directory</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Resources</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-label-md text-label-md hover:brightness-110 transition-all">
+<span class="material-symbols-outlined !text-[18px]">add</span>
+                Invite Recruiter
+            </button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-sidebar-width p-lg bg-background min-h-[calc(100vh-64px)] overflow-x-hidden">
+<!-- Dashboard Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+<!-- Stats Card 1 -->
+<div class="bg-surface border border-outline-variant p-lg rounded-xl flex flex-col gap-xs transition-all hover:border-primary/30">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Total Companies</span>
+<div class="flex items-baseline gap-2 mt-2">
+<h2 class="text-h2 font-h2 text-on-surface">1,248</h2>
+<span class="text-primary font-label-sm text-label-sm flex items-center">+12% <span class="material-symbols-outlined !text-[14px]">trending_up</span></span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden mt-2">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+</div>
+<!-- Stats Card 2 -->
+<div class="bg-surface border border-outline-variant p-lg rounded-xl flex flex-col gap-xs transition-all hover:border-primary/30">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Active Recruiters</span>
+<div class="flex items-baseline gap-2 mt-2">
+<h2 class="text-h2 font-h2 text-on-surface">432</h2>
+<span class="text-primary font-label-sm text-label-sm flex items-center">+5.2% <span class="material-symbols-outlined !text-[14px]">trending_up</span></span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden mt-2">
+<div class="h-full bg-primary w-[40%]"></div>
+</div>
+</div>
+<!-- Stats Card 3 -->
+<div class="bg-surface border border-outline-variant p-lg rounded-xl flex flex-col gap-xs transition-all hover:border-primary/30">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Campus Partners</span>
+<div class="flex items-baseline gap-2 mt-2">
+<h2 class="text-h2 font-h2 text-on-surface">86</h2>
+<span class="text-secondary font-label-sm text-label-sm flex items-center">Stable <span class="material-symbols-outlined !text-[14px]">remove</span></span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden mt-2">
+<div class="h-full bg-secondary w-[90%]"></div>
+</div>
+</div>
+<!-- Stats Card 4 -->
+<div class="bg-surface border border-outline-variant p-lg rounded-xl flex flex-col gap-xs transition-all hover:border-primary/30">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">New Registrations</span>
+<div class="flex items-baseline gap-2 mt-2">
+<h2 class="text-h2 font-h2 text-on-surface">24</h2>
+<span class="text-error font-label-sm text-label-sm flex items-center">Action Req <span class="material-symbols-outlined !text-[14px]">priority_high</span></span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden mt-2">
+<div class="h-full bg-error w-[15%]"></div>
+</div>
+</div>
+</section>
+<!-- Main Content Area: Data Table and Controls -->
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden mb-lg">
+<!-- Table Header / Tabs -->
+<div class="flex items-center justify-between px-lg py-md border-b border-outline-variant">
+<div class="flex items-center gap-lg">
+<button class="text-primary font-bold border-b-2 border-primary pb-2 font-label-md text-label-md" id="tab-companies" onclick="switchTab('companies')">Company Directory</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors pb-2 font-label-md text-label-md" id="tab-recruiters" onclick="switchTab('recruiters')">Recruiter Management</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors pb-2 font-label-md text-label-md flex items-center gap-1" id="tab-approvals" onclick="switchTab('approvals')">Approvals <span class="bg-error/10 text-error px-1.5 py-0.5 rounded-full text-[10px]">12</span></button>
+</div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-2 px-3 py-1.5 border border-outline-variant rounded-lg text-label-sm font-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined !text-[18px]">publish</span>
+                        Bulk Import
+                    </button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-outline-variant rounded-lg text-label-sm font-label-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined !text-[18px]">filter_list</span>
+                        Filters
+                    </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto" id="table-container">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Company</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Industry</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Partnership</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Status</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase">Recruiters</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer group" onclick="openProfileDrawer('TechNova Systems')">
+<td class="px-lg py-4">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A clean minimalist corporate logo for TechNova Systems using bold geometric sans-serif typography in deep forest green and light mint, set against a sterile white background with soft studio lighting. Minimalist SaaS brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdKR6KTUdpI4YINZ2e-qd2rccjbPl0_NvSow8aOsuqFrPl2pwDr5wHVnlD5ppgRzzm-bj1mUYRzkrP3DD2hYs5Q5Mdhu_3pAgUMg3mHBaDzP2ZNUU1S4loByXWCwNT84LxRiHZGNf7WHaeCfiavSpgmkfzxx75g604U6ylDQCOLYsVcgJ3NrviKNwx5lGSlwBjL0Rz-abRuGt_wqn-r0i-xmeUk4_Zpi3BL7ZGl5dXtKM7iSRy7D60FbOOiuJUVXo6tZEcaUrpQUQ"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold">TechNova Systems</p>
+<p class="text-label-sm text-on-surface-variant">tech-nova.io</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-2 py-1 rounded bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm">Software Engineering</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex flex-col gap-1">
+<span class="flex items-center gap-1 text-label-sm text-on-surface"><span class="material-symbols-outlined !text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> Placement</span>
+<span class="flex items-center gap-1 text-label-sm text-on-surface"><span class="material-symbols-outlined !text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> Internship</span>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm uppercase font-bold tracking-tight">Active</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a corporate recruiter, diverse ethnicity, soft studio lighting, neutral grey background, high resolution, minimalist business style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxK5XS5aDJCgRPPyEpp8bC1ru9-h1liYxgkwq4OZcI4z0ZB8gekwdWCdGfpJRmy_idYfmL_EZ3tpWISCjBVHeMg5huhXJcCcbcFm00XlCBTfyRUbgnvuwVvtXl-baEb5n6EB2dwpYFBLIk2GCQOsF35KxYxCetIRTwMqlqwRSKge81nQwimot0RQDqh1OG1NvkxDiqADA7ytQnOAP159F6MIsie1z-7e1n_XuNFXbwhczZ9YFRfKFr7Fb4Ttc7JzLCBg0rWd0jGGw"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a female recruiter, corporate attire, warm lighting, blurred office background, modern minimal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqBxOl5UyzwSFoBN7loT6DxzIWrly-tnXVJvArj1SufkZmZrctO8Mv-SHLtoC_yZJXqrmqPP3DjG6KYMJzSHEyIMRSgCKe-wZrBfmalObmsQhha04OIaCDmcR-g5Pe1xpu2n5a1MeRTq6gIMU6tWn5dKp6-Sz4Jj3cUKvdLkb0S51fJvQepsGfnjqg4JzTtA_tHfn_p6VBfHz9oMIw0uCnsaLWm45cqNCl1oZjHdcFX1XKiXQf_gClqRjxyOR5BemeMtHa2gN3zSg"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-high flex items-center justify-center text-[10px] font-bold">+2</div>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer" onclick="openProfileDrawer('Global Finance Corp')">
+<td class="px-lg py-4">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional banking logo for Global Finance Corp, featuring an abstract shield icon, deep navy and silver colors, clean modern lines, minimalist corporate identity on white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEANuHx1YlZbfj7jhsMqEYsEqfLBakse3oTbppxAAH-Xthrxrs9jMUk0kYaSSoEvxck76qDARspgorEewCq4H6ylf3nrVjB70HzMOXJ9AIBEFvMJ4m7xslOFbAGLdfibmGrWuBkResKlODaluJzhVhJ-wFYAztt4XKI6uKdYqxwwgkcltUfidN4HDkdw5tR_D2KIRqpTkNx57cjUpL-ymqy7LsDyxM0YOhOT4OzUA19TjpbUnUZR8cZ8aL0_yuoiXs_PswBmWUXtQ"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold">Global Finance Corp</p>
+<p class="text-label-sm text-on-surface-variant">globalfinance.com</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-2 py-1 rounded bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm">Financial Services</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex flex-col gap-1">
+<span class="flex items-center gap-1 text-label-sm text-on-surface"><span class="material-symbols-outlined !text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> Placement</span>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm uppercase font-bold tracking-tight">Active</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional corporate headshot of a male recruiter with glasses, friendly expression, clean lighting, minimalist grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoyIFbqsd8krQWorvVZdHMFvZD5QKupA6ClwDlcewubuLu_6YRXKMhrVYx8K-iHAnCEFRCIWJtXbgBWCQmlAjHjV9BjY-BSkVdRd7UL6l6ticUWZZsQ9PWDSqSPVCki1EsORT25EB6t2pe3l_mhP_4MvsZZTCWCki-f4TTxygPtwu1YrQ1kMywJyHMthQtRqJ72s0vOt_vhrGmO3oOhieX2sI8hcO-2eBBUwpMVqoTF4Q4HerHrlxOy6Dqn3l7jVnaWIzYITGAdGM"/>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 3 (Paused) -->
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer" onclick="openProfileDrawer('Creative Minds Agency')">
+<td class="px-lg py-4">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A creative boutique agency logo for Creative Minds Agency, colorful abstract brushstroke, playful yet professional, minimalist high-end design, white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVIkE2508pF9KWzu225KvuY9QIf2MN2j4OgKm5PVLAkUEqAV3U926t81zBI9PrxZLE-KQSPTjJEbyMB5p8Jx11OiEncrFr5F9-6llW7dUcNdjl9R6PKGRoK1GSXSncDTwQhM0xrtvoSLA4HOV08mvzQMGvR6RPEO_V2vPWP4DtdGVavVEA2LIH5bNuSn4Zoi9l3yheWFQlUnQjsyv0NrA-ks_vW39jDiWCaH6stz9F3W-g9EiGk3eFFPT5R4PCK4npkXDHdNXKt4w"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-semibold">Creative Minds Agency</p>
+<p class="text-label-sm text-on-surface-variant">cminds.creative</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-2 py-1 rounded bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm">Digital Marketing</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex flex-col gap-1">
+<span class="flex items-center gap-1 text-label-sm text-on-surface"><span class="material-symbols-outlined !text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span> Internship</span>
+</div>
+</td>
+<td class="px-lg py-4">
+<span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm uppercase font-bold tracking-tight">On Hold</span>
+</td>
+<td class="px-lg py-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Modern professional portrait of a marketing director, bright lighting, high-contrast, professional studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqUM8oH2drUYYiB1JMUcXnAU__RfciYGzah8P0_EXnwkehcWkfB_km4mmZd4-1rrcVwlqCcNPDjf_f2u0VglKs4PtAzcMVT0xkoQVL0zcgSwaKSfD8moRqgpLIqQYZc5wvMJDNnsl9Dl0PM9hEPUDAkiQ5LdJoIrnzordF63qA4qozILI0T2_BB4_LujJfuTxAfDhmcW3h9F3hXK0Aca15ba5WX-h1r3avamG5Atz_TSMMjZHgfD471ZfLMggMrCKvctt5OFiBJmE"/>
+</div>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Pagination -->
+<div class="flex items-center justify-between px-lg py-md border-t border-outline-variant">
+<p class="text-label-sm text-on-surface-variant">Showing 1 to 3 of 1,248 entries</p>
+<div class="flex items-center gap-base">
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined !text-[18px]">chevron_left</span></button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded font-label-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors font-label-sm">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors font-label-sm">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined !text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</section>
+<!-- Recruiter Management Visualization (Asymmetric Grid) -->
+<h3 class="text-h4 font-h4 text-on-surface mb-lg">Key Recruiting Partners</h3>
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-2xl">
+<!-- Partner 1 -->
+<div class="bg-surface border border-outline-variant p-lg rounded-xl flex flex-col gap-md transition-all hover:shadow-lg">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center">
+<img class="w-full h-full object-cover rounded-full" data-alt="Portrait of a senior executive recruiter, professional, authoritative, warm studio lighting, neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM_t17DbjbYKwfrDU-u98M-YEOenbk1yhiF5G17G3Bi29y3XDUSPHCARzjvSgOJcpBrh47uR2FbNmulkvSydUy-x1suLjXnYVLk0bfY8kgBKLbET6SpX8gq-YENFjt9SYvOX8AvPE9ozezRYarsUIyZovygv3Nc2x_BkeqUzdy2n4gPkaFe9rWa8Iy1LWwYF_2TR0zdZvu9Sr1W7OXeJq2i7VtTKwwb_0wCrD-RwmbaciIuooP81bpPM6rqTQ2OtfhK00Pxzij8oU"/>
+</div>
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase">Senior Partner</span>
+</div>
+<div>
+<h4 class="font-body-md font-bold">Sarah Jenkins</h4>
+<p class="text-label-sm text-on-surface-variant">Lead Recruiter @ TechNova</p>
+</div>
+<div class="space-y-2 border-t border-outline-variant pt-md">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant">Assigned Dept</span>
+<span class="font-medium">Computer Science</span>
+</div>
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant">Last Hire</span>
+<span class="font-medium">2 days ago</span>
+</div>
+</div>
+<button class="w-full py-2 bg-surface-container hover:bg-surface-container-high transition-colors rounded text-label-sm font-bold">View History</button>
+</div>
+<!-- Partner 2 -->
+<div class="bg-surface border border-outline-variant p-lg rounded-xl flex flex-col gap-md transition-all hover:shadow-lg">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center">
+<img class="w-full h-full object-cover rounded-full" data-alt="Portrait of a young tech talent recruiter, approachable, modern attire, blurred office space background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk7fm09o-nf00TsJK7b8owNaDWoNlZHpBQemkNE3NrX_Z8URpgOMAldE_WUqamsNYHY28NEEu1qd9uqqpqpOIfH1TN0Y5XMRvQRWbuiitCFPO_kl4Vr9NmQ-cBOOfY9iAo9_nOf7eZFxzbQIXrGUysCKWaVlshJJuuNKWwp8UKAWLZ3J6AY5VzBiV9XUPKqc0vGFcKk8QmncglfklFWsIWwCNgGv4GVBUGeTF45QXiX9HjuoaAw9D7bGxSTlsPX1I-u3ZYhpRQYVI"/>
+</div>
+<span class="px-2 py-1 rounded bg-secondary/10 text-secondary text-[10px] font-bold uppercase">Associate</span>
+</div>
+<div>
+<h4 class="font-body-md font-bold">Michael Chen</h4>
+<p class="text-label-sm text-on-surface-variant">University Outreach @ Finance Corp</p>
+</div>
+<div class="space-y-2 border-t border-outline-variant pt-md">
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant">Assigned Dept</span>
+<span class="font-medium">Business Admin</span>
+</div>
+<div class="flex items-center justify-between text-label-sm">
+<span class="text-on-surface-variant">Last Hire</span>
+<span class="font-medium">1 week ago</span>
+</div>
+</div>
+<button class="w-full py-2 bg-surface-container hover:bg-surface-container-high transition-colors rounded text-label-sm font-bold">View History</button>
+</div>
+<!-- Empty State / Add Partner -->
+<div class="border-2 border-dashed border-outline-variant p-lg rounded-xl flex flex-col items-center justify-center gap-md text-on-surface-variant hover:border-primary/50 transition-all cursor-pointer group">
+<span class="material-symbols-outlined !text-[40px] group-hover:scale-110 transition-transform">person_add</span>
+<p class="font-label-md">Onboard New Partner</p>
+</div>
+</section>
+</main>
+<!-- Company Profile Preview Drawer (Hidden by default) -->
+<div class="fixed top-0 right-0 h-full w-full max-w-md bg-surface drawer-shadow z-[60] translate-x-full transition-transform duration-300 ease-in-out border-l border-outline-variant overflow-y-auto" id="profile-drawer">
+<div class="p-lg sticky top-0 bg-surface/90 backdrop-blur-md border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-h4 text-h4 text-primary" id="drawer-title">TechNova Systems</h3>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors" onclick="closeProfileDrawer()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg">
+<!-- Header Section -->
+<div class="flex flex-col items-center gap-md mb-xl">
+<div class="w-24 h-24 rounded-2xl bg-surface-container-low border border-outline-variant overflow-hidden p-4">
+<img class="w-full h-full object-contain" data-alt="Minimalist corporate logo tech company brand, white background, high-end design." id="drawer-logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYzIKZa-IGfuNd62con5KkpvHpX9iM09_oF1ynEfggiv0MY-yxyc7HycvciZp6qqyhVu5zrmiu8aMspxgaA9TVcz6tPXKRO70WqlHO2hVn63elAUogkJa0-qF2eiO3NuJyjXRDBYwbG5zFXiFPhSojUcWTSeCzz6AuAYR1E84GD9c94AofXmXLHyW5zvRd5KPYlF9ZsvwC5xkD-z8Y3_xPLCxyAXncY6OrATevt-XKDXRETzaRg72wz-QkP6TM3pTyKbpPMP1UbC8"/>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase">Gold Partner</span>
+<span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-[10px] font-bold uppercase">Verified</span>
+</div>
+<p class="text-body-md text-on-surface-variant max-w-xs mx-auto">Providing enterprise AI solutions and high-performance computing platforms.</p>
+</div>
+</div>
+<!-- Profile Sections -->
+<div class="space-y-xl">
+<!-- Salary Stats -->
+<div class="bg-surface-container-low p-md rounded-xl">
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-md">Salary Statistics (2023)</h4>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<p class="text-label-sm text-on-surface-variant">Average Package</p>
+<p class="font-h3 text-h3 text-on-surface">$124k<span class="text-label-sm font-normal text-on-surface-variant">/yr</span></p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant">Highest Package</p>
+<p class="font-h3 text-h3 text-on-surface">$210k<span class="text-label-sm font-normal text-on-surface-variant">/yr</span></p>
+</div>
+</div>
+<!-- AI Insight Placeholder -->
+<div class="mt-md p-3 bg-primary-fixed/30 rounded-lg flex gap-3 items-start border border-primary-fixed">
+<span class="material-symbols-outlined text-primary !text-[18px]">auto_awesome</span>
+<p class="text-label-sm leading-relaxed text-on-primary-fixed-variant">AI Insight: TechNova offers 15% higher compensation for Data Science roles compared to university average.</p>
+</div>
+</div>
+<!-- Past History -->
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-md">Recruitment History</h4>
+<div class="space-y-md">
+<div class="flex items-center justify-between pb-md border-b border-outline-variant">
+<div>
+<p class="font-body-md font-bold">Campus Drive Fall '23</p>
+<p class="text-label-sm text-on-surface-variant">12 Placements • Software Dept</p>
+</div>
+<span class="text-primary font-bold">Success</span>
+</div>
+<div class="flex items-center justify-between pb-md border-b border-outline-variant">
+<div>
+<p class="font-body-md font-bold">Summer Internship '23</p>
+<p class="text-label-sm text-on-surface-variant">5 Interns • AI Research Lab</p>
+</div>
+<span class="text-primary font-bold">Success</span>
+</div>
+</div>
+</div>
+<!-- Contact Partners -->
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-md">Assigned Partners</h4>
+<div class="flex flex-col gap-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a recruiter, professional, bright lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzN9kGmhnIHqxR39p24bEJaTX-xiuYZuvLYMlv4BxwPou_Rq1nGdVXDZYwTM6OG6NLas3enbjBJBee1Xk0ha0V46XGL0iQefxuUzCCgUb3uZybw-hJ3ywiAKvi3y5fLiTBP2R4PwBsSNpRxBPziAPGstaVSby8mN3zNC986S25Ig_okFklrNQr730T_jMM0JikajK9ZA5-PFgY0thIyPclZtjV0VTy0W_YPiBjc4Tn3TyT5voBa5doBirGGByLeghuW-tAJ8Su8cw"/>
+</div>
+<div class="flex-1">
+<p class="text-label-md">Sarah Jenkins</p>
+<p class="text-label-sm text-on-surface-variant">s.jenkins@technova.io</p>
+</div>
+<button class="text-primary"><span class="material-symbols-outlined">mail</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-md mt-2xl pb-lg">
+<button class="py-3 border border-outline-variant rounded-lg text-label-md font-bold hover:bg-surface-container-low transition-colors">Edit Partnership</button>
+<button class="py-3 bg-primary text-white rounded-lg text-label-md font-bold hover:brightness-110 transition-all">Schedule Drive</button>
+</div>
+</div>
+</div>
+<!-- Backdrop for Drawer -->
+<div class="fixed inset-0 bg-black/20 backdrop-blur-sm z-[55] hidden transition-opacity duration-300" id="drawer-backdrop" onclick="closeProfileDrawer()"></div>
+<script>
+        function openProfileDrawer(companyName) {
+            document.getElementById('drawer-title').innerText = companyName;
+            const drawer = document.getElementById('profile-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            
+            drawer.classList.remove('translate-x-full');
+            backdrop.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfileDrawer() {
+            const drawer = document.getElementById('profile-drawer');
+            const backdrop = document.getElementById('drawer-backdrop');
+            
+            drawer.classList.add('translate-x-full');
+            backdrop.classList.remove('opacity-100');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+            }, 300);
+            
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchTab(tabId) {
+            const tabs = ['companies', 'recruiters', 'approvals'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                if (t === tabId) {
+                    btn.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                    btn.classList.remove('text-on-surface-variant');
+                } else {
+                    btn.classList.remove('text-primary', 'font-bold', 'border-b-2', 'border-primary');
+                    btn.classList.add('text-on-surface-variant');
+                }
+            });
+            
+            // Micro-interaction: Shimmer the table content area when switching
+            const table = document.getElementById('table-container');
+            table.classList.add('opacity-50');
+            setTimeout(() => {
+                table.classList.remove('opacity-50');
+            }, 150);
+        }
+
+        // Active Navigation Logic from requirements
+        document.addEventListener('DOMContentLoaded', () => {
+            // "Placement Cell" is active based on the prompt's intent for "university administrators" managing companies.
+        });
+    </script>
+</body></html>

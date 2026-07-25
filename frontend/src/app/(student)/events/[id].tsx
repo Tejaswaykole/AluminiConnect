@@ -22,7 +22,7 @@ export default function EventDetailsScreen() {
 
   return (
     <ScrollView className="flex-1 bg-background" showsVerticalScrollIndicator={false}>
-      <Image source={{ uri: event.image }} className="w-full h-64" />
+      <Image source={{ uri: event.image }} className="w-full h-64" resizeMode="cover" />
       
       <View className="px-4 py-6">
         <TouchableOpacity onPress={() => router.back()} className="mb-6">

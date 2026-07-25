@@ -5,6 +5,7 @@ import { Card } from '../../../components/Card';
 import { Avatar } from '../../../components/Avatar';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { ALUMNI_MOCKS } from '../../../mocks';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function MentorshipScreen() {
   const router = useRouter();
@@ -14,9 +15,10 @@ export default function MentorshipScreen() {
 
   return (
     <ScreenContainer>
-      <TouchableOpacity onPress={() => router.back()} className="mb-4">
-        <Typography variant="body" color="primary" className="font-medium">
-          ← Back to Dashboard
+      <TouchableOpacity onPress={() => router.back()} className="mb-4 flex-row items-center">
+        <MaterialIcons name="arrow-back" size={20} color="#154539" />
+        <Typography variant="body" color="primary" className="font-medium ml-1">
+          Back to Dashboard
         </Typography>
       </TouchableOpacity>
 

@@ -10,18 +10,16 @@ export default function NotificationsScreen() {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'mentorship': return '🤝';
-      case 'event': return '📅';
-      default: return '🔔';
+      case 'mentorship': return 'handshake';
+      case 'event': return 'event';
+      default: return 'notifications';
     }
   };
 
   return (
     <ScreenContainer>
       <TouchableOpacity onPress={() => router.back()} className="mb-4">
-        <Typography variant="body" color="primary" className="font-medium">
-          ← Back to Dashboard
-        </Typography>
+        <View className="flex-row items-center"><MaterialIcons name="arrow-back" size={20} color="#154539" /><Typography variant="body" color="primary" className="font-medium ml-1">Back to Dashboard</Typography></View>
       </TouchableOpacity>
 
       <View className="mb-6">

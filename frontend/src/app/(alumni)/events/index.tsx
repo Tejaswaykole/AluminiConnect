@@ -11,9 +11,7 @@ export default function EventsScreen() {
   return (
     <ScreenContainer>
       <TouchableOpacity onPress={() => router.back()} className="mb-4">
-        <Typography variant="body" color="primary" className="font-medium">
-          ← Back to Dashboard
-        </Typography>
+        <View className="flex-row items-center"><MaterialIcons name="arrow-back" size={20} color="#154539" /><Typography variant="body" color="primary" className="font-medium ml-1">Back to Dashboard</Typography></View>
       </TouchableOpacity>
 
       <View className="mb-6">
@@ -28,7 +26,7 @@ export default function EventsScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => router.push(`/events/${item.id}`)}>
             <Card className="mb-4 p-0 overflow-hidden">
-              <Image source={{ uri: item.image }} className="w-full h-40" />
+              <Image source={{ uri: item.image }} className="w-full h-40" resizeMode="cover" />
               <View className="p-4">
                 <Typography variant="caption" color="primary" className="font-medium mb-1">
                   {item.date} • {item.time}

@@ -7,6 +7,7 @@ import { Card } from '../../components/Card';
 import { Avatar } from '../../components/Avatar';
 import { LoadingState, ErrorState } from '../../components';
 import { useCurrentUser, useEvents, useOpportunities } from '../../hooks/queries';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function StudentDashboard() {
   const router = useRouter();
@@ -15,96 +16,121 @@ export default function StudentDashboard() {
   const { data: events, isLoading: eventsLoading, isError: eventsError, refetch: refetchEvents } = useEvents();
   const { data: opportunities, isLoading: oppsLoading, isError: oppsError, refetch: refetchOpps } = useOpportunities();
 
-  if (userLoading || eventsLoading || oppsLoading) {
-    return <LoadingState message="Loading dashboard..." />;
-  }
-
-  if (userError || eventsError || oppsError) {
-    const handleRetry = () => { refetchUser(); refetchEvents(); refetchOpps(); };
-    return <ErrorState onRetry={handleRetry} message="Failed to load your dashboard." />;
-  }
-
+  if (userLoading || eventsLoading || oppsLoading) return <LoadingState message="Loading enterprise dashboard..." />;
+  if (userError || eventsError || oppsError) return <ErrorState onRetry={() => { refetchUser(); refetchEvents(); refetchOpps(); }} message="Failed to load dashboard." />;
   if (!user) return null;
 
   return (
     <ScreenContainer scrollable>
-      {/* Header */}
-      <View className="flex-row justify-between items-center mb-8">
+      {/* Header & Notifications */}
+      <View className="flex-row justify-between items-center mb-8 mt-2">
         <View className="flex-row items-center flex-1">
-          <Avatar url={user.avatar} fallbackInitials="AJ" size="md" className="mr-4" />
+          <Avatar url={user.avatar} fallbackInitials="ST" size="lg" className="mr-4" />
           <View>
             <Typography variant="body" color="muted">Welcome back,</Typography>
             <Typography variant="h2">{user.name}</Typography>
           </View>
         </View>
-        <TouchableOpacity onPress={() => router.push('/notifications')} className="p-2 relative">
-          <Typography className="text-2xl">🔔</Typography>
-          <View className="absolute top-2 right-2 w-2.5 h-2.5 bg-status-error rounded-full" />
+        <TouchableOpacity onPress={() => router.push('/notifications')} className="p-3 bg-surface border border-border rounded-full relative">
+          <MaterialIcons name="notifications" size={24} color="#154539" />
+          <View className="absolute top-2 right-2 w-3 h-3 bg-primary rounded-full border-2 border-surface" />
         </TouchableOpacity>
       </View>
 
-      {/* Profile Summary Card */}
-      <Card className="mb-8 bg-primary/5 border-primary/20 flex-row justify-between items-center">
-        <View className="flex-1 mr-4">
-          <Typography variant="h3" className="mb-1 text-primary">Your Profile is 80% Complete</Typography>
-          <Typography variant="caption" color="muted">Add your resume to reach 100% and get better recommendations.</Typography>
-        </View>
-        <TouchableOpacity onPress={() => router.push('/profile')} className="bg-primary px-3 py-2 rounded-md">
-          <Typography variant="caption" color="inverse" className="font-medium">Update</Typography>
-        </TouchableOpacity>
-      </Card>
+      {/* Completion & Readiness Metrics */}
+      <View className="flex-row justify-between mb-8 space-x-4">
+        <Card className="flex-1 bg-surface border border-border items-center py-4">
+          <Typography variant="h2" className="text-primary mb-1">85%</Typography>
+          <Typography variant="caption" color="muted">Profile</Typography>
+        </Card>
+        <Card className="flex-1 bg-surface border border-border items-center py-4">
+          <Typography variant="h2" className="text-primary mb-1">92%</Typography>
+          <Typography variant="caption" color="muted">Resume ATS</Typography>
+        </Card>
+        <Card className="flex-1 bg-primary border border-primary-dark items-center py-4">
+          <Typography variant="h2" color="inverse" className="mb-1">A-</Typography>
+          <Typography variant="caption" color="inverse">Placement Ready</Typography>
+        </Card>
+      </View>
 
-      {/* Quick Actions */}
+      {/* Quick Actions (Enterprise Minimal) */}
       <View className="flex-row flex-wrap justify-between mb-8">
         {[
-          { id: 'mentors', icon: '🎓', label: 'Mentors', route: '/mentorship' },
-          { id: 'alumni', icon: '👥', label: 'Alumni', route: '/discover' },
-          { id: 'jobs', icon: '💼', label: 'Jobs', route: '/opportunities' },
-          { id: 'events', icon: '📅', label: 'Events', route: '/events' },
+          { id: 'jobs', icon: 'work', label: 'Jobs', route: '/opportunities' },
+          { id: 'resume', icon: 'description', label: 'Resume', route: '/profile' }, // Placeholder route
+          { id: 'tracker', icon: 'bar-chart', label: 'Tracker', route: '/profile' }, // Placeholder route
+          { id: 'ai', icon: 'psychology', label: 'AI Center', route: '/profile' }, // Placeholder route
         ].map((action) => (
           <TouchableOpacity 
             key={action.id} 
             onPress={() => router.push(action.route as any)}
-            className="items-center mb-4"
-            style={{ width: '23%' }}
+            className="items-center mb-4 w-[23%] md:w-[15%]"
           >
-            <View className="w-14 h-14 bg-background border border-border-strong rounded-2xl items-center justify-center mb-2">
-              <Typography className="text-2xl">{action.icon}</Typography>
+            <View className="w-14 h-14 bg-surface border border-border rounded-xl items-center justify-center mb-2 shadow-sm">
+              <MaterialIcons name={action.icon as any} size={28} color="#154539" />
             </View>
             <Typography variant="caption" className="font-medium text-center">{action.label}</Typography>
           </TouchableOpacity>
         ))}
       </View>
 
-      {/* Upcoming Events */}
-      <Section title="Upcoming Events" onSeeAll={() => router.push('/events')}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="-mx-4 px-4 pb-2">
-          {(events || []).map((event) => (
-            <TouchableOpacity 
-              key={event.id}
-              onPress={() => router.push(`/events/${event.id}`)}
-              className="mr-4 w-64"
-            >
-              <Card className="p-0 overflow-hidden">
-                <Image source={{ uri: event.image }} className="w-full h-32" />
-                <View className="p-3">
-                  <Typography variant="caption" color="primary" className="font-medium mb-1">{event.date}</Typography>
-                  <Typography variant="body" className="font-bold mb-1" numberOfLines={1}>{event.title}</Typography>
-                  <Typography variant="caption" color="muted" numberOfLines={1}>{event.organizer}</Typography>
-                </View>
-              </Card>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+      {/* AI Career Insights */}
+      <Card className="mb-8 bg-surface border-l-4 border-l-primary border-t border-r border-b border-border">
+        <View className="flex-row items-center mb-2">
+          <MaterialIcons name="auto-awesome" size={20} color="#154539" style={{ marginRight: 8 }} />
+          <Typography variant="h3">AI Career Insight</Typography>
+        </View>
+        <Typography variant="body" color="muted" className="mb-3">
+          Based on your recent interest in "Frontend Engineering", taking the upcoming "Advanced React Native Workshop" will boost your placement readiness score by 5%.
+        </Typography>
+        <TouchableOpacity>
+          <Typography variant="caption" color="primary" className="font-semibold">View Learning Roadmap →</Typography>
+        </TouchableOpacity>
+      </Card>
+
+      {/* Recent Applications & Interviews */}
+      <Section title="Application Tracker" onSeeAll={() => {}}>
+        <Card className="mb-3 flex-row justify-between items-center border border-border bg-surface">
+          <View>
+            <Typography variant="body" className="font-semibold mb-1">Software Engineer Intern</Typography>
+            <Typography variant="caption" color="muted">Google • Applied 2d ago</Typography>
+          </View>
+          <View className="bg-primary/10 px-3 py-1 rounded-full">
+            <Typography variant="caption" className="text-primary font-semibold">Under Review</Typography>
+          </View>
+        </Card>
+        <Card className="mb-6 flex-row justify-between items-center border border-border bg-surface">
+          <View>
+            <Typography variant="body" className="font-semibold mb-1">Frontend Developer</Typography>
+            <Typography variant="caption" color="muted">Stripe • Interview scheduled</Typography>
+          </View>
+          <View className="bg-status-success/10 px-3 py-1 rounded-full">
+            <Typography variant="caption" className="text-status-success font-semibold">Tomorrow, 10 AM</Typography>
+          </View>
+        </Card>
+      </Section>
+
+      {/* Mentorship Summary */}
+      <Section title="Mentorship" onSeeAll={() => router.push('/mentorship')}>
+        <Card className="mb-8 flex-row items-center border border-border bg-surface">
+          <Avatar url="" fallbackInitials="SJ" size="md" className="mr-4" />
+          <View className="flex-1">
+            <Typography variant="body" className="font-semibold mb-0.5">Upcoming Session with Sarah Jenkins</Typography>
+            <Typography variant="caption" color="muted">Mock Interview • Friday, 2 PM</Typography>
+          </View>
+          <TouchableOpacity className="p-2 bg-surface border border-border rounded-lg">
+             <Typography variant="caption" className="font-semibold">Join</Typography>
+          </TouchableOpacity>
+        </Card>
       </Section>
 
       {/* Recommended Opportunities */}
-      <Section title="Recommended For You" onSeeAll={() => router.push('/opportunities')}>
+      <Section title="Recommended Jobs" onSeeAll={() => router.push('/opportunities')}>
         {(opportunities || []).slice(0, 2).map((opp) => (
           <TouchableOpacity key={opp.id} onPress={() => router.push(`/opportunities/${opp.id}`)}>
-            <Card className="mb-3 flex-row items-center">
-              <View className="w-12 h-12 bg-secondary/10 rounded-lg items-center justify-center mr-4">
-                <Typography className="text-xl">🏢</Typography>
+            <Card className="mb-3 flex-row items-center border border-border bg-surface">
+              <View className="w-12 h-12 bg-surface border border-border rounded-lg items-center justify-center mr-4">
+                <MaterialIcons name="business" size={24} color="#154539" />
               </View>
               <View className="flex-1">
                 <Typography variant="body" className="font-semibold mb-0.5">{opp.title}</Typography>
@@ -114,7 +140,7 @@ export default function StudentDashboard() {
           </TouchableOpacity>
         ))}
       </Section>
-
+      
     </ScreenContainer>
   );
 }

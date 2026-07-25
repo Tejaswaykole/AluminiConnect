@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Communities &amp; Events | AlmaBridge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid #E4E4E4;
+        }
+
+        .ai-shimmer {
+            background: linear-gradient(90deg, #F8F8F7 25%, #FFFFFF 50%, #F8F8F7 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#f7b7ac",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#784840",
+                      "on-primary-fixed": "#002019",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#a0d1c0",
+                      "on-surface-variant": "#404945",
+                      "primary": "#154539",
+                      "on-secondary-container": "#626262",
+                      "surface": "#f9faf7",
+                      "surface-tint": "#396759",
+                      "surface-container": "#edeeec",
+                      "surface-bright": "#f9faf7",
+                      "outline-variant": "#c0c8c4",
+                      "on-tertiary-fixed": "#33110b",
+                      "inverse-surface": "#2e3130",
+                      "surface-container-high": "#e7e8e6",
+                      "surface-dim": "#d9dad8",
+                      "on-secondary-fixed": "#1b1c1c",
+                      "tertiary-fixed": "#ffdad4",
+                      "on-surface": "#1a1c1b",
+                      "on-primary-fixed-variant": "#204f42",
+                      "outline": "#717975",
+                      "primary-fixed": "#bceddc",
+                      "secondary-container": "#e1dfdf",
+                      "error": "#ba1a1a",
+                      "tertiary": "#5d322a",
+                      "secondary-fixed-dim": "#c7c6c6",
+                      "surface-variant": "#e2e3e0",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f3f4f1",
+                      "secondary-fixed": "#e4e2e2",
+                      "on-tertiary-container": "#fbbaaf",
+                      "inverse-on-surface": "#f0f1ee",
+                      "primary-container": "#2f5d50",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e2e3e0",
+                      "on-primary-container": "#a3d4c3",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#683a33",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "background": "#f9faf7",
+                      "on-secondary-fixed-variant": "#464747",
+                      "secondary": "#5e5e5e",
+                      "primary-fixed-dim": "#a0d1c0",
+                      "on-background": "#1a1c1b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "xl": "40px",
+                      "sidebar-width": "260px",
+                      "2xl": "64px",
+                      "lg": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "h2": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "h1-mobile": ["Inter"],
+                      "h3": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "h1": ["Inter"],
+                      "h4": ["Inter"]
+              },
+              "fontSize": {
+                      "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-md z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-h4 text-h4 font-bold text-primary">AlmaBridge</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Alumni Network</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Directory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md text-body-md">Jobs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="font-body-md text-body-md">Mentorship</span>
+</a>
+<!-- Active State for Communities -->
+<a class="flex items-center gap-3 px-4 py-2 bg-surface-container-low text-primary border-l-4 border-primary font-bold" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md text-body-md">Communities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Career Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Admin Tools</span>
+</a>
+</nav>
+<div class="px-md mt-auto pt-md space-y-1 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+<button class="w-full mt-md bg-primary text-on-primary font-label-md text-label-md py-3 rounded hover:bg-primary-container transition-all">
+                Support Alumni
+            </button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-lg z-40">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container border-none rounded-lg pl-10 pr-4 py-2 text-body-sm focus:ring-1 focus:ring-primary" placeholder="Search discussions or events..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex gap-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<button class="flex items-center gap-2 group">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young business woman with a friendly smile, dressed in smart casual attire, lit with soft natural studio lighting against a clean, off-white background. The aesthetic is modern, corporate, and minimalist with high clarity and balanced contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8N94Ud37xAeh03MxqX4O1DHt1MkHxx1j0mgnbD9I_cQi2iL6tuoKSAivBH6jpsbvgZgV04BAuDZh67Gwtm1biiNz5rbhwDOmdRUyQ64SbxZznwinRis7RaHMQvLmHAkYybjn6TouhrrjhrzHf9BA1O9--e_cAGllciVpgVY1BvFZiwH4SsMFcl4rb4AC6ML5xKDonRV-KQkvNT055W9cKm7wWrardJmePlZyx4sDADirwaFOhlY0rKgXJ-X_y7Oqu1NFn9G249cI"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary">Alex Rivera</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[260px] pt-24 px-lg pb-xl max-w-container-max mx-auto">
+<div class="flex flex-col gap-lg">
+<!-- Page Header & Filters -->
+<div class="flex flex-col gap-md lg:flex-row lg:items-end lg:justify-between">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Communities &amp; Events</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Connect with alumni, join interest groups, and grow your network.</p>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap">All Categories</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Tech &amp; AI</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Finance</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Entrepreneurship</button>
+<button class="px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-high transition-colors">Alumni-Led</button>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<!-- Left: Community Discussions -->
+<div class="lg:col-span-7 space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-h3 text-h3 text-on-surface flex items-center gap-2">
+                            Discussions
+                            <span class="bg-surface-container-high px-2 py-0.5 rounded text-label-sm font-label-sm">24 New</span>
+</h3>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Start Topic
+                        </button>
+</div>
+<!-- Post Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md hover:border-primary transition-all cursor-pointer">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male professional in his 40s with glasses, looking approachable and confident. The background is a blurred office environment with warm indoor lighting. The style is clean, sharp, and corporate minimalist with neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvdjngI6EqNOXyYEA1tGpZcbrX_uiMH_KxtwI9haIIh2zKBcgjJA7SB4UXiV63osus8oK5DnCPtKsLHXvodxd7LaX-3Mt5Rt5JFF0UGZX_PU-DVccPf-JCRlAO1Eu0ArmxHk-At40l5XP9dQ8oaf42PXadP5X8Fa4HmA7L_d05Qwlb9mMkqRi0nG8fi51tobsGtipwDJe8f3I1QIFyCRCfvq5W9mnHUtS8AjPsva_xijGqfwa32X31JCaY_ylEPEHGRTf_zphtzHk"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-h4 text-h4 text-on-surface text-[18px]">Future of Generative AI in FinTech</h4>
+<span class="text-label-sm font-label-sm text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-on-surface-variant font-label-sm text-label-sm mb-2">in <span class="text-primary font-bold">Tech &amp; AI</span></p>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">Has anyone successfully integrated LLMs into their risk assessment workflows? We're seeing some interesting results but the latency is still an issue for real-time applications.</p>
+<div class="mt-4 flex items-center gap-lg">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chat_bubble_outline</span>
+<span class="text-label-sm font-label-sm">48 comments</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">thumb_up</span>
+<span class="text-label-sm font-label-sm">124</span>
+</div>
+<div class="flex -space-x-2 ml-auto">
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container"></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Post Card 2 (AI Insight) -->
+<div class="bg-primary-container/5 border border-primary/20 rounded-xl p-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-h4 text-h4 text-primary text-[18px]">AI Daily Synthesis: Venture Trends</h4>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter">AI Generated</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Based on 15 discussions today, the community is pivoting heavily toward "Sustainable Infrastructure" as a core investment thesis for 2024. Read the summarized insights from top contributors.</p>
+<div class="mt-4 flex items-center gap-md">
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">View Analysis</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Post Card 3 -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md hover:border-primary transition-all cursor-pointer">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young female entrepreneur with bright, intelligent eyes and a modern professional appearance. The lighting is bright and airy, typical of a high-end minimalist design system. The background is subtle and clean, emphasizing a professional networking context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfjsKNNpArh_SU6F9tJqGEDSyUwERDXJsZHheqURP-YNgcEmwSWQgWG9rOe25GEFl2fI3skY2eMuuRUpvgyUE2eOWspcZfl0BY-oSHhfbnPaxjy-oAyCPv5PdB-uZbx1SbMGt7gh7rL1XaIKmh2SjCTyy_H1hSlEZhGgs1-qnCQ7kDFqhD-QuyCXc79jEvQR2gNP1AVxbXSNTVwvjLaaqllasO1Uj4ywgrZBT6t9JQpsAo8Cg0avHGhIz7ZjT8QxY9BeWrvNa4D-E"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-h4 text-h4 text-on-surface text-[18px]">Looking for a Technical Co-founder</h4>
+<span class="text-label-sm font-label-sm text-on-surface-variant">5h ago</span>
+</div>
+<p class="text-on-surface-variant font-label-sm text-label-sm mb-2">in <span class="text-primary font-bold">Entrepreneurship</span></p>
+<p class="font-body-md text-body-md text-on-surface line-clamp-2">Working on a seed-stage SaaS platform for decarbonization tracking. Looking for someone with strong experience in data engineering and AWS. Reach out for coffee!</p>
+<div class="mt-4 flex items-center gap-lg">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chat_bubble_outline</span>
+<span class="text-label-sm font-label-sm">12 comments</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">thumb_up</span>
+<span class="text-label-sm font-label-sm">32</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full py-4 border border-dashed border-outline-variant rounded-xl text-on-surface-variant font-label-md text-label-md hover:border-primary hover:text-primary transition-all">
+                        Load More Discussions
+                    </button>
+</div>
+<!-- Right: Upcoming Events -->
+<div class="lg:col-span-5 space-y-md">
+<h3 class="font-h3 text-h3 text-on-surface">Upcoming Events</h3>
+<!-- Calendar Mini -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-md text-label-md text-on-surface font-bold">October 2023</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined p-1 hover:bg-surface-container rounded transition-colors">chevron_left</button>
+<button class="material-symbols-outlined p-1 hover:bg-surface-container rounded transition-colors">chevron_right</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">S</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">M</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">T</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">W</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">T</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">F</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">S</span>
+<!-- Calendar Days -->
+<span class="p-2 text-label-sm text-outline-variant">25</span>
+<span class="p-2 text-label-sm text-outline-variant">26</span>
+<span class="p-2 text-label-sm text-on-surface">1</span>
+<span class="p-2 text-label-sm text-on-surface">2</span>
+<span class="p-2 text-label-sm text-on-surface">3</span>
+<span class="p-2 text-label-sm text-on-surface">4</span>
+<span class="p-2 text-label-sm text-on-surface">5</span>
+<!-- Highlighted Day -->
+<span class="p-2 text-label-sm text-on-surface">6</span>
+<span class="p-2 text-label-sm text-on-surface">7</span>
+<span class="p-2 text-label-sm text-on-surface">8</span>
+<span class="p-2 text-label-sm bg-primary text-on-primary rounded-full font-bold">9</span>
+<span class="p-2 text-label-sm text-on-surface">10</span>
+<span class="p-2 text-label-sm text-on-surface">11</span>
+<span class="p-2 text-label-sm text-on-surface">12</span>
+</div>
+</div>
+<!-- Event Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden group">
+<div class="h-32 bg-surface-container relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500" data-alt="A wide-angle photo of a modern university auditorium during a guest lecture. The room is filled with attentive professionals. The lighting is warm and intellectual, with a large screen displaying technical graphs. The image feels authoritative and academic yet modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiTNwPb53pHTWL_JMvRgeG4qgN4aY0ZC8WJUAlibDnrfO42nLZzQ74We79OKHYvHr-Qp4ymPyW5wbFNr76ebyGus84DDTb-3Rj77RODTNC2CFj8YwHaaU3d_32RyhwiTd8QvJ0jsdCoYxLsOJH2Sz8TMRylganIx9DsesXb1TEDuiHEBRkmGtDgylWiw92cKHzM5R7IbTbPM_DNsHTBPEd2z6QsFw1K2y_PixcAsgKcNrREm_NIjWPX085pRvMkS_lOpMWBuleQ8c"/>
+<div class="absolute top-2 left-2 bg-surface px-2 py-1 rounded text-[10px] font-bold text-primary uppercase">Virtual</div>
+</div>
+<div class="p-md">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-h4 text-h4 text-on-surface text-[16px] mb-1">Global Alumni Summit 2023</h4>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span class="text-label-sm font-label-sm">Oct 12, 10:00 AM</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary text-[10px] flex items-center justify-center text-on-primary">+250</div>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-md text-label-md hover:bg-primary-container transition-colors">Register</button>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden group">
+<div class="h-32 bg-surface-container relative overflow-hidden">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500" data-alt="A high-end networking event in a modern rooftop lounge at sunset. Bokeh lights from the city skyline in the background. Small groups of diverse professionals are engaging in conversation with drinks. The atmosphere is sophisticated, vibrant, and elegant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU1oeqc8LYi6msMi3s9jy_99iwBQglnyGxL4CzaGgv179HsPGeHcgHcselRpAQRdqZfaZ6QuIiwzsMulov5alFK6jjB1WVZl4E1-nTgskuxqXGanWgXyISsJiBlMHHW-XP4d2m51IQCB4gl4XOMZ7MnuRsX-Ws_IkyUK9JGIPgzH-cIVuh7dLa-jJViwnzI3tlRgoom2z7KcOvvsgX5TkWPR_splTdUha8_YDLeHk4myZ-MR3-wBJOM9xmuGepYuZ6j9B-tV1XFCg"/>
+<div class="absolute top-2 left-2 bg-primary text-on-primary px-2 py-1 rounded text-[10px] font-bold uppercase">In-Person</div>
+</div>
+<div class="p-md">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-h4 text-h4 text-on-surface text-[16px] mb-1">FinTech Mixer: London Chapter</h4>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="text-label-sm font-label-sm">The Shard, London</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-on-surface-variant">12 Slots left</span>
+</div>
+<button class="px-4 py-2 bg-surface border border-primary text-primary rounded font-label-md text-label-md hover:bg-primary-container/10 transition-colors">Register</button>
+</div>
+</div>
+</div>
+<!-- My Communities Quick Access -->
+<div class="pt-lg">
+<h3 class="font-h4 text-h4 text-on-surface mb-md">My Communities</h3>
+<div class="space-y-sm">
+<div class="flex items-center gap-3 p-3 bg-surface border border-outline-variant rounded-lg hover:border-primary cursor-pointer transition-all">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">terminal</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Data Science Network</p>
+<p class="text-[10px] text-on-surface-variant">1,240 Members</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface border border-outline-variant rounded-lg hover:border-primary cursor-pointer transition-all">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Private Equity Circle</p>
+<p class="text-[10px] text-on-surface-variant">856 Members</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

@@ -4,15 +4,17 @@ import { Typography } from '../../../components/Typography';
 import { Card } from '../../../components/Card';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { EVENT_MOCKS } from '../../../mocks';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function EventsScreen() {
   const router = useRouter();
 
   return (
     <ScreenContainer>
-      <TouchableOpacity onPress={() => router.back()} className="mb-4">
-        <Typography variant="body" color="primary" className="font-medium">
-          ← Back to Dashboard
+      <TouchableOpacity onPress={() => router.back()} className="mb-4 flex-row items-center">
+        <MaterialIcons name="arrow-back" size={20} color="#154539" />
+        <Typography variant="body" color="primary" className="font-medium ml-1">
+          Back to Dashboard
         </Typography>
       </TouchableOpacity>
 
@@ -28,7 +30,7 @@ export default function EventsScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => router.push(`/events/${item.id}`)}>
             <Card className="mb-4 p-0 overflow-hidden">
-              <Image source={{ uri: item.image }} className="w-full h-40" />
+              <Image source={{ uri: item.image }} className="w-full h-40" resizeMode="cover" />
               <View className="p-4">
                 <Typography variant="caption" color="primary" className="font-medium mb-1">
                   {item.date} • {item.time}

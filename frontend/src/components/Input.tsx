@@ -21,7 +21,7 @@ export function Input({ label, error, className = '', isPassword = false, ...pro
       ) : null}
       <View className="relative w-full">
         <TextInput
-          className={`w-full bg-background-surface border ${error ? 'border-status-error' : 'border-border-strong'} rounded-md px-4 py-3 text-text font-sans ${isPassword ? 'pr-12' : ''}`}
+          className={`w-full bg-surface border ${error ? 'border-status-error' : 'border-border-strong'} rounded-md px-4 py-3 text-text font-sans ${isPassword ? 'pr-12' : ''}`}
           placeholderTextColor="#64748b"
           secureTextEntry={isPassword && !isPasswordVisible}
           {...props}

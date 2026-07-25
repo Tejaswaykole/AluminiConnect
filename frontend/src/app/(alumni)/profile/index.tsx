@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../../components/Typography';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { Avatar } from '../../../components/Avatar';
@@ -21,104 +22,106 @@ export default function AlumniProfileScreen() {
     company: ALUMNI_USER.company,
     bio: ALUMNI_USER.bio,
     location: ALUMNI_USER.location,
+    linkedin: 'linkedin.com/in/jd',
+    github: 'github.com/jd',
   });
 
   const handleSave = () => {
-    // In a real app, this would call an API
     setIsEditing(false);
   };
 
   return (
     <ScreenContainer scrollable>
-      <View className="flex-row justify-between items-center mb-6">
-        <Typography variant="h2">My Profile</Typography>
-        <TouchableOpacity onPress={() => isEditing ? handleSave() : setIsEditing(true)}>
-          <Typography variant="body" color="primary" className="font-medium">
-            {isEditing ? 'Save' : 'Edit'}
-          </Typography>
-        </TouchableOpacity>
-      </View>
-
-      <View className="items-center mb-8">
-        <Avatar url={ALUMNI_USER.avatar} fallbackInitials="JD" size="lg" className="mb-4" />
-        {isEditing ? (
-          <TouchableOpacity className="bg-secondary/10 px-4 py-2 rounded-full">
-            <Typography variant="caption" color="primary" className="font-medium">Change Photo</Typography>
+      <View className="flex-row justify-between items-center mb-6 mt-2">
+        <Typography variant="h1">Professional Profile</Typography>
+        {!isEditing && (
+          <TouchableOpacity onPress={() => setIsEditing(true)} className="bg-primary/10 px-4 py-2 rounded-lg">
+            <Typography variant="body" color="primary" className="font-semibold">Edit Profile</Typography>
           </TouchableOpacity>
-        ) : null}
+        )}
       </View>
 
-      <Card className="mb-6">
-        {isEditing ? (
-          <View className="space-y-4">
-            <Input 
-              label="Full Name" 
-              value={formData.name}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, name: text }))}
-            />
-            <Input 
-              label="Job Title" 
-              value={formData.position}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, position: text }))}
-            />
-            <Input 
-              label="Company" 
-              value={formData.company}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, company: text }))}
-            />
-            <Input 
-              label="Location" 
-              value={formData.location}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, location: text }))}
-            />
-            <Input 
-              label="Bio" 
-              value={formData.bio}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, bio: text }))}
-              multiline
-              numberOfLines={4}
-            />
-          </View>
-        ) : (
-          <View>
-            <View className="mb-6 border-b border-border-strong pb-6">
-              <Typography variant="h3" className="mb-1">{formData.name}</Typography>
-              <Typography variant="body" color="muted" className="mb-2">{formData.position} at {formData.company}</Typography>
-              <Typography variant="caption" color="muted">{formData.location}</Typography>
-            </View>
-            
-            <View className="mb-6 border-b border-border-strong pb-6">
-              <Typography variant="h3" className="mb-2">About Me</Typography>
-              <Typography variant="body">{formData.bio}</Typography>
-            </View>
+      <View className="items-center mb-8 bg-surface border border-border p-6 rounded-2xl relative">
+        <Avatar url={ALUMNI_USER.avatar} fallbackInitials="JD" size="xl" className="mb-4" />
+        <Typography variant="h2" className="mb-1">{ALUMNI_USER.name}</Typography>
+        <Typography variant="body" className="font-medium text-center mb-1 text-primary">
+          {ALUMNI_USER.position} at {ALUMNI_USER.company}
+        </Typography>
+        <Typography variant="caption" color="muted" className="text-center mb-4">
+          {ALUMNI_USER.location} • Verified Alumni <MaterialIcons name="check" size={20} color="#154539" />
+        </Typography>
+      </View>
 
-            <View className="mb-6 border-b border-border-strong pb-6">
-              <Typography variant="h3" className="mb-2">Skills & Expertise</Typography>
-              <View className="flex-row flex-wrap mt-2">
-                {ALUMNI_USER.skills.map((skill, index) => (
-                  <View key={index} className="mr-2 mb-2">
-                    <Badge label={skill} variant="secondary" />
-                  </View>
-                ))}
+      {isEditing ? (
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <Card className="mb-6 bg-surface border border-border">
+            <Typography variant="h3" className="mb-4">Academic Background</Typography>
+            <Typography variant="caption" color="muted" className="mb-4">Verified by Institution.</Typography>
+            <Input label="Institution" value={ALUMNI_USER.education} editable={false} className="mb-3 opacity-70" />
+            <Input label="Graduation Year" value={ALUMNI_USER.graduationYear.toString()} editable={false} className="mb-3 opacity-70" />
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+            <Typography variant="h3" className="mb-4">Professional Details</Typography>
+            <Input label="Full Name" value={formData.name} onChangeText={(t) => setFormData(p => ({ ...p, name: t }))} className="mb-3" />
+            <Input label="Job Title" value={formData.position} onChangeText={(t) => setFormData(p => ({ ...p, position: t }))} className="mb-3" />
+            <Input label="Company" value={formData.company} onChangeText={(t) => setFormData(p => ({ ...p, company: t }))} className="mb-3" />
+            <Input label="Location" value={formData.location} onChangeText={(t) => setFormData(p => ({ ...p, location: t }))} className="mb-3" />
+            <Input label="Professional Bio" value={formData.bio} onChangeText={(t) => setFormData(p => ({ ...p, bio: t }))} multiline numberOfLines={4} className="mb-3" textAlignVertical="top" />
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+             <Typography variant="h3" className="mb-4">Social Links</Typography>
+             <Input label="LinkedIn URL" value={formData.linkedin} onChangeText={(t) => setFormData(p => ({ ...p, linkedin: t }))} className="mb-3" />
+             <Input label="GitHub URL" value={formData.github} onChangeText={(t) => setFormData(p => ({ ...p, github: t }))} className="mb-3" />
+          </Card>
+
+          <View className="flex-row gap-4 mb-8">
+             <Button title="Save Changes" onPress={handleSave} className="flex-1" />
+             <Button title="Cancel" variant="outline" onPress={() => setIsEditing(false)} className="flex-1" />
+          </View>
+        </KeyboardAvoidingView>
+      ) : (
+        <>
+          <Card className="mb-6 bg-surface border border-border">
+            <Typography variant="h3" className="mb-3">About Me</Typography>
+            <Typography variant="body" color="muted" className="leading-relaxed">
+              {formData.bio}
+            </Typography>
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+            <Typography variant="h3" className="mb-4">Skills & Expertise</Typography>
+            <View className="flex-row flex-wrap gap-2">
+              {ALUMNI_USER.skills.map((skill, index) => (
+                <Badge key={index} label={skill} variant="secondary" />
+              ))}
+            </View>
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+            <Typography variant="h3" className="mb-4">Education</Typography>
+            <View className="flex-row items-center border-b border-border pb-4 mb-4">
+               <View className="w-12 h-12 bg-secondary/10 rounded-lg items-center justify-center mr-4">
+                  <MaterialIcons name="school" size={24} color="#154539" />
+               </View>
+               <View>
+                  <Typography variant="body" className="font-semibold">{ALUMNI_USER.education}</Typography>
+                  <Typography variant="caption" color="muted">Class of {ALUMNI_USER.graduationYear}</Typography>
+               </View>
+            </View>
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+            <View className="flex-row justify-between items-center">
+              <View>
+                <Typography variant="h3" className="mb-1">Primary Resume</Typography>
+                <Typography variant="caption" color="muted">Last updated 6 months ago</Typography>
               </View>
+              <Button title="Manage Resumes" variant="outline" onPress={() => {}} />
             </View>
-
-            <View>
-              <Typography variant="h3" className="mb-2">Education</Typography>
-              <Typography variant="body">{ALUMNI_USER.education}</Typography>
-              <Typography variant="caption" color="muted">Class of {ALUMNI_USER.graduationYear}</Typography>
-            </View>
-          </View>
-        )}
-      </Card>
-
-      {!isEditing && (
-        <Button 
-          title="Log Out" 
-          variant="outline" 
-          onPress={() => router.replace('/login')} 
-          className="mt-4 border-status-error"
-        />
+          </Card>
+        </>
       )}
     </ScreenContainer>
   );

@@ -44,7 +44,7 @@ export default function CommunitiesScreen() {
             <Card className="mb-4">
               <View className="flex-row items-center mb-3">
                 <View className="w-12 h-12 bg-primary/10 rounded-full items-center justify-center mr-4">
-                  <Typography className="text-xl text-primary">💬</Typography>
+                  <MaterialIcons name="forum" size={24} color="#154539" />
                 </View>
                 <View className="flex-1">
                   <Typography variant="h3">{item.name}</Typography>

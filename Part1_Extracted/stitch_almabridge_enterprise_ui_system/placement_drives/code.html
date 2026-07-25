@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Placement Cell | EduAdmin Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#5d322a",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "on-primary-fixed-variant": "#204f42",
+                        "primary-container": "#2f5d50",
+                        "surface-variant": "#e2e3e0",
+                        "primary": "#154539",
+                        "on-primary-fixed": "#002019",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8e6",
+                        "inverse-surface": "#2e3130",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#5e5e5e",
+                        "background": "#f9faf7",
+                        "secondary-fixed": "#e4e2e2",
+                        "on-error": "#ffffff",
+                        "on-background": "#1a1c1b",
+                        "inverse-on-surface": "#f0f1ee",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#a0d1c0",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#f7b7ac",
+                        "on-tertiary-container": "#fbbaaf",
+                        "on-surface": "#1a1c1b",
+                        "surface-bright": "#f9faf7",
+                        "on-tertiary-fixed": "#33110b",
+                        "on-primary-container": "#a3d4c3",
+                        "inverse-primary": "#a0d1c0",
+                        "on-tertiary-fixed-variant": "#683a33",
+                        "secondary-container": "#e1dfdf",
+                        "on-surface-variant": "#404945",
+                        "on-secondary-fixed-variant": "#464747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "tertiary-container": "#784840",
+                        "surface-container-highest": "#e2e3e0",
+                        "surface-container-low": "#f3f4f1",
+                        "surface": "#f9faf7",
+                        "primary-fixed": "#bceddc",
+                        "surface-tint": "#396759",
+                        "on-secondary-container": "#626262",
+                        "surface-dim": "#d9dad8",
+                        "tertiary-fixed": "#ffdad4",
+                        "surface-container": "#edeeec",
+                        "outline-variant": "#c0c8c4",
+                        "outline": "#717975",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "sidebar-width": "260px",
+                        "base": "8px",
+                        "xl": "40px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "2xl": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h4": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h1-mobile": ["Inter"],
+                        "h1": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9faf7; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e3e0; border-radius: 10px; }
+        .glass-panel { backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="text-on-background">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface border-r border-outline-variant flex flex-col py-lg z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-h3 text-h3 text-primary">EduAdmin Pro</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Administrator Portal</p>
+</div>
+<nav class="flex-1 space-y-1 px-md">
+<!-- Active Tab: Placement Cell -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+<span class="font-label-md text-label-md">Institution</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+<span class="font-label-md text-label-md">Departments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-md text-label-md">Students</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 bg-background text-primary border-l-2 border-primary font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-label-md text-label-md">Placement Cell</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Alumni</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label-md text-label-md">Staff</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg transition-colors duration-200 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<div class="px-lg mt-auto border-t border-outline-variant pt-lg flex items-center gap-md">
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="Corporate professional headshot of a university placement officer, smiling confidently, dressed in formal attire, clean studio lighting with soft bokeh background of a university building. High-end professional aesthetic, minimal and crisp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6vtp-GMaAAbwGaYzgU86DI9RirbCB2ksDvAIUfHKoiJEi4a9AqiVc9bfhGiU3Ei1AyBVQ6kfmwkAXIJ7QANC2JJZC20tYc3QDiipCy-QKDhRPBXY5o78NgF7rWYS1qotOpp_9gAPGc5ZgchyLXi5DgMcnObPq83QRqwFi09cJRwOd_G2Q4gE2SK7EeJ73avPuRcXyUQ2rcvAz8Akh7fOu1F59jTYZow2CQ87YAxyNhJLS_m4tv2DH2t4NC5O4eXpcjxIcQlBuKYg"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-bold">Dr. Elena Vance</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Chief Placement Officer</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="sticky top-0 w-full z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant h-[64px] flex items-center justify-between px-lg">
+<div class="flex items-center gap-lg">
+<h2 class="font-h4 text-h4 font-bold text-on-surface">Institution Portal</h2>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="search">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg pl-10 pr-4 py-1.5 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search recruitment drives..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<button class="px-md py-1.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                    Create New Drive
+                </button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-lg space-y-lg">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant">
+<span>Placement Cell</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">Campus Recruitment Drives</span>
+</nav>
+<!-- Stats Overview (Asymmetric Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="col-span-1 p-lg bg-surface border border-outline-variant rounded-xl flex flex-col gap-sm">
+<p class="font-label-sm text-label-sm text-on-surface-variant">ACTIVE DRIVES</p>
+<div class="flex items-end justify-between">
+<h3 class="font-h2 text-h2 text-primary">12</h3>
+<div class="bg-primary/10 text-primary px-2 py-0.5 rounded font-label-sm text-label-sm font-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                            +3
+                        </div>
+</div>
+</div>
+<div class="col-span-1 p-lg bg-surface border border-outline-variant rounded-xl flex flex-col gap-sm">
+<p class="font-label-sm text-label-sm text-on-surface-variant">TOTAL APPLICANTS</p>
+<div class="flex items-end justify-between">
+<h3 class="font-h2 text-h2 text-on-surface">1,482</h3>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Unique students</span>
+</div>
+</div>
+<div class="col-span-2 p-lg bg-primary-container text-on-primary-container rounded-xl flex flex-col gap-sm relative overflow-hidden">
+<div class="relative z-10">
+<p class="font-label-sm text-label-sm opacity-80 uppercase tracking-wider">Upcoming Top Tier</p>
+<h3 class="font-h3 text-h3 mt-sm">Google Summer Internship 2024</h3>
+<p class="font-body-sm text-body-sm mt-xs opacity-90">Highest potential CTC: $120k/yr. Deadline: 3 days remaining.</p>
+<button class="mt-md bg-on-primary text-primary px-lg py-1.5 rounded font-label-md text-label-md font-bold">Review Pipeline</button>
+</div>
+<div class="absolute right-0 bottom-0 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+</section>
+<!-- Active & Upcoming Drives Table -->
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="px-lg py-md border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-h4 text-h4">Recruitment Pipeline</h3>
+<div class="flex items-center gap-md">
+<div class="flex border border-outline-variant rounded-lg p-0.5 bg-surface-container-low">
+<button class="px-md py-1 bg-surface shadow-sm rounded text-primary font-label-md text-label-md font-bold transition-all">Active</button>
+<button class="px-md py-1 text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-all">Completed</button>
+<button class="px-md py-1 text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-all">Drafts</button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Drive Name</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Company</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Package</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Eligible Depts</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Deadline</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Applicants</th>
+<th class="px-lg py-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant">Status</th>
+<th class="px-lg py-3 border-b border-outline-variant"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Drive Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="toggleDetail()">
+<td class="px-lg py-4 font-label-md text-label-md font-bold text-on-surface">Cloud Architect Intern</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded border border-outline-variant bg-white flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="Modern tech company logo, minimalist blue cloud icon on white background, sharp geometric lines, professional corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCEDSuYRkTM_sIoJJH80oE5VfGVrwHPCuvgvv_BYoNa-9V2u56jb5UYAjm97UePcrNZ3CVgDH1RNDj0uda9ZNN3JLvk40P5Qgdzw5gi99QQFxmiA-v6fpH2j_bKIRF6TXZT1_sAEKi_YEtmvjeMluOvwyEELyEdzTYbJSJ_uHPOn0S-XHuxt7xwoFDvhK42BPvZiWIHX_Sk3b0f1m5tiRXffM65-L9Ojv-zfYL9gk6Pu6qi9pLvzZ0aR0gwACev5HdmthYw86_Ezg"/>
+</div>
+<span class="font-body-sm text-body-sm">Amazon Web Services</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm text-body-sm font-medium">18.5 LPA</td>
+<td class="px-lg py-4">
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-[11px] font-medium">CS</span>
+<span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-[11px] font-medium">IT</span>
+<span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-[11px] font-medium">+1</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm text-body-sm">24 Oct 2023</td>
+<td class="px-lg py-4 font-body-sm text-body-sm">482</td>
+<td class="px-lg py-4">
+<span class="bg-[#5D8A7E]/10 text-[#5D8A7E] px-2 py-1 rounded text-[11px] font-bold uppercase tracking-wider">Interviewing</span>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-1 hover:bg-surface-container rounded text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Drive Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-lg py-4 font-label-md text-label-md font-bold text-on-surface">Associate Consultant</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded border border-outline-variant bg-white flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="Consulting firm logo, elegant green square with stylized 'D' and dot, professional business branding, high contrast white and green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYR1bJzoEvda9awD59rqB_053r3PaWs4d_Vvg6GAUN0S9l64PqueSSQecb_OQdkotKpXRcQlz5R2IazAMkhZe7Lss-zcqzhOq7sZYUwFbPEP-raHQFG0ExPOeg72hKRaS95HnHhegzjkCyHfJZMw4GZ7FLRkHyalwRqkVwOWodzXmCYu70tFgxfpq-Iys9lcV7PO5QHe0WVWEtih-U2KJmMI4lgfuBChz9Y4BwQxHPsvMbFII00xocALalKtYTk_rS_Kzxe5tTHvI"/>
+</div>
+<span class="font-body-sm text-body-sm">Deloitte USI</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm text-body-sm font-medium">8.2 LPA</td>
+<td class="px-lg py-4">
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-[11px] font-medium">All Depts</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm text-body-sm">02 Nov 2023</td>
+<td class="px-lg py-4 font-body-sm text-body-sm">1,240</td>
+<td class="px-lg py-4">
+<span class="bg-[#2F5D50]/10 text-[#2F5D50] px-2 py-1 rounded text-[11px] font-bold uppercase tracking-wider">Registration</span>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-1 hover:bg-surface-container rounded text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Drive Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-lg py-4 font-label-md text-label-md font-bold text-on-surface">Core Systems Dev</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded border border-outline-variant bg-white flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="Fintech company logo, bold black typography with a stylized chevron, clean modern finance branding, high fidelity digital render." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWqn9TArWsl--L5dA6AovJUuRSMBdohCcBn3xWIvG5ZEjOCsGqSF6dDFKGKcR434ICB3SWeMt1nai5Dd5k3uTtqsXycztMxzM79PDOYK_IqrCkVZzFpOcW1mACuOuR-0-kHnZ7Ypx8UBxSc5Zov-LI14WsF4ruUMYUphguc9-k_y2UtN18XJNjg7HCFb1-9cBst394QgEa8dOIgU5bdGk036X52-JcEmZ38NkL9RsCHuRpT5DyS7AEY3Ca59KVQdCT5LUIfAZN_hk"/>
+</div>
+<span class="font-body-sm text-body-sm">Morgan Stanley</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm text-body-sm font-medium">24.0 LPA</td>
+<td class="px-lg py-4">
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-[11px] font-medium">CS</span>
+<span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-[11px] font-medium">ECE</span>
+</div>
+</td>
+<td class="px-lg py-4 font-body-sm text-body-sm">15 Oct 2023</td>
+<td class="px-lg py-4 font-body-sm text-body-sm">215</td>
+<td class="px-lg py-4">
+<span class="bg-error/10 text-error px-2 py-1 rounded text-[11px] font-bold uppercase tracking-wider">Aptitude Test</span>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-1 hover:bg-surface-container rounded text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Detailed Drive View (Conditional Reveal Example) -->
+<section class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500" id="drive-detail">
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+<!-- Left Rail: Timeline & Management -->
+<div class="w-full md:w-1/3 border-r border-outline-variant flex flex-col">
+<div class="p-lg border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-md mb-md">
+<button class="p-1.5 rounded-full bg-surface border border-outline-variant hover:bg-surface-container shadow-sm transition-all" onclick="toggleDetail()">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h4 class="font-h4 text-h4">Drive Detail</h4>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-12 h-12 rounded-lg border border-outline-variant bg-white p-2">
+<img class="w-full h-full object-contain" data-alt="AWS cloud logo on white background, sharp vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2OImnmI7zYAWWC2IgHxz1-tB7JfBQoCRiqubNuOgtFvoediUU2gtsNtgkCn4yQCNuKAubwykVtRTYGCoTJHa-6HlhMLNNASOOPjj8Twbv2nyzGr6oBK7QiBpuaZGL4D__loQe32nQsxu2srYPV45tAaY2Uc9jcmitgR1E-tIS-eAslbwgmJoAHhp8sBA6TXE7JSZnxy1fbmTPpZ_khrujorcjUOPPk6GWfrYDWfyz3BM0t_wIgiSIZQNADxrYymAP-9SVVNBnq_A"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-bold">AWS - Cloud Architect</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Recruiter: Sarah Jenkins</p>
+</div>
+</div>
+</div>
+<!-- Round Management -->
+<div class="p-lg flex-1 custom-scrollbar overflow-y-auto space-y-lg">
+<div>
+<h5 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-md">Recruitment Flow</h5>
+<div class="space-y-4">
+<!-- Round 1 -->
+<div class="flex gap-md relative">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+</div>
+<div class="w-0.5 h-full bg-primary absolute top-8"></div>
+</div>
+<div class="pt-1">
+<p class="font-label-md text-label-md font-bold">Registration &amp; Shortlisting</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">482 students registered</p>
+<span class="text-[11px] text-primary font-bold">Completed Oct 20</span>
+</div>
+</div>
+<!-- Round 2 -->
+<div class="flex gap-md relative">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+</div>
+<div class="w-0.5 h-full bg-primary absolute top-8"></div>
+</div>
+<div class="pt-1">
+<p class="font-label-md text-label-md font-bold">Technical Aptitude</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">120 students cleared</p>
+<span class="text-[11px] text-primary font-bold">Completed Oct 25</span>
+</div>
+</div>
+<!-- Round 3 (Active) -->
+<div class="flex gap-md relative">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center z-10">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</div>
+<div class="w-0.5 h-full bg-outline-variant absolute top-8 border-dashed"></div>
+</div>
+<div class="pt-1">
+<p class="font-label-md text-label-md font-bold text-primary">Technical Interviews</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ongoing - Room 402 &amp; Online</p>
+<div class="mt-2 flex gap-sm">
+<button class="bg-primary px-3 py-1 rounded text-[11px] text-on-primary font-bold">Manage Slots</button>
+<button class="border border-outline-variant px-3 py-1 rounded text-[11px] font-bold">Post Results</button>
+</div>
+</div>
+</div>
+<!-- Round 4 -->
+<div class="flex gap-md">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="pt-1 opacity-50">
+<p class="font-label-md text-label-md font-bold">Final HR Interview</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Scheduled Nov 05</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Section: Student List & Detailed Table -->
+<div class="flex-1 flex flex-col bg-background">
+<div class="p-lg border-b border-outline-variant flex items-center justify-between bg-surface">
+<div>
+<h5 class="font-h4 text-h4">Shortlisted Candidates</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Phase: Technical Interviews (Round 3)</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="px-md py-1.5 border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-low flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                                    Export CSV
+                                </button>
+<button class="px-md py-1.5 bg-on-surface text-surface rounded-lg font-label-md text-label-md hover:opacity-90 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="mail">mail</span>
+                                    Notify Selected
+                                </button>
+</div>
+</div>
+<!-- Inner Table (Bento style items) -->
+<div class="p-lg custom-scrollbar overflow-y-auto">
+<div class="grid grid-cols-1 gap-md">
+<!-- Student Row 1 -->
+<div class="bg-surface border border-outline-variant p-md rounded-xl flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Professional studio portrait of a young male engineering student, looking confident, soft warm lighting, blurred library background. Clean minimalist portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUi7OYvft3wMTzLUP1C8pz45GT8qPylgw-oW86r0Oid8ck76xDq5iHKWzbIjy5GrfxZIRBiEulqTKYarkpj12hGnU4CPdt30IVP6jtWPDy78lTa2YPyxzpwHufFSJYrqFW5NANgvT0Ef7zJNJQ-HE0MTxAp9O7xjejWPorkLTD_luEIUIupKaI6hRasW_WlJwek4qZnT65fHxyUGYSaU0CyC3J_1IzcIcGQ7sRIon5ssKL5LCmUI4-Xya9SPRre8iXi_TT3RU2HQ4"/>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Marcus Thorne</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">CGPA: 9.42 | Computer Science</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aptitude Score</p>
+<p class="font-label-md text-label-md font-bold text-primary">98/100</p>
+</div>
+<div class="flex items-center gap-md">
+<select class="bg-surface-container border-outline-variant rounded-lg font-label-sm text-label-sm py-1 px-4 focus:ring-primary focus:border-primary">
+<option>Reviewing</option>
+<option selected="">Interview Scheduled</option>
+<option>Selected</option>
+<option>Rejected</option>
+</select>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Student Row 2 -->
+<div class="bg-surface border border-outline-variant p-md rounded-xl flex items-center justify-between hover:shadow-md transition-shadow">
+<div class="flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of a female student with glasses, sharp intellect expression, corporate business professional lighting, modern minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzPpWux9x7acyfLgwQmGOnpBGhrFKMCksYZPTFmC-ty3asEzhyE0Npmt7g4xwGfRwDufFqm8m0Y2XjDkCSuPOvmze1pm8P4x1345lwz5od961rbevMGaPsO_OrxOQzVisUvzYdLK2ZXxAfHUJs7rBHN84vnKooliwRSwRlkJX4qZ4mMdDjSl6589UesSVRHl9iuV5Hl635rUjHxkiOTqHRttSq3a5dLx98GpFKL09k1SvcN7jPPSZROBkEOwK68N2dfq3VCGCy9nk"/>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Aditi Sharma</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">CGPA: 8.95 | Information Tech</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aptitude Score</p>
+<p class="font-label-md text-label-md font-bold text-primary">92/100</p>
+</div>
+<div class="flex items-center gap-md">
+<select class="bg-surface-container border-outline-variant rounded-lg font-label-sm text-label-sm py-1 px-4">
+<option>Reviewing</option>
+<option>Interview Scheduled</option>
+<option selected="">Selected</option>
+<option>Rejected</option>
+</select>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Student Row 3 -->
+<div class="bg-surface border border-outline-variant p-md rounded-xl flex items-center justify-between hover:shadow-md transition-shadow opacity-75">
+<div class="flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Male student professional portrait, thoughtful expression, university campus backdrop softly blurred, neutral color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApv_sdBOZ2RxrFCa2tY673aFFwYMIXqNbw1vTHxL-ZSy2NjqQri8RH8CreW8jAJq6U9duEmca1a7E-EQwtG58MVYaNtY1Ghy680FbeRpnG2zuaUCCHFlXcrcmURzVjajETthUce7ybVexgF5Uup6HRUwUTn2RthSaSHP4QKCVnmqW0lXGK6REj8LztVP1a2uJ6MwDq6d0MpVionwfTHGYYHv-hv3uvAkN5m1JIsq0IIHuCxAWd2W1lot_WQ8k9VeSoVv08y0qEors"/>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Jordan Peterson</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">CGPA: 8.12 | Electronics</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aptitude Score</p>
+<p class="font-label-md text-label-md font-bold text-primary">78/100</p>
+</div>
+<div class="flex items-center gap-md">
+<select class="bg-error/10 border-error/20 text-error rounded-lg font-label-sm text-label-sm py-1 px-4">
+<option>Reviewing</option>
+<option>Interview Scheduled</option>
+<option>Selected</option>
+<option selected="">Rejected</option>
+</select>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer / Feedback -->
+<footer class="mt-auto px-lg py-md border-t border-outline-variant flex items-center justify-between bg-surface text-on-surface-variant">
+<p class="font-label-sm text-label-sm">© 2023 EduAdmin Pro • University Placement Integrated System</p>
+<div class="flex items-center gap-md">
+<a class="font-label-sm text-label-sm hover:text-primary" href="#">Policy</a>
+<a class="font-label-sm text-label-sm hover:text-primary" href="#">Audit Log</a>
+<span class="w-2 h-2 rounded-full bg-[#5D8A7E]"></span>
+<span class="font-label-sm text-label-sm">Systems Operational</span>
+</div>
+</footer>
+</main>
+<script>
+        function toggleDetail() {
+            const detailView = document.getElementById('drive-detail');
+            if (detailView.classList.contains('hidden')) {
+                detailView.classList.remove('hidden');
+                detailView.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                detailView.classList.add('hidden');
+            }
+        }
+
+        // Add a subtle AI shimmer effect to the Top Tier card
+        document.addEventListener('DOMContentLoaded', () => {
+            const tierCard = document.querySelector('.bg-primary-container');
+            if (tierCard) {
+                tierCard.addEventListener('mousemove', (e) => {
+                    const rect = tierCard.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    tierCard.style.setProperty('--mouse-x', `${x}px`);
+                    tierCard.style.setProperty('--mouse-y', `${y}px`);
+                });
+            }
+        });
+    </script>
+<style>
+        .bg-primary-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1) 0%, transparent 80%);
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            animation: fadeInSlide 0.5s ease-out forwards;
+        }
+    </style>
+</body></html>

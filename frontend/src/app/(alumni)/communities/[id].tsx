@@ -30,7 +30,7 @@ export default function CommunityDetailsScreen() {
 
       <View className="mb-8">
         <View className="w-16 h-16 bg-primary/10 rounded-xl items-center justify-center mb-4">
-          <Typography className="text-3xl text-primary">💬</Typography>
+          <MaterialIcons name="forum" size={24} color="#154539" />
         </View>
         <Typography variant="h1" className="mb-2">{comm.name}</Typography>
         <Typography variant="body" color="muted" className="mb-4">

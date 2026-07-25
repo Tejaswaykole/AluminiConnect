@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Typography } from '../../components/Typography';
 import { Button } from '../../components/Button';
@@ -15,29 +15,54 @@ export default function WelcomeScreen() {
           {/* Logo Placeholder */}
           <View className="w-24 h-24 bg-primary rounded-2xl items-center justify-center mb-6">
             <Typography variant="h1" color="inverse" className="font-bold">
-              AC
+              AB
             </Typography>
           </View>
           
           <Typography variant="h1" align="center" className="mb-3">
-            {APP_CONFIG.name}
+            Welcome to AlmaBridge
           </Typography>
           <Typography variant="body" color="muted" align="center" className="max-w-[280px]">
-            Connect, mentor, and grow with your academic community.
+            Continue as
           </Typography>
         </View>
 
         <View className="w-full space-y-4">
           <Button 
-            title="Login" 
-            onPress={() => router.push('/login')} 
-            className="mb-4"
+            title="Student" 
+            variant="outline"
+            onPress={() => router.push('/register-student')} 
+            className="mb-3"
           />
           <Button 
-            title="Create Account" 
-            variant="outline" 
-            onPress={() => router.push('/register')} 
+            title="Alumni" 
+            variant="outline"
+            onPress={() => router.push('/register-alumni')} 
+            className="mb-3"
           />
+          <Button 
+            title="Institution" 
+            variant="outline"
+            onPress={() => router.push('/register-institution')} 
+            className="mb-3"
+          />
+          <Button 
+            title="Company / Recruiter" 
+            variant="outline"
+            onPress={() => router.push('/register-company')} 
+            className="mb-6"
+          />
+        </View>
+        
+        <View className="w-full flex-row justify-center mt-6">
+            <Typography variant="body" color="muted">
+              Already have an account?{' '}
+            </Typography>
+            <TouchableOpacity onPress={() => router.push('/login')}>
+              <Typography variant="body" color="primary" className="font-semibold">
+                Sign In
+              </Typography>
+            </TouchableOpacity>
         </View>
       </View>
     </ScreenContainer>

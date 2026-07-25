@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlmaBridge | Alumni Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#f7b7ac",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#784840",
+                        "on-primary-fixed": "#002019",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#a0d1c0",
+                        "on-surface-variant": "#404945",
+                        "primary": "#154539",
+                        "on-secondary-container": "#626262",
+                        "surface": "#f9faf7",
+                        "surface-tint": "#396759",
+                        "surface-container": "#edeeec",
+                        "surface-bright": "#f9faf7",
+                        "outline-variant": "#c0c8c4",
+                        "on-tertiary-fixed": "#33110b",
+                        "inverse-surface": "#2e3130",
+                        "surface-container-high": "#e7e8e6",
+                        "surface-dim": "#d9dad8",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-surface": "#1a1c1b",
+                        "on-primary-fixed-variant": "#204f42",
+                        "outline": "#717975",
+                        "primary-fixed": "#bceddc",
+                        "secondary-container": "#e1dfdf",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5d322a",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "surface-variant": "#e2e3e0",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f3f4f1",
+                        "secondary-fixed": "#e4e2e2",
+                        "on-tertiary-container": "#fbbaaf",
+                        "inverse-on-surface": "#f0f1ee",
+                        "primary-container": "#2f5d50",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e2e3e0",
+                        "on-primary-container": "#a3d4c3",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#683a33",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "background": "#f9faf7",
+                        "on-secondary-fixed-variant": "#464747",
+                        "secondary": "#5e5e5e",
+                        "primary-fixed-dim": "#a0d1c0",
+                        "on-background": "#1a1c1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "xl": "40px",
+                        "sidebar-width": "260px",
+                        "2xl": "64px",
+                        "lg": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h1-mobile": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "h4": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["28px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "h1-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["13px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "h4": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .sidebar-active-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #154539;
+        }
+        .ai-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(228, 228, 228, 0.5);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f9faf7 0%, #ffffff 50%, #f9faf7 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-md z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-h4 text-h4 font-bold text-primary">AlmaBridge</h1>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mt-xs">Alumni Network</p>
+</div>
+<nav class="flex-grow space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<!-- Directory (Active) -->
+<a class="flex items-center gap-3 px-4 py-2 bg-surface-container-low text-primary border-l-4 border-primary font-bold relative group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-body-md text-body-md">Directory</span>
+</a>
+<!-- Jobs -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md text-body-md">Jobs</span>
+</a>
+<!-- Mentorship -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="font-body-md text-body-md">Mentorship</span>
+</a>
+<!-- Communities -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md text-body-md">Communities</span>
+</a>
+<!-- AI Career Center -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Career Center</span>
+</a>
+<!-- Admin Tools -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Admin Tools</span>
+</a>
+</nav>
+<div class="px-md mt-auto pt-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-all mb-md">
+<span class="material-symbols-outlined text-[20px]">volunteer_activism</span>
+                Support Alumni
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-lg z-40">
+<div class="flex items-center w-1/3">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search directory by name, skills, or company..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="relative text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="font-label-md text-on-surface group-hover:text-primary transition-colors">Alex Chen</p>
+<p class="text-[11px] text-on-surface-variant uppercase font-bold tracking-tighter">Class of '18</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold border-2 border-surface shadow-sm">
+                    AC
+                </div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-sidebar-width pt-16 min-h-screen bg-background p-lg">
+<!-- Header & Breadcrumb -->
+<div class="flex items-end justify-between mb-lg">
+<div>
+<nav class="flex text-label-sm text-on-surface-variant mb-xs gap-2">
+<a class="hover:text-primary" href="#">Dashboard</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">Alumni Directory</span>
+</nav>
+<h2 class="font-h1 text-h1 text-primary">Directory</h2>
+<p class="text-body-md text-on-surface-variant max-w-2xl mt-xs">Connect with 12,482 alumni across global industries and expertise domains.</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex p-1 bg-surface-container rounded-lg border border-outline-variant">
+<button class="p-2 bg-surface shadow-sm rounded-md text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">view_list</span>
+</button>
+</div>
+<button class="bg-primary-container text-on-primary-container px-lg py-md rounded-lg font-label-md flex items-center gap-2 hover:brightness-90 transition-all">
+<span class="material-symbols-outlined">file_download</span>
+                    Export List
+                </button>
+</div>
+</div>
+<div class="flex gap-lg">
+<!-- Filters Sidebar -->
+<aside class="w-64 flex-shrink-0 space-y-lg">
+<div class="bg-surface p-md rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-label-md text-on-surface font-bold">Filters</h3>
+<button class="text-label-sm text-primary hover:underline">Clear all</button>
+</div>
+<!-- Industry Filter -->
+<div class="mb-lg">
+<label class="block font-label-sm text-on-surface-variant uppercase mb-sm">Industry</label>
+<div class="space-y-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Technology</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Finance &amp; Banking</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Healthcare</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Education</span>
+</label>
+</div>
+</div>
+<!-- Company Filter -->
+<div class="mb-lg">
+<label class="block font-label-sm text-on-surface-variant uppercase mb-sm">Top Companies</label>
+<div class="space-y-2">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Google</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">Goldman Sachs</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-body-sm group-hover:text-primary">McKinsey &amp; Co.</span>
+</label>
+</div>
+<button class="text-label-sm text-primary mt-sm">+ 12 more</button>
+</div>
+<!-- Location Filter -->
+<div>
+<label class="block font-label-sm text-on-surface-variant uppercase mb-sm">Location</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-body-sm outline-none focus:border-primary">
+<option>All Locations</option>
+<option>New York, NY</option>
+<option>San Francisco, CA</option>
+<option>London, UK</option>
+<option>Singapore</option>
+</select>
+</div>
+</div>
+<div class="bg-primary text-on-primary p-md rounded-xl shadow-md relative overflow-hidden group">
+
+<div class="relative z-10">
+<span class="material-symbols-outlined mb-2" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h4 class="font-h4 text-h4 mb-xs">AI Matchmaking</h4>
+<p class="text-body-sm opacity-90 mb-md">Let our AI suggest relevant connections based on your career goals.</p>
+<button class="w-full bg-white text-primary py-2 rounded-lg font-label-md hover:bg-primary-fixed transition-colors">Start Discovery</button>
+</div>
+</div>
+</aside>
+<!-- Profile Cards Grid -->
+<div class="flex-grow grid grid-cols-1 xl:grid-cols-2 gap-lg h-fit">
+<!-- Profile Card 1 -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all p-lg group relative overflow-hidden">
+<div class="flex items-start gap-lg">
+<div class="relative">
+<img class="w-20 h-20 rounded-xl object-cover border border-outline-variant" data-alt="A professional studio portrait of a woman in her late 20s with a confident smile, wearing business casual attire. The background is a soft, out-of-focus modern office space with natural lighting. The overall style is clean, high-resolution corporate photography with a warm, welcoming color palette of creams and subtle greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuefvyQePQO67JTDWjxJcPHUWMxYKkYi9acyRGcS34FBcuO6QSt8z-JMTOvIU0KppAddz5lRTcuvP54ltQe-89B6CVOsg4qxqC7ldxgvl1e1xU_7HcnjX6RCuKToCZOJMfSRFGn4DmJ1sXw2Z7pCWwiJyq7wr8N6ehW3lb9rCU_uvN9uf9yZ7nuNNyyBbdrWhNXtW0b496PihMAIFXVmmsiFo7nbx4oVuyQp4LasW9-B8M29LksUTLoneeQTHCxdm6rambcauAUto"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full"></span>
+</div>
+<div class="flex-grow">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-h4 text-h4 text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</h3>
+<p class="text-label-sm text-on-surface-variant font-bold uppercase tracking-tight">Class of 2015 • Computer Science</p>
+</div>
+<div class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Accepting Mentees
+                                </div>
+</div>
+<div class="mt-md flex items-center gap-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-surface-container rounded flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="The minimalist corporate logo of a global technology leader, featuring clean geometric lines and a modern typeface. The design is presented in a high-contrast black and white aesthetic suitable for a professional SaaS directory. The logo symbolizes innovation and corporate prestige." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU_mzwI_o1SITBqTv_4bWK0B4TwyGD-Kh07UeZU45OuTstRyUen4UB-PLovAGzZxq5kdA5jtfgbZom_REYWLc0JoD0k7j7q5UYIvBdC1_unlElXcbM3otVw9cc2HxtJxVzzQImAIweKuffDU-2JmjV8p2uqoff6ovh8H3aFHf0A54Ic7pCzXsGq-I0K-XAIooyYIexshhGu6lWNnQgOZuGj00VDZUWVC0PVdABizK5U4Rd9z_2qx3ChQgPyHiACdoFpaOraKf2Uvg"/>
+</div>
+<span class="text-body-sm font-medium">Senior PM @ Google</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="text-body-sm">San Francisco, CA</span>
+</div>
+</div>
+<p class="mt-md text-body-sm text-on-surface-variant line-clamp-2">Ex-Meta engineer turned product manager. Enthusiastic about scaling AI products and mentoring women in tech. Looking to connect with ambitious grads.</p>
+</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex items-center gap-md">
+<button class="flex-grow bg-primary text-on-primary py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all">Connect</button>
+<button class="flex-grow border border-outline-variant text-on-surface py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all">View Profile</button>
+<button class="p-2.5 border border-outline-variant text-on-surface-variant rounded-lg hover:text-primary hover:border-primary transition-all group/btn" title="Request Mentorship">
+<span class="material-symbols-outlined group-hover/btn:fill-1">diversity_3</span>
+</button>
+</div>
+</div>
+<!-- Profile Card 2 -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all p-lg group relative overflow-hidden">
+<div class="flex items-start gap-lg">
+<div class="relative">
+<img class="w-20 h-20 rounded-xl object-cover border border-outline-variant" data-alt="A high-quality professional portrait of a man in his early 40s wearing a dark navy suit and crisp white shirt. He has a distinguished yet approachable expression. The lighting is sophisticated, three-point studio lighting against a neutral grey minimalist background. The aesthetic is sharp, precise, and authoritative, matching an executive finance professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYNTfoOnEuNkuEdPzZYRFKa7tLYtbBYNiQeNyuxRbwHNbD-JdmPqg1gZB6P0WJQDQSQKdPAVhBpT1VyBkiGbrg8z939SAqSTTjGJkdNPoDWopz84WGDwn-RaHzmgCKSfYSFenkOVRE-uQ8xnerGdT5Bd305hSglhzX8H9Gjsw2RoSg9moiQdbkiFtUTHqNjHf6xkxl4uVQ0qPO_s5nb_SrKhgi1EKG2hn5YaZ1fHO-P6QEhQe6r_sAxPIwZiPWfGSmzdmt_BI4lv4"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-h4 text-h4 text-on-surface group-hover:text-primary transition-colors">David Sterling</h3>
+<p class="text-label-sm text-on-surface-variant font-bold uppercase tracking-tight">Class of 2008 • Finance &amp; Econ</p>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-bold">
+                                    Network Only
+                                </div>
+</div>
+<div class="mt-md flex items-center gap-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-surface-container rounded flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="A professional logo of a major investment bank, rendered in a sophisticated, minimalist vector style. The mark uses strong vertical lines to convey stability and heritage. The design is integrated into a clean white background, optimized for a high-end financial networking platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbdCDHw6U5Jq_2PIVDToA50G2rC4EwiPbcz9L1bUqujZSK2mZw_rZKDm5t4A7YI59m4XjXZ-Am7LlsFKeqMu3LlphdP-uzZZYL2mqwqol6jAB8S_XnWx4dWJ5Bgss0BYGgaXnJ3TWEi6-eY0aP6UNB6B1kX0GfsG2CYEG83BaR7tEatUCcEEMj_NNLCw0gMWNPX2gY2FXA7Mc80nnpvJqjyJY5huYvdkHOvOE5X0-MB1iDe9IFw0UYPVGXZfjxQjmnp4qzsa0I34A"/>
+</div>
+<span class="text-body-sm font-medium">VP, M&amp;A @ Goldman Sachs</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="text-body-sm">New York, NY</span>
+</div>
+</div>
+<p class="mt-md text-body-sm text-on-surface-variant line-clamp-2">Investment banking veteran with focus on TMT. Always happy to provide insights on the current market landscape to fellow alumni.</p>
+</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex items-center gap-md">
+<button class="flex-grow bg-primary text-on-primary py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all">Connect</button>
+<button class="flex-grow border border-outline-variant text-on-surface py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all">View Profile</button>
+<button class="p-2.5 border border-outline-variant text-on-surface-variant rounded-lg opacity-50 cursor-not-allowed" title="Mentorship unavailable">
+<span class="material-symbols-outlined">block</span>
+</button>
+</div>
+</div>
+<!-- Profile Card 3 -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all p-lg group relative overflow-hidden">
+<div class="flex items-start gap-lg">
+<div class="relative">
+<img class="w-20 h-20 rounded-xl object-cover border border-outline-variant" data-alt="A vibrant professional headshot of a creative professional with colorful yet tasteful accessories. She has an engaging and energetic smile. The background is a bright, airy architectural space with clean lines and greenery. The photography uses soft bokeh and natural light to create a modern, forward-thinking aesthetic for an design industry leader." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWGHF-YnUEJQMgBvjUEA_HhdO_n58gIm-DMVEQEufkmszGgM876_4vXc9BSamld-d4a8-w8n83PiiUKeeKlfy276DQ3vlvl5ej1x_JofM6G4uPZsIMBfow8oN9KyvZTX8JUP6eiLgro__2-LrSKdBQ_VuN9tr--EdH95DyI-azrFLY-uZ6wNyvGUUdyWDEXHezgJNbGAGP1c_y6XyirPLyaIx9uSukBxZrl9-NDA3uWlJy6js3zGReuPJr0ZHbT6PpGPesEmTfwjU"/>
+<span class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full"></span>
+</div>
+<div class="flex-grow">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-h4 text-h4 text-on-surface group-hover:text-primary transition-colors">Maya Rodrigues</h3>
+<p class="text-label-sm text-on-surface-variant font-bold uppercase tracking-tight">Class of 2021 • Architecture</p>
+</div>
+<div class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    Accepting Mentees
+                                </div>
+</div>
+<div class="mt-md flex items-center gap-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-surface-container rounded flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="The elegant logo of a world-class architectural firm, showcasing a minimalist and geometric design that reflects structural precision. The logo is clean, modern, and presented in a monochromatic palette to maintain a high-end aesthetic within a professional networking UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_6tL-vlAer2dVIYp_9O0MXkgN8IgsFV2jOS5DXOrFOteyk9kFIjz5ts2LsbJBQsV_3j5KXNbu2BCqKIGl6k6EIHEdLPjD5Ck6uXXvmz3dvgLFciVBx0I2q6ONNy6TM1xa2EPXkH-p2WJF30W7HFXK7rYCDtleYJFiiecXpE7UnySN7Wm6ytJKrBFUqtnxbaI3ztD_e34ELmN6RmICqorUQAeFGYi63srCx8R9ricQDGf4IJaFPPkUPVgaEp_Dbl-sLLjPs4Netis"/>
+</div>
+<span class="text-body-sm font-medium">Lead Designer @ Gensler</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="text-body-sm">Chicago, IL</span>
+</div>
+</div>
+<p class="mt-md text-body-sm text-on-surface-variant line-clamp-2">Specializing in sustainable urban development and high-performance building skins. Recent Fulbright scholar.</p>
+</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex items-center gap-md">
+<button class="flex-grow bg-primary text-on-primary py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all">Connect</button>
+<button class="flex-grow border border-outline-variant text-on-surface py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all">View Profile</button>
+<button class="p-2.5 border border-outline-variant text-on-surface-variant rounded-lg hover:text-primary hover:border-primary transition-all group/btn" title="Request Mentorship">
+<span class="material-symbols-outlined group-hover/btn:fill-1">diversity_3</span>
+</button>
+</div>
+</div>
+<!-- Profile Card 4 -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all p-lg group relative overflow-hidden">
+<div class="flex items-start gap-lg">
+<div class="relative">
+<img class="w-20 h-20 rounded-xl object-cover border border-outline-variant" data-alt="A formal professional portrait of a man in his mid-30s with short hair and a thoughtful expression, wearing a tailored charcoal blazer. The background is a minimalist library or study environment with soft, warm lighting. The image captures a sense of intellectual depth and professional reliability, with high clarity and balanced color saturation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9YspFr366D528FJ3_cHhV11I0z75SBFCk3QrzXePFcD5UgJUzJbvbDgOCMQvwoZNSOXgqk9lsZFrGz7ZtWl6JSb6EPEsLYaAIFNPV_CPevNcpris8jCf1hFK19xOA9ZLeZcZCu4_rJqL9Jyrd7K_o0cxz1ejmhF6inNIrMORNFSTOQ3HdQ6BFDFuo378uZsNwgUVvh3sRZhtjsqlwpnTKl7T5ZhzOGklbjLFWbhhz2eV813Vp_2K_3rOxl6hQS4ll1k_YMbz-ZoU"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-h4 text-h4 text-on-surface group-hover:text-primary transition-colors">Dr. Marcus Thorne</h3>
+<p class="text-label-sm text-on-surface-variant font-bold uppercase tracking-tight">Class of 2012 • Bio-Engineering</p>
+</div>
+<div class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-label-sm font-bold">
+                                    Research Partner
+                                </div>
+</div>
+<div class="mt-md flex items-center gap-md">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-surface-container rounded flex items-center justify-center p-1">
+<img class="w-full h-full object-contain" data-alt="The clean and modern logo of a prestigious university research center, using scholarly yet contemporary typography and a simple crest. The logo is rendered in a minimalist style to fit the academic-professional context of the alumni directory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe9vKyN987TGUA-0W_vGeNho4ErNPfR3vaQPRpAVRa7bcvSve4IkFOrxps0_9P3M_VHkgkIUxxTduBHNJUc1CbCm1TDjERfKZ9VwvziFJH0RPQ_obkihrbFOXGEBr3RaQELwR5WMQXhbu-Q85g-Pyq-ybqajmkkswQPe30enXt4hep9uZlwoDAe8pvfDIhMSoDiIrRmGcm9LHXrLK4sUZ4FRKeE9AUQzW_IJAYn5VlfNkKQ8DgBX1JAvu1dqJEtV5g_YmOQTG99Xc"/>
+</div>
+<span class="text-body-sm font-medium">Principal Researcher @ MIT</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="text-body-sm">Cambridge, MA</span>
+</div>
+</div>
+<p class="mt-md text-body-sm text-on-surface-variant line-clamp-2">Leading a laboratory focused on CRISPR and gene editing therapeutics. Interested in industrial partnerships.</p>
+</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex items-center gap-md">
+<button class="flex-grow bg-primary text-on-primary py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all">Connect</button>
+<button class="flex-grow border border-outline-variant text-on-surface py-2.5 rounded-lg font-label-md hover:bg-surface-container-low transition-all">View Profile</button>
+<button class="p-2.5 border border-outline-variant text-on-surface-variant rounded-lg opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined">block</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-xl flex items-center justify-between py-md border-t border-outline-variant">
+<p class="text-body-sm text-on-surface-variant">Showing 1-12 of 12,482 alumni</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded-lg font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container rounded-lg transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container rounded-lg transition-colors">3</button>
+<span class="px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container rounded-lg transition-colors">1041</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-lg text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for profile cards
+        document.querySelectorAll('.profile-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary');
+        });
+    </script>
+</body></html>

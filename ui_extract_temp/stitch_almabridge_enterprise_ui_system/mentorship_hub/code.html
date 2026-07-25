@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mentorship | AlmaBridge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#f7b7ac",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#784840",
+                    "on-primary-fixed": "#002019",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#a0d1c0",
+                    "on-surface-variant": "#404945",
+                    "primary": "#154539",
+                    "on-secondary-container": "#626262",
+                    "surface": "#f9faf7",
+                    "surface-tint": "#396759",
+                    "surface-container": "#edeeec",
+                    "surface-bright": "#f9faf7",
+                    "outline-variant": "#c0c8c4",
+                    "on-tertiary-fixed": "#33110b",
+                    "inverse-surface": "#2e3130",
+                    "surface-container-high": "#e7e8e6",
+                    "surface-dim": "#d9dad8",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "tertiary-fixed": "#ffdad4",
+                    "on-surface": "#1a1c1b",
+                    "on-primary-fixed-variant": "#204f42",
+                    "outline": "#717975",
+                    "primary-fixed": "#bceddc",
+                    "secondary-container": "#e1dfdf",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5d322a",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "surface-variant": "#e2e3e0",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f3f4f1",
+                    "secondary-fixed": "#e4e2e2",
+                    "on-tertiary-container": "#fbbaaf",
+                    "inverse-on-surface": "#f0f1ee",
+                    "primary-container": "#2f5d50",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e2e3e0",
+                    "on-primary-container": "#a3d4c3",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#683a33",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "background": "#f9faf7",
+                    "on-secondary-fixed-variant": "#464747",
+                    "secondary": "#5e5e5e",
+                    "primary-fixed-dim": "#a0d1c0",
+                    "on-background": "#1a1c1b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "xl": "40px",
+                    "sidebar-width": "260px",
+                    "2xl": "64px",
+                    "lg": "24px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "h2": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h1-mobile": ["Inter"],
+                    "h3": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "h4": ["Inter"]
+            },
+            "fontSize": {
+                    "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .ai-shimmer {
+            background: linear-gradient(135deg, #f3f4f1 25%, #ffffff 50%, #f3f4f1 75%);
+            background-size: 400% 400%;
+            animation: shimmer 8s ease infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface dark:bg-surface-container border-r border-outline-variant dark:border-outline z-50 flex flex-col py-md">
+<div class="px-lg mb-xl">
+<h1 class="font-h4 text-h4 font-bold text-primary dark:text-primary-fixed-dim">AlmaBridge</h1>
+<p class="text-label-sm text-on-surface-variant">Alumni Network</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Directory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md">Jobs</span>
+</a>
+<!-- Active Tab: Mentorship -->
+<a class="flex items-center gap-3 px-4 py-2 bg-surface-container-low dark:bg-surface-container-highest text-primary dark:text-primary-fixed-dim border-l-4 border-primary font-bold transition-transform active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="font-body-md">Mentorship</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md">Communities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">AI Career Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Admin Tools</span>
+</a>
+</nav>
+<div class="px-lg mt-auto space-y-lg">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md hover:opacity-90 transition-opacity">Support Alumni</button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline z-40 flex items-center justify-between px-lg transition-all duration-200">
+<div class="flex items-center gap-md w-1/3">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-body-sm outline-none" placeholder="Search mentors, topics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="relative p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="flex items-center gap-sm cursor-pointer border-l border-outline-variant pl-lg ml-sm">
+<div class="text-right">
+<p class="font-label-md text-on-surface leading-none">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Product Designer</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young Hispanic male product designer with short dark hair, wearing a neutral-colored linen shirt, smiling confidently against a minimalist, bright architectural background with soft natural lighting and a clean, high-end professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhnM64L6WdWQuqn6HpWWzSDGVtdY8pyYPL3YnHlNq0LfK5F-0937m3B0OyDww5l9NrUDYAigWgxPK1XNJ3xTNVa7i1NiEMvXaMCBI6LpXU9cUFHJtrXL8h3z8hsOfRBBmwmDDd_15kVi1XHFFf1_LVkOVmgutAkAm515kY7OKa_Iff1izD43A8DxbMvPfPbq22a2M7PRS_TQdw0m8OuSe-If_Cr8sktPH0z6t30UHerZAMo2_XUkntwOY90OgxRoA0KxVst0YhAvY"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-sidebar-width pt-16 min-h-screen">
+<div class="p-lg max-w-[1400px] mx-auto">
+<!-- Page Header -->
+<div class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Mentorship Hub</h2>
+<p class="text-body-md text-on-surface-variant">Empowering career growth through alumni connections.</p>
+</div>
+<div class="grid grid-cols-12 gap-lg items-start">
+<!-- Left Column: Current Mentor & History -->
+<div class="col-span-12 lg:col-span-8 space-y-lg">
+<!-- My Mentor Status Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col md:flex-row gap-lg items-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg">
+<span class="bg-primary/10 text-primary text-label-sm px-3 py-1 rounded-full font-bold">Active Mentorship</span>
+</div>
+<div class="w-32 h-32 rounded-xl overflow-hidden border border-outline-variant shrink-0">
+<img class="w-full h-full object-cover" data-alt="A medium shot of a distinguished female executive in her 40s with professional styling, glasses, and a friendly expression. She is seated in a modern, sun-drenched office space with books and plants in the blurred background. The image has a warm, sophisticated, and trustworthy mood with high-clarity lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx51bXM8OIgZfZXslywFTyEDUpalXVSV_br_247DOLJ4qX9yf9QrMj1771IkLXuwOWXNsODsxdRWTJUPFh862S88C-kvThJ_9qvEIzDFNZqJrqBAAi7rvnxYs4UbH-igPWe7358p42bgv9tUXrqOCtj1IUbXCUOxy4UmCZPMhf4R1jbneisXOvx_JsgAQ1v_TA1lUZYlZpE1g0CB-ZsJTjuOb5v8w9UQfQj50LFEqzm7YWLB_6c9dfob47TpSF1T1zSBcslh1hOmE"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">Dr. Sarah Jenkins</h3>
+<p class="text-primary font-label-md mb-md">Senior Director @ Global Tech Solutions</p>
+<div class="grid grid-cols-3 gap-md">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase">Sessions</p>
+<p class="font-h4 text-h4">12 / 15</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase">Duration</p>
+<p class="font-h4 text-h4">6 Months</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase">Next Meeting</p>
+<p class="font-h4 text-h4 text-primary">Oct 24</p>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex flex-col gap-sm">
+<button class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md hover:bg-primary-container transition-all">Schedule Session</button>
+<button class="border border-outline-variant text-on-surface px-lg py-2 rounded-lg font-label-md hover:bg-surface-container-low transition-all">Message</button>
+</div>
+</div>
+<!-- Meeting History Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex items-center justify-between">
+<h4 class="font-h4 text-h4 text-on-surface">Meeting History</h4>
+<button class="text-primary font-label-md hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low text-label-sm text-on-surface-variant">
+<tr>
+<th class="px-lg py-3 font-medium">DATE</th>
+<th class="px-lg py-3 font-medium">TOPIC</th>
+<th class="px-lg py-3 font-medium">DURATION</th>
+<th class="px-lg py-3 font-medium">STATUS</th>
+<th class="px-lg py-3 font-medium">RESOURCES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-lg py-4 text-body-sm">Oct 12, 2023</td>
+<td class="px-lg py-4 text-body-sm font-medium">Portfolio Review</td>
+<td class="px-lg py-4 text-body-sm">45m</td>
+<td class="px-lg py-4">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Completed</span>
+</td>
+<td class="px-lg py-4">
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-lg py-4 text-body-sm">Sep 28, 2023</td>
+<td class="px-lg py-4 text-body-sm font-medium">Career Strategy</td>
+<td class="px-lg py-4 text-body-sm">60m</td>
+<td class="px-lg py-4">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Completed</span>
+</td>
+<td class="px-lg py-4">
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-lg py-4 text-body-sm">Sep 14, 2023</td>
+<td class="px-lg py-4 text-body-sm font-medium">Interview Prep</td>
+<td class="px-lg py-4 text-body-sm">30m</td>
+<td class="px-lg py-4">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Completed</span>
+</td>
+<td class="px-lg py-4">
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Session Requests -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+<h4 class="font-h4 text-h4 text-on-surface mb-md">Session Requests</h4>
+<div class="space-y-md">
+<!-- Request 1 -->
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-lg hover:border-primary/30 transition-all">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-primary">MW</div>
+<div>
+<p class="font-label-md text-on-surface">Mark Wilson (Junior Alum)</p>
+<p class="text-body-sm text-on-surface-variant">Wants help with: UI Design principles</p>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="px-lg py-2 bg-primary text-on-primary rounded font-label-sm hover:opacity-90">Accept</button>
+<button class="px-lg py-2 border border-outline-variant text-on-surface rounded font-label-sm hover:bg-surface-container-low">Decline</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Matching & Calendar -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<!-- AI Recommended Mentors -->
+<div class="ai-shimmer border border-outline-variant rounded-xl p-lg">
+<div class="flex items-center gap-2 mb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h4 class="font-label-md font-bold uppercase tracking-widest text-primary">Recommended Matches</h4>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-lg">Based on your career goal: <span class="font-bold text-on-surface">Lead Product Designer</span></p>
+<div class="space-y-lg">
+<div class="flex items-start gap-md group">
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male tech professional in his early 30s with a modern hairstyle, wearing a dark polo shirt. He has a warm, accessible smile. The background is a clean, minimalist studio set with soft blue and grey tones, creating a high-end corporate networking vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8-PdI90wEsumAtinWz3ZLUZD2EHhBx0gHNPLV7UDoqhGgj-DWAkhgUVaxGG3K8qx7rtcwIcq1sAfMvamAcTvE3a6qpCwrZSGoj7kjHuEcuyVSkdV5hf5yx8cj-beTNe39ylioWu-IQeiPB1zZTG8AgR2LcK_w6j0wUsoa3ylcN80MgG6ZsT-2w6NpFMrwdhp23-cSYK6sJmBL_hxDt8FL-_vOZcFjmf4eV2WfLRDGOG7gp2SMcqY6GBjAuD3medIXwVOjbW_pttI"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface group-hover:text-primary transition-colors">David Chen</p>
+<p class="text-[11px] text-on-surface-variant">Design Lead @ Meta</p>
+<div class="flex gap-1 mt-1">
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant">UX Strategy</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant">Leadership</span>
+</div>
+</div>
+<button class="ml-auto text-primary p-1 hover:bg-primary/5 rounded">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+</div>
+<div class="flex items-start gap-md group">
+<div class="w-12 h-12 rounded-lg bg-surface-container border border-outline-variant overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a professional woman in her 30s with long dark hair, wearing a stylish blazer, smiling warmly. The setting is a minimalist office with a soft-focus interior. The lighting is bright and airy, emphasizing a friendly yet authoritative professional persona consistent with a high-end AI mentorship platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnTfBO1XhVXGnf6gxPukHi4rFu26g5b8oBhQeuZ9pGFiXQyZiVBRFmrsIXeQEOctr9LsKng1It_Aqx3OMxSL41Yox1CsYHor_O9DmjtuO_52sel-uZkXEJAJvfoQj-zWw0S-UGh8j1gGb7Dr1gYjUWi-gskXLJefvsFdgaxTJKmWNGoNTbIMroScjnN7voox0VOZzAntCLnc6MDXG_2OSKaBTMfJsSI_AObrPedRtvmA534gLAh1Yv6tt8sLuJApATg9lMjeHh3p0"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface group-hover:text-primary transition-colors">Elena Rodriguez</p>
+<p class="text-[11px] text-on-surface-variant">VP Design @ Stripe</p>
+<div class="flex gap-1 mt-1">
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant">Fintech</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant">Scaling</span>
+</div>
+</div>
+<button class="ml-auto text-primary p-1 hover:bg-primary/5 rounded">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+</div>
+</div>
+<button class="w-full mt-lg text-primary font-label-md text-center py-2 border border-primary rounded hover:bg-primary/5 transition-all">Refine Career Goals</button>
+</div>
+<!-- Calendar Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+<div class="flex items-center justify-between mb-lg">
+<h4 class="font-h4 text-h4 text-on-surface">Availability</h4>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="p-1 hover:bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="text-center mb-md">
+<p class="font-label-md text-on-surface">October 2023</p>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-[11px] text-on-surface-variant font-medium mb-2">
+<div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center">
+<!-- Placeholder dates -->
+<div class="p-2 text-on-surface-variant/40">24</div>
+<div class="p-2 text-on-surface-variant/40">25</div>
+<div class="p-2 text-on-surface-variant/40">26</div>
+<div class="p-2 text-on-surface-variant/40">27</div>
+<div class="p-2 text-on-surface-variant/40">28</div>
+<div class="p-2 text-on-surface-variant/40">29</div>
+<div class="p-2 text-on-surface-variant/40">30</div>
+<div class="p-2 bg-surface-container-low rounded text-on-surface">1</div>
+<div class="p-2 text-on-surface">2</div>
+<div class="p-2 text-on-surface">3</div>
+<div class="p-2 bg-primary/10 text-primary font-bold rounded-full cursor-pointer hover:bg-primary/20">4</div>
+<div class="p-2 text-on-surface">5</div>
+<div class="p-2 bg-primary/10 text-primary font-bold rounded-full cursor-pointer hover:bg-primary/20">6</div>
+<div class="p-2 text-on-surface">7</div>
+<div class="p-2 text-on-surface">8</div>
+<div class="p-2 text-on-surface">9</div>
+<div class="p-2 bg-primary text-on-primary font-bold rounded-full cursor-default">10</div>
+<div class="p-2 text-on-surface">11</div>
+<div class="p-2 text-on-surface">12</div>
+<div class="p-2 text-on-surface">13</div>
+<div class="p-2 text-on-surface">14</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant">
+<p class="text-label-sm font-bold text-on-surface mb-md">Upcoming Today</p>
+<div class="flex items-center gap-md bg-surface-container-low p-3 rounded-lg">
+<div class="w-1 bg-primary h-8 rounded-full"></div>
+<div>
+<p class="font-label-md text-on-surface leading-tight">Session with Sarah</p>
+<p class="text-[11px] text-on-surface-variant">14:00 - 14:45 (Zoom)</p>
+</div>
+<button class="ml-auto text-primary">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Optional contextual) -->
+<button class="fixed bottom-lg right-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<script>
+        // Micro-interactions and subtle logic
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.getAttribute('href') === '#') e.preventDefault();
+            });
+        });
+
+        // Simple tab hover state logic could be added here if needed for custom components
+    </script>
+</body></html>

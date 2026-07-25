@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlmaBridge | Analytics &amp; Reports</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for minimalist feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e3e0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c0c8c4; }
+
+        .chart-container {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .chart-container:hover {
+            border-color: #154539;
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#f7b7ac",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#784840",
+                        "on-primary-fixed": "#002019",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#a0d1c0",
+                        "on-surface-variant": "#404945",
+                        "primary": "#154539",
+                        "on-secondary-container": "#626262",
+                        "surface": "#f9faf7",
+                        "surface-tint": "#396759",
+                        "surface-container": "#edeeec",
+                        "surface-bright": "#f9faf7",
+                        "outline-variant": "#c0c8c4",
+                        "on-tertiary-fixed": "#33110b",
+                        "inverse-surface": "#2e3130",
+                        "surface-container-high": "#e7e8e6",
+                        "surface-dim": "#d9dad8",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-surface": "#1a1c1b",
+                        "on-primary-fixed-variant": "#204f42",
+                        "outline": "#717975",
+                        "primary-fixed": "#bceddc",
+                        "secondary-container": "#e1dfdf",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5d322a",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "surface-variant": "#e2e3e0",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f3f4f1",
+                        "secondary-fixed": "#e4e2e2",
+                        "on-tertiary-container": "#fbbaaf",
+                        "inverse-on-surface": "#f0f1ee",
+                        "primary-container": "#2f5d50",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e2e3e0",
+                        "on-primary-container": "#a3d4c3",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#683a33",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "background": "#f9faf7",
+                        "on-secondary-fixed-variant": "#464747",
+                        "secondary": "#5e5e5e",
+                        "primary-fixed-dim": "#a0d1c0",
+                        "on-background": "#1a1c1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "xl": "40px",
+                        "sidebar-width": "260px",
+                        "2xl": "64px",
+                        "lg": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Inter"], "h2": ["Inter"], "h3": ["Inter"], "h4": ["Inter"],
+                        "body-lg": ["Inter"], "body-md": ["Inter"], "body-sm": ["Inter"],
+                        "label-md": ["Inter"], "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-md z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-h4 text-h4 font-bold text-primary">AlmaBridge</h1>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-widest mt-xs">Alumni Network</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Directory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md">Jobs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="font-body-md">Mentorship</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md">Communities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">AI Career Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 bg-surface-container-low text-primary border-l-4 border-primary font-bold" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Admin Tools</span>
+</a>
+</nav>
+<div class="mt-auto px-md pt-md border-t border-outline-variant">
+<button class="w-full py-3 bg-primary text-on-primary font-label-md rounded-lg mb-md hover:brightness-110 transition-all">
+                Support Alumni
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="ml-sidebar-width min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-lg z-40">
+<div class="flex items-center gap-md">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 text-body-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Search analytics or reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md text-on-surface-variant">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined">chat_bubble</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-24 pb-xl px-xl max-w-container-max mx-auto">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h2 class="font-h1 text-h1 text-primary">Analytics &amp; Reports</h2>
+<p class="text-on-surface-variant font-body-md mt-2">Deep dive into the health and performance of the AlmaBridge network.</p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<!-- Date Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface border border-outline-variant text-body-sm px-4 py-2.5 pr-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option>Last 30 Days</option>
+<option>Last 90 Days</option>
+<option>Current Quarter</option>
+<option>Year to Date</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<!-- Role Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface border border-outline-variant text-body-sm px-4 py-2.5 pr-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option>All User Roles</option>
+<option>Alumni</option>
+<option>Students</option>
+<option>Recruiters</option>
+<option>Admins</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">filter_list</span>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-2.5 font-label-md rounded-lg hover:brightness-110 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Stats Overview Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:shadow-md transition-shadow">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Active Users</span>
+<div class="flex items-end justify-between mt-xs">
+<h3 class="font-h2 text-h2 text-primary">12,842</h3>
+<span class="text-primary font-label-md flex items-center gap-1">+14% <span class="material-symbols-outlined text-[16px]">trending_up</span></span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:shadow-md transition-shadow">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Placement Rate</span>
+<div class="flex items-end justify-between mt-xs">
+<h3 class="font-h2 text-h2 text-primary">86.2%</h3>
+<span class="text-primary font-label-md flex items-center gap-1">+3% <span class="material-symbols-outlined text-[16px]">trending_up</span></span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:shadow-md transition-shadow">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">Mentorship Hours</span>
+<div class="flex items-end justify-between mt-xs">
+<h3 class="font-h2 text-h2 text-primary">2,410</h3>
+<span class="text-primary font-label-md flex items-center gap-1">+22% <span class="material-symbols-outlined text-[16px]">trending_up</span></span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:shadow-md transition-shadow">
+<span class="text-label-sm text-on-surface-variant uppercase tracking-wider">AI Accuracy</span>
+<div class="flex items-end justify-between mt-xs">
+<h3 class="font-h2 text-h2 text-primary">94.8%</h3>
+<span class="text-on-surface-variant font-label-md flex items-center gap-1">Stable <span class="material-symbols-outlined text-[16px]">horizontal_rule</span></span>
+</div>
+</div>
+</div>
+<!-- Bento Grid of Charts -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- 1. Engagement over Time (Large Line Chart) -->
+<div class="col-span-12 lg:col-span-8 bg-surface border border-outline-variant rounded-xl p-lg chart-container">
+<div class="flex items-center justify-between mb-lg">
+<h4 class="font-h4 text-h4 text-primary">Platform Engagement over Time</h4>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 px-2 relative">
+<!-- Simulated Line Chart with SVG -->
+<svg class="absolute inset-0 w-full h-full px-lg py-md overflow-visible" viewbox="0 0 800 200">
+<path d="M0,180 Q100,160 200,120 T400,140 T600,60 T800,40" fill="none" stroke="#154539" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0,180 Q100,160 200,120 T400,140 T600,60 T800,40 V200 H0 Z" fill="url(#gradient-forest)" opacity="0.1"></path>
+<defs>
+<lineargradient id="gradient-forest" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#154539"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="border-t border-outline"></div>
+<div class="border-t border-outline"></div>
+<div class="border-t border-outline"></div>
+<div class="border-t border-outline"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-label-sm text-on-surface-variant uppercase px-2">
+<span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span><span>Week 5</span><span>Week 6</span>
+</div>
+</div>
+<!-- 2. Placement Trends (Bar Chart) -->
+<div class="col-span-12 lg:col-span-4 bg-surface border border-outline-variant rounded-xl p-lg chart-container">
+<h4 class="font-h4 text-h4 text-primary mb-lg">Placement Trends</h4>
+<div class="flex items-end justify-around h-64 gap-2">
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-lg transition-all hover:bg-primary-container" style="height: 60%"></div>
+<span class="text-label-sm text-on-surface-variant">Tech</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-lg transition-all hover:bg-primary-container" style="height: 85%"></div>
+<span class="text-label-sm text-on-surface-variant">Fin</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-lg transition-all hover:bg-primary-container" style="height: 45%"></div>
+<span class="text-label-sm text-on-surface-variant">Med</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-lg transition-all hover:bg-primary-container" style="height: 70%"></div>
+<span class="text-label-sm text-on-surface-variant">Edu</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-lg transition-all hover:bg-primary-container" style="height: 30%"></div>
+<span class="text-label-sm text-on-surface-variant">Law</span>
+</div>
+</div>
+</div>
+<!-- 3. Mentorship Activity (Heatmap Style) -->
+<div class="col-span-12 lg:col-span-4 bg-surface border border-outline-variant rounded-xl p-lg chart-container">
+<h4 class="font-h4 text-h4 text-primary mb-lg">Mentorship Activity</h4>
+<div class="grid grid-cols-7 gap-2">
+<!-- Fake heatmap calendar -->
+<script>
+                            for(let i=0; i<35; i++){
+                                const op = Math.random();
+                                document.write(`<div class="aspect-square rounded-sm" style="background-color: rgba(21, 69, 57, ${op})"></div>`);
+                            }
+                        </script>
+</div>
+<div class="flex items-center justify-between mt-md text-label-sm text-on-surface-variant">
+<span>Low Volume</span>
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-primary/10"></div>
+<div class="w-3 h-3 bg-primary/40"></div>
+<div class="w-3 h-3 bg-primary/70"></div>
+<div class="w-3 h-3 bg-primary"></div>
+</div>
+<span>High Volume</span>
+</div>
+</div>
+<!-- 4. User Growth (Stepped Area) -->
+<div class="col-span-12 lg:col-span-4 bg-surface border border-outline-variant rounded-xl p-lg chart-container">
+<div class="flex items-center gap-2 mb-lg">
+<h4 class="font-h4 text-h4 text-primary">User Growth</h4>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase">+2.4k NEW</span>
+</div>
+<div class="h-48 flex items-end">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 200 100">
+<polyline fill="#154539" fill-opacity="0.1" points="0,100 20,90 20,80 40,80 40,65 60,65 60,50 80,50 80,45 100,45 100,30 120,30 120,25 140,25 140,20 160,20 160,15 180,15 180,10 200,10 200,100" stroke="#154539" stroke-width="2"></polyline>
+</svg>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-md">Consistent exponential growth since platform launch in Q3.</p>
+</div>
+<!-- 5. Content Performance (Bar Chart) -->
+<div class="col-span-12 lg:col-span-4 bg-surface border border-outline-variant rounded-xl p-lg chart-container">
+<h4 class="font-h4 text-h4 text-primary mb-lg">Content Performance</h4>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>Career Guides</span>
+<span>92%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>Webinars</span>
+<span>74%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 74%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>Case Studies</span>
+<span>58%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 58%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>Alumni Stories</span>
+<span>85%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. AI Suggestion Accuracy (Sparklines/Metrics) -->
+<div class="col-span-12 lg:col-span-12 bg-primary text-on-primary rounded-xl p-lg relative overflow-hidden">
+<!-- AI Branding shimmer background effect -->
+<div class="absolute inset-0 shimmer opacity-5"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-lg">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary-fixed">auto_awesome</span>
+<h4 class="font-h4 text-h4 text-on-primary">AI Suggestion Accuracy</h4>
+</div>
+<p class="text-primary-fixed/80 body-md max-w-xl">Our machine learning models analyze over 500,000 data points daily to provide high-precision job and mentor matching.</p>
+</div>
+<div class="flex gap-xl text-center">
+<div>
+<h3 class="font-h1 text-h1">94.8%</h3>
+<p class="text-label-sm text-primary-fixed/60 uppercase">Precision</p>
+</div>
+<div class="w-px h-16 bg-white/10 hidden md:block"></div>
+<div>
+<h3 class="font-h1 text-h1">2.4s</h3>
+<p class="text-label-sm text-primary-fixed/60 uppercase">Avg Latency</p>
+</div>
+<div class="w-px h-16 bg-white/10 hidden md:block"></div>
+<div>
+<h3 class="font-h1 text-h1">12M</h3>
+<p class="text-label-sm text-primary-fixed/60 uppercase">Matches/mo</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Data Table Section -->
+<div class="mt-xl bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="p-lg border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<h4 class="font-h4 text-h4 text-primary">Top Performing Communities</h4>
+<button class="text-primary font-label-md flex items-center gap-1 hover:underline">View All <span class="material-symbols-outlined text-base">arrow_forward</span></button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-lg py-3 font-label-sm text-on-surface-variant uppercase">Community Name</th>
+<th class="px-lg py-3 font-label-sm text-on-surface-variant uppercase">Members</th>
+<th class="px-lg py-3 font-label-sm text-on-surface-variant uppercase">Engagement</th>
+<th class="px-lg py-3 font-label-sm text-on-surface-variant uppercase">Growth</th>
+<th class="px-lg py-3 font-label-sm text-on-surface-variant uppercase">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-lg py-4 font-body-sm font-bold text-primary">Software Engineering '24</td>
+<td class="px-lg py-4 font-body-sm">4,281</td>
+<td class="px-lg py-4 font-body-sm">
+<span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">92%</span>
+</td>
+<td class="px-lg py-4 font-body-sm text-primary">+12.4%</td>
+<td class="px-lg py-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">analytics</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-lg py-4 font-body-sm font-bold text-primary">Finance &amp; Investment Banking</td>
+<td class="px-lg py-4 font-body-sm">2,914</td>
+<td class="px-lg py-4 font-body-sm">
+<span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">88%</span>
+</td>
+<td class="px-lg py-4 font-body-sm text-primary">+8.2%</td>
+<td class="px-lg py-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">analytics</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-lg py-4 font-body-sm font-bold text-primary">Creative Arts &amp; Design</td>
+<td class="px-lg py-4 font-body-sm">1,503</td>
+<td class="px-lg py-4 font-body-sm">
+<span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">75%</span>
+</td>
+<td class="px-lg py-4 font-body-sm text-primary">+5.1%</td>
+<td class="px-lg py-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">analytics</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple scale effect for chart containers
+        const containers = document.querySelectorAll('.chart-container');
+        containers.forEach(container => {
+            container.addEventListener('mousedown', () => {
+                container.style.transform = 'scale(0.985)';
+            });
+            container.addEventListener('mouseup', () => {
+                container.style.transform = 'scale(1)';
+            });
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

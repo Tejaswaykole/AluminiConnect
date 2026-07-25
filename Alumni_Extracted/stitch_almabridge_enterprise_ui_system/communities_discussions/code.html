@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlmaBridge - Communities</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error-container": "#93000a",
+            "surface-dim": "#d9dad8",
+            "primary-container": "#2f5d50",
+            "on-tertiary-fixed": "#33110b",
+            "on-primary-fixed": "#002019",
+            "on-primary-fixed-variant": "#204f42",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#784840",
+            "primary": "#154539",
+            "on-secondary-container": "#626262",
+            "surface-container-low": "#f3f4f1",
+            "on-tertiary-fixed-variant": "#683a33",
+            "on-primary-container": "#a3d4c3",
+            "secondary-fixed-dim": "#c7c6c6",
+            "on-secondary-fixed": "#1b1c1c",
+            "on-background": "#1a1c1b",
+            "secondary-container": "#e1dfdf",
+            "surface-container": "#edeeec",
+            "background": "#f9faf7",
+            "on-tertiary-container": "#fbbaaf",
+            "secondary": "#5e5e5e",
+            "on-secondary-fixed-variant": "#464747",
+            "inverse-surface": "#2e3130",
+            "secondary-fixed": "#e4e2e2",
+            "surface-bright": "#f9faf7",
+            "outline-variant": "#c0c8c4",
+            "on-surface": "#1a1c1b",
+            "primary-fixed": "#bceddc",
+            "outline": "#717975",
+            "surface-tint": "#396759",
+            "on-surface-variant": "#404945",
+            "inverse-primary": "#a0d1c0",
+            "tertiary-fixed-dim": "#f7b7ac",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#a0d1c0",
+            "surface-container-high": "#e7e8e6",
+            "surface-container-highest": "#e2e3e0",
+            "tertiary": "#5d322a",
+            "inverse-on-surface": "#f0f1ee",
+            "on-primary": "#ffffff",
+            "surface": "#f9faf7",
+            "surface-variant": "#e2e3e0",
+            "tertiary-fixed": "#ffdad4",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "lg": "24px",
+            "container-max": "1280px",
+            "sm": "8px",
+            "xl": "40px",
+            "base": "8px",
+            "xs": "4px",
+            "md": "16px",
+            "2xl": "64px",
+            "sidebar-width": "260px"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "h3": ["Inter"],
+            "h4": ["Inter"],
+            "h2": ["Inter"],
+            "body-md": ["Inter"],
+            "h1-mobile": ["Inter"],
+            "body-sm": ["Inter"],
+            "h1": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+            "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+            "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; background-color: #f9faf7; color: #1a1c1b; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #c0c8c4; border-radius: 10px; }
+    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid #e4e4e4; }
+    .nav-transition { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-md z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-h4 text-h4 font-bold text-primary">AlmaBridge</h1>
+<p class="text-on-surface-variant font-label-sm">Alumni Network</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors nav-transition" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors nav-transition" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Directory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors nav-transition" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md">Jobs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors nav-transition" href="#">
+<span class="material-symbols-outlined">diversity_3</span>
+<span class="font-body-md">Mentorship</span>
+</a>
+<!-- Active Tab: Communities -->
+<a class="flex items-center gap-3 px-4 py-2 bg-surface-container-low text-primary border-l-4 border-primary font-bold nav-transition" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md">Communities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors nav-transition" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">AI Career Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors nav-transition" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Admin Tools</span>
+</a>
+</nav>
+<div class="px-lg mt-auto mb-lg">
+<button class="w-full bg-primary text-on-primary py-2 rounded-lg font-label-md hover:opacity-90 transition-opacity">
+        Support Alumni
+      </button>
+</div>
+<div class="border-t border-outline-variant pt-md flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex items-center justify-between px-lg z-40">
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-2 w-96 border border-outline-variant focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full ml-2 text-on-surface" placeholder="Search communities, posts, or topics..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-2 cursor-pointer hover:bg-surface-container-high p-1 rounded-lg transition-colors">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female executive in a minimalist studio setting with soft side-lighting, reflecting a sophisticated and authoritative professional vibe, styled with clean, sharp focus and neutral professional colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJvin_WpPvJRkUnGlUlHzfupgoI6hFlcd9WUARnckFKAks5-CO998a9AiraHD0dRKvi0nVHtQYN0ykm3-UDE6xrnaMFgwKvGqYVfq5HCqFSX3r3kZS7AuxHeBNxhMgHVvKZpYA2eLB5zwVqyYa0Q8opt-ugkrUqoRKPCx8Ll4PmrAKavORHMFi7S3x2aJA6XXCe8IYhh217087vaG93xKo6GDo44HLPCZDVEOAMfqmTGy6VDBfXIWcGr_BqxwUJewIJ7kgvTg7mHY"/>
+</div>
+<span class="font-label-md">Alex Chen</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[260px] pt-16 min-h-screen bg-background">
+<div class="max-w-7xl mx-auto p-lg grid grid-cols-12 gap-lg">
+<!-- Left Column: My Communities & Discovery -->
+<section class="col-span-3 flex flex-col gap-lg">
+<!-- My Communities -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="px-md py-4 border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
+<h2 class="font-h4 text-h4 text-on-surface">My Communities</h2>
+<span class="text-primary font-label-sm cursor-pointer hover:underline">See all</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- Community Item -->
+<div class="p-md hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">code</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface group-hover:text-primary transition-colors">Software Engineering</h3>
+<p class="text-[11px] text-outline">1.2k Active Members</p>
+</div>
+</div>
+</div>
+<!-- Community Item -->
+<div class="p-md hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">finance</span>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface group-hover:text-primary transition-colors">Venture Capital</h3>
+<p class="text-[11px] text-outline">840 Members</p>
+</div>
+</div>
+</div>
+<!-- Community Item -->
+<div class="p-md hover:bg-surface-container-lowest transition-colors cursor-pointer group border-l-4 border-primary bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">design_services</span>
+</div>
+<div>
+<h3 class="font-label-md text-primary font-bold">Product Designers</h3>
+<p class="text-[11px] text-outline">2.5k Members</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Discover Communities -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="px-md py-4 border-b border-outline-variant bg-surface-container-low">
+<h2 class="font-h4 text-h4 text-on-surface">Discover</h2>
+</div>
+<div class="p-md space-y-md">
+<div class="flex flex-col gap-3">
+<div class="h-32 rounded-lg bg-cover bg-center relative overflow-hidden" data-alt="A cinematic, high-contrast overhead shot of a modern urban technology hub with neon grid lines and blurred city movement, symbolizing innovation and connectivity in a sleek professional aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDptH1agmHgKki8tLD00XB6CBO7R7fzZpDWb6yYOa3vghjs7-Rv8NdQr0_SoqoIhSsGpgVxW4Skb_6lwJBUnu02vfFzdo5oFtj9QGjSJ5VvdZuqLnoUFgyL-976HuIt7z6YgK4S8TQwgKMus-ib94LSQ54HiGW6KpJ4r2I3B8X3yvnsLNCAsD7LgBsIGv1FH8TyFIz2YQxMR4NUQgpKYjuC6s_AonmBwqwaUeCtAORgHKIz2b9CTFUO-whQg0yqKfEQ0YVhe62QNAg')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<p class="text-[10px] font-bold uppercase tracking-wider">New</p>
+<p class="font-label-md">Web3 Alums</p>
+</div>
+</div>
+<button class="w-full border border-outline text-on-surface font-label-sm py-1.5 rounded hover:bg-surface-container-low transition-colors">Join Community</button>
+</div>
+<div class="flex flex-col gap-3">
+<div class="h-32 rounded-lg bg-cover bg-center relative overflow-hidden" data-alt="An elegant, minimalist boardroom interior with large glass windows overlooking a serene garden, bathed in soft morning light, representing leadership and executive networking in a high-end corporate setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbnMx00oN8Ig723FSx4Wudv3p57CCQowS4RZNKNG7RyYv0rfPagYCzMJJkgiQFZcrCLPC2TZdJYqNYrZSNNZdoM4HgRa0jpXLwe6IXEP78lGvHeStB6Vxd6FBvXHFfg21yWG5MyQq3p-_H-LbH7qRM1udYqIdbQ-uBwJVbUge5_8e7NHA_SzXvTgt42leI4Ge2ucoSTe9zAhXmyhR8hs6DJxmcAEyloUt-9U_QMYt9JKAopKiYSi9xv6YCN5pbM3zrkhpbH30riSM')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<p class="text-[10px] font-bold uppercase tracking-wider">Trending</p>
+<p class="font-label-md">Executive Leadership</p>
+</div>
+</div>
+<button class="w-full border border-outline text-on-surface font-label-sm py-1.5 rounded hover:bg-surface-container-low transition-colors">Join Community</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Center Column: Discussion Feed -->
+<section class="col-span-6 flex flex-col gap-lg">
+<!-- Post Creator -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a confident male professional with a warm smile, wearing a dark blazer, set against a blurred modern office background with soft bokeh lights, projecting accessibility and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC18poZ-B0bvOzT8Y3vRS9Z-5_iN28H3lU4hqdMUyWGDZxjBt5dFgHgI7S-yRhnIUo2PNAB-gI90-n2oI5PnAC7J-t_8sj60RlAITWC5MQM3XD3tMWuJoCIk-xvCyj3sttn-oh8zi8EF75PijSsIEzti2a_jZZejR6gyuJ6B8I0ZK8Li9x4fMz_EciPAeNaxuo4rqDaKfXkZD9hv0CcJU-bk_Qa8mbl_LEMuhbn2dmrfljM62-bi-S37ZAkk_DhRlMAwkgXP0vHEAk"/>
+</div>
+<div class="flex-1">
+<textarea class="w-full bg-surface-container-low border-none focus:ring-0 rounded-lg p-3 text-body-sm resize-none min-h-[100px]" placeholder="Share an insight with Product Designers..."></textarea>
+<div class="flex justify-between items-center mt-3">
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary hover:bg-surface-container-high rounded transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button class="p-2 text-outline hover:text-primary hover:bg-surface-container-high rounded transition-colors">
+<span class="material-symbols-outlined">attachment</span>
+</button>
+<button class="p-2 text-outline hover:text-primary hover:bg-surface-container-high rounded transition-colors">
+<span class="material-symbols-outlined">poll</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary px-lg py-2 rounded-lg font-label-md hover:opacity-90 transition-opacity">Post Discussion</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pinned Post -->
+<div class="bg-primary-container/10 border border-primary/20 rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Announcement</span>
+<span class="text-on-surface-variant font-label-sm">Posted by <span class="font-bold">Group Lead</span> • 2h ago</span>
+</div>
+<h2 class="font-h3 text-h3 text-primary mb-2">Q4 Mentorship Matching is Now Open!</h2>
+<p class="text-body-md text-on-surface-variant mb-4">We are excited to launch our quarterly matching cycle. This term we've added a specialized track for Senior UI/UX Designers transitioning into Management.</p>
+<button class="text-primary font-bold hover:underline flex items-center gap-1">
+            Apply as Mentor <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Discussion Feed -->
+<div class="flex flex-col gap-lg">
+<!-- Post 1 -->
+<article class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex justify-between items-start mb-lg">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A minimalist professional avatar of a woman with glasses, neutral expression, in a high-end corporate studio setting, featuring soft gray background and sharp photographic clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOYTzsHPTQhGJ3PLGBy7IzrVbxKREwaudD17bG7GZjq9MlHyxOKfglPq8u6hkl3BIjACxCOQZ0-8DMuLmPkm0vqpZEdX_9zJL2WbC2myom_oJof4vNlqg0z2_W2AjyBveNqO_iYLP6vRLBcZVabBxaz2HiFKaVy5OZiCMGIRcXpQaBa4B9dm9DqeZRl8HTmSIFj1Erj90jnZ_gC5aG237Z3BGWeC_T7EIn9TSGQ5AR7NegTmZ-OdZKmzWh34OtAvFBFlLAe7HKDmY"/>
+</div>
+<div>
+<h3 class="font-label-md text-on-surface">Sarah Jenkins <span class="text-outline font-normal ml-1">@sjenkins</span></h3>
+<p class="text-label-sm text-outline">Lead Designer at Veridian • 5h ago</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<p class="text-body-md text-on-surface mb-lg">
+              Has anyone integrated AI agents directly into their Figma workflow yet? We're exploring some new plugins that automate documentation, but I'm curious about the learning curve for larger teams. Would love to hear your experiences!
+            </p>
+<div class="bg-surface-container-low rounded-xl p-md flex items-center gap-4 border border-outline-variant mb-lg">
+<div class="w-16 h-16 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">psychology</span>
+</div>
+<div>
+<p class="font-label-md">AI Workflow Study 2024.pdf</p>
+<p class="text-label-sm text-outline">2.4 MB • Resource</p>
+</div>
+<button class="ml-auto text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="flex items-center gap-6 pt-4 border-t border-outline-variant">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-xl group-hover:fill-current">thumb_up</span>
+<span class="text-label-md">42</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span class="text-label-md">18</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-xl">share</span>
+</button>
+<div class="ml-auto flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-surface overflow-hidden"><img class="w-full h-full object-cover" data-alt="Small profile icon of a professional person." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ziHUBvvdyLj-lAhhkC5RcyFkS7N5-dI24ubHJA79g7VftRO_wdu54EQ38n7dz6xo0w1pZfAhD19t_CLH2dXH722W-uLHqV2Xo3YDZhP6zdJeO7hyBI8qnycAsEvXPB-x2H59A6yUiZaZ3-cxod5mXclseMIVNjVynM3JSOtReAoSpshXC17KWy285wQwDjvuOhYC8Yu_cw8luirmt2oCcMvd_d1GVKrpz0RQgMWSY9SdOeKrfMmmGQbrzGZnbHdxqoQJsZG0Ku4"/></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface overflow-hidden"><img class="w-full h-full object-cover" data-alt="Small profile icon of a professional person." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi0JYXrPuXYf-lCjzgFvGKcS5W0cAwSY_dc0QtRdVWqO9_LK7JUdYaO26ZJpFAeicCUQui3inrdMfzEXbmxm9A1-1MNbC3U2J7sz3QMkb6wxnOqp5yTPH9cTj6Rf8WqwTakMDWUORFwwRB953tQWzu7EG1HGS0sBIJMLQ9D-WHkmOMhvvHyRfT4TFaM6tC6pYFaSzP7Ji05kVd4kCguBaPw836OeTNUd-PQxdQitGUOGpMjGLnrGuc1bo1JnOAKYeuiJvbsToCFD0"/></div>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-[8px] font-bold">+15</div>
+</div>
+</div>
+</article>
+<!-- Post 2 (Moderated/Featured) -->
+<article class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm border-l-4 border-primary">
+<div class="flex justify-between items-start mb-lg">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Headshot of an older distinguished professional man with grey hair and a friendly demeanor, wearing a professional charcoal sweater, in a warm library setting with soft bookshelf lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLoJsnnOkYJgopVD7--VCK5siBeFGV5zqtSYAXGGa8dQ8S4vbo4Q254BgP-vdu-zvoZMaUZtflMlRaBLzn1ygPwZI3c4Y7nKdxSL0atQT2zoRbrPDCrrtzxq-UZECfbnz0CSsqY5ECXsMQpQB8PLRAJvFatGKvt5hza56_kTJn-2Qo4awDoH9kKaJNPlmg3gQSEwpG5r2vwZk73cBjSGzHCSUEszJamzY_Nxz74JpF7gxJLHpjZNV7Pd7xpT6HsksrjLnQxwHw2jE"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-label-md text-on-surface">Dr. Robert Vance</h3>
+<span class="bg-primary/10 text-primary text-[9px] font-bold px-1.5 py-0.5 rounded uppercase border border-primary/20">Group Lead</span>
+</div>
+<p class="text-label-sm text-outline">Executive Coach • 12h ago</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-on-surface-variant text-[11px] font-bold hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">shield</span>
+                   Moderator Tools
+                 </button>
+</div>
+</div>
+<p class="text-body-md text-on-surface mb-lg">
+              Weekly Thread: What's the biggest challenge you're facing in your current role? No matter how small, sharing helps us find patterns and support each other. I'll be responding to as many as I can today.
+            </p>
+<div class="flex items-center gap-6 pt-4 border-t border-outline-variant">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">thumb_up</span>
+<span class="text-label-md">156</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span class="text-label-md">89</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Right Column: Trending & People -->
+<section class="col-span-3 flex flex-col gap-lg">
+<!-- Trending Topics -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md shadow-sm">
+<h2 class="font-h4 text-h4 text-on-surface mb-md">Trending Topics</h2>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-label-sm hover:border-primary cursor-pointer transition-colors">#UXResearch</span>
+<span class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-label-sm hover:border-primary cursor-pointer transition-colors">#AIEthics</span>
+<span class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-label-sm hover:border-primary cursor-pointer transition-colors">#RemoteLeadership</span>
+<span class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-label-sm hover:border-primary cursor-pointer transition-colors">#SaasSales</span>
+<span class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded-full text-label-sm hover:border-primary cursor-pointer transition-colors">#Web3</span>
+</div>
+</div>
+<!-- Featured Members (Active in Community) -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="px-md py-4 border-b border-outline-variant bg-surface-container-low">
+<h2 class="font-h4 text-h4 text-on-surface">Top Contributors</h2>
+</div>
+<div class="divide-y divide-outline-variant">
+<div class="p-md flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-outline-variant" data-alt="Portrait of a young creative professional with artistic flair, bright background, expressive lighting, modern and energetic mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDB9ZuaYSu2Flv2q6x3NT1tsIb_sX5LmSgNyb66dcbiMF25xIZlSFX4K1oZNXZHoQS1Vynh81xPPt2et-H1XPv4nP_ihK8dLN8spq3MoOa0n7WMfS2iuS9L8qPeoSFZS7v7HAk__KI3DLqHwFfsoBYolil0QCU3TjCV9k_7m3R1G4YjKQjKlfbUEUmIqwTpLkXBmTAAVXm01OS73DXVtcOOcAk8D6nmiAFesBqTZIm1WQEHXh_1HKziRKA8HGzOQ2JPA8CB2ssbJO8')"></div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Emma Watson</p>
+<p class="text-[11px] text-outline">24 posts this month</p>
+</div>
+<button class="text-primary"><span class="material-symbols-outlined">person_add</span></button>
+</div>
+<div class="p-md flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-outline-variant" data-alt="Portrait of a seasoned business analyst in a high-tech office environment, cool blue tones, professional and focused aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDt7uzGQ6SkruKGSoxbBx4FYTuECg9FUfwtvrw9RbTr_oYvz2i7aRDRvvhCOG35jwzzRgSkn2nWLXKwb2zqLRr2mUGKFgOdWQVWPK_JNXKFvWB4pLEEQul-8219ZN4I-My9mA6uL1flG6Wra8ilPo1Gdu4DntKHodBLmV-1WYDANbsr5jmaHXQ2v__7reFjQ9sb1yJCRw_0hR-t0Gm5VV7jdPkbe63SWzIOfgjVYYPSPAmzRW33Kc3PeRUgsxKN4PuiCwGnQOH1NPA')"></div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">David Miller</p>
+<p class="text-[11px] text-outline">18 posts this month</p>
+</div>
+<button class="text-primary"><span class="material-symbols-outlined">person_add</span></button>
+</div>
+</div>
+<div class="p-md text-center">
+<button class="text-label-sm text-outline hover:text-primary transition-colors">View Member Directory</button>
+</div>
+</div>
+<!-- Community Stats (AI Insights) -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 opacity-10">
+<span class="material-symbols-outlined text-6xl">auto_awesome</span>
+</div>
+<div class="flex items-center gap-2 mb-md text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-label-sm uppercase tracking-wider font-bold">AI Community Health</h3>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between items-center mb-1">
+<p class="text-label-sm text-on-surface-variant">Active Engagement</p>
+<p class="text-label-sm font-bold text-primary">+12%</p>
+</div>
+<div class="w-full bg-surface-container-low h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<p class="text-[12px] text-on-surface-variant italic">
+              "The Software Engineering group has seen a surge in discussions around 'Systems Design'. Consider hosting a live session."
+            </p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Bottom Nav (Hidden on Desktop) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant flex justify-around py-2 px-4 z-50">
+<button class="flex flex-col items-center p-2 text-outline">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center p-2 text-primary font-bold">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[10px]">Communities</span>
+</button>
+<button class="flex flex-col items-center p-2 text-outline">
+<span class="material-symbols-outlined">work</span>
+<span class="text-[10px]">Jobs</span>
+</button>
+<button class="flex flex-col items-center p-2 text-outline">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<script>
+    // Micro-interactions for tab switching and hover effects
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Prevent default for demo
+        e.preventDefault();
+        // Visual feedback would go here in a real app
+      });
+    });
+
+    // Add subtle shadow transition on scroll for TopNavBar
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 10) {
+        header.classList.add('shadow-sm');
+      } else {
+        header.classList.remove('shadow-sm');
+      }
+    });
+  </script>
+</body></html>

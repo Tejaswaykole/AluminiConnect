@@ -65,7 +65,7 @@ export default function MentorshipRequestScreen() {
         {isSuccess ? (
           <View className="items-center py-8">
             <View className="w-16 h-16 bg-status-success/10 rounded-full items-center justify-center mb-4">
-              <Typography className="text-3xl text-status-success">✓</Typography>
+              <MaterialIcons name="check" size={20} color="#154539" />
             </View>
             <Typography variant="h2" className="mb-2">Request Sent!</Typography>
             <Typography variant="body" color="muted" className="text-center mb-8">

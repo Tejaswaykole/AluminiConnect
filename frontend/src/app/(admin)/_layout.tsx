@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../components/Typography';
 
 export default function AdminLayout() {
@@ -29,28 +30,28 @@ export default function AdminLayout() {
         name="index"
         options={{
           title: 'Dashboard',
-          tabBarIcon: ({ color }) => <Typography color={color === '#2563eb' ? 'primary' : 'muted'} className="text-xl">📊</Typography>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="bar-chart" size={24} color="#154539" />,
         }}
       />
       <Tabs.Screen
         name="users"
         options={{
           title: 'Users',
-          tabBarIcon: ({ color }) => <Typography color={color === '#2563eb' ? 'primary' : 'muted'} className="text-xl">👥</Typography>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="groups" size={24} color="#154539" />,
         }}
       />
       <Tabs.Screen
         name="content"
         options={{
           title: 'Content',
-          tabBarIcon: ({ color }) => <Typography color={color === '#2563eb' ? 'primary' : 'muted'} className="text-xl">📝</Typography>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="article" size={24} color="#154539" />,
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => <Typography color={color === '#2563eb' ? 'primary' : 'muted'} className="text-xl">⚙️</Typography>,
+          tabBarIcon: ({ color }) => <Typography color={color === '#2563eb' ? 'primary' : 'muted'} className="text-xl"><MaterialIcons name="settings" size={24} color="#154539" />️</Typography>,
         }}
       />
       

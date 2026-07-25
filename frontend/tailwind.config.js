@@ -12,57 +12,72 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#2563eb', // Blue 600
-          hover: '#1d4ed8',   // Blue 700
-          muted: '#60a5fa',   // Blue 400
+          DEFAULT: '#154539',
+          container: '#2f5d50',
+          fixed: '#bceddc',
+          'fixed-dim': '#a0d1c0',
         },
         secondary: {
-          DEFAULT: '#475569', // Slate 600
-          hover: '#334155',   // Slate 700
+          DEFAULT: '#5e5e5e',
+          container: '#e1dfdf',
+          fixed: '#e4e2e2',
+          'fixed-dim': '#c7c6c6',
         },
-        accent: {
-          DEFAULT: '#0ea5e9', // Sky 500
+        tertiary: {
+          DEFAULT: '#5d322a',
+          container: '#784840',
         },
         background: {
-          DEFAULT: '#ffffff', // White
-          surface: '#f8fafc', // Slate 50
-          subtle: '#f1f5f9',  // Slate 100
+          DEFAULT: '#f9faf7',
+        },
+        surface: {
+          DEFAULT: '#f9faf7',
+          dim: '#d9dad8',
+          bright: '#f9faf7',
+          'container-lowest': '#ffffff',
+          'container-low': '#f3f4f1',
+          container: '#edeeec',
+          'container-high': '#e7e8e6',
+          'container-highest': '#e2e3e0',
+          variant: '#e2e3e0',
         },
         text: {
-          DEFAULT: '#0f172a', // Slate 900
-          muted: '#64748b',   // Slate 500
+          DEFAULT: '#1a1c1b',
+          muted: '#404945',
           inverse: '#ffffff',
         },
         border: {
-          DEFAULT: '#e2e8f0', // Slate 200
-          strong: '#cbd5e1',  // Slate 300
+          DEFAULT: '#c0c8c4', // outline-variant
+          strong: '#717975',  // outline
         },
         status: {
-          success: '#16a34a', // Green 600
-          warning: '#ca8a04', // Yellow 600
-          error: '#dc2626',   // Red 600
+          success: '#16a34a', // Keeping semantic defaults if unprovided
+          warning: '#ca8a04',
+          error: '#ba1a1a',   // From design spec
         }
       },
       fontFamily: {
-        sans: ['System', 'sans-serif'], // Native fonts
+        sans: ['Inter', 'System', 'sans-serif'],
       },
       spacing: {
-        '2xs': '0.25rem',
-        xs: '0.5rem',
-        sm: '0.75rem',
-        md: '1rem',
-        lg: '1.5rem',
-        xl: '2rem',
-        '2xl': '3rem',
+        'xs': '4px',
+        'sm': '8px',
+        'md': '16px',
+        'lg': '24px',
+        'xl': '40px',
+        '2xl': '64px',
       },
       borderRadius: {
         sm: '0.125rem',
-        DEFAULT: '0.25rem', // Minimal radius
+        DEFAULT: '0.25rem',
+        md: '0.375rem',
         lg: '0.5rem',
+        xl: '0.75rem',
+        full: '9999px',
       },
       boxShadow: {
-        sm: '0 1px 2px 0 rgba(15, 23, 42, 0.05)',
-        DEFAULT: '0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05)', // Subtle
+        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        DEFAULT: '0 4px 20px rgba(0,0,0,0.04)', // Ambient Shadow defined in DESIGN.md
       }
     },
   },

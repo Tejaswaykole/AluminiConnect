@@ -17,20 +17,20 @@ export function Button({
   ...props 
 }: ButtonProps) {
   
-  const baseClasses = 'flex-row items-center justify-center rounded-lg px-4 py-3 active:opacity-80 transition-opacity';
+  const baseClasses = 'flex-row items-center justify-center rounded px-4 py-3 active:opacity-80 transition-opacity';
   
   const variants = {
-    primary: 'bg-primary',
-    secondary: 'bg-secondary',
-    outline: 'border-2 border-border-strong bg-transparent',
-    ghost: 'bg-transparent',
+    primary: 'bg-primary-container',
+    secondary: 'bg-white border border-border',
+    outline: 'border border-border bg-transparent',
+    ghost: 'bg-transparent active:bg-surface hover:bg-surface',
   };
 
   const textColors = {
     primary: 'inverse',
-    secondary: 'inverse',
+    secondary: 'default',
     outline: 'default',
-    ghost: 'primary',
+    ghost: 'muted',
   };
 
   const disabledClass = disabled || isLoading ? 'opacity-50' : '';
@@ -44,7 +44,7 @@ export function Button({
       {...props}
     >
       {isLoading ? (
-        <ActivityIndicator color={variant === 'outline' || variant === 'ghost' ? '#2563eb' : '#ffffff'} />
+        <ActivityIndicator color={variant === 'primary' ? '#ffffff' : '#154539'} />
       ) : (
         <Typography 
           variant="body" 

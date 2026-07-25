@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlmaBridge | Jobs &amp; Internships Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdad4",
+                        "outline": "#717975",
+                        "surface-tint": "#396759",
+                        "surface-container-low": "#f3f4f1",
+                        "primary-fixed": "#bceddc",
+                        "on-tertiary-fixed": "#33110b",
+                        "on-primary-fixed": "#002019",
+                        "surface-bright": "#f9faf7",
+                        "tertiary-container": "#784840",
+                        "inverse-surface": "#2e3130",
+                        "tertiary-fixed-dim": "#f7b7ac",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1b",
+                        "on-tertiary-container": "#fbbaaf",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#edeeec",
+                        "on-tertiary-fixed-variant": "#683a33",
+                        "surface-dim": "#d9dad8",
+                        "inverse-on-surface": "#f0f1ee",
+                        "secondary-container": "#e1dfdf",
+                        "secondary": "#5e5e5e",
+                        "on-secondary-fixed-variant": "#464747",
+                        "surface-container-high": "#e7e8e6",
+                        "on-primary-fixed-variant": "#204f42",
+                        "background": "#f9faf7",
+                        "tertiary": "#5d322a",
+                        "on-error": "#ffffff",
+                        "primary": "#154539",
+                        "on-primary-container": "#a3d4c3",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9faf7",
+                        "outline-variant": "#c0c8c4",
+                        "secondary-fixed": "#e4e2e2",
+                        "primary-fixed-dim": "#a0d1c0",
+                        "on-surface-variant": "#404945",
+                        "surface-container-highest": "#e2e3e0",
+                        "primary-container": "#2f5d50",
+                        "on-secondary-container": "#626262",
+                        "surface-variant": "#e2e3e0",
+                        "secondary-fixed-dim": "#c7c6c6",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1b",
+                        "inverse-primary": "#a0d1c0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "base": "8px",
+                        "2xl": "64px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "container-max": "1280px",
+                        "xl": "40px",
+                        "md": "16px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h4": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h1-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f9faf7; }
+        ::-webkit-scrollbar-thumb { background: #c0c8c4; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #717975; }
+        .glass-panel { backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.8); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-lg z-50">
+<div class="px-lg mb-2xl">
+<h1 class="font-h4 text-h4 font-bold text-primary">AlmaBridge</h1>
+<p class="font-label-sm text-label-sm text-secondary">Student Portal</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<!-- Active Tab: Jobs & Internships -->
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md text-body-md">Profile</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md">Resume Center</span>
+</a>
+<div class="flex items-center gap-md px-lg py-sm bg-surface-container-low text-primary border-l-2 border-primary cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+<span class="font-body-md text-body-md font-semibold">Jobs &amp; Internships</span>
+</div>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Career Center</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<span class="font-body-md text-body-md">Mentorship</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md text-body-md">Communities</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md text-body-md">Events</span>
+</a>
+</nav>
+<div class="px-lg pt-lg border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-md py-sm text-secondary hover:text-primary transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-md py-sm text-secondary hover:text-primary transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 right-0 left-sidebar-width h-16 bg-surface/80 border-b border-outline-variant backdrop-blur-md z-40 flex justify-between items-center px-lg">
+<div class="flex items-center bg-surface-container-low px-md py-xs rounded-lg border border-outline-variant w-full max-w-md">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-sm px-sm" placeholder="Search roles, companies, or keywords..." type="text"/>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm text-secondary hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm text-secondary hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young university student in business casual attire, smiling confidently against a soft-focus office background. The lighting is bright and natural, reflecting a modern light-mode aesthetic with clean lines and a sophisticated professional feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEhCPNV3tZhhYgJa0ks-HjntEnRYQlyM57tVZNgvfFy6PE7eXxg0wBgEBpGkcpfnvRDtNCx6ndHLvFvz7FggRSOY5uiWVNls5egNrugkgqmjYdYRy69ImC3zoQ71qq5y6OKZwG3r5gomEAtWeLizCWKhlixRCrFxYbMs7G5ScuGSRpEi8mwm4vru4NGhzXVqlMs3LPuNLjg1FX7AecvCIdsR9ACJ6cy4mh_j7wPz3bUVmq8U9ShIwHv_zlPA5CWyvpy6SSz1ZhnZE"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-sidebar-width pt-16 h-screen overflow-hidden flex flex-col">
+<!-- Advanced Filters Bar -->
+<div class="px-lg py-md bg-surface border-b border-outline-variant flex items-center gap-lg">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-outline">Filter by:</span>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-outline-variant rounded-lg px-md pr-8 py-xs text-body-sm font-medium focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Role: All Types</option>
+<option>Software Engineer</option>
+<option>Product Manager</option>
+<option>Data Scientist</option>
+<option>UX Designer</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">keyboard_arrow_down</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-outline-variant rounded-lg px-md pr-8 py-xs text-body-sm font-medium focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Industry: Tech</option>
+<option>Finance</option>
+<option>Healthcare</option>
+<option>Education</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">keyboard_arrow_down</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-outline-variant rounded-lg px-md pr-8 py-xs text-body-sm font-medium focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Salary: $80k+</option>
+<option>$100k+</option>
+<option>$120k+</option>
+<option>$150k+</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-sm">keyboard_arrow_down</span>
+</div>
+</div>
+<div class="h-6 w-px bg-outline-variant"></div>
+<button class="flex items-center gap-xs text-primary font-medium text-body-sm hover:underline">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                More Filters
+            </button>
+<div class="ml-auto">
+<p class="text-label-md text-secondary">Showing 248 available opportunities</p>
+</div>
+</div>
+<!-- Split-View Layout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left: Job List -->
+<div class="w-[420px] bg-background border-r border-outline-variant overflow-y-auto p-md space-y-md">
+<!-- Job Card 1 (Active/Selected) -->
+<div class="bg-surface border-2 border-primary p-md rounded-xl shadow-sm cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center border border-outline-variant">
+<img class="w-8 h-8 object-contain" data-alt="A clean, minimalist logo of a modern tech startup featuring an abstract geometric sapphire-blue shape. The logo is centered on a crisp white background, representing professional innovation and high-end enterprise software development branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVZPXAz51p3Iqs4aYmrfGLIP8X2f12CiB04MkKnkVrKu0Xd6YgjLQmNHmsWzq4vlou-il26oOaL_uDUCqDU_SUp5I_zfIaeblLavdnBVTvTMS9VLNP_ck3_7GPZdfRnwaAKEp7-HqdvN3BSGqedplx7koCiqGTJVRy2L8xAP2yNMnNoefe7wMXqDssJzrPWxf7XXWeRkXv9mmrm90XMYbfkQJOVBWrtEWMqmEEYoN80sevL2u-VIoCHQ_k6SzATc-gajIv-L7j7GM"/>
+</div>
+<span class="px-sm py-xs bg-primary/10 text-primary rounded-full text-label-sm font-bold uppercase tracking-wider">Applied</span>
+</div>
+<h3 class="font-h4 text-body-lg font-bold text-on-surface mb-xs">Senior AI Research Engineer</h3>
+<p class="text-body-sm text-secondary font-medium">NeuralMind Technologies</p>
+<div class="mt-md flex flex-wrap gap-xs">
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Palo Alto, CA
+                        </div>
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Full-time
+                        </div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<span class="text-primary font-bold text-body-sm">$160k - $220k</span>
+<span class="text-label-sm text-outline">2 days ago</span>
+</div>
+</div>
+<!-- Job Card 2 (Standard) -->
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:border-primary-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center border border-outline-variant">
+<img class="w-8 h-8 object-contain" data-alt="A minimalist tech logo consisting of a sleek, silver 'V' shape with a subtle metallic gradient, set against a pristine light grey background. The style is sophisticated, professional, and corporate, representing a global cloud infrastructure provider." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1xb529SslGg0rQOeKZolJsf1UnjvIHb0DRPTpMYNgqQtFpfeHon54uChxm5Z6CQ_YpWESMQfS1sK6udLJ9f8ScCBFo3iRDvIwyZAr0a_ipG6eGg4XzfTn3U3cCccubJ-Puz7dFJMD3GyG7dXy-h72eoq7oob0jCOPcd8-_uHbVxpF95LlActVMejd28dy2si6U1n4__clQFgTgrnLTaB6vELlcCJDREIedPRZUiPoSZgp7G-upzWF0Jf_cL-pzrD677RoLNmGXkQ"/>
+</div>
+<span class="px-sm py-xs bg-tertiary/10 text-tertiary rounded-full text-label-sm font-bold uppercase tracking-wider">Saved</span>
+</div>
+<h3 class="font-h4 text-body-lg font-bold text-on-surface mb-xs">Product Design Lead</h3>
+<p class="text-body-sm text-secondary font-medium">Vortex Cloud Systems</p>
+<div class="mt-md flex flex-wrap gap-xs">
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">laptop</span> Remote
+                        </div>
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Full-time
+                        </div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<span class="text-primary font-bold text-body-sm">$140k - $190k</span>
+<span class="text-label-sm text-outline">4 hours ago</span>
+</div>
+</div>
+<!-- Job Card 3 (New) -->
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:border-primary-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center border border-outline-variant">
+<img class="w-8 h-8 object-contain" data-alt="An elegant, minimalist emblem of a stylized green leaf integrated with a circuit board pattern. The logo uses a palette of forest green and white, symbolizing a modern green-tech sustainable energy company in a clean light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuWI6CPT-Dv1MdVc7tFlhNnbhTJwf1L5Ct53BVj2KygBraPhg_w-f1KlGqqlOXna5iGrqWlCOwzhHZn77L9kwevkoW4mHvXDlFewpsJ18uT1yHD-E9D9Jyp6fYA3AMqI0TPGDaqmpMrPA_xvHsDimRN1Xa6YaCBFGXTYBh_FMMW8MxNckZaMXOAQx-QeOdnKLPLubGZsjD_CLOwfIlAoagCylFlwv6RwYITfEA7beN0vWyVcQ6eCsUi-cxrsPokYHMXVV4JpV54oU"/>
+</div>
+</div>
+<h3 class="font-h4 text-body-lg font-bold text-on-surface mb-xs">Machine Learning Intern</h3>
+<p class="text-body-sm text-secondary font-medium">EcoPulse Solutions</p>
+<div class="mt-md flex flex-wrap gap-xs">
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Austin, TX
+                        </div>
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">history</span> Summer 2024
+                        </div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<span class="text-primary font-bold text-body-sm">$35 - $45 / hr</span>
+<span class="text-label-sm text-outline">Just now</span>
+</div>
+</div>
+<!-- Job Card 4 -->
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:border-primary-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center border border-outline-variant">
+<img class="w-8 h-8 object-contain" data-alt="A professional, minimalist fintech logo featuring two overlapping arcs in gold and black on a white background. The design is clean, authoritative, and modern, representing a high-end financial services platform for institutional investors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhJDStkrJmWIY6AuJbE8lBBUXBih7Er7h0oW69TLsceF8gWFBDtrDDasgRwyG3_ZLG1iDn7SDsia6xjB4pShNANzfONAWIPWojLW1Zs6L5oEmXygP7_gHu2I06AVggg2NGBfCk_4-QDT7whsqkD5HLqjNcAptRkGwvSaNmjAoF67bp8Na1HVp2PjXsN03jemlOEpGcYHgQYgn0ufBv56N8cFTbGpYWH7vDBx1HpRmCVDxXjazv59Oz7XFq_5K2YIo381CM9fqT9VQ"/>
+</div>
+</div>
+<h3 class="font-h4 text-body-lg font-bold text-on-surface mb-xs">Full Stack Developer</h3>
+<p class="text-body-sm text-secondary font-medium">FinFlow Institutional</p>
+<div class="mt-md flex flex-wrap gap-xs">
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span> New York, NY
+                        </div>
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container rounded-lg text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Full-time
+                        </div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<span class="text-primary font-bold text-body-sm">$130k - $175k</span>
+<span class="text-label-sm text-outline">1 day ago</span>
+</div>
+</div>
+</div>
+<!-- Right: Job Detail Preview -->
+<div class="flex-1 overflow-y-auto bg-surface-container-lowest flex flex-col">
+<!-- Detail Header -->
+<div class="p-2xl border-b border-outline-variant bg-surface">
+<div class="flex justify-between items-start mb-lg">
+<div class="flex items-center gap-lg">
+<div class="w-20 h-20 bg-surface-container rounded-xl flex items-center justify-center border border-outline-variant">
+<img class="w-12 h-12 object-contain" data-alt="A detailed view of a high-tech company logo featuring a series of concentric circles and a central dot, rendered in a deep emerald green. The style is modern, minimalist, and very clean, fitting for a leading artificial intelligence research firm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB264aMTy2Fg6RStHRRn7vYWW3qs6TLGUBQTlvmipKuhHd8ae2t-nVVeEyjDDKTFUNcysr52ZBrh9-4QHjB1M9AUyITXnkm625rBufSr681N5cpaj_4q2DLsUiv4mO0VbjbEKhYL4Rylkz-gbogl65LPcImFvwH7h9ZNwBOC2L0soGw84ej-7_ulyEDSfiw7E_IKHBjm0X-u33_6FVN8Hu2ueSBPQT740-fcPCCLXjEy13xWUiwfE3ObdQLSA5414tilkI578gXoCM"/>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Senior AI Research Engineer</h2>
+<p class="text-body-lg text-primary font-medium">NeuralMind Technologies • Palo Alto, CA (Hybrid)</p>
+</div>
+</div>
+<div class="flex gap-md">
+<button class="flex items-center gap-sm px-lg py-md border border-outline-variant rounded-lg font-semibold text-on-surface hover:bg-surface-container transition-all active:scale-95">
+<span class="material-symbols-outlined">bookmark</span>
+                                Save
+                            </button>
+<button class="flex items-center gap-sm px-xl py-md bg-primary text-on-primary rounded-lg font-semibold hover:bg-primary-container transition-all active:scale-95">
+                                Apply Now
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-md">
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant">
+<p class="text-label-sm text-secondary mb-xs uppercase tracking-wider">Salary Range</p>
+<p class="font-h4 text-body-lg font-bold text-on-surface">$160,000 - $220,000</p>
+</div>
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant">
+<p class="text-label-sm text-secondary mb-xs uppercase tracking-wider">Job Type</p>
+<p class="font-h4 text-body-lg font-bold text-on-surface">Full-time</p>
+</div>
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant">
+<p class="text-label-sm text-secondary mb-xs uppercase tracking-wider">Experience</p>
+<p class="font-h4 text-body-lg font-bold text-on-surface">Senior (5+ Years)</p>
+</div>
+<div class="p-md rounded-lg bg-surface-container-low border border-outline-variant">
+<p class="text-label-sm text-secondary mb-xs uppercase tracking-wider">Applicants</p>
+<p class="font-h4 text-body-lg font-bold text-on-surface">42 Applied</p>
+</div>
+</div>
+</div>
+<!-- Detail Content -->
+<div class="p-2xl max-w-4xl space-y-xl">
+<section>
+<h4 class="font-h3 text-h3 text-on-surface mb-md">About the Role</h4>
+<div class="text-body-md text-on-surface-variant space-y-md leading-relaxed">
+<p>NeuralMind is looking for a Senior AI Research Engineer to lead our Core Perception team. You will be responsible for developing state-of-the-art transformer models for real-time visual understanding in complex environments.</p>
+<p>Our team sits at the intersection of deep learning theory and production-scale engineering. You'll have access to massive compute clusters and proprietary datasets to push the boundaries of what's possible in artificial intelligence.</p>
+</div>
+</section>
+<section>
+<h4 class="font-h3 text-h3 text-on-surface mb-md">Key Responsibilities</h4>
+<ul class="space-y-sm text-body-md text-on-surface-variant list-none">
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Design and implement large-scale training pipelines for multimodal models.</span>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Collaborate with cross-functional teams to integrate AI models into end-user products.</span>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Optimize inference performance for deployment on edge devices and cloud infrastructure.</span>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Publish research findings at major conferences (CVPR, ICCV, NeurIPS).</span>
+</li>
+</ul>
+</section>
+<section class="bg-primary-container/10 p-lg rounded-xl border border-primary-container/20">
+<div class="flex items-center gap-md mb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h4 class="font-h4 text-h4 text-primary">AI Insights: Why you're a match</h4>
+</div>
+<p class="text-body-md text-on-surface mb-lg">Our AI analysis suggests you are in the <strong>top 5% of applicants</strong> for this role based on your recent work with PyTorch and Computer Vision.</p>
+<div class="flex gap-md">
+<div class="flex-1 p-md bg-surface/50 rounded-lg">
+<p class="text-label-sm text-primary font-bold uppercase mb-xs">Skill Strength</p>
+<p class="text-body-sm">Your "TensorFlow" and "Distributed Training" experience matches their core stack.</p>
+</div>
+<div class="flex-1 p-md bg-surface/50 rounded-lg">
+<p class="text-label-sm text-primary font-bold uppercase mb-xs">Alumni Network</p>
+<p class="text-body-sm">3 AlmaBridge graduates currently work at NeuralMind.</p>
+</div>
+</div>
+</section>
+<section>
+<h4 class="font-h3 text-h3 text-on-surface mb-md">Benefits</h4>
+<div class="grid grid-cols-2 gap-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Premium Health</p>
+<p class="text-body-sm text-secondary">100% covered for families</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Wellness Stipend</p>
+<p class="text-body-sm text-secondary">$200/month for health</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Equity &amp; Bonus</p>
+<p class="text-body-sm text-secondary">Generous RSU packages</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Unlimited PTO</p>
+<p class="text-body-sm text-secondary">Mandatory 3 weeks minimum</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Spacer for scroll -->
+<div class="h-2xl"></div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Only on Mobile - Hidden here per rules for Desktop Details focus) -->
+<!-- The FAB is suppressed on Details screens as per the Shell Visibility & Relevance instructions -->
+<script>
+        // Simple micro-interaction for job cards
+        const jobCards = document.querySelectorAll('.cursor-pointer');
+        jobCards.forEach(card => {
+            card.addEventListener('click', () => {
+                jobCards.forEach(c => {
+                    c.classList.remove('border-primary', 'border-2');
+                    c.classList.add('border-outline-variant', 'border');
+                });
+                card.classList.remove('border-outline-variant', 'border');
+                card.classList.add('border-primary', 'border-2');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchContainer = searchInput.parentElement;
+        searchInput.addEventListener('focus', () => {
+            searchContainer.classList.add('ring-2', 'ring-primary/20', 'border-primary');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchContainer.classList.remove('ring-2', 'ring-primary/20', 'border-primary');
+        });
+    </script>
+</body></html>

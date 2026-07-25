@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlmaBridge | Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad4",
+                    "outline": "#717975",
+                    "surface-tint": "#396759",
+                    "surface-container-low": "#f3f4f1",
+                    "primary-fixed": "#bceddc",
+                    "on-tertiary-fixed": "#33110b",
+                    "on-primary-fixed": "#002019",
+                    "surface-bright": "#f9faf7",
+                    "tertiary-container": "#784840",
+                    "inverse-surface": "#2e3130",
+                    "tertiary-fixed-dim": "#f7b7ac",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1b",
+                    "on-tertiary-container": "#fbbaaf",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#edeeec",
+                    "on-tertiary-fixed-variant": "#683a33",
+                    "surface-dim": "#d9dad8",
+                    "inverse-on-surface": "#f0f1ee",
+                    "secondary-container": "#e1dfdf",
+                    "secondary": "#5e5e5e",
+                    "on-secondary-fixed-variant": "#464747",
+                    "surface-container-high": "#e7e8e6",
+                    "on-primary-fixed-variant": "#204f42",
+                    "background": "#f9faf7",
+                    "tertiary": "#5d322a",
+                    "on-error": "#ffffff",
+                    "primary": "#154539",
+                    "on-primary-container": "#a3d4c3",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "surface": "#f9faf7",
+                    "outline-variant": "#c0c8c4",
+                    "secondary-fixed": "#e4e2e2",
+                    "primary-fixed-dim": "#a0d1c0",
+                    "on-surface-variant": "#404945",
+                    "surface-container-highest": "#e2e3e0",
+                    "primary-container": "#2f5d50",
+                    "on-secondary-container": "#626262",
+                    "surface-variant": "#e2e3e0",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1c1b",
+                    "inverse-primary": "#a0d1c0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sidebar-width": "260px",
+                    "base": "8px",
+                    "2xl": "64px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "container-max": "1280px",
+                    "xl": "40px",
+                    "md": "16px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "h1": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h4": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h2": ["Inter"],
+                    "label-md": ["Inter"],
+                    "h1-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shimmer-ai {
+            background: linear-gradient(90deg, #f3f4f1 25%, #ffffff 50%, #f3f4f1 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        body { background-color: #f9faf7; }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface border-r border-outline-variant flex flex-col py-lg z-50">
+<div class="px-lg mb-2xl">
+<h1 class="font-h4 text-h4 font-bold text-primary">AlmaBridge</h1>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mt-xs">Student Portal</p>
+</div>
+<nav class="flex-1 flex flex-col">
+<div class="space-y-1">
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md">Profile</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md">Resume Center</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md">Jobs &amp; Internships</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">AI Career Center</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<span class="font-body-md">Mentorship</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md">Communities</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-body-md">Events</span>
+</a>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-lg">
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Support</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-sidebar-width min-h-screen flex flex-col">
+<!-- Top Nav Bar -->
+<header class="fixed top-0 right-0 left-sidebar-width h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant px-lg flex justify-between items-center z-40">
+<div class="flex items-center gap-md">
+<span class="font-h4 text-h4 font-bold text-primary">Notifications</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="relative group">
+<span class="material-symbols-outlined text-primary cursor-pointer transition-all active:scale-95" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border border-surface"></span>
+</div>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary transition-all">apps</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young university student, wearing a smart casual blazer, smiling warmly against a blurred corporate office background. The lighting is soft and natural, emphasizing a clean and approachable academic persona. The image style is polished and high-end, consistent with a professional networking platform aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB24sgeuBWcw7XYu7KuGyrfcvfu_E7NX8eeZYoR3it5eHtp7TqM1MK_lxnNWe0Sud28VLl2VKTyayQLr7GBqMOOkzKURNUH5SFw82ei0P0fqNajzbu1VlpsWh0XHnayoGpo8Yc5OeY0akOkpWWlDim1pBb6RmhEWIuS0bRd_yG8k2H70vd29fwvejF5urhj_LINCd94_I6knBjLMZcXdbkmyO7SegOEA1YbIiAruLHMeq7hM_7PmPzxNJ-tSPIzOZYBmZI5hoJae7I"/>
+</div>
+</div>
+</header>
+<!-- Notification Workspace -->
+<div class="mt-16 p-xl max-w-container-max mx-auto w-full">
+<!-- Page Header & Global Controls -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-md">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Activity Center</h2>
+<p class="text-on-surface-variant font-body-sm">Stay updated with your career progress and university events.</p>
+</div>
+<button class="flex items-center gap-xs text-primary font-label-md hover:bg-surface-container-low px-md py-sm rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+                    Mark all as read
+                </button>
+</div>
+<!-- Tab Navigation (Bento Layout Component) -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden mb-lg">
+<div class="flex border-b border-outline-variant overflow-x-auto scrollbar-hide">
+<button class="px-lg py-md font-label-md border-b-2 border-primary text-primary whitespace-nowrap">All <span class="ml-1 opacity-60">(12)</span></button>
+<button class="px-lg py-md font-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">Announcements</button>
+<button class="px-lg py-md font-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">Placement Updates</button>
+<button class="px-lg py-md font-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">Messages</button>
+</div>
+<!-- Notifications List -->
+<div class="divide-y divide-outline-variant">
+<!-- Notification Item: Unread AI Insight -->
+<div class="group relative flex gap-md p-lg bg-surface-container-lowest hover:bg-surface-container-low transition-all duration-300">
+<!-- Unread Indicator -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-h4 text-body-md font-bold text-on-surface truncate">AI Career Match: Junior UX Designer at TechCorp</h4>
+<span class="font-label-sm text-outline whitespace-nowrap ml-md">2 mins ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">Your resume was analyzed against the new job posting. You have a 92% match score. We recommend applying before the priority deadline.</p>
+<div class="mt-md flex gap-sm">
+<button class="px-md py-sm bg-primary text-on-primary font-label-sm rounded-lg hover:brightness-110 transition-all">Apply Now</button>
+<button class="px-md py-sm bg-secondary-container text-on-secondary-container font-label-sm rounded-lg hover:bg-outline-variant transition-all">Mark as read</button>
+</div>
+</div>
+<div class="flex-shrink-0 flex items-start gap-sm">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-error transition-colors" title="Delete">delete</span>
+</div>
+</div>
+<!-- Notification Item: University Announcement -->
+<div class="group flex gap-md p-lg hover:bg-surface-container-low transition-all duration-300">
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md font-semibold text-on-surface truncate">University Annual Career Fair 2024</h4>
+<span class="font-label-sm text-outline whitespace-nowrap ml-md">1 hour ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">The main career event is scheduled for next Friday. Over 50+ Fortune 500 companies are expected to attend for on-spot registrations.</p>
+</div>
+<div class="flex-shrink-0 self-center">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</div>
+</div>
+<!-- Notification Item: Placement Update (Success) -->
+<div class="group flex gap-md p-lg hover:bg-surface-container-low transition-all duration-300">
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md font-semibold text-on-surface truncate">Interview Confirmed: Global Solutions Inc.</h4>
+<span class="font-label-sm text-outline whitespace-nowrap ml-md">Yesterday</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Your application has been shortlisted for the final round. The interview is scheduled for Oct 14th at 10:00 AM via Zoom.</p>
+<div class="mt-md">
+<span class="inline-flex items-center px-sm py-xs bg-[#5D8A7E1A] text-primary text-[10px] font-bold uppercase tracking-wider rounded-sm">Placement Update</span>
+</div>
+</div>
+<div class="flex-shrink-0 self-center">
+<button class="font-label-sm text-primary hover:underline">View Details</button>
+</div>
+</div>
+<!-- Notification Item: Message -->
+<div class="group flex gap-md p-lg hover:bg-surface-container-low transition-all duration-300">
+<div class="flex-shrink-0 w-12 h-12 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of an experienced industry mentor, a middle-aged woman with glasses and a friendly, professional demeanor, in a bright modern office. The background shows soft architectural details and indoor plants. The photo is high-quality, professional, and suggests a supportive academic or professional mentoring relationship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi4nn6MMwiB4L0s5GaC5qZhjCyKq-DIb9ZxnsaCb_LRvCz8hut4ojF3J1tE2D5m2VeNXAgF7ZVyWzyCmLprPJsK36_S-4MrvqMEETFm83UEFUGo39AssRyJODWnaoZewHUPauqvBcIOFE5WyWZiAOtjOd-mNMqd5xhcfNZd-gKDL8pCvpVsiYkcReeNiPjia_3MGSCECGwMBv1f4ZmoHn9ODiD3zl1cJLNcOu5idXVirIlO41bL4cN_iiQbOv8kyBhFoowt8egxJk"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md font-semibold text-on-surface truncate">Sarah Jenkins (Mentor)</h4>
+<span class="font-label-sm text-outline whitespace-nowrap ml-md">Oct 10</span>
+</div>
+<p class="text-body-sm text-on-surface-variant italic leading-relaxed">"Hey there! I've reviewed your latest portfolio project. Let's discuss the improvements in our session today."</p>
+</div>
+</div>
+<!-- Notification Item: Job Status -->
+<div class="group flex gap-md p-lg hover:bg-surface-container-low transition-all duration-300 opacity-60">
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md font-semibold text-on-surface truncate">Application Status: In Review</h4>
+<span class="font-label-sm text-outline whitespace-nowrap ml-md">Oct 08</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Your application for Senior Data Intern at Innovate Lab is currently under review by the hiring manager.</p>
+</div>
+</div>
+</div>
+<!-- Load More / Footer -->
+<div class="p-lg bg-surface-container-lowest flex justify-center">
+<button class="text-primary font-label-md flex items-center gap-sm hover:opacity-80 transition-opacity">
+                        View Past Notifications
+                        <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- Suggestion Card (AI Highlight) -->
+<div class="relative overflow-hidden rounded-xl bg-primary-container p-lg text-on-primary-container flex flex-col md:flex-row items-center gap-lg">
+<!-- AI Subtle Shimmer Effect -->
+<div class="absolute inset-0 opacity-10 shimmer-ai pointer-events-none"></div>
+<div class="flex-1 z-10">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+<span class="font-label-sm uppercase tracking-widest font-bold">AI Recommendation</span>
+</div>
+<h3 class="font-h3 text-h3 mb-xs text-white">Optimize your Notification Flow</h3>
+<p class="text-on-primary-container/80 text-body-sm max-w-xl">Based on your activity, we can filter out low-priority internship alerts for roles outside your preferred locations. Would you like to adjust your preferences?</p>
+</div>
+<button class="z-10 px-lg py-md bg-white text-primary font-bold rounded-lg hover:bg-opacity-90 transition-all whitespace-nowrap">Adjust Settings</button>
+</div>
+</div>
+</main>
+<!-- Contextual Micro-Interactions Script -->
+<script>
+        // Simple mock interaction for 'Mark as read'
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('Mark as read')) {
+                btn.addEventListener('click', function(e) {
+                    const row = this.closest('.group');
+                    row.style.opacity = '0.6';
+                    row.querySelector('.absolute')?.remove(); // Remove blue unread bar
+                    this.remove(); // Remove the button itself
+                });
+            }
+        });
+
+        // Search bar focus effect
+        const topBar = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                topBar.classList.add('shadow-sm');
+            } else {
+                topBar.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AlmaBridge - Student Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#f7b7ac",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#784840",
+                      "on-primary-fixed": "#002019",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#a0d1c0",
+                      "on-surface-variant": "#404945",
+                      "primary": "#154539",
+                      "on-secondary-container": "#626262",
+                      "surface": "#f9faf7",
+                      "surface-tint": "#396759",
+                      "surface-container": "#edeeec",
+                      "surface-bright": "#f9faf7",
+                      "outline-variant": "#c0c8c4",
+                      "on-tertiary-fixed": "#33110b",
+                      "inverse-surface": "#2e3130",
+                      "surface-container-high": "#e7e8e6",
+                      "surface-dim": "#d9dad8",
+                      "on-secondary-fixed": "#1b1c1c",
+                      "tertiary-fixed": "#ffdad4",
+                      "on-surface": "#1a1c1b",
+                      "on-primary-fixed-variant": "#204f42",
+                      "outline": "#717975",
+                      "primary-fixed": "#bceddc",
+                      "secondary-container": "#e1dfdf",
+                      "error": "#ba1a1a",
+                      "tertiary": "#5d322a",
+                      "secondary-fixed-dim": "#c7c6c6",
+                      "surface-variant": "#e2e3e0",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f3f4f1",
+                      "secondary-fixed": "#e4e2e2",
+                      "on-tertiary-container": "#fbbaaf",
+                      "inverse-on-surface": "#f0f1ee",
+                      "primary-container": "#2f5d50",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e2e3e0",
+                      "on-primary-container": "#a3d4c3",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#683a33",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "background": "#f9faf7",
+                      "on-secondary-fixed-variant": "#464747",
+                      "secondary": "#5e5e5e",
+                      "primary-fixed-dim": "#a0d1c0",
+                      "on-background": "#1a1c1b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "xl": "40px",
+                      "sidebar-width": "260px",
+                      "2xl": "64px",
+                      "lg": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "h2": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "h1-mobile": ["Inter"],
+                      "h3": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "h1": ["Inter"],
+                      "h4": ["Inter"]
+              },
+              "fontSize": {
+                      "h2": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "h1-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["13px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "h4": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e3e0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c0c8c4; }
+        .glass-header {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface dark:bg-surface-container border-r border-outline-variant dark:border-outline flex flex-col py-md z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-h4 text-h4 font-bold text-primary dark:text-primary-fixed-dim">AlmaBridge</h1>
+<p class="text-label-sm text-on-surface-variant">Alumni Network</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 bg-surface-container-low dark:bg-surface-container-highest text-primary dark:text-primary-fixed-dim border-l-4 border-primary font-bold transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Directory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<span>Jobs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">diversity_3</span>
+<span>Mentorship</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Communities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span>AI Career Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-lowest dark:hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Admin Tools</span>
+</a>
+</nav>
+<div class="px-4 mt-auto pt-md flex flex-col gap-1">
+<button class="bg-primary text-white w-full py-2 rounded-lg font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2 mb-md">
+<span class="material-symbols-outlined text-sm">volunteer_activism</span>
+                Support Alumni
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-lowest" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline z-40 flex items-center justify-between px-lg">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-body-sm" placeholder="Search students, skills, or majors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-2 p-1 hover:bg-surface-container rounded-lg transition-all">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">AD</div>
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-sidebar-width pt-16 min-h-screen">
+<div class="p-lg max-w-container-max mx-auto">
+<!-- Page Header & Action Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-lg">
+<div>
+<h2 class="font-h2 text-h2 text-primary">Student Directory</h2>
+<p class="text-body-sm text-on-surface-variant">Manage and connect with current students across all departments.</p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-xs">
+<select class="bg-white border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none">
+<option>All Departments</option>
+<option>Computer Science</option>
+<option>Business Admin</option>
+<option>Mechanical Eng</option>
+</select>
+<select class="bg-white border border-outline-variant rounded-lg px-3 py-2 text-body-sm focus:ring-primary focus:border-primary outline-none">
+<option>All Skills</option>
+<option>React</option>
+<option>Python</option>
+<option>SQL</option>
+</select>
+</div>
+<button class="flex items-center gap-2 bg-white border border-outline-variant text-on-surface px-4 py-2 rounded-lg font-medium hover:bg-surface-container-low transition-all text-body-sm">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Stats Bar (Micro Bento) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-lg">
+<div class="bg-white p-md border border-outline-variant rounded-xl">
+<p class="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Total Students</p>
+<h3 class="font-h3 text-h3">12,482</h3>
+</div>
+<div class="bg-white p-md border border-outline-variant rounded-xl">
+<p class="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Placed This Year</p>
+<h3 class="font-h3 text-h3">84%</h3>
+</div>
+<div class="bg-white p-md border border-outline-variant rounded-xl">
+<p class="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Avg. Skills / Student</p>
+<h3 class="font-h3 text-h3">6.2</h3>
+</div>
+<div class="bg-white p-md border border-outline-variant rounded-xl">
+<p class="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Internship Active</p>
+<h3 class="font-h3 text-h3">1,120</h3>
+</div>
+</div>
+<!-- Enterprise Data Table -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-md py-4 font-label-sm text-on-surface-variant uppercase">Student Name</th>
+<th class="px-md py-4 font-label-sm text-on-surface-variant uppercase">Year</th>
+<th class="px-md py-4 font-label-sm text-on-surface-variant uppercase">Major</th>
+<th class="px-md py-4 font-label-sm text-on-surface-variant uppercase">Skills</th>
+<th class="px-md py-4 font-label-sm text-on-surface-variant uppercase">Placement Status</th>
+<th class="px-md py-4 font-label-sm text-on-surface-variant uppercase text-right">Resume</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a young female college student with a friendly expression, soft studio lighting, wearing a smart casual blazer, against a clean white and soft green background to match the professional networking brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBGhYmTIGsVdW1YQ7z4hBWBzYZ9NAe26juFdcyaAICs3WKgDTx8FeuFd0yKPTkFBpreLZAT1m4iBrqVg-3wtZNKV2xzk4yHeo-uHIncJAXKKoMo7CTFNls5PAfOKO6gKYsLMdesw1rmwOdKsbXjb77uNHTZRNKEZ6zv4bVuTC9O1KcvqtygIuaxhHR7yYrm-0MTEnSpLnt6GzIUs0wI7z_cP-ESzbAilOo0Trc_axnjyc7IF41Obd6jvxgkxPl1nw301j7-80OdxQ"/>
+<div>
+<p class="font-bold text-on-surface">Elena Rodriguez</p>
+<p class="text-xs text-on-surface-variant">elena.r@university.edu</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 text-body-sm">Senior</td>
+<td class="px-md py-4 text-body-sm">Computer Science</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">React</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">TypeScript</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-[11px] font-medium">+2</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                        Placed @ Google
+                                    </span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a male graduate student, slightly smiling, wearing a button-down shirt, crisp office lighting, minimalist modern look, high-resolution photography, echoing an elite academic environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLayyqSsPAZmGryqWEUiRauM37wTFzfWiYn2QNEls-wR9WBiJ69UEKctV1rBtKDfvp8H4yYd4T7VRyovkpxbMyktZLaFGqjIkJ1d1V_5zUWAruOOTxEREE_PCqAyp2WEA6yXvKpzEVkCURzK6sameNpbDXg1yi4Orj7uHPyV3z_sxrEm5A_m_J_NP9zrHTOBq38irIHlblknZA7g7bjyW1I8HOqHsxpz5sjjqAf5VGp9gjL45cBNDpwM5uU-ct_wC6t9TgcQMM24M"/>
+<div>
+<p class="font-bold text-on-surface">Marcus Chen</p>
+<p class="text-xs text-on-surface-variant">m.chen@university.edu</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 text-body-sm">Junior</td>
+<td class="px-md py-4 text-body-sm">Data Analytics</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">Python</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">SQL</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant">
+                                        Interviewing
+                                    </span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A diverse female student with a confident smile, set in a bright library background with soft bokeh, high-key lighting, modern professional photography, clean composition focused on clarity and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBordukujP4dU_frfbDih0amyFJqFeIZ6BlGdeJ2Ku02ntHFY41msmNEcM2EH3NtJVbDmfbUS-mhOCWWRKhQ_aYfXxCZgpLInMdt0gTFHJbbG3yHZ_p9IXK8rY1TH2QUi7Axlae7it5LxYA-gP48YgOAYrwGHturolmlHz0E9vHJ_5YH8fwnHXF7bliJ3Cha-3Tu7kfl_NBnKNQbjMRigkqxocdndZBACofseBvh9q_Tf3NyIX6GyNJIjF09FmnDFeUp-M0gQ95oxw"/>
+<div>
+<p class="font-bold text-on-surface">Sarah Jenkins</p>
+<p class="text-xs text-on-surface-variant">s.jenkins@university.edu</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 text-body-sm">Sophomore</td>
+<td class="px-md py-4 text-body-sm">Business Management</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">Strategy</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">Excel</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-secondary">
+                                        Seeking
+                                    </span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold text-sm">JH</div>
+<div>
+<p class="font-bold text-on-surface">James Harrison</p>
+<p class="text-xs text-on-surface-variant">jh88@university.edu</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 text-body-sm">Senior</td>
+<td class="px-md py-4 text-body-sm">Mechanical Engineering</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">CAD</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">Matlab</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                        Placed @ Tesla
+                                    </span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="Close up of a young male student wearing professional glasses, soft natural light from a window, modern tech office aesthetic, sharp focus, vibrant yet realistic colors, professional LinkedIn style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-BuHewlh7k7X_wCMVGdmO2IaldAeL5OEsJoqJrieX27XoQVVtPyMaD_ZHCN04BrIOmzMkmwj3x37da69RODtPUf8mxnxMdWyJEOKfEtB4DO5IjBfcLUlabZbpqckBWsl7jgDWfPskJB8ugnoA0OwGai8vaGBJRQy8MTw1RMmVQibCrHBixXAR7wvrwuSwI9uJP8JtmTuJs_lqEqUujPJQF-wbwGuU7Qw8qQpFqtwtE-rulwzBNhOqKmxXnyMOz4aCecj766TzTMY"/>
+<div>
+<p class="font-bold text-on-surface">Liam Patel</p>
+<p class="text-xs text-on-surface-variant">l.patel@university.edu</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 text-body-sm">Masters</td>
+<td class="px-md py-4 text-body-sm">Artificial Intelligence</td>
+<td class="px-md py-4">
+<div class="flex flex-wrap gap-1">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">PyTorch</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded text-[11px] font-medium">NLP</span>
+</div>
+</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                        Interning @ OpenAI
+                                    </span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">description</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-md py-4 bg-white border-t border-outline-variant flex items-center justify-between">
+<p class="text-label-sm text-on-surface-variant">Showing 1 to 5 of 12,482 entries</p>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded hover:bg-surface-container transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-xs font-medium">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-xs font-medium">3</button>
+<span class="px-1">...</span>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-xs font-medium">2496</button>
+<button class="p-2 rounded hover:bg-surface-container transition-all text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Help / AI Insight Sidebar (Hidden on small screens) -->
+<div class="mt-lg grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="col-span-1 md:col-span-2 bg-primary/5 p-lg rounded-xl border border-primary/10 flex items-start gap-md">
+<div class="bg-primary-container p-2 rounded-lg text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-h4 text-primary mb-1">AI Talent Matcher</h4>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+                            Based on your current mentorship history, we've identified 12 students in the directory who match your expertise in <strong>Machine Learning</strong> and <strong>Cloud Architecture</strong>.
+                        </p>
+<button class="mt-md text-primary font-bold text-label-md flex items-center gap-1 hover:underline">
+                            View matches <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-lg rounded-xl border border-outline-variant flex flex-col justify-center">
+<h4 class="font-label-sm text-on-surface-variant uppercase tracking-widest mb-md">Quick Actions</h4>
+<div class="flex flex-col gap-sm">
+<button class="w-full text-left p-3 rounded-lg bg-white border border-outline-variant text-body-sm hover:border-primary transition-all flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">person_add</span>
+                            Invite new students
+                        </button>
+<button class="w-full text-left p-3 rounded-lg bg-white border border-outline-variant text-body-sm hover:border-primary transition-all flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">verified</span>
+                            Batch verify resumes
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.add('scale-[0.995]');
+                setTimeout(() => row.classList.remove('scale-[0.995]'), 100);
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

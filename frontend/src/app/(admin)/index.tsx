@@ -1,3 +1,4 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Typography } from '../../components/Typography';
@@ -22,7 +23,7 @@ export default function AdminDashboard() {
           </View>
         </View>
         <TouchableOpacity onPress={() => router.push('/notifications')} className="p-2 relative">
-          <Typography className="text-2xl">🔔</Typography>
+          <MaterialIcons name="notifications" size={24} color="#154539" />
         </TouchableOpacity>
       </View>
 
@@ -47,10 +48,10 @@ export default function AdminDashboard() {
       {/* Quick Actions */}
       <View className="flex-row flex-wrap justify-between mb-8">
         {[
-          { id: 'users', icon: '👥', label: 'Users', route: '/users' },
-          { id: 'content', icon: '📝', label: 'Content', route: '/content' },
-          { id: 'analytics', icon: '📈', label: 'Analytics', route: '/analytics' },
-          { id: 'settings', icon: '⚙️', label: 'Settings', route: '/settings' },
+          { id: 'users', icon: 'groups', label: 'Users', route: '/users' },
+          { id: 'content', icon: 'article', label: 'Content', route: '/content' },
+          { id: 'analytics', icon: 'trending-up', label: 'Analytics', route: '/analytics' },
+          { id: 'settings', icon: '<MaterialIcons name="settings" size={24} color="#154539" />️', label: 'Settings', route: '/settings' },
         ].map((action) => (
           <TouchableOpacity 
             key={action.id} 

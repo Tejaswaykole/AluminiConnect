@@ -17,7 +17,7 @@ export function ScreenContainer({
   
   return (
     <Container
-      className={`flex-1 bg-background-surface ${className}`}
+      className={`flex-1 bg-background ${className}`}
       style={{
         paddingTop: insets.top,
         paddingBottom: insets.bottom,

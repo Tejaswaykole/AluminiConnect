@@ -6,6 +6,7 @@ import { SearchBar } from '../../../components/SearchBar';
 import { Card } from '../../../components/Card';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { COMMUNITY_MOCKS } from '../../../mocks';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function CommunitiesScreen() {
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function CommunitiesScreen() {
             <Card className="mb-4">
               <View className="flex-row items-center mb-3">
                 <View className="w-12 h-12 bg-primary/10 rounded-full items-center justify-center mr-4">
-                  <Typography className="text-xl text-primary">💬</Typography>
+                  <MaterialIcons name="groups" size={24} color="#154539" />
                 </View>
                 <View className="flex-1">
                   <Typography variant="h3">{item.name}</Typography>

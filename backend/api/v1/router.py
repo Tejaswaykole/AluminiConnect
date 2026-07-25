@@ -1,8 +1,9 @@
 from fastapi import APIRouter
-from .endpoints import health, users, opportunities, communities, events, mentorship, notifications, files
+from .endpoints import health, users, opportunities, communities, events, mentorship, notifications, files, auth, resumes, applications, messages, portfolios, contributions, audit_logs, drives
 
 api_router = APIRouter()
 api_router.include_router(health.router, tags=["Health"])
+api_router.include_router(auth.router, prefix="/auth", tags=["Auth"])
 api_router.include_router(users.router, prefix="/users", tags=["Users"])
 api_router.include_router(opportunities.router, prefix="/opportunities", tags=["Opportunities"])
 api_router.include_router(communities.router, prefix="/communities", tags=["Communities"])
@@ -10,3 +11,10 @@ api_router.include_router(events.router, prefix="/events", tags=["Events"])
 api_router.include_router(mentorship.router, prefix="/mentorship", tags=["Mentorship"])
 api_router.include_router(notifications.router, prefix="/notifications", tags=["Notifications"])
 api_router.include_router(files.router, prefix="/files", tags=["Files"])
+api_router.include_router(resumes.router, prefix="/resumes", tags=["Resumes"])
+api_router.include_router(applications.router, prefix="/applications", tags=["Applications"])
+api_router.include_router(messages.router, prefix="/messages", tags=["Messages"])
+api_router.include_router(portfolios.router, prefix="/portfolios", tags=["Portfolios"])
+api_router.include_router(contributions.router, prefix="/contributions", tags=["Contributions"])
+api_router.include_router(audit_logs.router, prefix="/audit-logs", tags=["Audit"])
+api_router.include_router(drives.router, prefix="/drives", tags=["Placement Drives"])
