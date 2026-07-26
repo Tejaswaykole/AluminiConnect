@@ -7,8 +7,14 @@ export const useEvents = () => {
   return useQuery<Event[]>({
     queryKey: queryKeys.events.list(),
     queryFn: async () => {
-      const response = await apiClient.get<{ success: boolean; data: Event[] }>('/events/');
-      return response.data;
+      try {
+        const response = await apiClient.get<{ success: boolean; data: Event[] }>('/events/');
+        return response.data;
+      } catch (error) {
+        console.warn("Backend unavailable, using mock events...");
+        const { MOCK_EVENTS } = await import('../../mocks');
+        return MOCK_EVENTS;
+      }
     },
   });
 };

@@ -7,8 +7,14 @@ export const useOpportunities = () => {
   return useQuery<Opportunity[]>({
     queryKey: queryKeys.opportunities.list(),
     queryFn: async () => {
-      const response = await apiClient.get<{ success: boolean; data: Opportunity[] }>('/opportunities/');
-      return response.data;
+      try {
+        const response = await apiClient.get<{ success: boolean; data: Opportunity[] }>('/opportunities/');
+        return response.data;
+      } catch (error) {
+        console.warn("Backend unavailable, using mock opportunities...");
+        const { MOCK_OPPORTUNITIES } = await import('../../mocks');
+        return MOCK_OPPORTUNITIES;
+      }
     },
   });
 };
