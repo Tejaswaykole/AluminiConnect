@@ -19,3 +19,8 @@ class MentorshipUnavailableException(DomainException):
 class OpportunityClosedException(DomainException):
     def __init__(self):
         super().__init__(detail="This opportunity is closed and no longer accepting applications.")
+
+class AppException(Exception):
+    def __init__(self, message: str, status_code: int = 400):
+        self.message = message
+        self.status_code = status_code

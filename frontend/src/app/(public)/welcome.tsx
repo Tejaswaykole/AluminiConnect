@@ -31,25 +31,25 @@ export default function WelcomeScreen() {
           <Button 
             title="Student" 
             variant="outline"
-            onPress={() => router.push('/register-student')} 
+            onPress={() => router.push('/register')} 
             className="mb-3"
           />
           <Button 
             title="Alumni" 
             variant="outline"
-            onPress={() => router.push('/register-alumni')} 
+            onPress={() => router.push('/register')} 
             className="mb-3"
           />
           <Button 
             title="Institution" 
             variant="outline"
-            onPress={() => router.push('/register-institution')} 
+            onPress={() => router.push('/register')} 
             className="mb-3"
           />
           <Button 
             title="Company / Recruiter" 
             variant="outline"
-            onPress={() => router.push('/register-company')} 
+            onPress={() => router.push('/register')} 
             className="mb-6"
           />
         </View>

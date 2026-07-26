@@ -9,8 +9,8 @@ export default function AdminLayout() {
 
   const sidebarItems: SidebarItem[] = [
     { name: 'dashboard', label: 'Dashboard', icon: 'bar-chart', href: '/(institution)' },
-    { name: 'users', label: 'User Directory', icon: 'groups', href: '/(institution)/users' },
-    { name: 'content', label: 'Content Hub', icon: 'article', href: '/(institution)/content' },
+    { name: 'audit', label: 'Audit Logs', icon: 'security', href: '/(institution)/audit' },
+    { name: 'drives', label: 'Placement Drives', icon: 'work', href: '/(institution)/drives' },
     { name: 'settings', label: 'Settings', icon: 'settings', href: '/(institution)/settings' },
   ];
 
@@ -54,17 +54,17 @@ export default function AdminLayout() {
             }}
           />
           <Tabs.Screen
-            name="users"
+            name="audit"
             options={{
-              title: 'Users',
-              tabBarIcon: ({ color }) => <MaterialIcons name="groups" size={24} color={color} />,
+              title: 'Audit Logs',
+              tabBarIcon: ({ color }) => <MaterialIcons name="security" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
-            name="content"
+            name="drives"
             options={{
-              title: 'Content',
-              tabBarIcon: ({ color }) => <MaterialIcons name="article" size={24} color={color} />,
+              title: 'Drives',
+              tabBarIcon: ({ color }) => <MaterialIcons name="work" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
@@ -74,11 +74,6 @@ export default function AdminLayout() {
               tabBarIcon: ({ color }) => <MaterialIcons name="settings" size={24} color={color} />,
             }}
           />
-          
-          {/* Hidden */}
-          <Tabs.Screen name="mentorship" options={{ href: null }} />
-          <Tabs.Screen name="analytics" options={{ href: null }} />
-          <Tabs.Screen name="notifications" options={{ href: null }} />
         </Tabs>
       </View>
     </View>

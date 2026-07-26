@@ -60,8 +60,8 @@ export default function RegisterScreen() {
     // Simulate network request
     setTimeout(() => {
       setIsLoading(false);
-      // Navigate to Role Selection
-      router.push('/role-selection');
+      // Navigate to Login after registration
+      router.push('/login');
     }, 1500);
   };
 
