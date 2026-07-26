@@ -13,7 +13,7 @@ export const useCurrentUser = () => {
           return response.data;
         }
       } catch (e) {
-        console.warn("Backend unavailable, using local mock data...");
+        // Silent fallback
       }
       
       // Fallback to local storage if backend call fails (e.g. no token)

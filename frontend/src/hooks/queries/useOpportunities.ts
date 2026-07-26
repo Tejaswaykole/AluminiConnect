@@ -11,7 +11,6 @@ export const useOpportunities = () => {
         const response = await apiClient.get<{ success: boolean; data: Opportunity[] }>('/opportunities/');
         return response.data;
       } catch (error) {
-        console.warn("Backend unavailable, using mock opportunities...");
         const { OPPORTUNITY_MOCKS } = await import('../../mocks');
         return OPPORTUNITY_MOCKS;
       }

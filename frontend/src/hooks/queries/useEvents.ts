@@ -11,7 +11,6 @@ export const useEvents = () => {
         const response = await apiClient.get<{ success: boolean; data: Event[] }>('/events/');
         return response.data;
       } catch (error) {
-        console.warn("Backend unavailable, using mock events...");
         const { EVENT_MOCKS } = await import('../../mocks');
         return EVENT_MOCKS;
       }
