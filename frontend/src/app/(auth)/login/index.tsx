@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Typography } from '../../../components/Typography';
 import { Button } from '../../../components/Button';
@@ -8,6 +8,8 @@ import { CURRENT_USER } from '../../../mocks';
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { width } = useWindowDimensions();
+  const isLargeScreen = width >= 768;
 
   const handleRoleSelection = (role: string) => {
     // Store mock user profile in local storage for useCurrentUser hook
@@ -91,13 +93,15 @@ export default function LoginScreen() {
       </View>
 
       {/* Right side: Cover Image (visible on larger screens) */}
-      <View className="hidden md:flex flex-1 relative bg-primary/5 border-l border-border/20">
-        <Image 
-          source={{ uri: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop' }} 
-          style={{ width: '100%', height: '100%', position: 'absolute' }}
-          resizeMode="cover"
-        />
-      </View>
+      {isLargeScreen && (
+        <View className="flex-1 relative bg-primary/5 border-l border-border/20">
+          <Image 
+            source={{ uri: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop' }} 
+            style={{ width: '100%', height: '100%', position: 'absolute' }}
+            resizeMode="cover"
+          />
+        </View>
+      )}
     </View>
   );
 }
