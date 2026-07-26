@@ -8,7 +8,12 @@ export const apiClient = axios.create({
   timeout: 10000,
 });
 
+const USE_MOCK_BACKEND = true; // Set to true to prevent browser CORS/Network errors when backend is offline
+
 apiClient.interceptors.request.use(async (config) => {
+  if (USE_MOCK_BACKEND) {
+    throw new axios.Cancel("Backend mock mode active");
+  }
   // Logic to inject token from secure storage
   // const token = await SecureStore.getItemAsync('userToken');
   // if (token) config.headers.Authorization = `Bearer ${token}`;
