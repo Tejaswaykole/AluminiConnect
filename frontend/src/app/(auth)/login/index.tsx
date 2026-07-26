@@ -93,7 +93,7 @@ export default function LoginScreen() {
       {/* Right side: Cover Image (visible on larger screens) */}
       <View className="hidden md:flex flex-1 relative bg-primary/5 border-l border-border/20">
         <Image 
-          source={require('../../../../assets/images/alumni_login_cover.png')} 
+          source={{ uri: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop' }} 
           style={{ width: '100%', height: '100%', position: 'absolute' }}
           resizeMode="cover"
         />
