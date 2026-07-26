@@ -91,6 +91,14 @@ export default function DiscoverAlumniScreen() {
                       <Badge key={skill} label={skill} variant="secondary" className="mr-2 mb-2" />
                     ))}
                   </View>
+                  <View className="flex-row mt-2">
+                    <Button 
+                      title="Message" 
+                      variant="outline" 
+                      className="py-1 px-4 min-h-0 h-8"
+                      onPress={() => router.push(`/student/messages/${item.id}`)}
+                    />
+                  </View>
                 </View>
               </View>
             </Card>

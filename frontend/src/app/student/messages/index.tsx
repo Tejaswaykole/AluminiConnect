@@ -11,9 +11,9 @@ import { STUDENT_MOCKS } from '../../../mocks';
 const MESSAGE_CONTEXTS = ['All', 'Direct', 'Mentorship', 'Recruiter'];
 
 const MOCK_INBOX = [
-  { id: '1', name: 'Ramesh Patil', avatar: '', context: 'Mentorship', lastMessage: 'Hello! I saw your request for mentorship and would love to help.', time: '1h ago', unread: true },
-  { id: '2', name: 'Aditi Joshi', avatar: '', context: 'Direct', lastMessage: 'Hi, are you interested in a referral for the upcoming graduate roles?', time: 'Yesterday', unread: false },
-  { id: '3', name: 'Alumni Network Admin', avatar: '', context: 'Community', lastMessage: 'Welcome to the platform! Please complete your profile.', time: 'Mon', unread: false },
+  { id: 'a1', name: 'Sarah Chen', avatar: 'https://i.pravatar.cc/150?u=a1', context: 'Mentorship', lastMessage: 'Hello! I saw your request for mentorship and would love to help.', time: '1h ago', unread: true },
+  { id: 'a2', name: 'Michael Rodriguez', avatar: 'https://i.pravatar.cc/150?u=a2', context: 'Direct', lastMessage: 'Hi, are you interested in a referral for the upcoming graduate roles?', time: 'Yesterday', unread: false },
+  { id: 'admin', name: 'Alumni Network Admin', avatar: '', context: 'Community', lastMessage: 'Welcome to the platform! Please complete your profile.', time: 'Mon', unread: false },
 ];
 
 export default function ProfessionalMessagesScreen() {

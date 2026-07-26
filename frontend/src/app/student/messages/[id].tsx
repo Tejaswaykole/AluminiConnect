@@ -15,18 +15,25 @@ export default function ChatScreen() {
   const { data: alumniList = [] } = useAlumni();
   
   const mockInboxUsers: Record<string, string> = {
-    '1': 'Ramesh Patil',
-    '2': 'Aditi Joshi',
-    '3': 'Alumni Network Admin',
+    'a1': 'Sarah Chen',
+    'a2': 'Michael Rodriguez',
+    'admin': 'Alumni Network Admin',
   };
 
   const chatPartner = studentList.find(s => s.id === id) || alumniList.find(a => a.id === id);
   const partnerName = chatPartner ? (chatPartner.name || chatPartner.first_name || 'User') : (mockInboxUsers[id as string] || 'User');
-  const partnerAvatar = chatPartner?.avatar || '';
+  const partnerAvatar = chatPartner?.avatar || (id === 'a1' ? 'https://i.pravatar.cc/150?u=a1' : (id === 'a2' ? 'https://i.pravatar.cc/150?u=a2' : ''));
 
-  const [messages, setMessages] = useState([
-    { id: '1', text: `Hi! Thanks for connecting.`, sender: 'them', time: '10:00 AM' },
-  ]);
+  const [messages, setMessages] = useState(() => {
+    if (id === 'a1') {
+      return [{ id: '1', text: 'Hello! I saw your request for mentorship and would love to help.', sender: 'them', time: '10:30 AM' }];
+    } else if (id === 'a2') {
+      return [{ id: '1', text: 'Hi, are you interested in a referral for the upcoming graduate roles?', sender: 'them', time: 'Yesterday' }];
+    } else if (id === 'admin') {
+      return [{ id: '1', text: 'Welcome to the platform! Please complete your profile.', sender: 'them', time: 'Mon' }];
+    }
+    return [];
+  });
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
