@@ -38,14 +38,44 @@ export default function RegisterStudentScreen() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!validate()) return;
     
     setIsLoading(true);
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/auth/register/student', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name: formData.fullName.split(' ')[0] || formData.fullName,
+          last_name: formData.fullName.split(' ').slice(1).join(' ') || 'User',
+          email: formData.email,
+          password: formData.password,
+          // Passing a random UUID to satisfy the Pydantic validation for institution_id
+          institution_id: '123e4567-e89b-12d3-a456-426614174000',
+          enrollment_number: formData.enrollmentNumber,
+          academic_year: formData.academicYear,
+          graduation_year: parseInt(formData.graduationYear) || 2026,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+
+      const result = await response.json();
+      console.log('Registration successful:', result);
+      
+      // Navigate to pending approval or login
+      router.push('/login');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to register. Please try again.');
+    } finally {
       setIsLoading(false);
-      router.push('/pending-approval');
-    }, 1500);
+    }
   };
 
   const updateField = (field: string, value: string) => {

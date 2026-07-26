@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { Typography } from '../../../components/Typography';
 import { Avatar } from '../../../components/Avatar';
@@ -7,19 +7,30 @@ import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
 import { Card } from '../../../components/Card';
 import { ScreenContainer } from '../../../components/ScreenContainer';
-import { CURRENT_USER } from '../../../mocks';
+import { useCurrentUser } from '../../../hooks/queries';
 
 export default function StudentProfileScreen() {
+  const { data: user } = useCurrentUser();
   const [isEditing, setIsEditing] = useState(false);
-  const [bio, setBio] = useState(CURRENT_USER.bio || 'Aspiring software engineer passionate about building scalable backend systems.');
-  const [skills, setSkills] = useState(CURRENT_USER.skills ? CURRENT_USER.skills.join(', ') : 'Python, React, TypeScript, SQL');
+  
+  const [bio, setBio] = useState('Aspiring software engineer passionate about building scalable backend systems.');
+  const [skills, setSkills] = useState('Python, React, TypeScript, SQL');
   const [careerInterests, setCareerInterests] = useState('Backend Development, Cloud Infrastructure');
   const [githubUrl, setGithubUrl] = useState('https://github.com/alexj');
   const [linkedinUrl, setLinkedinUrl] = useState('https://linkedin.com/in/alexj');
 
+  useEffect(() => {
+    if (user) {
+      if (user.bio) setBio(user.bio);
+      if (user.skills) setSkills(user.skills.join(', '));
+    }
+  }, [user]);
+
   const handleSave = () => {
     setIsEditing(false);
   };
+
+  if (!user) return null;
 
   return (
     <ScreenContainer scrollable>
@@ -34,13 +45,13 @@ export default function StudentProfileScreen() {
 
       {/* Header Info */}
       <View className="items-center mb-8 bg-surface border border-border p-6 rounded-2xl">
-        <Avatar url={CURRENT_USER.avatar} fallbackInitials="AJ" size="xl" className="mb-4" />
-        <Typography variant="h2" className="mb-1">{CURRENT_USER.name}</Typography>
+        <Avatar url={user.avatar} fallbackInitials={user.name?.charAt(0) || 'U'} size="xl" className="mb-4" />
+        <Typography variant="h2" className="mb-1">{user.name}</Typography>
         <Typography variant="body" className="font-medium text-center mb-1 text-primary">
-          {CURRENT_USER.department}
+          {user.department}
         </Typography>
         <Typography variant="caption" color="muted" className="text-center mb-4">
-          {CURRENT_USER.college} • Class of {CURRENT_USER.graduationYear}
+          {user.college} • Class of {user.graduationYear}
         </Typography>
         <View className="flex-row gap-2">
             <Badge label="Looking for Internships" variant="secondary" />
@@ -54,8 +65,8 @@ export default function StudentProfileScreen() {
           <Card className="mb-6 bg-surface border border-border">
             <Typography variant="h3" className="mb-4">Academic Information</Typography>
             <Typography variant="caption" color="muted" className="mb-4">These fields are verified by your institution and cannot be changed.</Typography>
-            <Input label="Institution" value={CURRENT_USER.college} editable={false} className="mb-3 opacity-70" />
-            <Input label="Department" value={CURRENT_USER.department} editable={false} className="mb-3 opacity-70" />
+            <Input label="Institution" value={user.college} editable={false} className="mb-3 opacity-70" />
+            <Input label="Department" value={user.department} editable={false} className="mb-3 opacity-70" />
             <Input label="Enrollment Number" value="ENR-2023-4491" editable={false} className="mb-3 opacity-70" />
           </Card>
 

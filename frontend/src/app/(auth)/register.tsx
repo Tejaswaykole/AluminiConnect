@@ -57,12 +57,12 @@ export default function RegisterScreen() {
     if (!validate()) return;
     
     setIsLoading(true);
-    // Simulate network request
+    // Redirect to the real student registration flow
     setTimeout(() => {
       setIsLoading(false);
-      // Navigate to Login after registration
-      router.push('/login');
-    }, 1500);
+      alert('This is a mock page. Redirecting you to the fully integrated Student Registration flow.');
+      router.push('/register-student');
+    }, 500);
   };
 
   const updateField = (field: string, value: string) => {

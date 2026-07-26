@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import String, Enum, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import UUID, ARRAY
+from sqlalchemy import Uuid, JSON
 from .base import BaseModel
 from .enums import CommunityVisibility
 
@@ -23,5 +23,5 @@ class CommunityPost(BaseModel):
     community_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("community.id", ondelete="CASCADE"), index=True)
     author_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("user.id", ondelete="SET NULL"), nullable=True)
     content: Mapped[str] = mapped_column(String)
-    images: Mapped[list[str]] = mapped_column(ARRAY(String), nullable=True)
+    images: Mapped[list[str]] = mapped_column(JSON(), nullable=True)
     deleted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)

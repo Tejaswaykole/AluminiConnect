@@ -31,7 +31,7 @@ export default function WelcomeScreen() {
           <Button 
             title="Student" 
             variant="outline"
-            onPress={() => router.push('/register')} 
+            onPress={() => router.push('/register-student')} 
             className="mb-3"
           />
           <Button 

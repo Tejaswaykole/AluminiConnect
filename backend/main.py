@@ -24,7 +24,7 @@ def create_app() -> FastAPI:
     # Middleware
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+        allow_origins=["*"], # Allow all for local dev to avoid trailing slash issues
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

@@ -10,8 +10,8 @@ export default function SplashScreen() {
   useEffect(() => {
     // Simulate initial loading (e.g., auth check, asset loading)
     const timer = setTimeout(() => {
-      // In this Phase 2 mock, we always redirect to the Welcome screen
-      router.replace('/welcome');
+      // Bypassing standard login, drop into role selector
+      router.replace('/login');
     }, 2000);
 
     return () => clearTimeout(timer);

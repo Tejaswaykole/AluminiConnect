@@ -2,23 +2,20 @@ import { Tabs } from 'expo-router';
 import { useWindowDimensions, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Sidebar, SidebarItem } from '../../components/Sidebar';
+import { useCurrentUser } from '../../hooks/queries';
 
-export default function AdminLayout() {
+export default function StudentLayout() {
+  const { data: user } = useCurrentUser();
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768;
 
   const sidebarItems: SidebarItem[] = [
-    { name: 'dashboard', label: 'Dashboard', icon: 'bar-chart', href: '/(institution)' },
-    { name: 'audit', label: 'Audit Logs', icon: 'security', href: '/(institution)/audit' },
-    { name: 'drives', label: 'Placement Drives', icon: 'work', href: '/(institution)/drives' },
-    { name: 'settings', label: 'Settings', icon: 'settings', href: '/(institution)/settings' },
+    { name: 'home', label: 'Home', icon: 'home', href: '/student' },
+    { name: 'alumni', label: 'Alumni Network', icon: 'groups', href: '/student/discover' },
+    { name: 'jobs', label: 'Jobs & Internships', icon: 'work', href: '/student/opportunities' },
+    { name: 'groups', label: 'Communities', icon: 'forum', href: '/student/communities' },
+    { name: 'profile', label: 'My Profile', icon: 'person', href: '/student/profile' },
   ];
-
-  const user = {
-    name: 'Institution Admin',
-    role: 'Administrator',
-    avatar: ''
-  };
 
   return (
     <View className="flex-1 flex-row bg-background w-full h-full">
@@ -49,31 +46,44 @@ export default function AdminLayout() {
           <Tabs.Screen
             name="index"
             options={{
-              title: 'Dashboard',
-              tabBarIcon: ({ color }) => <MaterialIcons name="bar-chart" size={24} color={color} />,
+              title: 'Home',
+              tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
-            name="audit"
+            name="discover"
             options={{
-              title: 'Audit Logs',
-              tabBarIcon: ({ color }) => <MaterialIcons name="security" size={24} color={color} />,
+              title: 'Alumni',
+              tabBarIcon: ({ color }) => <MaterialIcons name="groups" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
-            name="drives"
+            name="opportunities"
             options={{
-              title: 'Drives',
+              title: 'Jobs',
               tabBarIcon: ({ color }) => <MaterialIcons name="work" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
-            name="settings"
+            name="communities"
             options={{
-              title: 'Settings',
-              tabBarIcon: ({ color }) => <MaterialIcons name="settings" size={24} color={color} />,
+              title: 'Groups',
+              tabBarIcon: ({ color }) => <MaterialIcons name="forum" size={24} color={color} />,
             }}
           />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: 'Profile',
+              tabBarIcon: ({ color }) => <MaterialIcons name="person" size={24} color={color} />,
+            }}
+          />
+
+          {/* Hide these from bottom tabs but allow stack navigation to them */}
+          <Tabs.Screen name="events" options={{ href: null }} />
+          <Tabs.Screen name="mentorship" options={{ href: null }} />
+          <Tabs.Screen name="notifications" options={{ href: null }} />
+          <Tabs.Screen name="settings" options={{ href: null }} />
         </Tabs>
       </View>
     </View>

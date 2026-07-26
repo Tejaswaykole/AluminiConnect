@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import ForeignKey, DateTime, text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid
 from .base import BaseModel
 
 class StudentSkill(BaseModel):

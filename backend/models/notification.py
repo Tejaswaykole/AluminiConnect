@@ -1,7 +1,7 @@
 import uuid
 from sqlalchemy import String, Boolean, Enum, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid
 from .base import BaseModel
 from .enums import NotificationType
 
