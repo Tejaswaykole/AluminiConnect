@@ -12,8 +12,8 @@ export const useAlumni = () => {
         return response.data.filter((u: any) => u.role === 'ALUMNI' || u.role === 'alumni') as unknown as Alumni[];
       } catch (error) {
         console.warn("Backend unavailable, using mock alumni...");
-        const { MOCK_ALUMNI } = await import('../../mocks');
-        return MOCK_ALUMNI;
+        const { ALUMNI_MOCKS } = await import('../../mocks');
+        return ALUMNI_MOCKS as any;
       }
     },
   });

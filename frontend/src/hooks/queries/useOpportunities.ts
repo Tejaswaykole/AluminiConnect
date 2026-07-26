@@ -12,8 +12,8 @@ export const useOpportunities = () => {
         return response.data;
       } catch (error) {
         console.warn("Backend unavailable, using mock opportunities...");
-        const { MOCK_OPPORTUNITIES } = await import('../../mocks');
-        return MOCK_OPPORTUNITIES;
+        const { OPPORTUNITY_MOCKS } = await import('../../mocks');
+        return OPPORTUNITY_MOCKS;
       }
     },
   });

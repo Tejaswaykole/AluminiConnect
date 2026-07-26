@@ -12,8 +12,8 @@ export const useEvents = () => {
         return response.data;
       } catch (error) {
         console.warn("Backend unavailable, using mock events...");
-        const { MOCK_EVENTS } = await import('../../mocks');
-        return MOCK_EVENTS;
+        const { EVENT_MOCKS } = await import('../../mocks');
+        return EVENT_MOCKS;
       }
     },
   });
