@@ -1,6 +1,6 @@
-# AlmaBridge (Alumni Connect)
+# Alumni Connect
 
-AlmaBridge is a comprehensive university networking platform connecting students, alumni, and placement officers. It features an intelligent AI layer for career guidance, resume analysis, and networking recommendations.
+Alumni Connect is a comprehensive university networking platform connecting students, alumni, and placement officers. It features an intelligent AI layer for career guidance, resume analysis, and networking recommendations.
 
 ## Architecture
 - **Frontend**: React Native (Expo) using NativeWind (TailwindCSS) and Zustand.

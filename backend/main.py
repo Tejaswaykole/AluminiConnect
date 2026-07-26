@@ -18,7 +18,7 @@ def create_app() -> FastAPI:
         title=settings.PROJECT_NAME,
         version="1.0.0",
         openapi_url=f"{settings.API_V1_STR}/openapi.json",
-        description="AlmaBridge API documentation"
+        description="Alumni Connect API documentation"
     )
 
     # Middleware
@@ -42,7 +42,7 @@ def create_app() -> FastAPI:
 
     @app.get("/", response_model=StandardResponse[dict])
     async def root():
-        return StandardResponse(success=True, message="AlmaBridge API", data={"version": "1.0.0"})
+        return StandardResponse(success=True, message="Alumni Connect API", data={"version": "1.0.0"})
 
     return app
 

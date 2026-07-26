@@ -30,7 +30,7 @@ export function Sidebar({ items, user }: { items: SidebarItem[], user: any }) {
     >
       <View>
         <View className="px-6 mb-8 flex-row items-center">
-            <Typography variant="h2" className="text-primary font-bold">AlmaBridge</Typography>
+            <Typography variant="h2" className="text-primary font-bold">Alumni Connect</Typography>
         </View>
         <View className="px-3">
           {items.map(item => {

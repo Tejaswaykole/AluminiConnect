@@ -3,7 +3,7 @@ from pydantic import AnyHttpUrl, Field
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "AlmaBridge"
+    PROJECT_NAME: str = "Alumni Connect"
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = "development"
     DEBUG: bool = True

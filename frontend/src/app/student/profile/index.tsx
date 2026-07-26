@@ -136,7 +136,7 @@ export default function StudentProfileScreen() {
           <Card className="mb-6 bg-surface border border-border">
             <Typography variant="h3" className="mb-4">Projects & Achievements</Typography>
             <View className="mb-4 border-b border-border pb-4">
-                <Typography variant="body" className="font-semibold mb-1">AlmaBridge Mobile App</Typography>
+                <Typography variant="body" className="font-semibold mb-1">Alumni Connect Mobile App</Typography>
                 <Typography variant="caption" color="muted" className="mb-2">Oct 2023 - Present</Typography>
                 <Typography variant="body" color="muted">Built the React Native mobile app bridging students and alumni.</Typography>
             </View>

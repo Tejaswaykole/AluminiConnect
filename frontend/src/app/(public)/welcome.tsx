@@ -20,7 +20,7 @@ export default function WelcomeScreen() {
           </View>
           
           <Typography variant="h1" align="center" className="mb-3">
-            Welcome to AlmaBridge
+            Welcome to Alumni Connect
           </Typography>
           <Typography variant="body" color="muted" align="center" className="max-w-[280px]">
             Continue as
