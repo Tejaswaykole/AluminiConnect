@@ -8,7 +8,7 @@ export const apiClient = axios.create({
   timeout: 10000,
 });
 
-const USE_MOCK_BACKEND = true; // Set to true to prevent browser CORS/Network errors when backend is offline
+const USE_MOCK_BACKEND = false; // Set to true to prevent browser CORS/Network errors when backend is offline
 
 apiClient.interceptors.request.use(async (config) => {
   if (USE_MOCK_BACKEND) {

@@ -24,10 +24,10 @@ class CommunityMembership(BaseModel):
     __tablename__ = "community_membership"
     community_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("community.id", ondelete="CASCADE"), index=True)
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("user.id", ondelete="CASCADE"), index=True)
-    joined_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=text("now()"))
+    joined_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
 
 class EventRegistration(BaseModel):
     __tablename__ = "event_registration"
     event_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("event.id", ondelete="CASCADE"), index=True)
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("user.id", ondelete="CASCADE"), index=True)
-    registered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=text("now()"))
+    registered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
