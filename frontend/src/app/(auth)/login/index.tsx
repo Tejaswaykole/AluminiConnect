@@ -42,7 +42,7 @@ export default function LoginScreen() {
         <View className="items-center mb-8">
           <View className="w-20 h-20 bg-primary rounded-2xl items-center justify-center mb-6">
             <Typography variant="h2" color="inverse" className="font-bold">
-              AB
+              AC
             </Typography>
           </View>
           
@@ -70,11 +70,7 @@ export default function LoginScreen() {
             onPress={() => handleRoleSelection('INSTITUTION')} 
             className="mb-3 bg-green-600"
           />
-          <Button 
-            title="Login as Company" 
-            onPress={() => handleRoleSelection('COMPANY')} 
-            className="mb-3 bg-orange-600"
-          />
+
         </View>
         
         <View className="w-full flex-row justify-center mt-8">

@@ -15,7 +15,7 @@ export default function WelcomeScreen() {
           {/* Logo Placeholder */}
           <View className="w-24 h-24 bg-primary rounded-2xl items-center justify-center mb-6">
             <Typography variant="h1" color="inverse" className="font-bold">
-              AB
+              AC
             </Typography>
           </View>
           
@@ -46,12 +46,7 @@ export default function WelcomeScreen() {
             onPress={() => router.push('/register')} 
             className="mb-3"
           />
-          <Button 
-            title="Company / Recruiter" 
-            variant="outline"
-            onPress={() => router.push('/register')} 
-            className="mb-6"
-          />
+
         </View>
         
         <View className="w-full flex-row justify-center mt-6">
