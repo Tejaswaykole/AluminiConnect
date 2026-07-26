@@ -7,6 +7,7 @@ import { FilterChip } from '../../../components/FilterChip';
 import { Card } from '../../../components/Card';
 import { Avatar } from '../../../components/Avatar';
 import { Badge } from '../../../components/Badge';
+import { Button } from '../../../components/Button';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { useAlumni } from '../../../hooks/queries/useAlumni';
 
