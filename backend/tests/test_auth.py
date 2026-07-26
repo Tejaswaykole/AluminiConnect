@@ -17,6 +17,6 @@ def test_jwt_token_validation():
 
 def test_expired_jwt_token():
     from jose.exceptions import ExpiredSignatureError
-    with patch("jose.jwt.decode", side_effect=ExpiredSignatureError):
+    with patch("jose.jwt.decode", side_effect=ExpiredSignatureError) as mock_decode:
         with pytest.raises(ExpiredSignatureError):
             _ = mock_decode("expired.jwt.token", "secret", algorithms=["HS256"])
