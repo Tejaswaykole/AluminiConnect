@@ -96,7 +96,7 @@ export default function LoginScreen() {
       {isLargeScreen && (
         <View className="flex-1 relative bg-primary/5 border-l border-border/20">
           <Image 
-            source={{ uri: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2070&auto=format&fit=crop' }} 
+            source={require('../../../../assets/images/professional_flyer_bg.png')} 
             style={{ width: '100%', height: '100%', position: 'absolute' }}
             resizeMode="cover"
           />
