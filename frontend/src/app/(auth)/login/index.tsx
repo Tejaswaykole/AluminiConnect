@@ -47,10 +47,10 @@ export default function LoginScreen() {
           </View>
           
           <Typography variant="h1" align="center" className="mb-2">
-            Development Bypass
+            Welcome Back
           </Typography>
           <Typography variant="body" color="muted" align="center">
-            Select a role below to instantly log in
+            Sign in to your account
           </Typography>
         </View>
 
