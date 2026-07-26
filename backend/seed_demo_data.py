@@ -1,4 +1,4 @@
-﻿import sys; sys.path.insert(0, "C:\\Users\\tejas\\OneDrive\\Desktop\\ALumini\\backend")
+import sys; sys.path.insert(0, "C:\\Users\\tejas\\OneDrive\\Desktop\\ALumini\\backend")
 import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
@@ -9,13 +9,15 @@ from models.enums import UserRole, VerificationStatus
 import uuid
 import sys
 import os
+from dotenv import load_dotenv
 
 # Append current directory to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-DATABASE_URL = "postgresql+asyncpg://postgres.wuxkdbdfbuvetmahdflo:Tejuuu%409860%23@aws-1-ap-south-1.pooler.supabase.com:5432/postgres"
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./almabridge.db")
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL, connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {})
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 async def seed_data():
