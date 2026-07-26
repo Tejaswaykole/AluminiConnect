@@ -1,27 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '../../api/queryKeys';
-import { CURRENT_USER } from '../../mocks';
+import { apiClient } from '../../api/client';
 import { Student } from '../../types';
 
 export const useCurrentUser = () => {
   return useQuery<Student>({
     queryKey: queryKeys.users.current(),
-    queryFn: () => {
+    queryFn: async () => {
       try {
-        const storedUser = localStorage.getItem('currentUser');
-        if (storedUser) {
-          const parsedUser = JSON.parse(storedUser);
-          // Only return it if it looks like a valid user object
-          if (parsedUser && parsedUser.id && parsedUser.email) {
-            return Promise.resolve(parsedUser as Student);
-          }
+        const response = await apiClient.get<{ success: boolean; data: Student }>('/users/me');
+        if (response.data) {
+          return response.data;
         }
       } catch (e) {
-        console.error("Failed to parse currentUser from localStorage", e);
+        console.error("Failed to fetch user from backend", e);
       }
       
-      // Fallback to mock data if not logged in or invalid
-      return Promise.resolve(CURRENT_USER as Student);
+      // Fallback to local storage if backend call fails (e.g. no token)
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser && parsedUser.id && parsedUser.email) {
+          return parsedUser as Student;
+        }
+      }
+      throw new Error("No user found");
     },
   });
 };

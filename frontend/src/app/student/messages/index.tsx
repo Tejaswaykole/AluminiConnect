@@ -11,10 +11,9 @@ import { STUDENT_MOCKS } from '../../../mocks';
 const MESSAGE_CONTEXTS = ['All', 'Direct', 'Mentorship', 'Recruiter'];
 
 const MOCK_INBOX = [
-  { id: '1', name: 'John Doe', avatar: '', context: 'Mentorship', lastMessage: 'Thank you for reviewing my resume! I updated the bullet points as you suggested.', time: '2h ago', unread: true },
-  { id: '2', name: 'Sarah Jenkins', avatar: '', context: 'Direct', lastMessage: 'Are you attending the Google Cloud event next week?', time: 'Yesterday', unread: false },
-  { id: '3', name: 'Alex Smith', avatar: STUDENT_MOCKS[0].avatar, context: 'Mentorship', lastMessage: 'Could we schedule a mock interview for Friday?', time: 'Mon', unread: false },
-  { id: '4', name: 'Tech Innovations HR', avatar: '', context: 'Recruiter', lastMessage: 'We saw your profile and would love to discuss a Senior PM role.', time: 'Last Week', unread: true },
+  { id: '1', name: 'Ramesh Patil', avatar: '', context: 'Mentorship', lastMessage: 'Hello! I saw your request for mentorship and would love to help.', time: '1h ago', unread: true },
+  { id: '2', name: 'Aditi Joshi', avatar: '', context: 'Direct', lastMessage: 'Hi, are you interested in a referral for the upcoming graduate roles?', time: 'Yesterday', unread: false },
+  { id: '3', name: 'Alumni Network Admin', avatar: '', context: 'Community', lastMessage: 'Welcome to the platform! Please complete your profile.', time: 'Mon', unread: false },
 ];
 
 export default function ProfessionalMessagesScreen() {
@@ -66,7 +65,7 @@ export default function ProfessionalMessagesScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity 
             className={`flex-row items-center py-4 border-b border-border ${item.unread ? 'bg-primary/5' : ''}`}
-            onPress={() => router.push(`/alumni/messages/${item.id}`)}
+            onPress={() => router.push(`/student/messages/${item.id}`)}
           >
             <Avatar url={item.avatar} fallbackInitials={item.name.charAt(0)} size="md" className="mr-4 ml-2" />
             <View className="flex-1 mr-2">

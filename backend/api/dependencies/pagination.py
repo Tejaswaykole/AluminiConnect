@@ -8,3 +8,11 @@ class PaginationParams(BaseModel):
     search: Optional[str] = Query(None)
     order_by: Optional[str] = Query(None)
     order: Optional[str] = Query("desc", regex="^(asc|desc)$")
+
+    @property
+    def limit(self) -> int:
+        return self.page_size
+
+    @property
+    def skip(self) -> int:
+        return (self.page - 1) * self.page_size

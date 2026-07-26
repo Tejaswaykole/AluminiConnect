@@ -6,16 +6,21 @@ import { Card } from '../../../components/Card';
 import { Avatar } from '../../../components/Avatar';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { SearchBar } from '../../../components/SearchBar';
-import { ALUMNI_MOCKS } from '../../../mocks';
+import { useAlumni } from '../../../hooks/queries/useAlumni';
 
 export default function PlacementAlumniScreen() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
+  
+  const { data: alumniList = [], isLoading } = useAlumni();
 
-  const filteredAlumni = ALUMNI_MOCKS.filter(alumni => 
-    alumni.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    alumni.company.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredAlumni = alumniList.filter(alumni => {
+    const nameMatch = alumni.first_name ? (alumni.first_name + ' ' + alumni.last_name).toLowerCase() : '';
+    const nameStr = alumni.name ? alumni.name.toLowerCase() : nameMatch;
+    
+    return nameStr.includes(searchQuery.toLowerCase()) || 
+           (alumni.company || '').toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   return (
     <ScreenContainer>
@@ -45,11 +50,11 @@ export default function PlacementAlumniScreen() {
           <TouchableOpacity onPress={() => router.push(`/alumni/${item.id}` as any)}>
             <Card className="mb-4">
               <View className="flex-row items-start mb-3">
-                <Avatar url={item.avatar} fallbackInitials={item.name.charAt(0)} size="md" className="mr-4 mt-1" />
+                <Avatar url={item.avatar} fallbackInitials={(item.name || item.first_name || '?').charAt(0)} size="md" className="mr-4 mt-1" />
                 <View className="flex-1">
-                  <Typography variant="h3">{item.name}</Typography>
-                  <Typography variant="caption" color="muted">{item.position} at {item.company}</Typography>
-                  <Typography variant="caption" color="muted">Class of {item.graduationYear}</Typography>
+                  <Typography variant="h3">{item.name || `${item.first_name || ''} ${item.last_name || ''}`}</Typography>
+                  <Typography variant="caption" color="muted">{item.position || 'Alumni'} at {item.company || 'Unknown Company'}</Typography>
+                  <Typography variant="caption" color="muted">Class of {item.graduationYear || '2021'}</Typography>
                 </View>
                 {item.availableForMentorship && (
                   <View className="bg-status-success/10 px-2 py-1 rounded-md">

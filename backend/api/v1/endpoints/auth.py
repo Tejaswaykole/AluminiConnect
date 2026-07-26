@@ -93,8 +93,9 @@ async def login(data: LoginRequest, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).where(User.email == data.email))
     user = result.scalars().first()
     
-    # Bypass logic: if user not found, create a mock user object on the fly!
+    is_mock = False
     if not user:
+        is_mock = True
         # Determine role based on email keyword
         mock_role = UserRole.STUDENT
         if "alumni" in data.email.lower():

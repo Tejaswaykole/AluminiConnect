@@ -8,7 +8,7 @@ import { Card } from '../../../components/Card';
 import { Avatar } from '../../../components/Avatar';
 import { Badge } from '../../../components/Badge';
 import { ScreenContainer } from '../../../components/ScreenContainer';
-import { ALUMNI_MOCKS } from '../../../mocks';
+import { useAlumni } from '../../../hooks/queries/useAlumni';
 
 const FILTERS = ['All', 'Mentors', 'Software Engineering', 'Data Science', 'Design'];
 
@@ -17,13 +17,18 @@ export default function DiscoverAlumniScreen() {
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
 
-  // Basic mock search/filter logic
-  const filteredAlumni = ALUMNI_MOCKS.filter(alumni => {
-    const matchesSearch = alumni.name.toLowerCase().includes(search.toLowerCase()) || 
-                          alumni.company.toLowerCase().includes(search.toLowerCase());
+  const { data: alumniList = [], isLoading } = useAlumni();
+
+  // Basic mock search/filter logic adapted for API data
+  const filteredAlumni = alumniList.filter(alumni => {
+    const nameMatch = alumni.first_name ? (alumni.first_name + ' ' + alumni.last_name).toLowerCase() : '';
+    const nameStr = alumni.name ? alumni.name.toLowerCase() : nameMatch;
+    
+    const matchesSearch = nameStr.includes(search.toLowerCase()) || 
+                          (alumni.company || '').toLowerCase().includes(search.toLowerCase());
     const matchesFilter = activeFilter === 'All' || 
                           (activeFilter === 'Mentors' && alumni.availableForMentorship) ||
-                          alumni.skills.some(skill => skill.includes(activeFilter));
+                          (alumni.skills || []).some(skill => skill.includes(activeFilter));
     return matchesSearch && matchesFilter;
   });
 
@@ -69,20 +74,20 @@ export default function DiscoverAlumniScreen() {
           <TouchableOpacity onPress={() => router.push(`/student/discover/${item.id}`)}>
             <Card className="mb-4">
               <View className="flex-row">
-                <Avatar url={item.avatar} fallbackInitials={item.name.charAt(0)} size="lg" className="mr-4" />
+                <Avatar url={item.avatar} fallbackInitials={(item.name || item.first_name || '?').charAt(0)} size="lg" className="mr-4" />
                 <View className="flex-1">
                   <View className="flex-row justify-between items-start">
-                    <Typography variant="h3" className="mb-1">{item.name}</Typography>
+                    <Typography variant="h3" className="mb-1">{item.name || `${item.first_name || ''} ${item.last_name || ''}`}</Typography>
                     {item.availableForMentorship && (
                       <Badge label="Mentor" variant="success" />
                     )}
                   </View>
-                  <Typography variant="body" className="font-medium mb-1">{item.position}</Typography>
+                  <Typography variant="body" className="font-medium mb-1">{item.position || 'Alumni'}</Typography>
                   <Typography variant="caption" color="muted" className="mb-2">
-                    {item.company} • {item.location}
+                    {item.company || 'Unknown Company'} • {item.location || 'Unknown Location'}
                   </Typography>
                   <View className="flex-row flex-wrap">
-                    {item.skills.slice(0, 3).map(skill => (
+                    {(item.skills || []).slice(0, 3).map(skill => (
                       <Badge key={skill} label={skill} variant="secondary" className="mr-2 mb-2" />
                     ))}
                   </View>

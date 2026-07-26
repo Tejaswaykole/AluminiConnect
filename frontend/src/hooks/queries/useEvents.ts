@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { queryKeys } from '../../api/queryKeys';
-import { EVENT_MOCKS } from '../../mocks';
+import { apiClient } from '../../api/client';
 import { Event } from '../../types';
 
 export const useEvents = () => {
   return useQuery<Event[]>({
     queryKey: queryKeys.events.list(),
-    queryFn: () => Promise.resolve(EVENT_MOCKS),
+    queryFn: async () => {
+      const response = await apiClient.get<{ success: boolean; data: Event[] }>('/events/');
+      return response.data;
+    },
   });
 };

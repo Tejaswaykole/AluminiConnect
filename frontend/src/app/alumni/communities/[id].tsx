@@ -1,4 +1,5 @@
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Typography } from '../../../components/Typography';
 import { Button } from '../../../components/Button';
@@ -37,7 +38,7 @@ export default function CommunityDetailsScreen() {
           {comm.members.toLocaleString()} members • Active {comm.recentActivity}
         </Typography>
         
-        <Button title="Join Community" onPress={() => {}} />
+        <Button title="Join Community" onPress={() => { typeof window !== 'undefined' ? window.alert(`You have successfully joined the ${comm.name} community.`) : Alert.alert('Community Joined', `You have successfully joined the ${comm.name} community.`) }} />
       </View>
 
       <Card className="mb-6">

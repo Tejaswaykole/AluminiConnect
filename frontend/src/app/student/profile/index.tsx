@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import { Typography } from '../../../components/Typography';
 import { Avatar } from '../../../components/Avatar';
 import { Badge } from '../../../components/Badge';
@@ -18,6 +18,8 @@ export default function StudentProfileScreen() {
   const [careerInterests, setCareerInterests] = useState('Backend Development, Cloud Infrastructure');
   const [githubUrl, setGithubUrl] = useState('https://github.com/alexj');
   const [linkedinUrl, setLinkedinUrl] = useState('https://linkedin.com/in/alexj');
+  const [avatarUrl, setAvatarUrl] = useState(user?.avatar || '');
+  const [bannerUrl, setBannerUrl] = useState('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80');
 
   useEffect(() => {
     if (user) {
@@ -44,18 +46,27 @@ export default function StudentProfileScreen() {
       </View>
 
       {/* Header Info */}
-      <View className="items-center mb-8 bg-surface border border-border p-6 rounded-2xl">
-        <Avatar url={user.avatar} fallbackInitials={user.name?.charAt(0) || 'U'} size="xl" className="mb-4" />
-        <Typography variant="h2" className="mb-1">{user.name}</Typography>
-        <Typography variant="body" className="font-medium text-center mb-1 text-primary">
-          {user.department}
-        </Typography>
-        <Typography variant="caption" color="muted" className="text-center mb-4">
-          {user.college} • Class of {user.graduationYear}
-        </Typography>
-        <View className="flex-row gap-2">
-            <Badge label="Looking for Internships" variant="secondary" />
-            <Badge label="Public Profile" variant="outline" />
+      <View className="mb-8 bg-surface border border-border rounded-2xl overflow-hidden relative">
+        <Image 
+          source={{ uri: bannerUrl || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80' }} 
+          className="w-full h-32 bg-primary/20"
+          resizeMode="cover"
+        />
+        <View className="px-6 pb-6 pt-14 relative items-center">
+          <View className="absolute -top-12 border-4 border-surface rounded-full bg-surface">
+            <Avatar url={avatarUrl} fallbackInitials={user.name?.charAt(0) || 'U'} size="xl" />
+          </View>
+          <Typography variant="h2" className="mb-1 mt-2">{user.name}</Typography>
+          <Typography variant="body" className="font-medium text-center mb-1 text-primary">
+            {user.department}
+          </Typography>
+          <Typography variant="caption" color="muted" className="text-center mb-4">
+            {user.college} • Class of {user.graduationYear}
+          </Typography>
+          <View className="flex-row gap-2">
+              <Badge label="Looking for Internships" variant="secondary" />
+              <Badge label="Public Profile" variant="outline" />
+          </View>
         </View>
       </View>
 
@@ -75,6 +86,12 @@ export default function StudentProfileScreen() {
             <Input label="Bio" value={bio} onChangeText={setBio} multiline numberOfLines={4} className="mb-4" textAlignVertical="top" />
             <Input label="Skills (comma separated)" value={skills} onChangeText={setSkills} className="mb-4" />
             <Input label="Career Interests" value={careerInterests} onChangeText={setCareerInterests} className="mb-4" />
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+             <Typography variant="h3" className="mb-4">Profile Images</Typography>
+             <Input label="Profile Picture URL" value={avatarUrl} onChangeText={setAvatarUrl} className="mb-3" />
+             <Input label="Cover Banner URL" value={bannerUrl} onChangeText={setBannerUrl} className="mb-3" />
           </Card>
 
           <Card className="mb-6 bg-surface border border-border">

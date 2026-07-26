@@ -6,7 +6,8 @@ import { Avatar } from '../../../components/Avatar';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { SearchBar } from '../../../components/SearchBar';
 import { FilterChip } from '../../../components/FilterChip';
-import { STUDENT_MOCKS, ALUMNI_MOCKS } from '../../../mocks';
+import { useStudents } from '../../../hooks/queries/useStudents';
+import { useAlumni } from '../../../hooks/queries/useAlumni';
 
 const ROLES = ['All', 'Student', 'Alumni', 'Placement'];
 
@@ -14,14 +15,20 @@ export default function AdminUsersScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRole, setSelectedRole] = useState('All');
 
-  // Combine mocks for admin view
+  const { data: studentList = [] } = useStudents();
+  const { data: alumniList = [] } = useAlumni();
+
+  // Combine data for admin view
   const allUsers = [
-    ...STUDENT_MOCKS.map(s => ({ ...s, role: 'Student' })),
-    ...ALUMNI_MOCKS.map(a => ({ ...a, role: 'Alumni' }))
+    ...studentList.map(s => ({ ...s, role: 'Student' })),
+    ...alumniList.map(a => ({ ...a, role: 'Alumni' }))
   ];
 
   const filteredUsers = allUsers.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const nameMatch = user.first_name ? (user.first_name + ' ' + user.last_name).toLowerCase() : '';
+    const nameStr = user.name ? user.name.toLowerCase() : nameMatch;
+    
+    const matchesSearch = nameStr.includes(searchQuery.toLowerCase());
     const matchesRole = selectedRole === 'All' || user.role === selectedRole;
     return matchesSearch && matchesRole;
   });
@@ -67,9 +74,9 @@ export default function AdminUsersScreen() {
         renderItem={({ item }) => (
           <Card className="mb-4">
             <View className="flex-row items-center">
-              <Avatar url={item.avatar} fallbackInitials={item.name.charAt(0)} size="md" className="mr-4" />
+              <Avatar url={item.avatar} fallbackInitials={(item.name || item.first_name || '?').charAt(0)} size="md" className="mr-4" />
               <View className="flex-1">
-                <Typography variant="h3" className="mb-1">{item.name}</Typography>
+                <Typography variant="h3" className="mb-1">{item.name || `${item.first_name || ''} ${item.last_name || ''}`}</Typography>
                 <Typography variant="caption" color="muted">{item.role}</Typography>
               </View>
               <View className="bg-status-success/10 px-2 py-1 rounded-md">

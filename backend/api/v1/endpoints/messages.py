@@ -1,30 +1,64 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+import uuid
+from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from database.session import get_db
 from schemas.base import StandardResponse
-from services.message_service import MessageService
-from models.enums import MessageContext
+from api.dependencies.pagination import PaginationParams
 from api.dependencies.auth import get_current_user_id
-import uuid
+from sqlalchemy.future import select
+from sqlalchemy import or_
+from models.message import Message
+from models.enums import MessageContext
+from pydantic import BaseModel
 
 router = APIRouter()
 
-@router.get("/{context}")
-async def get_messages(
-    context: MessageContext,
-    db: AsyncSession = Depends(get_db),
-    user_id: uuid.UUID = Depends(get_current_user_id)
-):
-    messages = await MessageService.get_messages_by_context(db, user_id, context)
-    return StandardResponse(success=True, data=[m.__dict__ for m in messages])
+class MessageCreate(BaseModel):
+    receiver_id: uuid.UUID
+    content: str
 
-@router.post("/")
-async def send_message(
-    receiver_id: uuid.UUID,
-    context: MessageContext,
-    content: str,
-    db: AsyncSession = Depends(get_db),
-    user_id: uuid.UUID = Depends(get_current_user_id)
+@router.get('/')
+async def get_messages(
+    params: PaginationParams = Depends(),
+    user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db)
 ):
-    msg = await MessageService.send_message(db, user_id, receiver_id, context, content)
-    return StandardResponse(success=True, data=msg.__dict__, message="Message sent")
+    # Fetch messages where the user is sender or receiver
+    result = await db.execute(
+        select(Message)
+        .where(or_(Message.sender_id == user_id, Message.receiver_id == user_id))
+        .order_by(Message.created_at.desc())
+        .limit(params.limit)
+        .offset(params.skip)
+    )
+    msgs = result.scalars().all()
+    msg_list = [
+        {
+            "id": str(m.id),
+            "sender_id": str(m.sender_id),
+            "receiver_id": str(m.receiver_id),
+            "content": m.content,
+            "context": m.context.value if hasattr(m.context, 'value') else m.context,
+            "is_read": m.is_read,
+            "created_at": m.created_at.isoformat() if m.created_at else None
+        } for m in msgs
+    ]
+    return StandardResponse(success=True, data=msg_list)
+
+@router.post('/')
+async def send_message(
+    data: MessageCreate,
+    user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db)
+):
+    new_msg = Message(
+        sender_id=user_id,
+        receiver_id=data.receiver_id,
+        content=data.content,
+        context=MessageContext.DIRECT,
+        is_read=False
+    )
+    db.add(new_msg)
+    await db.commit()
+    await db.refresh(new_msg)
+    return StandardResponse(success=True, message="Message sent successfully", data={"id": str(new_msg.id)})

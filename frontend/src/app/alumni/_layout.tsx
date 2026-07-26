@@ -14,6 +14,7 @@ export default function AlumniLayout() {
     { name: 'mentorship', label: 'Mentoring', icon: 'handshake', href: '/alumni/mentorship' },
     { name: 'jobs', label: 'Job Board', icon: 'work', href: '/alumni/opportunities' },
     { name: 'events', label: 'Events', icon: 'event', href: '/alumni/events' },
+    { name: 'messages', label: 'Messages', icon: 'message', href: '/alumni/messages' },
     { name: 'profile', label: 'My Profile', icon: 'person', href: '/alumni/profile' },
   ];
 

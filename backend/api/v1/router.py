@@ -18,3 +18,5 @@ api_router.include_router(portfolios.router, prefix="/portfolios", tags=["Portfo
 api_router.include_router(contributions.router, prefix="/contributions", tags=["Contributions"])
 api_router.include_router(audit_logs.router, prefix="/audit-logs", tags=["Audit"])
 api_router.include_router(drives.router, prefix="/drives", tags=["Placement Drives"])
+from .endpoints import recommendations
+api_router.include_router(recommendations.router, prefix="/recommendations", tags=["Recommendations"])

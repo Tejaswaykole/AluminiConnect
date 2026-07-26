@@ -46,7 +46,7 @@ export default function AlumniProfileScreen() {
 
       <View className="flex-row space-x-4 mb-8">
         <View className="flex-1 mr-2">
-          <Button title="Message" variant="outline" onPress={() => router.push('/student/messages')} />
+          <Button title="Message" variant="outline" onPress={() => { typeof window !== 'undefined' ? window.alert('Messaging is under development.') : Alert.alert('Coming Soon', 'Messaging is under development.')}} />
         </View>
         <View className="flex-1 ml-2">
           {alumni.availableForMentorship ? (

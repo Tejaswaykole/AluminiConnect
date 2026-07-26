@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../../components/Typography';
@@ -24,6 +24,8 @@ export default function AlumniProfileScreen() {
     location: ALUMNI_USER.location,
     linkedin: 'linkedin.com/in/jd',
     github: 'github.com/jd',
+    avatarUrl: ALUMNI_USER.avatar || '',
+    bannerUrl: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80',
   });
 
   const handleSave = () => {
@@ -41,15 +43,24 @@ export default function AlumniProfileScreen() {
         )}
       </View>
 
-      <View className="items-center mb-8 bg-surface border border-border p-6 rounded-2xl relative">
-        <Avatar url={ALUMNI_USER.avatar} fallbackInitials="JD" size="xl" className="mb-4" />
-        <Typography variant="h2" className="mb-1">{ALUMNI_USER.name}</Typography>
-        <Typography variant="body" className="font-medium text-center mb-1 text-primary">
-          {ALUMNI_USER.position} at {ALUMNI_USER.company}
-        </Typography>
-        <Typography variant="caption" color="muted" className="text-center mb-4">
-          {ALUMNI_USER.location} • Verified Alumni <MaterialIcons name="check" size={20} color="#154539" />
-        </Typography>
+      <View className="mb-8 bg-surface border border-border rounded-2xl overflow-hidden relative">
+        <Image 
+          source={{ uri: formData.bannerUrl || 'https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80' }} 
+          className="w-full h-32 bg-primary/20"
+          resizeMode="cover"
+        />
+        <View className="px-6 pb-6 pt-14 relative items-center">
+          <View className="absolute -top-12 border-4 border-surface rounded-full">
+            <Avatar url={formData.avatarUrl} fallbackInitials={ALUMNI_USER.name.charAt(0)} size="xl" />
+          </View>
+          <Typography variant="h2" className="mb-1 mt-2 text-center">{formData.name}</Typography>
+          <Typography variant="body" className="font-medium text-center mb-1 text-primary">
+            {formData.position} at {formData.company}
+          </Typography>
+          <Typography variant="caption" color="muted" className="text-center mb-4">
+            {formData.location} • Verified Alumni <MaterialIcons name="check" size={20} color="#154539" />
+          </Typography>
+        </View>
       </View>
 
       {isEditing ? (
@@ -68,6 +79,12 @@ export default function AlumniProfileScreen() {
             <Input label="Company" value={formData.company} onChangeText={(t) => setFormData(p => ({ ...p, company: t }))} className="mb-3" />
             <Input label="Location" value={formData.location} onChangeText={(t) => setFormData(p => ({ ...p, location: t }))} className="mb-3" />
             <Input label="Professional Bio" value={formData.bio} onChangeText={(t) => setFormData(p => ({ ...p, bio: t }))} multiline numberOfLines={4} className="mb-3" textAlignVertical="top" />
+          </Card>
+
+          <Card className="mb-6 bg-surface border border-border">
+             <Typography variant="h3" className="mb-4">Profile Images</Typography>
+             <Input label="Profile Picture URL" value={formData.avatarUrl} onChangeText={(t) => setFormData(p => ({ ...p, avatarUrl: t }))} className="mb-3" />
+             <Input label="Cover Banner URL" value={formData.bannerUrl} onChangeText={(t) => setFormData(p => ({ ...p, bannerUrl: t }))} className="mb-3" />
           </Card>
 
           <Card className="mb-6 bg-surface border border-border">

@@ -14,6 +14,7 @@ export default function StudentLayout() {
     { name: 'alumni', label: 'Alumni Network', icon: 'groups', href: '/student/discover' },
     { name: 'jobs', label: 'Jobs & Internships', icon: 'work', href: '/student/opportunities' },
     { name: 'groups', label: 'Communities', icon: 'forum', href: '/student/communities' },
+    { name: 'messages', label: 'Messages', icon: 'message', href: '/student/messages' },
     { name: 'profile', label: 'My Profile', icon: 'person', href: '/student/profile' },
   ];
 
@@ -80,6 +81,7 @@ export default function StudentLayout() {
           />
 
           {/* Hide these from bottom tabs but allow stack navigation to them */}
+          <Tabs.Screen name="messages" options={{ href: null }} />
           <Tabs.Screen name="events" options={{ href: null }} />
           <Tabs.Screen name="mentorship" options={{ href: null }} />
           <Tabs.Screen name="notifications" options={{ href: null }} />
