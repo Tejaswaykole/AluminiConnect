@@ -82,7 +82,7 @@ export default function AlumniMentorshipDetailScreen() {
         </View>
       )}
 
-      <TouchableOpacity onPress={() => router.push(`/discover/${student.id}`)} className="mt-4">
+      <TouchableOpacity onPress={() => router.push(`/alumni/discover/${student.id}`)} className="mt-4">
         <Typography variant="body" color="primary" className="text-center font-medium">View Full Profile</Typography>
       </TouchableOpacity>
     </ScreenContainer>

@@ -18,7 +18,7 @@ export default function AlumniSettingsScreen() {
     {
       title: "Professional Profile",
       items: [
-        { label: "Edit Profile Details", route: "/profile", type: "link" },
+        { label: "Edit Profile Details", route: "/alumni/profile", type: "link" },
         { label: "Profile Verification Status", route: "/settings/verification", type: "link", rightText: "Verified" },
         { label: "Connected Accounts", route: "/settings/connected", type: "link" },
       ]

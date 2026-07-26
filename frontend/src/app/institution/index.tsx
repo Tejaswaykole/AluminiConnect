@@ -113,7 +113,7 @@ export default function InstitutionDashboard() {
       </Section>
 
       {/* Placement Drives Overview */}
-      <Section title="Active Placement Drives" onSeeAll={() => router.push('/drives')}>
+      <Section title="Active Placement Drives" onSeeAll={() => router.push('/institution/drives')}>
          <Card className="mb-8 bg-surface border border-border p-4">
             <View className="flex-row justify-between mb-3 border-b border-border pb-3">
                 <View>

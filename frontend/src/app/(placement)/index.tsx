@@ -1,5 +1,6 @@
 import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../components/Typography';
 import { ScreenContainer } from '../../components/ScreenContainer';
 import { Section } from '../../components/Section';

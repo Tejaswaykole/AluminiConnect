@@ -76,7 +76,7 @@ export default function AlumniMentorshipScreen() {
         <Typography variant="h3" className="mb-4">Active Mentees</Typography>
         {activeMentorships.length > 0 ? (
           activeMentorships.map(student => (
-            <TouchableOpacity key={student.id} onPress={() => router.push(`/mentorship/${student.id}`)}>
+            <TouchableOpacity key={student.id} onPress={() => router.push(`/alumni/mentorship/${student.id}`)}>
               <Card className="mb-4 bg-surface border border-border">
                 <View className="flex-row items-center mb-3">
                   <Avatar url={student.avatar} fallbackInitials={student.name.charAt(0)} size="md" className="mr-4" />

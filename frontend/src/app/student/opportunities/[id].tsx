@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../../components/Typography';
 import { Badge } from '../../../components/Badge';
 import { Button } from '../../../components/Button';
@@ -12,11 +14,38 @@ export default function OpportunityDetailsScreen() {
   const router = useRouter();
   const opp = OPPORTUNITY_MOCKS.find(o => o.id === id);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   if (!opp) {
     return (
       <ScreenContainer className="items-center justify-center">
         <Typography variant="h3" color="error">Opportunity not found.</Typography>
         <Button title="Go Back" onPress={() => router.back()} className="mt-4" />
+      </ScreenContainer>
+    );
+  }
+
+  const handleApply = () => {
+    setIsSubmitting(true);
+    // Simulate network request
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }, 1500);
+  };
+
+  if (isSuccess) {
+    return (
+      <ScreenContainer className="items-center justify-center py-8">
+        <View className="w-16 h-16 bg-status-success/10 rounded-full items-center justify-center mb-4">
+          <MaterialIcons name="check" size={32} color="#154539" />
+        </View>
+        <Typography variant="h2" className="mb-2">Application Submitted!</Typography>
+        <Typography variant="body" color="muted" className="text-center mb-8">
+          You have successfully applied for the {opp.title} role at {opp.company}. Good luck!
+        </Typography>
+        <Button title="Return to Jobs" onPress={() => router.replace('/student/opportunities')} />
       </ScreenContainer>
     );
   }
@@ -39,7 +68,7 @@ export default function OpportunityDetailsScreen() {
           <Badge label={`Deadline: ${new Date(opp.deadline).toLocaleDateString()}`} variant="warning" />
         </View>
 
-        <Button title="Apply Now" onPress={() => {}} />
+        <Button title="Apply Now" onPress={handleApply} isLoading={isSubmitting} />
       </View>
 
       <Card className="mb-6">

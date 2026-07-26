@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../../components/Typography';
 import { Button } from '../../../components/Button';
 import { Card } from '../../../components/Card';
@@ -11,6 +13,9 @@ export default function CommunityDetailsScreen() {
   const router = useRouter();
   const comm = COMMUNITY_MOCKS.find(c => c.id === id);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isJoined, setIsJoined] = useState(false);
+
   if (!comm) {
     return (
       <ScreenContainer className="items-center justify-center">
@@ -19,6 +24,15 @@ export default function CommunityDetailsScreen() {
       </ScreenContainer>
     );
   }
+
+  const handleJoin = () => {
+    setIsSubmitting(true);
+    // Simulate network request
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsJoined(true);
+    }, 1500);
+  };
 
   return (
     <ScreenContainer scrollable>
@@ -37,7 +51,16 @@ export default function CommunityDetailsScreen() {
           {comm.members.toLocaleString()} members • Active {comm.recentActivity}
         </Typography>
         
-        <Button title="Join Community" onPress={() => {}} />
+        {isJoined ? (
+          <View className="bg-status-success/10 py-3 px-4 rounded-xl flex-row items-center justify-center">
+            <MaterialIcons name="check-circle" size={20} color="#154539" className="mr-2" />
+            <Typography variant="body" className="font-medium text-status-success">
+               You joined this community
+            </Typography>
+          </View>
+        ) : (
+          <Button title="Join Community" onPress={handleJoin} isLoading={isSubmitting} />
+        )}
       </View>
 
       <Card className="mb-6">

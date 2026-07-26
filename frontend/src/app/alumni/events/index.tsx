@@ -24,7 +24,7 @@ export default function EventsScreen() {
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/events/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/alumni/events/${item.id}`)}>
             <Card className="mb-4 p-0 overflow-hidden">
               <Image source={{ uri: item.image }} className="w-full h-40" resizeMode="cover" />
               <View className="p-4">

@@ -41,7 +41,7 @@ export default function CommunitiesScreen() {
           </View>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/communities/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/student/communities/${item.id}`)}>
             <Card className="mb-4">
               <View className="flex-row items-center mb-3">
                 <View className="w-12 h-12 bg-primary/10 rounded-full items-center justify-center mr-4">

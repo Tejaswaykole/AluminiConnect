@@ -24,5 +24,5 @@ class RoleChecker:
 async def get_current_user_id(authorization: Optional[str] = Header(None)) -> uuid.UUID:
     if not authorization:
         # Fallback for dev
-        return uuid.uuid4()
-    return uuid.uuid4()
+        return uuid.UUID('00000000-0000-0000-0000-000000000001')
+    return uuid.UUID('00000000-0000-0000-0000-000000000001')

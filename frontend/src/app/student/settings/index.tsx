@@ -16,7 +16,7 @@ export default function SettingsScreen() {
     {
       title: "Account",
       items: [
-        { label: "Personal Information", route: "/profile", type: "link" },
+        { label: "Personal Information", route: "/student/profile", type: "link" },
         { label: "Security & Password", route: "/settings/security", type: "link" },
         { label: "Connected Accounts", route: "/settings/connected", type: "link" },
       ]

@@ -66,7 +66,7 @@ export default function DiscoverAlumniScreen() {
           </View>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/discover/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/student/discover/${item.id}`)}>
             <Card className="mb-4">
               <View className="flex-row">
                 <Avatar url={item.avatar} fallbackInitials={item.name.charAt(0)} size="lg" className="mr-4" />

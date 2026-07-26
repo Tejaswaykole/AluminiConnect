@@ -22,7 +22,7 @@ export default function AlumniDashboard() {
             <Typography variant="h2">{ALUMNI_USER.name}</Typography>
           </View>
         </View>
-        <TouchableOpacity onPress={() => router.push('/notifications')} className="p-3 bg-surface border border-border rounded-full relative">
+        <TouchableOpacity onPress={() => router.push('/alumni/notifications')} className="p-3 bg-surface border border-border rounded-full relative">
           <MaterialIcons name="notifications" size={24} color="#154539" />
           <View className="absolute top-2 right-2 w-3 h-3 bg-primary rounded-full border-2 border-surface" />
         </TouchableOpacity>
@@ -77,7 +77,7 @@ export default function AlumniDashboard() {
       </Card>
 
       {/* Mentorship & Networking Activity */}
-      <Section title="Upcoming Mentorship" onSeeAll={() => router.push('/mentorship')}>
+      <Section title="Upcoming Mentorship" onSeeAll={() => router.push('/alumni/mentorship')}>
         <Card className="mb-6 flex-row items-center border border-border bg-surface">
           <Avatar url={STUDENT_MOCKS[0].avatar} fallbackInitials="SJ" size="md" className="mr-4" />
           <View className="flex-1">
@@ -109,12 +109,12 @@ export default function AlumniDashboard() {
       </Section>
 
       {/* Upcoming Events */}
-      <Section title="Alumni Events" onSeeAll={() => router.push('/events')}>
+      <Section title="Alumni Events" onSeeAll={() => router.push('/alumni/events')}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="-mx-4 px-4 pb-2">
           {EVENT_MOCKS.map((event) => (
             <TouchableOpacity 
               key={event.id}
-              onPress={() => router.push(`/events/${event.id}`)}
+              onPress={() => router.push(`/alumni/events/${event.id}`)}
               className="mr-4 w-64"
             >
               <Card className="p-0 overflow-hidden border border-border bg-surface">

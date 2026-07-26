@@ -31,7 +31,7 @@ export default function StudentDashboard() {
             <Typography variant="h2">{user.name}</Typography>
           </View>
         </View>
-        <TouchableOpacity onPress={() => router.push('/notifications')} className="p-3 bg-surface border border-border rounded-full relative">
+        <TouchableOpacity onPress={() => router.push('/student/notifications')} className="p-3 bg-surface border border-border rounded-full relative">
           <MaterialIcons name="notifications" size={24} color="#154539" />
           <View className="absolute top-2 right-2 w-3 h-3 bg-primary rounded-full border-2 border-surface" />
         </TouchableOpacity>
@@ -56,10 +56,11 @@ export default function StudentDashboard() {
       {/* Quick Actions (Enterprise Minimal) */}
       <View className="flex-row flex-wrap justify-between mb-8">
         {[
-          { id: 'jobs', icon: 'work', label: 'Jobs', route: '/opportunities' },
-          { id: 'resume', icon: 'description', label: 'Resume', route: '/profile' }, // Placeholder route
-          { id: 'tracker', icon: 'bar-chart', label: 'Tracker', route: '/profile' }, // Placeholder route
-          { id: 'ai', icon: 'psychology', label: 'AI Center', route: '/profile' }, // Placeholder route
+          { id: 'jobs', icon: 'work', label: 'Jobs', route: '/student/opportunities' },
+          { id: 'resume', icon: 'description', label: 'Resume', route: '/student/profile' },
+          { id: 'tracker', icon: 'bar-chart', label: 'Tracker', route: '/student/profile' },
+          { id: 'ai', icon: 'psychology', label: 'AI Center', route: '/student/profile' },
+          { id: 'portfolio', icon: 'folder', label: 'Portfolio', route: '/student/profile' },
         ].map((action) => (
           <TouchableOpacity 
             key={action.id} 
@@ -111,7 +112,7 @@ export default function StudentDashboard() {
       </Section>
 
       {/* Mentorship Summary */}
-      <Section title="Mentorship" onSeeAll={() => router.push('/mentorship')}>
+      <Section title="Mentorship" onSeeAll={() => router.push('/student/mentorship')}>
         <Card className="mb-8 flex-row items-center border border-border bg-surface">
           <Avatar url="" fallbackInitials="SJ" size="md" className="mr-4" />
           <View className="flex-1">
@@ -125,9 +126,9 @@ export default function StudentDashboard() {
       </Section>
 
       {/* Recommended Opportunities */}
-      <Section title="Recommended Jobs" onSeeAll={() => router.push('/opportunities')}>
+      <Section title="Recommended Jobs" onSeeAll={() => router.push('/student/opportunities')}>
         {(opportunities || []).slice(0, 2).map((opp) => (
-          <TouchableOpacity key={opp.id} onPress={() => router.push(`/opportunities/${opp.id}`)}>
+          <TouchableOpacity key={opp.id} onPress={() => router.push(`/student/opportunities/${opp.id}`)}>
             <Card className="mb-3 flex-row items-center border border-border bg-surface">
               <View className="w-12 h-12 bg-surface border border-border rounded-lg items-center justify-center mr-4">
                 <MaterialIcons name="business" size={24} color="#154539" />

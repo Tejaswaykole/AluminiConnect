@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Typography } from '../../../components/Typography';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
@@ -71,7 +72,7 @@ export default function MentorshipRequestScreen() {
             <Typography variant="body" color="muted" className="text-center mb-8">
               We'll notify you once {alumni.name} responds to your mentorship request.
             </Typography>
-            <Button title="Return to Directory" onPress={() => router.replace('/discover')} />
+            <Button title="Return to Directory" onPress={() => router.replace('/student/discover')} />
           </View>
         ) : (
           <View>

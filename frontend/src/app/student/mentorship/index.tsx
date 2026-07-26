@@ -38,7 +38,7 @@ export default function MentorshipScreen() {
           </View>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/discover/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/student/discover/${item.id}`)}>
             <Card className="mb-4">
               <View className="flex-row items-center mb-3">
                 <Avatar url={item.avatar} fallbackInitials={item.name.charAt(0)} size="md" className="mr-4" />

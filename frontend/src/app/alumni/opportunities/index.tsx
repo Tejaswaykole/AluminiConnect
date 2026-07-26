@@ -20,7 +20,7 @@ export default function AlumniOpportunitiesScreen() {
 
       <Button 
         title="Post New Opportunity" 
-        onPress={() => router.push('/opportunities/new' as any)} 
+        onPress={() => router.push('/alumni/opportunities/new' as any)} 
         className="mb-6"
       />
 
@@ -34,7 +34,7 @@ export default function AlumniOpportunitiesScreen() {
           </View>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/opportunities/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/alumni/opportunities/${item.id}`)}>
             <Card className="mb-4">
               <View className="flex-row justify-between items-start mb-2">
                 <Typography variant="h3" className="flex-1 mr-2">{item.title}</Typography>

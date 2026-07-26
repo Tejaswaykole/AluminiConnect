@@ -48,7 +48,7 @@ export default function AlumniProfileScreen() {
         </View>
         <View className="flex-1 ml-2">
           {alumni.availableForMentorship ? (
-            <Button title="Request Mentorship" onPress={() => router.push(`/mentorship/${alumni.id}` as any)} />
+            <Button title="Request Mentorship" onPress={() => router.push(`/student/mentorship/${alumni.id}` as any)} />
           ) : (
             <Button title="Connect" onPress={() => {}} />
           )}

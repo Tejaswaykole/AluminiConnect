@@ -69,7 +69,7 @@ export default function AlumniNetworkScreen() {
           </View>
         }
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/discover/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/alumni/discover/${item.id}`)}>
             <Card className="mb-4 bg-surface border border-border">
               <View className="flex-row items-start mb-3">
                 <Avatar url="" fallbackInitials={item.name.charAt(0)} size="md" className="mr-4 mt-1" />

@@ -65,7 +65,7 @@ export default function OpportunitiesScreen() {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={<EmptyState title="No opportunities found" message="Try adjusting your filters." />}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => router.push(`/opportunities/${item.id}`)}>
+          <TouchableOpacity onPress={() => router.push(`/student/opportunities/${item.id}`)}>
             <Card className="mb-4">
               <View className="flex-row justify-between items-start mb-2">
                 <Typography variant="h3" className="flex-1 mr-2">{item.title}</Typography>
