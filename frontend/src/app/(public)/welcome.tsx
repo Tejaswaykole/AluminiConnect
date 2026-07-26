@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Typography } from '../../components/Typography';
 import { Button } from '../../components/Button';
@@ -11,14 +11,12 @@ export default function WelcomeScreen() {
   return (
     <ScreenContainer scrollable={false} className="justify-center items-center">
       <View className="flex-1 w-full max-w-md justify-center py-12">
-        <View className="items-center mb-12">
-          {/* Logo Placeholder */}
-          <View className="w-24 h-24 bg-primary rounded-2xl items-center justify-center mb-6">
-            <Typography variant="h1" color="inverse" className="font-bold">
-              AC
-            </Typography>
-          </View>
-          
+        <View className="items-center mb-8 w-full">
+          <Image 
+            source={{ uri: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop' }} 
+            className="w-full h-48 rounded-3xl mb-8"
+            resizeMode="cover"
+          />
           <Typography variant="h1" align="center" className="mb-3">
             Welcome to Alumni Connect
           </Typography>
