@@ -15,11 +15,11 @@ export default function PlacementDashboard() {
     <ScreenContainer scrollable>
       {/* Header */}
       <View className="flex-row justify-between items-center mb-8">
-        <View className="flex-row items-center flex-1">
+        <View className="flex-row items-center flex-1 shrink mr-4">
           <Avatar url={PLACEMENT_USER.avatar} fallbackInitials="PC" size="md" className="mr-4" />
-          <View>
+          <View className="shrink">
             <Typography variant="body" color="muted">Welcome back,</Typography>
-            <Typography variant="h2">{PLACEMENT_USER.name}</Typography>
+            <Typography variant="h2" numberOfLines={1} className="shrink">{PLACEMENT_USER.name}</Typography>
           </View>
         </View>
         <TouchableOpacity onPress={() => router.push('/notifications')} className="p-2 relative">
@@ -29,21 +29,21 @@ export default function PlacementDashboard() {
       </View>
 
       {/* Dashboard Stats */}
-      <View className="flex-row flex-wrap justify-between mb-8">
+      <View className="flex-row gap-4 mb-8">
         {[
           { label: 'Active Jobs', value: OPPORTUNITY_MOCKS.length.toString(), color: 'text-primary' },
           { label: 'Students', value: STUDENT_MOCKS.length.toString(), color: 'text-text' },
           { label: 'Drives', value: DRIVE_MOCKS.length.toString(), color: 'text-status-success' },
         ].map((stat, i) => (
-          <Card key={i} className="mb-4 items-center justify-center py-4" style={{ width: '31%' }}>
-            <Typography variant="h2" className={`mb-1 ${stat.color}`}>{stat.value}</Typography>
-            <Typography variant="caption" color="muted">{stat.label}</Typography>
+          <Card key={i} className="flex-1 items-center justify-center py-4 shrink">
+            <Typography variant="h2" className={`mb-1 ${stat.color}`} numberOfLines={1}>{stat.value}</Typography>
+            <Typography variant="caption" color="muted" numberOfLines={1}>{stat.label}</Typography>
           </Card>
         ))}
       </View>
 
       {/* Quick Actions */}
-      <View className="flex-row flex-wrap justify-between mb-8">
+      <View className="flex-row flex-wrap gap-4 mb-8">
         {[
           { id: 'students', icon: 'school', label: 'Students', route: '/students' },
           { id: 'jobs', icon: 'work', label: 'Jobs', route: '/opportunities' },
@@ -53,13 +53,12 @@ export default function PlacementDashboard() {
           <TouchableOpacity 
             key={action.id} 
             onPress={() => router.push(action.route as any)}
-            className="items-center mb-4"
-            style={{ width: '23%' }}
+            className="flex-1 min-w-[70px] items-center mb-2"
           >
             <View className="w-14 h-14 bg-background border border-border-strong rounded-2xl items-center justify-center mb-2">
-              <Typography className="text-2xl">{action.icon}</Typography>
+              <MaterialIcons name={action.icon as any} size={28} color="#154539" />
             </View>
-            <Typography variant="caption" className="font-medium text-center">{action.label}</Typography>
+            <Typography variant="caption" className="font-medium text-center" numberOfLines={1}>{action.label}</Typography>
           </TouchableOpacity>
         ))}
       </View>
@@ -68,17 +67,17 @@ export default function PlacementDashboard() {
       <Section title="Upcoming Drives" onSeeAll={() => router.push('/drives')}>
         {DRIVE_MOCKS.slice(0, 2).map((drive) => (
           <TouchableOpacity key={drive.id} onPress={() => router.push(`/drives/${drive.id}`)}>
-            <Card className="mb-3">
-              <View className="flex-row justify-between items-center mb-2">
-                <Typography variant="h3" className="flex-1">{drive.title}</Typography>
+            <Card className="mb-3 shrink">
+              <View className="flex-row justify-between items-center mb-2 shrink">
+                <Typography variant="h3" className="flex-1 shrink mr-2" numberOfLines={1}>{drive.title}</Typography>
                 <View className="bg-primary/10 px-2 py-1 rounded-md">
                   <Typography variant="caption" color="primary" className="font-medium">{drive.status}</Typography>
                 </View>
               </View>
-              <Typography variant="body" color="muted" className="mb-2">{drive.company}</Typography>
+              <Typography variant="body" color="muted" className="mb-2" numberOfLines={1}>{drive.company}</Typography>
               <View className="flex-row justify-between">
-                <Typography variant="caption" color="muted">Date: {drive.date}</Typography>
-                <Typography variant="caption" color="muted">Registered: {drive.registeredCount}</Typography>
+                <Typography variant="caption" color="muted" numberOfLines={1}>Date: {drive.date}</Typography>
+                <Typography variant="caption" color="muted" numberOfLines={1}>Registered: {drive.registeredCount}</Typography>
               </View>
             </Card>
           </TouchableOpacity>
@@ -89,13 +88,13 @@ export default function PlacementDashboard() {
       <Section title="Recent Opportunities" onSeeAll={() => router.push('/opportunities')}>
         {OPPORTUNITY_MOCKS.slice(0, 2).map((opp) => (
           <TouchableOpacity key={opp.id} onPress={() => router.push(`/opportunities/${opp.id}`)}>
-            <Card className="mb-3 flex-row items-center">
+            <Card className="mb-3 flex-row items-center shrink">
               <View className="w-12 h-12 bg-secondary/10 rounded-lg items-center justify-center mr-4">
                 <MaterialIcons name="business" size={24} color="#154539" />
               </View>
-              <View className="flex-1">
-                <Typography variant="body" className="font-semibold mb-0.5">{opp.title}</Typography>
-                <Typography variant="caption" color="muted">{opp.company} • {opp.type}</Typography>
+              <View className="flex-1 shrink">
+                <Typography variant="body" className="font-semibold mb-0.5 shrink" numberOfLines={1}>{opp.title}</Typography>
+                <Typography variant="caption" color="muted" numberOfLines={1}>{opp.company} • {opp.type}</Typography>
               </View>
             </Card>
           </TouchableOpacity>
