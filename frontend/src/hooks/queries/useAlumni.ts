@@ -7,13 +7,8 @@ export const useAlumni = () => {
   return useQuery<Alumni[]>({
     queryKey: queryKeys.users.alumni(),
     queryFn: async () => {
-      try {
-        const response = await apiClient.get<{ success: boolean; data: any[] }>('/users/');
-        return response.data.filter((u: any) => u.role === 'ALUMNI' || u.role === 'alumni') as unknown as Alumni[];
-      } catch (error) {
-        const { ALUMNI_MOCKS } = await import('../../mocks');
-        return ALUMNI_MOCKS as any;
-      }
+      const response = await apiClient.get<{ success: boolean; data: any[] }>('/users/');
+      return (response as any).data.filter((u: any) => u.role === 'ALUMNI' || u.role === 'alumni') as unknown as Alumni[];
     },
   });
 };

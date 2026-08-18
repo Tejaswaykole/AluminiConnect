@@ -1,4 +1,5 @@
 import { View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Typography } from '../../../components/Typography';
 import { Card } from '../../../components/Card';
