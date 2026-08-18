@@ -11,19 +11,19 @@ export interface SidebarItem {
   href: string;
 }
 
-export function Sidebar({ items, user }: { items: SidebarItem[], user: any }) {
+export function Sidebar({ items, user, className, activeBgColor, activeTextColor, inactiveHoverColor }: { items: SidebarItem[], user: any, className?: string, activeBgColor?: string, activeTextColor?: string, inactiveHoverColor?: string }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   if (width < 768) return null; // Hidden on mobile
 
   return (
     <View 
-       className="bg-surface border-r border-border py-6 flex-col justify-between hidden md:flex"
+       className={`${className || 'bg-surface'} border-r border-border py-6 flex-col justify-between hidden md:flex`}
        style={{ 
          width: 260, 
-         height: Platform.OS === 'web' ? '100vh' : '100%',
+         height: Platform.OS === 'web' ? height : '100%',
          position: Platform.OS === 'web' ? ('sticky' as any) : 'relative', 
          top: 0 
        }}
@@ -39,10 +39,10 @@ export function Sidebar({ items, user }: { items: SidebarItem[], user: any }) {
               <TouchableOpacity 
                 key={item.name}
                 onPress={() => router.push(item.href as any)}
-                className={`flex-row items-center px-3 py-3 mb-1 rounded-lg ${isActive ? 'bg-primary/10' : ''}`}
+                className={`flex-row items-center px-3 py-3 mb-1 rounded-lg ${isActive ? (activeBgColor || 'bg-primary/10') : (inactiveHoverColor || '')}`}
               >
-                <MaterialIcons name={item.icon} size={24} color={isActive ? "#154539" : "#64748b"} />
-                <Typography variant="body" className={`ml-3 font-medium ${isActive ? 'text-primary' : 'text-muted'}`}>
+                <MaterialIcons name={item.icon} size={24} color={isActive ? (activeTextColor ? undefined : "#154539") : "#64748b"} className={isActive && activeTextColor ? activeTextColor : ''} />
+                <Typography variant="body" className={`ml-3 font-medium ${isActive ? (activeTextColor || 'text-primary') : 'text-muted'}`}>
                   {item.label}
                 </Typography>
               </TouchableOpacity>
