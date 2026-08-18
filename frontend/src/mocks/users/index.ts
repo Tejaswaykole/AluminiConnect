@@ -14,6 +14,8 @@ export const CURRENT_USER: Student = {
   connections: 42,
 };
 
+export const STUDENT_USER = CURRENT_USER;
+
 export const ALUMNI_USER: Alumni = {
   id: 'a0',
   name: 'Jane Doe',

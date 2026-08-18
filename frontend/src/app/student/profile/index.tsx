@@ -1,179 +1,151 @@
-import { useState, useEffect } from 'react';
-import { View, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform, Image } from 'react-native';
-import { Typography } from '../../../components/Typography';
-import { Avatar } from '../../../components/Avatar';
-import { Badge } from '../../../components/Badge';
-import { Button } from '../../../components/Button';
-import { Input } from '../../../components/Input';
-import { Card } from '../../../components/Card';
-import { ScreenContainer } from '../../../components/ScreenContainer';
-import { useCurrentUser } from '../../../hooks/queries';
+import { useState } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Image, Platform, TextInput } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { STUDENT_USER } from '../../../mocks';
 
-export default function StudentProfileScreen() {
-  const { data: user } = useCurrentUser();
+export default function StudentProfile() {
   const [isEditing, setIsEditing] = useState(false);
-  
-  const [bio, setBio] = useState('Aspiring software engineer passionate about building scalable backend systems.');
-  const [skills, setSkills] = useState('Python, React, TypeScript, SQL');
-  const [careerInterests, setCareerInterests] = useState('Backend Development, Cloud Infrastructure');
-  const [githubUrl, setGithubUrl] = useState('https://github.com/alexj');
-  const [linkedinUrl, setLinkedinUrl] = useState('https://linkedin.com/in/alexj');
-  const [avatarUrl, setAvatarUrl] = useState(user?.avatar || '');
-  const [bannerUrl, setBannerUrl] = useState('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80');
-
-  useEffect(() => {
-    if (user) {
-      if (user.bio) setBio(user.bio);
-      if (user.skills) setSkills(user.skills.join(', '));
-    }
-  }, [user]);
-
-  const handleSave = () => {
-    setIsEditing(false);
-  };
-
-  const handleManageResumes = () => {
-    if (Platform.OS === 'web') {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.pdf,.doc,.docx';
-      input.onchange = (e: any) => {
-        const file = e.target?.files?.[0];
-        if (file) {
-          alert(`Successfully uploaded ${file.name}. ATS Score is being calculated...`);
-        }
-      };
-      input.click();
-    } else {
-      alert('Resume management will be available in the native app release.');
-    }
-  };
-
-  if (!user) return null;
 
   return (
-    <ScreenContainer scrollable>
-      <View className="flex-row justify-between items-center mb-6">
-        <Typography variant="h1">My Profile</Typography>
-        {!isEditing && (
-          <TouchableOpacity onPress={() => setIsEditing(true)} className="bg-primary/10 px-4 py-2 rounded-lg">
-            <Typography variant="body" color="primary" className="font-semibold">Edit Profile</Typography>
-          </TouchableOpacity>
-        )}
+    <ScrollView 
+      className="flex-1 bg-student-background"
+      contentContainerStyle={{ 
+        paddingHorizontal: Platform.OS === 'web' ? 32 : 16,
+        paddingTop: 32,
+        paddingBottom: 96,
+        maxWidth: 1280,
+        alignSelf: 'center',
+        width: '100%',
+      }}
+      showsVerticalScrollIndicator={false}
+    >
+      <View className="mb-8 flex-row items-center justify-between">
+        <Text className="text-[32px] md:text-[48px] font-bold text-student-on-surface tracking-tight">My Profile</Text>
+        <TouchableOpacity 
+          onPress={() => setIsEditing(!isEditing)}
+          className="bg-student-surface border border-student-outline-variant px-4 py-2 rounded-lg flex-row items-center gap-2 hover:bg-student-surface-container-high transition-colors"
+        >
+          <MaterialIcons name={isEditing ? 'check' : 'edit'} size={20} color="#0b1c30" />
+          <Text className="text-[14px] font-medium text-student-on-surface">{isEditing ? 'Save Profile' : 'Edit Profile'}</Text>
+        </TouchableOpacity>
       </View>
 
-      {/* Header Info */}
-      <View className="mb-8 bg-surface border border-border rounded-2xl overflow-hidden relative">
-        <Image 
-          source={{ uri: bannerUrl || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80' }} 
-          className="w-full h-32 bg-primary/20"
-          resizeMode="cover"
-        />
-        <View className="px-6 pb-6 pt-14 relative items-center">
-          <View className="absolute -top-12 border-4 border-surface rounded-full bg-surface">
-            <Avatar url={avatarUrl} fallbackInitials={user.name?.charAt(0) || 'U'} size="xl" />
+      <View className="flex-col md:flex-row gap-6">
+        {/* Left Column - Core Identity */}
+        <View className="w-full md:w-1/3 flex-col gap-6">
+          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm items-center">
+            <View className="relative w-32 h-32 mb-4">
+              <Image 
+                source={{ uri: STUDENT_USER.avatar }}
+                className="w-full h-full rounded-full border-4 border-student-surface-container-low"
+              />
+              {isEditing && (
+                <TouchableOpacity className="absolute bottom-0 right-0 bg-student-primary p-2 rounded-full border-2 border-student-surface">
+                  <MaterialIcons name="camera-alt" size={16} color="#ffffff" />
+                </TouchableOpacity>
+              )}
+            </View>
+            
+            {isEditing ? (
+              <TextInput 
+                value={STUDENT_USER.name}
+                className="text-[24px] font-bold text-student-on-surface mb-2 border-b border-student-outline-variant w-full text-center pb-1"
+              />
+            ) : (
+              <Text className="text-[24px] font-bold text-student-on-surface mb-1">{STUDENT_USER.name}</Text>
+            )}
+            
+            <Text className="text-[16px] text-student-on-surface-variant font-medium text-center">B.S. Computer Science</Text>
+            <Text className="text-[14px] text-student-secondary text-center mt-1">Class of 2024</Text>
+
+            <View className="flex-row items-center gap-2 mt-4 text-student-secondary">
+              <MaterialIcons name="location-on" size={16} color="#5c5f61" />
+              <Text className="text-[14px] text-student-secondary">San Francisco, CA</Text>
+            </View>
           </View>
-          <Typography variant="h2" className="mb-1 mt-2">{user.name}</Typography>
-          <Typography variant="body" className="font-medium text-center mb-1 text-primary">
-            {user.department}
-          </Typography>
-          <Typography variant="caption" color="muted" className="text-center mb-4">
-            {user.college} • Class of {user.graduationYear}
-          </Typography>
-          <View className="flex-row gap-2">
-              <Badge label="Looking for Internships" variant="secondary" />
-              <Badge label="Public Profile" variant="outline" />
+          
+          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm">
+            <Text className="text-[18px] font-semibold text-student-on-surface mb-4">Profile Completeness</Text>
+            <View className="flex-row items-end justify-between mb-2">
+              <Text className="text-[24px] font-bold text-student-primary">70%</Text>
+            </View>
+            <View className="w-full bg-student-secondary-fixed h-2 rounded-full overflow-hidden mb-4">
+              <View className="bg-student-primary-container h-full rounded-full w-[70%]" />
+            </View>
+            <Text className="text-[14px] text-student-on-surface-variant">Add your Resume to reach 100%.</Text>
+            <TouchableOpacity className="w-full mt-4 bg-student-surface border border-student-outline-variant py-2 rounded-lg items-center justify-center hover:bg-student-surface-container-high transition-colors">
+              <Text className="text-[14px] font-medium text-student-on-surface">Upload Resume</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Right Column - Details */}
+        <View className="w-full md:flex-1 flex-col gap-6">
+          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm">
+            <Text className="text-[20px] font-semibold text-student-on-surface mb-4">About Me</Text>
+            {isEditing ? (
+              <TextInput 
+                multiline
+                numberOfLines={4}
+                value="I'm a senior CS student passionate about building scalable web applications and exploring artificial intelligence. Actively seeking full-time software engineering roles for Fall 2024."
+                className="w-full bg-student-surface-container-low border border-student-outline-variant rounded-lg p-3 text-[16px] text-student-on-surface"
+                textAlignVertical="top"
+              />
+            ) : (
+              <Text className="text-[16px] text-student-on-surface-variant leading-relaxed">
+                I'm a senior CS student passionate about building scalable web applications and exploring artificial intelligence. Actively seeking full-time software engineering roles for Fall 2024.
+              </Text>
+            )}
+          </View>
+
+          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm">
+            <View className="flex-row items-center justify-between mb-4">
+              <Text className="text-[20px] font-semibold text-student-on-surface">Skills</Text>
+              {isEditing && (
+                <TouchableOpacity>
+                  <Text className="text-[14px] font-medium text-student-primary hover:underline">Add Skill</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <View className="flex-row flex-wrap gap-2">
+              {['React', 'TypeScript', 'Node.js', 'Python', 'Machine Learning', 'Git'].map(skill => (
+                <View key={skill} className="bg-student-surface-container-low border border-student-outline-variant px-3 py-1.5 rounded-full flex-row items-center gap-1">
+                  <Text className="text-[14px] font-medium text-student-on-surface">{skill}</Text>
+                  {isEditing && (
+                    <TouchableOpacity>
+                      <MaterialIcons name="close" size={14} color="#5c5f61" />
+                    </TouchableOpacity>
+                  )}
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm">
+            <View className="flex-row items-center justify-between mb-6">
+              <Text className="text-[20px] font-semibold text-student-on-surface">Experience</Text>
+              {isEditing && (
+                <TouchableOpacity>
+                  <Text className="text-[14px] font-medium text-student-primary hover:underline">Add Experience</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            <View className="flex-col gap-6 border-l-2 border-student-surface-container-high ml-2 pl-6 relative">
+              
+              <View className="relative">
+                <View className="absolute -left-[35px] top-1 w-4 h-4 rounded-full bg-student-primary border-4 border-student-surface" />
+                <Text className="text-[18px] font-semibold text-student-on-surface">Software Engineering Intern</Text>
+                <Text className="text-[16px] text-student-secondary font-medium">TechStart Inc.</Text>
+                <Text className="text-[14px] text-student-on-surface-variant mt-1 mb-2">May 2023 - Aug 2023</Text>
+                <Text className="text-[16px] text-student-on-surface-variant leading-relaxed">
+                  Developed and tested RESTful APIs using Node.js and Express. Improved query performance by 20% through database indexing.
+                </Text>
+              </View>
+
+            </View>
           </View>
         </View>
       </View>
-
-      {isEditing ? (
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          
-          <Card className="mb-6 bg-surface border border-border">
-            <Typography variant="h3" className="mb-4">Academic Information</Typography>
-            <Typography variant="caption" color="muted" className="mb-4">These fields are verified by your institution and cannot be changed.</Typography>
-            <Input label="Institution" value={user.college} editable={false} className="mb-3 opacity-70" />
-            <Input label="Department" value={user.department} editable={false} className="mb-3 opacity-70" />
-            <Input label="Enrollment Number" value="ENR-2023-4491" editable={false} className="mb-3 opacity-70" />
-          </Card>
-
-          <Card className="mb-6 bg-surface border border-border">
-            <Typography variant="h3" className="mb-4">Personal Details</Typography>
-            <Input label="Bio" value={bio} onChangeText={setBio} multiline numberOfLines={4} className="mb-4" textAlignVertical="top" />
-            <Input label="Skills (comma separated)" value={skills} onChangeText={setSkills} className="mb-4" />
-            <Input label="Career Interests" value={careerInterests} onChangeText={setCareerInterests} className="mb-4" />
-          </Card>
-
-          <Card className="mb-6 bg-surface border border-border">
-             <Typography variant="h3" className="mb-4">Profile Images</Typography>
-             <Input label="Profile Picture URL" value={avatarUrl} onChangeText={setAvatarUrl} className="mb-3" />
-             <Input label="Cover Banner URL" value={bannerUrl} onChangeText={setBannerUrl} className="mb-3" />
-          </Card>
-
-          <Card className="mb-6 bg-surface border border-border">
-             <Typography variant="h3" className="mb-4">Social Links</Typography>
-             <Input label="GitHub URL" value={githubUrl} onChangeText={setGithubUrl} className="mb-3" />
-             <Input label="LinkedIn URL" value={linkedinUrl} onChangeText={setLinkedinUrl} className="mb-3" />
-          </Card>
-
-          <View className="flex-row gap-4 mb-8">
-             <Button title="Save Changes" onPress={handleSave} className="flex-1" />
-             <Button title="Cancel" variant="outline" onPress={() => setIsEditing(false)} className="flex-1" />
-          </View>
-
-        </KeyboardAvoidingView>
-      ) : (
-        <>
-          <Card className="mb-6 bg-surface border border-border">
-            <Typography variant="h3" className="mb-3">About</Typography>
-            <Typography variant="body" color="muted" className="leading-relaxed">{bio}</Typography>
-          </Card>
-
-          <View className="flex-row gap-4 mb-6">
-              <Card className="flex-1 bg-surface border border-border">
-                <Typography variant="h3" className="mb-4">Skills</Typography>
-                <View className="flex-row flex-wrap gap-2">
-                  {skills.split(',').map(s => s.trim()).filter(Boolean).map(skill => (
-                    <Badge key={skill} label={skill} variant="secondary" />
-                  ))}
-                </View>
-              </Card>
-
-              <Card className="flex-1 bg-surface border border-border">
-                <Typography variant="h3" className="mb-4">Career Interests</Typography>
-                <View className="flex-row flex-wrap gap-2">
-                  {careerInterests.split(',').map(s => s.trim()).filter(Boolean).map(interest => (
-                    <Badge key={interest} label={interest} variant="outline" />
-                  ))}
-                </View>
-              </Card>
-          </View>
-
-          <Card className="mb-6 bg-surface border border-border">
-            <Typography variant="h3" className="mb-4">Projects & Achievements</Typography>
-            <View className="mb-4 border-b border-border pb-4">
-                <Typography variant="body" className="font-semibold mb-1">Alumni Connect Mobile App</Typography>
-                <Typography variant="caption" color="muted" className="mb-2">Oct 2023 - Present</Typography>
-                <Typography variant="body" color="muted">Built the React Native mobile app bridging students and alumni.</Typography>
-            </View>
-            <View>
-                <Typography variant="body" className="font-semibold mb-1">AWS Certified Developer - Associate</Typography>
-                <Typography variant="caption" color="muted" className="mb-2">Issued Jan 2024</Typography>
-            </View>
-          </Card>
-          
-          <Card className="mb-6 bg-surface border border-border">
-            <View className="flex-row justify-between items-center">
-              <View>
-                <Typography variant="h3" className="mb-1">Primary Resume</Typography>
-                <Typography variant="caption" color="status-success">ATS Score: 92% • Last updated 2 days ago</Typography>
-              </View>
-              <Button title="Manage Resumes" variant="outline" onPress={handleManageResumes} />
-            </View>
-          </Card>
-        </>
-      )}
-    </ScreenContainer>
+    </ScrollView>
   );
 }
