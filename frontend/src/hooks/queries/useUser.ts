@@ -4,13 +4,13 @@ import { apiClient } from '../../api/client';
 import { Student } from '../../types';
 
 export const useCurrentUser = () => {
-  return useQuery<Student>({
+  return useQuery({
     queryKey: queryKeys.users.current(),
-    queryFn: async () => {
+    queryFn: async (): Promise<Student> => {
       try {
-        const response = await apiClient.get<{ success: boolean; data: Student }>('/users/me');
-        if (response.data) {
-          return response.data;
+        const user = await apiClient.get<any, Student>('/users/me');
+        if (user) {
+          return user;
         }
       } catch (e) {
         // Silent fallback
