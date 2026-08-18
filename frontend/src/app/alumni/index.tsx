@@ -44,10 +44,10 @@ export default function AlumniDashboard() {
       {/* Quick Actions (Enterprise Minimal) */}
       <View className="flex-row flex-wrap gap-4 mb-8">
         {[
-          { id: 'network', icon: 'groups', label: 'Network', route: '/discover' },
-          { id: 'mentorship', icon: 'handshake', label: 'Mentoring', route: '/mentorship' },
-          { id: 'jobs', icon: 'work', label: 'Post Job', route: '/opportunities' },
-          { id: 'events', icon: 'event', label: 'Events', route: '/events' },
+          { id: 'network', icon: 'groups', label: 'Network', route: '/alumni/discover' },
+          { id: 'mentorship', icon: 'handshake', label: 'Mentoring', route: '/alumni/mentorship' },
+          { id: 'jobs', icon: 'work', label: 'Post Job', route: '/alumni/opportunities' },
+          { id: 'events', icon: 'event', label: 'Events', route: '/alumni/events' },
         ].map((action) => (
           <TouchableOpacity 
             key={action.id} 
