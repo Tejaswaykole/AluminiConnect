@@ -24,7 +24,10 @@ export const useCurrentUser = () => {
           return parsedUser as Student;
         }
       }
-      throw new Error("No user found");
+      
+      // Fallback to mock user if backend is offline and no user in storage
+      const { STUDENT_MOCKS } = await import('../../mocks');
+      return { ...STUDENT_MOCKS[0], role: 'student', email: 'alex@example.com' } as unknown as Student;
     },
   });
 };

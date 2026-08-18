@@ -57,7 +57,7 @@ export default function PlacementDashboard() {
             style={{ width: '23%' }}
           >
             <View className="w-14 h-14 bg-background border border-border-strong rounded-2xl items-center justify-center mb-2">
-              <Typography className="text-2xl">{action.icon}</Typography>
+              <MaterialIcons name={action.icon as any} size={28} color="#154539" />
             </View>
             <Typography variant="caption" className="font-medium text-center">{action.label}</Typography>
           </TouchableOpacity>

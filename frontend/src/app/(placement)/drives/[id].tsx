@@ -6,7 +6,8 @@ import { Card } from '../../../components/Card';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { Button } from '../../../components/Button';
 import { Input } from '../../../components/Input';
-import { DRIVE_MOCKS } from '../../../mocks';
+import { Avatar } from '../../../components/Avatar';
+import { DRIVE_MOCKS, STUDENT_MOCKS } from '../../../mocks';
 
 export default function PlacementDriveDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -16,6 +17,7 @@ export default function PlacementDriveDetailScreen() {
   const existingDrive = DRIVE_MOCKS.find(d => d.id === id);
   
   const [isEditing, setIsEditing] = useState(isNew);
+  const [showStudents, setShowStudents] = useState(false);
   const [formData, setFormData] = useState({
     title: existingDrive?.title || '',
     company: existingDrive?.company || '',
@@ -100,7 +102,27 @@ export default function PlacementDriveDetailScreen() {
             <Typography variant="body">{formData.description}</Typography>
           </Card>
 
-          <Button title="View Registered Students" variant="outline" className="mt-2" />
+          <Button 
+            title={showStudents ? "Hide Registered Students" : "View Registered Students"} 
+            variant="outline" 
+            className="mt-2" 
+            onPress={() => setShowStudents(!showStudents)}
+          />
+
+          {showStudents && (
+            <Card className="mt-6">
+              <Typography variant="h3" className="mb-4">Registered Students</Typography>
+              {STUDENT_MOCKS.map((student) => (
+                <View key={student.id} className="flex-row items-center mb-4 last:mb-0 border-b border-border pb-2 last:border-0 last:pb-0">
+                  <Avatar url={student.avatar} fallbackInitials={student.name.substring(0, 2).toUpperCase()} size="md" className="mr-4" />
+                  <View className="flex-1">
+                    <Typography variant="body" className="font-semibold">{student.name}</Typography>
+                    <Typography variant="caption" color="muted">{student.college} • {student.department} • Class of {student.graduationYear}</Typography>
+                  </View>
+                </View>
+              ))}
+            </Card>
+          )}
         </View>
       )}
     </ScreenContainer>

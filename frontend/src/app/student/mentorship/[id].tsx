@@ -31,7 +31,7 @@ export default function MentorshipRequestScreen() {
   const handleRequest = () => {
     if (!message.trim()) return;
     setIsSubmitting(true);
-    
+
     // Simulate network request
     setTimeout(() => {
       setIsSubmitting(false);
@@ -86,10 +86,10 @@ export default function MentorshipRequestScreen() {
               className="mb-6"
               textAlignVertical="top"
             />
-            <Button 
-              title="Send Request" 
-              onPress={handleRequest} 
-              isLoading={isSubmitting} 
+            <Button
+              title="Send Request"
+              onPress={handleRequest}
+              isLoading={isSubmitting}
               disabled={!message.trim()}
             />
           </View>
