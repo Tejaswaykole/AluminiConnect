@@ -17,7 +17,13 @@ export default function StudentDashboard() {
   const { data: opportunities, isLoading: oppsLoading, isError: oppsError, refetch: refetchOpps } = useOpportunities();
 
   if (userLoading || eventsLoading || oppsLoading) return <LoadingState message="Loading enterprise dashboard..." />;
-  if (userError || eventsError || oppsError) return <ErrorState onRetry={() => { refetchUser(); refetchEvents(); refetchOpps(); }} message="Failed to load dashboard." />;
+  
+  if (userError) {
+    router.replace('/login');
+    return null;
+  }
+  
+  if (eventsError || oppsError) return <ErrorState onRetry={() => { refetchEvents(); refetchOpps(); }} message="Failed to load dashboard." />;
   if (!user) return null;
 
   return (

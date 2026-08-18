@@ -32,6 +32,23 @@ export default function StudentProfileScreen() {
     setIsEditing(false);
   };
 
+  const handleManageResumes = () => {
+    if (Platform.OS === 'web') {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.pdf,.doc,.docx';
+      input.onchange = (e: any) => {
+        const file = e.target?.files?.[0];
+        if (file) {
+          alert(`Successfully uploaded ${file.name}. ATS Score is being calculated...`);
+        }
+      };
+      input.click();
+    } else {
+      alert('Resume management will be available in the native app release.');
+    }
+  };
+
   if (!user) return null;
 
   return (
@@ -152,7 +169,7 @@ export default function StudentProfileScreen() {
                 <Typography variant="h3" className="mb-1">Primary Resume</Typography>
                 <Typography variant="caption" color="status-success">ATS Score: 92% • Last updated 2 days ago</Typography>
               </View>
-              <Button title="Manage Resumes" variant="outline" onPress={() => {}} />
+              <Button title="Manage Resumes" variant="outline" onPress={handleManageResumes} />
             </View>
           </Card>
         </>

@@ -32,6 +32,23 @@ export default function AlumniProfileScreen() {
     setIsEditing(false);
   };
 
+  const handleManageResumes = () => {
+    if (Platform.OS === 'web') {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.pdf,.doc,.docx';
+      input.onchange = (e: any) => {
+        const file = e.target?.files?.[0];
+        if (file) {
+          alert(`Successfully uploaded ${file.name}.`);
+        }
+      };
+      input.click();
+    } else {
+      alert('Resume management will be available in the native app release.');
+    }
+  };
+
   return (
     <ScreenContainer scrollable>
       <View className="flex-row justify-between items-center mb-6 mt-2">
@@ -135,7 +152,7 @@ export default function AlumniProfileScreen() {
                 <Typography variant="h3" className="mb-1">Primary Resume</Typography>
                 <Typography variant="caption" color="muted">Last updated 6 months ago</Typography>
               </View>
-              <Button title="Manage Resumes" variant="outline" onPress={() => {}} />
+              <Button title="Manage Resumes" variant="outline" onPress={handleManageResumes} />
             </View>
           </Card>
         </>

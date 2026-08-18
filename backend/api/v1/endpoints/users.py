@@ -20,6 +20,8 @@ async def list_users(params: PaginationParams = Depends(), db: AsyncSession = De
             "email": u.email,
             "first_name": u.first_name,
             "last_name": u.last_name,
+            "name": f"{u.first_name} {u.last_name}".strip(),
+            "avatar": None,
             "role": u.role.value if hasattr(u.role, 'value') else u.role
         } for u in users
     ]
@@ -37,6 +39,8 @@ async def get_me(user_id: uuid.UUID = Depends(get_current_user_id), db: AsyncSes
         "email": u.email,
         "first_name": u.first_name,
         "last_name": u.last_name,
+        "name": f"{u.first_name} {u.last_name}".strip(),
+        "avatar": None,
         "role": u.role.value if hasattr(u.role, 'value') else u.role
     }
     return StandardResponse(success=True, data=data)
