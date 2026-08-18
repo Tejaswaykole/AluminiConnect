@@ -1,42 +1,106 @@
-import { Tabs } from 'expo-router';
-import { useWindowDimensions, View } from 'react-native';
+import { Tabs, useRouter, usePathname } from 'expo-router';
+import { View, useWindowDimensions, TouchableOpacity, Text, Image, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Sidebar, SidebarItem } from '../../components/Sidebar';
-import { useCurrentUser } from '../../hooks/queries';
+import { STUDENT_USER } from '../../mocks';
 
 export default function StudentLayout() {
-  const { data: user } = useCurrentUser();
   const { width } = useWindowDimensions();
-  const isDesktop = width >= 768;
+  const isDesktop = width >= 1024; // lg breakpoint
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const sidebarItems: SidebarItem[] = [
-    { name: 'home', label: 'Home', icon: 'home', href: '/student' },
-    { name: 'alumni', label: 'Alumni Network', icon: 'groups', href: '/student/discover' },
-    { name: 'jobs', label: 'Jobs & Internships', icon: 'work', href: '/student/opportunities' },
-    { name: 'groups', label: 'Communities', icon: 'forum', href: '/student/communities' },
-    { name: 'messages', label: 'Messages', icon: 'message', href: '/student/messages' },
-    { name: 'profile', label: 'My Profile', icon: 'person', href: '/student/profile' },
+  const navItems = [
+    { name: 'Dashboard', icon: 'dashboard', href: '/student' },
+    { name: 'Opportunities', icon: 'work', href: '/student/opportunities' },
+    { name: 'Mentorship', icon: 'handshake', href: '/student/mentorship' },
+    { name: 'Connections', icon: 'group', href: '/student/connections' },
+    { name: 'Community', icon: 'forum', href: '/student/community' },
+    { name: 'Profile', icon: 'account_circle', href: '/student/profile' },
   ];
 
   return (
-    <View className="flex-1 flex-row bg-background w-full h-full">
-      {isDesktop && <Sidebar items={sidebarItems} user={user} />}
-      <View className="flex-1 h-full w-full">
+    <View className="flex-1 flex-row bg-student-background w-full h-full">
+      {/* Desktop Sidebar */}
+      {isDesktop && (
+        <View 
+          className="w-[280px] h-full bg-student-surface border-r border-student-outline-variant flex-col p-4 z-40"
+          style={Platform.OS === 'web' ? { position: 'sticky', top: 0, height: '100vh' } as any : {}}
+        >
+          {/* Header */}
+          <View className="flex-row items-center gap-4 mb-4">
+            <Image 
+              source={{ uri: STUDENT_USER.avatar }} 
+              className="w-12 h-12 rounded-full border-2 border-student-surface"
+              resizeMode="cover"
+            />
+            <View className="flex-col">
+              <Text className="text-[24px] font-bold text-student-primary">{STUDENT_USER.name}</Text>
+              <Text className="text-[12px] text-student-on-surface-variant">Computer Science Senior</Text>
+            </View>
+          </View>
+
+          {/* Navigation Links */}
+          <View className="flex-col gap-2 flex-grow mt-4">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/student' && pathname.startsWith(item.href));
+              
+              return (
+                <TouchableOpacity
+                  key={item.name}
+                  onPress={() => router.push(item.href as any)}
+                  className={`flex-row items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    isActive 
+                      ? 'bg-student-primary-container' 
+                      : 'hover:bg-student-surface-container-high'
+                  }`}
+                >
+                  <MaterialIcons 
+                    name={item.icon as any} 
+                    size={24} 
+                    color={isActive ? '#dad7ff' : '#5c5f61'} 
+                  />
+                  <Text 
+                    className={`text-[14px] font-medium ${
+                      isActive ? 'text-student-on-primary-container font-bold' : 'text-student-secondary'
+                    }`}
+                  >
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Bottom Actions */}
+          <View className="mt-auto pt-4 border-t border-student-outline-variant">
+            <TouchableOpacity 
+              onPress={() => router.push('/student/settings')}
+              className="flex-row items-center gap-3 px-4 py-3 rounded-lg hover:bg-student-surface-container-high transition-colors"
+            >
+              <MaterialIcons name="settings" size={24} color="#5c5f61" />
+              <Text className="text-[14px] font-medium text-student-secondary">Settings</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
+      {/* Main Content Area with Mobile Bottom Tabs */}
+      <View className="flex-1 h-full w-full bg-student-background">
         <Tabs
           screenOptions={{
             headerShown: false,
             tabBarStyle: isDesktop ? { display: 'none' } : {
-              backgroundColor: '#ffffff',
+              backgroundColor: '#eff4ff', // surface-container-low
               borderTopWidth: 1,
-              borderTopColor: '#e2e8f0',
+              borderTopColor: '#c7c4d8', // outline-variant
               elevation: 0,
               shadowOpacity: 0,
-              height: 60,
+              height: 64,
               paddingBottom: 8,
               paddingTop: 8,
             },
-            tabBarActiveTintColor: '#154539',
-            tabBarInactiveTintColor: '#64748b',
+            tabBarActiveTintColor: '#3525cd', // primary
+            tabBarInactiveTintColor: '#5c5f61', // secondary
             tabBarLabelStyle: {
               fontFamily: 'System',
               fontWeight: '500',
@@ -48,14 +112,7 @@ export default function StudentLayout() {
             name="index"
             options={{
               title: 'Home',
-              tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />,
-            }}
-          />
-          <Tabs.Screen
-            name="discover"
-            options={{
-              title: 'Alumni',
-              tabBarIcon: ({ color }) => <MaterialIcons name="groups" size={24} color={color} />,
+              tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
@@ -66,25 +123,22 @@ export default function StudentLayout() {
             }}
           />
           <Tabs.Screen
-            name="communities"
+            name="mentorship"
             options={{
-              title: 'Groups',
-              tabBarIcon: ({ color }) => <MaterialIcons name="forum" size={24} color={color} />,
+              title: 'Mentors',
+              tabBarIcon: ({ color }) => <MaterialIcons name="handshake" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
             name="profile"
             options={{
               title: 'Profile',
-              tabBarIcon: ({ color }) => <MaterialIcons name="person" size={24} color={color} />,
+              tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
             }}
           />
-
-          {/* Hide these from bottom tabs but allow stack navigation to them */}
-          <Tabs.Screen name="messages" options={{ href: null }} />
-          <Tabs.Screen name="events" options={{ href: null }} />
-          <Tabs.Screen name="mentorship" options={{ href: null }} />
-          <Tabs.Screen name="notifications" options={{ href: null }} />
+          {/* Hide these from bottom tabs to save space, accessible via other means or a 'More' tab if needed */}
+          <Tabs.Screen name="connections" options={{ href: null }} />
+          <Tabs.Screen name="community" options={{ href: null }} />
           <Tabs.Screen name="settings" options={{ href: null }} />
         </Tabs>
       </View>

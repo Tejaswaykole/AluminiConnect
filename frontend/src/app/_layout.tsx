@@ -18,7 +18,6 @@ export default function RootLayout() {
           }}
         >
           {/* Navigation Route Groups */}
-          <Stack.Screen name="(public)" />
           <Stack.Screen name="(auth)" />
           <Stack.Screen name="(admin)" />
           <Stack.Screen name="(placement)" />
