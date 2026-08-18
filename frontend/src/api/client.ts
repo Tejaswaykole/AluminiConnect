@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { QueryClient } from '@tanstack/react-query';
+import { Platform } from 'react-native';
 
-const API_URL = 'http://192.168.43.103:8000/api/v1';
+const API_URL = Platform.OS === 'web' 
+  ? 'http://127.0.0.1:8000/api/v1' 
+  : 'http://192.168.43.103:8000/api/v1';
 
 export const apiClient = axios.create({
   baseURL: API_URL,

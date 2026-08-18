@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Redirect } from 'expo-router';
 import { Typography } from '../../components/Typography';
 import { ScreenContainer } from '../../components/ScreenContainer';
 import { Section } from '../../components/Section';
@@ -19,8 +19,7 @@ export default function StudentDashboard() {
   if (userLoading || eventsLoading || oppsLoading) return <LoadingState message="Loading enterprise dashboard..." />;
   
   if (userError) {
-    router.replace('/login');
-    return null;
+    return <Redirect href="/login" />;
   }
   
   if (eventsError || oppsError) return <ErrorState onRetry={() => { refetchEvents(); refetchOpps(); }} message="Failed to load dashboard." />;
