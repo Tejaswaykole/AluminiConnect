@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(0, "C:\\Users\\tejas\\OneDrive\\Desktop\\ALumini\\backend")
+import os
+sys.path.insert(0, os.path.abspath("."))
 import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine
 from core.config import settings
