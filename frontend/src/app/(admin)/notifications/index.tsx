@@ -1,4 +1,5 @@
 import { View, FlatList, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Typography } from '../../../components/Typography';
 import { ScreenContainer } from '../../../components/ScreenContainer';

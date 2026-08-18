@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { QueryClient } from '@tanstack/react-query';
 
-const API_URL = 'http://localhost:8000/api/v1';
+const API_URL = 'http://192.168.43.103:8000/api/v1';
 
 export const apiClient = axios.create({
   baseURL: API_URL,
