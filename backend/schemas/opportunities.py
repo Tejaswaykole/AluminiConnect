@@ -1,18 +1,27 @@
-from pydantic import BaseModel
-from typing import Optional, List
+
 import uuid
+from pydantic import BaseModel, ConfigDict
+from typing import Optional, List
 from datetime import datetime
 
-class OpportunitiesBase(BaseModel):
-    pass
+class OpportunityCreate(BaseModel):
+    title: str
+    description: str
+    opportunity_type_id: uuid.UUID
+    company: str
+    location: Optional[str] = None
+    deadline: Optional[datetime] = None
 
-class OpportunitiesCreate(OpportunitiesBase):
-    pass
-
-class OpportunitiesUpdate(BaseModel):
-    pass
-
-class OpportunitiesResponse(OpportunitiesBase):
+class OpportunityResponse(BaseModel):
     id: uuid.UUID
-    class Config:
-        from_attributes = True
+    title: str
+    description: str
+    opportunity_type_id: uuid.UUID
+    company: str
+    location: Optional[str]
+    deadline: Optional[datetime]
+    status: str
+    created_by: uuid.UUID
+    created_at: datetime
+    
+    model_config = ConfigDict(from_attributes=True)

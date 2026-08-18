@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import String, Enum, DateTime, ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Uuid
+from sqlalchemy import Uuid, Index
 from .base import BaseModel
 from .enums import MentorshipStatus
 
@@ -15,3 +15,13 @@ class MentorshipRequest(BaseModel):
     notes: Mapped[str] = mapped_column(String, nullable=True)
     request_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
     accepted_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    __table_args__ = (
+        Index(
+            "uq_active_mentorship",
+            "mentor_id",
+            "student_id",
+            unique=True,
+            postgresql_where=text("status IN ('PENDING', 'ACCEPTED')")
+        ),
+    )

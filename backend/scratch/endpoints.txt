@@ -1,0 +1,177 @@
+
+--- applications.py ---
+
+> api\v1\endpoints\applications.py:11:@router.get("/")
+  api\v1\endpoints\applications.py:12:async def get_my_applications(
+  api\v1\endpoints\applications.py:13:    db: AsyncSession = Depends(get_db),
+> api\v1\endpoints\applications.py:19:@router.post("/{opportunity_id}")
+  api\v1\endpoints\applications.py:20:async def apply_to_job(
+  api\v1\endpoints\applications.py:21:    opportunity_id: uuid.UUID,
+
+
+
+--- audit_logs.py ---
+
+> api\v1\endpoints\audit_logs.py:11:@router.get("/")
+  api\v1\endpoints\audit_logs.py:12:async def get_recent_audit_logs(
+  api\v1\endpoints\audit_logs.py:13:    db: AsyncSession = Depends(get_db),
+
+
+
+--- auth.py ---
+
+> api\v1\endpoints\auth.py:48:@router.post("/register/student", status_code=status.HTTP_201_CREATED)
+  api\v1\endpoints\auth.py:49:async def register_student(data: StudentRegistration, db: AsyncSession = 
+Depends(get_db)):
+  api\v1\endpoints\auth.py:50:    # Create the user
+> api\v1\endpoints\auth.py:75:@router.post("/register/alumni", status_code=status.HTTP_201_CREATED)
+  api\v1\endpoints\auth.py:76:async def register_alumni(data: AlumniRegistration, db: AsyncSession = Depends(get_db)):
+  api\v1\endpoints\auth.py:77:    # Create user with ALUMNI role, PENDING verification
+> api\v1\endpoints\auth.py:80:@router.post("/register/institution", status_code=status.HTTP_201_CREATED)
+  api\v1\endpoints\auth.py:81:async def register_institution(data: InstitutionRegistration, db: AsyncSession = 
+Depends(get_db)):
+  api\v1\endpoints\auth.py:82:    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Institutions 
+cannot self-register. Please contact administration.")
+> api\v1\endpoints\auth.py:84:@router.post("/login")
+  api\v1\endpoints\auth.py:85:async def login(data: LoginRequest, db: AsyncSession = Depends(get_db)):
+  api\v1\endpoints\auth.py:86:    from sqlalchemy.future import select
+
+
+
+--- communities.py ---
+
+> api\v1\endpoints\communities.py:11:@router.get('/')
+  api\v1\endpoints\communities.py:12:async def list_communities(params: PaginationParams = Depends(), db: AsyncSession 
+= Depends(get_db)):
+  api\v1\endpoints\communities.py:13:    return StandardResponse(success=True, data=[])
+
+
+
+--- contributions.py ---
+
+> api\v1\endpoints\contributions.py:11:@router.get("/")
+  api\v1\endpoints\contributions.py:12:async def get_my_contributions(
+  api\v1\endpoints\contributions.py:13:    db: AsyncSession = Depends(get_db),
+
+
+
+--- events.py ---
+
+> api\v1\endpoints\events.py:22:@router.get('/')
+  api\v1\endpoints\events.py:23:async def list_events(params: PaginationParams = Depends(), db: AsyncSession = 
+Depends(get_db)):
+  api\v1\endpoints\events.py:24:    result = await db.execute(select(Event).limit(params.limit).offset(params.skip))
+> api\v1\endpoints\events.py:38:@router.post('/')
+  api\v1\endpoints\events.py:39:async def create_event(
+  api\v1\endpoints\events.py:40:    data: EventCreate,
+
+
+
+--- files.py ---
+
+> api\v1\endpoints\files.py:11:@router.get('/')
+  api\v1\endpoints\files.py:12:async def list_files(params: PaginationParams = Depends(), db: AsyncSession = 
+Depends(get_db)):
+  api\v1\endpoints\files.py:13:    return StandardResponse(success=True, data=[])
+
+
+
+--- health.py ---
+
+> api\v1\endpoints\health.py:15:@router.get("/health", response_model=StandardResponse[dict])
+  api\v1\endpoints\health.py:16:async def health_check(db: AsyncSession = Depends(get_db)):
+  api\v1\endpoints\health.py:17:    start_time = time.time()
+
+
+
+--- mentorship.py ---
+
+> api\v1\endpoints\mentorship.py:20:@router.get('/')
+  api\v1\endpoints\mentorship.py:21:async def list_mentorship_requests(params: PaginationParams = Depends(), db: 
+AsyncSession = Depends(get_db)):
+  api\v1\endpoints\mentorship.py:22:    result = await 
+db.execute(select(MentorshipRequest).limit(params.limit).offset(params.skip))
+> api\v1\endpoints\mentorship.py:36:@router.post('/')
+  api\v1\endpoints\mentorship.py:37:async def request_mentorship(
+  api\v1\endpoints\mentorship.py:38:    data: MentorshipRequestCreate,
+
+
+
+--- messages.py ---
+
+> api\v1\endpoints\messages.py:20:@router.get('/')
+  api\v1\endpoints\messages.py:21:async def get_messages(
+  api\v1\endpoints\messages.py:22:    params: PaginationParams = Depends(),
+> api\v1\endpoints\messages.py:48:@router.post('/')
+  api\v1\endpoints\messages.py:49:async def send_message(
+  api\v1\endpoints\messages.py:50:    data: MessageCreate,
+
+
+
+--- notifications.py ---
+
+> api\v1\endpoints\notifications.py:13:@router.get('/')
+  api\v1\endpoints\notifications.py:14:async def list_notifications(
+  api\v1\endpoints\notifications.py:15:    params: PaginationParams = Depends(),
+> api\v1\endpoints\notifications.py:39:@router.put('/{notification_id}/read')
+  api\v1\endpoints\notifications.py:40:async def mark_as_read(
+  api\v1\endpoints\notifications.py:41:    notification_id: uuid.UUID,
+
+
+
+--- opportunities.py ---
+
+> api\v1\endpoints\opportunities.py:23:@router.get('/')
+  api\v1\endpoints\opportunities.py:24:async def list_opportunities(params: PaginationParams = Depends(), db: 
+AsyncSession = Depends(get_db)):
+  api\v1\endpoints\opportunities.py:25:    result = await 
+db.execute(select(Opportunity).limit(params.limit).offset(params.skip))
+> api\v1\endpoints\opportunities.py:40:@router.post('/')
+  api\v1\endpoints\opportunities.py:41:async def create_opportunity(
+  api\v1\endpoints\opportunities.py:42:    data: OpportunityCreate,
+
+
+
+--- portfolios.py ---
+
+> api\v1\endpoints\portfolios.py:18:@router.get("/")
+  api\v1\endpoints\portfolios.py:19:async def get_my_portfolio(
+  api\v1\endpoints\portfolios.py:20:    db: AsyncSession = Depends(get_db),
+> api\v1\endpoints\portfolios.py:26:@router.post("/")
+  api\v1\endpoints\portfolios.py:27:async def add_portfolio_item(
+  api\v1\endpoints\portfolios.py:28:    data: PortfolioItemCreate,
+
+
+
+--- recommendations.py ---
+
+> api\v1\endpoints\recommendations.py:19:@router.post("/match", response_model=List[MatchResponse])
+  api\v1\endpoints\recommendations.py:20:async def generate_matches(request: MatchRequest):
+  api\v1\endpoints\recommendations.py:21:    if not settings.GROQ_API_KEY:
+
+
+
+--- resumes.py ---
+
+> api\v1\endpoints\resumes.py:11:@router.get("/")
+  api\v1\endpoints\resumes.py:12:async def get_my_resumes(
+  api\v1\endpoints\resumes.py:13:    db: AsyncSession = Depends(get_db),
+> api\v1\endpoints\resumes.py:19:@router.post("/")
+  api\v1\endpoints\resumes.py:20:async def upload_resume(
+  api\v1\endpoints\resumes.py:21:    file_uri: str,
+
+
+
+--- users.py ---
+
+> api\v1\endpoints\users.py:13:@router.get('/')
+  api\v1\endpoints\users.py:14:async def list_users(params: PaginationParams = Depends(), db: AsyncSession = 
+Depends(get_db)):
+  api\v1\endpoints\users.py:15:    result = await db.execute(select(User).limit(params.limit).offset(params.skip))
+> api\v1\endpoints\users.py:30:@router.get('/me')
+  api\v1\endpoints\users.py:31:async def get_me(user_id: uuid.UUID = Depends(get_current_user_id), db: AsyncSession = 
+Depends(get_db)):
+  api\v1\endpoints\users.py:32:    result = await db.execute(select(User).where(User.id == user_id))
+
+
+

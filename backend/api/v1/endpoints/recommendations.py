@@ -1,7 +1,8 @@
 import httpx
 import json
 from typing import List, Dict, Any
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter
+from api.dependencies.auth import get_current_user_id, get_current_user, RoleChecker, HTTPException, Depends
 from pydantic import BaseModel
 from core.config import settings
 
@@ -16,7 +17,7 @@ class MatchResponse(BaseModel):
     match_score: int
     reason: str
 
-@router.post("/match", response_model=List[MatchResponse])
+@router.post("/match", response_model=List[MatchResponse], dependencies=[Depends(get_current_user)])
 async def generate_matches(request: MatchRequest):
     if not settings.GROQ_API_KEY:
         raise HTTPException(status_code=500, detail="GROQ_API_KEY is not configured.")

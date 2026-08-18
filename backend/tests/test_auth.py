@@ -1,22 +1,25 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from httpx import AsyncClient
+import uuid
 
-# A robust application should test JWT generation and validation
-# Since this is a scaffolding pass, we mock the auth service behavior
-def test_jwt_token_generation():
-    # Mocking standard JWT generation
-    with patch("jose.jwt.encode", return_value="mocked.jwt.token") as mock_encode:
-        token = mock_encode({"sub": "user_123"}, "secret", algorithm="HS256")
-        assert token == "mocked.jwt.token"
+pytestmark = pytest.mark.anyio
 
-def test_jwt_token_validation():
-    # Mocking JWT validation
-    with patch("jose.jwt.decode", return_value={"sub": "user_123"}) as mock_decode:
-        payload = mock_decode("mocked.jwt.token", "secret", algorithms=["HS256"])
-        assert payload["sub"] == "user_123"
-
-def test_expired_jwt_token():
-    from jose.exceptions import ExpiredSignatureError
-    with patch("jose.jwt.decode", side_effect=ExpiredSignatureError) as mock_decode:
-        with pytest.raises(ExpiredSignatureError):
-            _ = mock_decode("expired.jwt.token", "secret", algorithms=["HS256"])
+async def test_student_registration_and_login(client: AsyncClient):
+    email = f"student_auth_test_{uuid.uuid4().hex[:8]}@example.com"
+    response = await client.post('/api/v1/auth/register/student', json={
+        "first_name": "Test",
+        "last_name": "Student",
+        "email": email,
+        "password": "Password123!",
+        "enrollment_number": "EN123",
+        "academic_year": "1st Year",
+        "graduation_year": 2026,
+        "institution_id": "00000000-0000-0000-0000-000000000000"
+    })
+    assert response.status_code == 201
+    
+    response = await client.post('/api/v1/auth/login', json={
+        "email": email,
+        "password": "Password123!"
+    })
+    assert response.status_code == 200

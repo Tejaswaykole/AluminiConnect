@@ -11,15 +11,19 @@ export const apiClient = axios.create({
   timeout: 10000,
 });
 
-const USE_MOCK_BACKEND = false; // Set to true to prevent browser CORS/Network errors when backend is offline
+const USE_MOCK_BACKEND = false;
 
 apiClient.interceptors.request.use(async (config) => {
   if (USE_MOCK_BACKEND) {
     throw new axios.Cancel("Backend mock mode active");
   }
-  // Logic to inject token from secure storage
-  // const token = await SecureStore.getItemAsync('userToken');
-  // if (token) config.headers.Authorization = `Bearer ${token}`;
+  
+  if (Platform.OS === 'web') {
+    const token = localStorage.getItem('token');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+  } else {
+    // Mobile logic placeholder
+  }
   return config;
 });
 
@@ -27,7 +31,9 @@ apiClient.interceptors.response.use(
   (response) => response.data,
   (error) => {
     if (error.response?.status === 401) {
-      // Logic to trigger logout or token refresh
+      if (Platform.OS === 'web') {
+         localStorage.removeItem('token');
+      }
     }
     return Promise.reject(error);
   }

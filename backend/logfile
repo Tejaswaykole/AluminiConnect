@@ -1,0 +1,5 @@
+2026-08-19 01:25:17.614 IST [35676] LOG:  starting PostgreSQL 18.4 on x86_64-windows, compiled by msvc-19.44.35227, 64-bit
+2026-08-19 01:25:17.617 IST [35676] LOG:  listening on IPv6 address "::1", port 5432
+2026-08-19 01:25:17.617 IST [35676] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-08-19 01:25:17.673 IST [24008] LOG:  database system was shut down at 2026-08-19 01:24:21 IST
+2026-08-19 01:25:17.678 IST [35676] LOG:  database system is ready to accept connections

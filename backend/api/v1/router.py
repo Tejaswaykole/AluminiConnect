@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .endpoints import health, users, opportunities, communities, events, mentorship, notifications, files, auth, resumes, applications, messages, portfolios, contributions, audit_logs, drives
+from .endpoints import health, users, opportunities, communities, events, mentorship, notifications, files, auth, resumes, applications, messages, portfolios, contributions, audit_logs
 
 api_router = APIRouter()
 api_router.include_router(health.router, tags=["Health"])
@@ -17,6 +17,17 @@ api_router.include_router(messages.router, prefix="/messages", tags=["Messages"]
 api_router.include_router(portfolios.router, prefix="/portfolios", tags=["Portfolios"])
 api_router.include_router(contributions.router, prefix="/contributions", tags=["Contributions"])
 api_router.include_router(audit_logs.router, prefix="/audit-logs", tags=["Audit"])
-api_router.include_router(drives.router, prefix="/drives", tags=["Placement Drives"])
+
 from .endpoints import recommendations
 api_router.include_router(recommendations.router, prefix="/recommendations", tags=["Recommendations"])
+
+from api.v1.endpoints import connections, messaging, mentorship
+api_router.include_router(connections.router, prefix="/connections", tags=["Connections"])
+api_router.include_router(messaging.router, prefix="/messages", tags=["Messaging"])
+api_router.include_router(mentorship.router, prefix="/mentorship", tags=["Mentorship"])
+
+from api.v1.endpoints import admin, institute, analytics, storage
+api_router.include_router(admin.router, prefix="/admin", tags=["Admin"])
+api_router.include_router(institute.router, prefix="/institute", tags=["Institute"])
+api_router.include_router(analytics.router, prefix="/analytics", tags=["Analytics"])
+api_router.include_router(storage.router, prefix="/storage", tags=["Storage"])

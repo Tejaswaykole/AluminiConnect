@@ -1,27 +1,39 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+
+import uuid
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+from sqlalchemy.exc import IntegrityError
 from database.session import get_db
 from schemas.base import StandardResponse
-from services.application_service import ApplicationService
+from schemas.applications import ApplicationCreate, ApplicationResponse
+from models.application import JobApplication
+from models.enums import ApplicationStatus
+from models.opportunity import Opportunity
 from api.dependencies.auth import get_current_user_id
-import uuid
 
 router = APIRouter()
 
-@router.get("/")
-async def get_my_applications(
-    db: AsyncSession = Depends(get_db),
-    user_id: uuid.UUID = Depends(get_current_user_id)
-):
-    applications = await ApplicationService.get_applications_by_user(db, user_id)
-    return StandardResponse(success=True, data=[a.__dict__ for a in applications])
+@router.post("/", response_model=StandardResponse)
+async def apply(payload: ApplicationCreate, current_user_id: uuid.UUID = Depends(get_current_user_id), db: AsyncSession = Depends(get_db)):
+    opp_res = await db.execute(select(Opportunity).where(Opportunity.id == payload.opportunity_id))
+    opp = opp_res.scalars().first()
+    if not opp or opp.deleted_at or opp.status != "OPEN":
+        raise HTTPException(status_code=400, detail="Opportunity is closed or does not exist")
+        
+    app = JobApplication(user_id=current_user_id, opportunity_id=payload.opportunity_id, resume_id=payload.resume_id, status=ApplicationStatus.APPLIED)
+    db.add(app)
+    try:
+        await db.commit()
+        await db.refresh(app)
+    except IntegrityError:
+        await db.rollback()
+        raise HTTPException(status_code=409, detail="Application already submitted")
+        
+    return StandardResponse(success=True, data=ApplicationResponse.model_validate(app).model_dump(mode='json'))
 
-@router.post("/{opportunity_id}")
-async def apply_to_job(
-    opportunity_id: uuid.UUID,
-    resume_id: uuid.UUID | None = None,
-    db: AsyncSession = Depends(get_db),
-    user_id: uuid.UUID = Depends(get_current_user_id)
-):
-    application = await ApplicationService.apply_to_opportunity(db, user_id, opportunity_id, resume_id)
-    return StandardResponse(success=True, data=application.__dict__, message="Successfully applied to opportunity")
+@router.get("/me", response_model=StandardResponse)
+async def my_applications(db: AsyncSession = Depends(get_db), current_user_id: uuid.UUID = Depends(get_current_user_id)):
+    result = await db.execute(select(JobApplication).where(JobApplication.user_id == current_user_id))
+    items = result.scalars().all()
+    return StandardResponse(success=True, data=[ApplicationResponse.model_validate(i).model_dump(mode='json') for i in items])

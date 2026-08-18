@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database.session import get_db
 from schemas.base import StandardResponse
 from services.portfolio_service import PortfolioService
-from api.dependencies.auth import get_current_user_id
+from api.dependencies.auth import get_current_user_id, get_current_user, RoleChecker
 import uuid
 from pydantic import BaseModel
 
@@ -15,7 +15,7 @@ class PortfolioItemCreate(BaseModel):
     description: str | None = None
     link: str | None = None
 
-@router.get("/")
+@router.get("/", dependencies=[Depends(get_current_user)])
 async def get_my_portfolio(
     db: AsyncSession = Depends(get_db),
     user_id: uuid.UUID = Depends(get_current_user_id)
@@ -23,7 +23,7 @@ async def get_my_portfolio(
     items = await PortfolioService.get_portfolio_by_user(db, user_id)
     return StandardResponse(success=True, data=[i.__dict__ for i in items])
 
-@router.post("/")
+@router.post("/", dependencies=[Depends(RoleChecker(["STUDENT", "ALUMNI"]))])
 async def add_portfolio_item(
     data: PortfolioItemCreate,
     db: AsyncSession = Depends(get_db),

@@ -14,6 +14,11 @@ class Settings(BaseSettings):
     SUPABASE_SERVICE_ROLE_KEY: str = ""
     
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    
+    # JWT Settings
+    SECRET_KEY: str = "secret-key-placeholder"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7 # 7 days
 
     # AI Settings
     GROQ_API_KEY: str = ''

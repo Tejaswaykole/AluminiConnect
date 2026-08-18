@@ -3,12 +3,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database.session import get_db
 from schemas.base import StandardResponse
 from services.contribution_service import ContributionService
-from api.dependencies.auth import get_current_user_id
+from api.dependencies.auth import get_current_user_id, get_current_user, RoleChecker
 import uuid
 
 router = APIRouter()
 
-@router.get("/")
+@router.get("/", dependencies=[Depends(get_current_user)])
 async def get_my_contributions(
     db: AsyncSession = Depends(get_db),
     user_id: uuid.UUID = Depends(get_current_user_id)

@@ -1,18 +1,21 @@
-from pydantic import BaseModel
-from typing import Optional, List
+
 import uuid
+from pydantic import BaseModel, ConfigDict
+from typing import Optional, List
 from datetime import datetime
+from models.mentorship import MentorshipStatus
 
-class MentorshipBase(BaseModel):
-    pass
+class MentorshipCreateRequest(BaseModel):
+    mentor_id: uuid.UUID
+    notes: Optional[str] = None
 
-class MentorshipCreate(MentorshipBase):
-    pass
-
-class MentorshipUpdate(BaseModel):
-    pass
-
-class MentorshipResponse(MentorshipBase):
+class MentorshipResponse(BaseModel):
     id: uuid.UUID
-    class Config:
-        from_attributes = True
+    mentor_id: uuid.UUID
+    student_id: uuid.UUID
+    status: MentorshipStatus
+    notes: Optional[str] = None
+    request_date: Optional[datetime]
+    accepted_date: Optional[datetime]
+    
+    model_config = ConfigDict(from_attributes=True)

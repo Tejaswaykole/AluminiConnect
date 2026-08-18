@@ -3,10 +3,11 @@ import { useRouter } from 'expo-router';
 import { Typography } from '../../../components/Typography';
 import { Card } from '../../../components/Card';
 import { ScreenContainer } from '../../../components/ScreenContainer';
-import { EVENT_MOCKS } from '../../../mocks';
+import { useEvents } from '../../../hooks/useEvents';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function EventsScreen() {
+  const { data: events = [], isLoading } = useEvents();
   const router = useRouter();
 
   return (
@@ -24,7 +25,7 @@ export default function EventsScreen() {
       </View>
 
       <FlatList
-        data={EVENT_MOCKS}
+        data={events}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (

@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database.session import get_db
 from schemas.base import StandardResponse
 from api.dependencies.pagination import PaginationParams
-from api.dependencies.auth import get_current_user_id
+from api.dependencies.auth import get_current_user_id, get_current_user, RoleChecker
 from sqlalchemy.future import select
 from sqlalchemy import or_
 from models.message import Message
@@ -17,7 +17,7 @@ class MessageCreate(BaseModel):
     receiver_id: uuid.UUID
     content: str
 
-@router.get('/')
+@router.get('/', dependencies=[Depends(get_current_user)])
 async def get_messages(
     params: PaginationParams = Depends(),
     user_id: uuid.UUID = Depends(get_current_user_id),
@@ -45,7 +45,7 @@ async def get_messages(
     ]
     return StandardResponse(success=True, data=msg_list)
 
-@router.post('/')
+@router.post('/', dependencies=[Depends(get_current_user)])
 async def send_message(
     data: MessageCreate,
     user_id: uuid.UUID = Depends(get_current_user_id),

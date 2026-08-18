@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import ForeignKey, DateTime, text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Uuid
+from sqlalchemy import Uuid, UniqueConstraint
 from .base import BaseModel
 
 class StudentSkill(BaseModel):
@@ -31,3 +31,7 @@ class EventRegistration(BaseModel):
     event_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("event.id", ondelete="CASCADE"), index=True)
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("user.id", ondelete="CASCADE"), index=True)
     registered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "event_id", name="uq_event_registration_user_event"),
+    )

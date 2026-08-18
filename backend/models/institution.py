@@ -22,19 +22,4 @@ class Institution(BaseModel):
     
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
     
-    # Relationships
-    # Note: typing for back_populates is string based for late binding
-    users: Mapped[list["User"]] = relationship("User", back_populates="institution", cascade="all, delete-orphan")
-    placement_cells: Mapped[list["PlacementCell"]] = relationship("PlacementCell", back_populates="institution", cascade="all, delete-orphan")
-
-
-class PlacementCell(BaseModel):
-    __tablename__ = "placement_cell"
-
-    institution_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("institution.id", ondelete="CASCADE"))
-    name: Mapped[str] = mapped_column(String, default="Main Placement Cell")
-    contact_email: Mapped[str] = mapped_column(String, nullable=True)
-    contact_phone: Mapped[str] = mapped_column(String, nullable=True)
-
-    # Relationships
-    institution: Mapped["Institution"] = relationship("Institution", back_populates="placement_cells")
+    # Relationships (Legacy users and placement cells removed)

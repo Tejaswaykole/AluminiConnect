@@ -1,7 +1,7 @@
 import uuid
 from sqlalchemy import String, ForeignKey, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Uuid
+from sqlalchemy import Uuid, UniqueConstraint
 from .base import BaseModel
 from .enums import ApplicationStatus
 
@@ -17,3 +17,7 @@ class JobApplication(BaseModel):
     user: Mapped["User"] = relationship("User", backref="applications")
     opportunity: Mapped["Opportunity"] = relationship("Opportunity", back_populates="applications")
     resume: Mapped["Resume"] = relationship("Resume")
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "opportunity_id", name="uq_job_application_user_opp"),
+    )
