@@ -30,8 +30,8 @@
     "typescript": "~6.0.3"
   },
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
+    "start": "expo start --port 3000",
+    "android": "expo start --android --port 3000",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "echo \"No tests specified\" && exit 0"
