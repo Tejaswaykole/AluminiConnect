@@ -11,7 +11,7 @@ export interface SidebarItem {
   href: string;
 }
 
-export function Sidebar({ items, user, className, activeBgColor, activeTextColor, inactiveHoverColor }: { items: SidebarItem[], user: any, className?: string, activeBgColor?: string, activeTextColor?: string, inactiveHoverColor?: string }) {
+export function Sidebar({ items, user }: { items: SidebarItem[], user: any }) {
   const router = useRouter();
   const pathname = usePathname();
   const { width, height } = useWindowDimensions();
@@ -20,7 +20,7 @@ export function Sidebar({ items, user, className, activeBgColor, activeTextColor
 
   return (
     <View 
-       className={`${className || 'bg-surface'} border-r border-border py-6 flex-col justify-between hidden md:flex`}
+       className="bg-surface border-r border-border py-6 flex-col justify-between hidden md:flex"
        style={{ 
          width: 260, 
          height: Platform.OS === 'web' ? height : '100%',
@@ -39,10 +39,10 @@ export function Sidebar({ items, user, className, activeBgColor, activeTextColor
               <TouchableOpacity 
                 key={item.name}
                 onPress={() => router.push(item.href as any)}
-                className={`flex-row items-center px-3 py-3 mb-1 rounded-lg ${isActive ? (activeBgColor || 'bg-primary/10') : (inactiveHoverColor || '')}`}
+                className={`flex-row items-center px-3 py-3 mb-1 rounded-lg ${isActive ? 'bg-primary/10' : ''}`}
               >
-                <MaterialIcons name={item.icon} size={24} color={isActive ? (activeTextColor ? undefined : "#154539") : "#64748b"} className={isActive && activeTextColor ? activeTextColor : ''} />
-                <Typography variant="body" className={`ml-3 font-medium ${isActive ? (activeTextColor || 'text-primary') : 'text-muted'}`}>
+                <MaterialIcons name={item.icon} size={24} color={isActive ? "#154539" : "#64748b"} />
+                <Typography variant="body" className={`ml-3 font-medium ${isActive ? 'text-primary' : 'text-muted'}`}>
                   {item.label}
                 </Typography>
               </TouchableOpacity>

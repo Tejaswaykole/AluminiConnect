@@ -1,68 +1,46 @@
 import { View, ScrollView } from 'react-native';
 import { Typography } from '../../../components/Typography';
-import { ScreenContainer } from '../../../components/ScreenContainer';
 import { Card } from '../../../components/Card';
-import { MaterialIcons } from '@expo/vector-icons';
+import { ScreenContainer } from '../../../components/ScreenContainer';
+import { STUDENT_MOCKS, ALUMNI_MOCKS, COMMUNITY_MOCKS, OPPORTUNITY_MOCKS } from '../../../mocks';
 
-export default function PlatformAnalytics() {
+export default function AdminAnalyticsScreen() {
   return (
     <ScreenContainer scrollable>
-      <View className="mb-6 mt-2">
-        <Typography variant="body" color="muted">Platform Insights</Typography>
-        <Typography variant="h1">Global Analytics</Typography>
+      <View className="mb-6">
+        <Typography variant="h1" className="mb-2">Platform Analytics</Typography>
+        <Typography variant="body" color="muted">System-wide usage and engagement metrics.</Typography>
       </View>
 
       <Typography variant="h3" className="mb-4">User Growth</Typography>
-      <View className="flex-row flex-wrap justify-between mb-6">
-        <Card className="w-[48%] md:w-[23%] bg-surface border border-border p-4 mb-4">
-          <Typography variant="caption" color="muted" className="mb-1">Total Users</Typography>
-          <Typography variant="h2" className="text-primary mb-1">12,450</Typography>
+      <View className="flex-row justify-between space-x-4 mb-6">
+        <Card className="flex-1 items-center py-6 border-primary/20 bg-primary/5">
+          <Typography variant="h2" color="primary" className="mb-2">+{STUDENT_MOCKS.length}</Typography>
+          <Typography variant="caption" color="muted" className="text-center">New Students This Month</Typography>
         </Card>
-        <Card className="w-[48%] md:w-[23%] bg-surface border border-border p-4 mb-4">
-          <Typography variant="caption" color="muted" className="mb-1">Students</Typography>
-          <Typography variant="h2" className="text-primary mb-1">8,200</Typography>
-        </Card>
-        <Card className="w-[48%] md:w-[23%] bg-surface border border-border p-4 mb-4">
-          <Typography variant="caption" color="muted" className="mb-1">Alumni</Typography>
-          <Typography variant="h2" className="text-primary mb-1">4,200</Typography>
-        </Card>
-        <Card className="w-[48%] md:w-[23%] bg-surface border border-border p-4 mb-4">
-          <Typography variant="caption" color="muted" className="mb-1">Institute Users</Typography>
-          <Typography variant="h2" className="text-primary mb-1">50</Typography>
+        <Card className="flex-1 items-center py-6 border-status-success/20 bg-status-success/5">
+          <Typography variant="h2" color="primary" className="mb-2">+{ALUMNI_MOCKS.length}</Typography>
+          <Typography variant="caption" color="muted" className="text-center">New Alumni This Month</Typography>
         </Card>
       </View>
 
-      <Typography variant="h3" className="mb-4">Engagement & Opportunities</Typography>
-      <View className="flex-row flex-wrap justify-between mb-6">
-        <Card className="w-full md:w-[48%] bg-surface border border-border p-4 mb-4 flex-row items-center justify-between">
-            <View>
-              <Typography variant="caption" color="muted" className="mb-1">Total Connections</Typography>
-              <Typography variant="h2" className="text-primary mb-1">145k</Typography>
-            </View>
-            <MaterialIcons name="people-alt" size={40} color="#e2e8f0" />
-        </Card>
-        <Card className="w-full md:w-[48%] bg-surface border border-border p-4 mb-4 flex-row items-center justify-between">
-            <View>
-              <Typography variant="caption" color="muted" className="mb-1">Active Mentorships</Typography>
-              <Typography variant="h2" className="text-primary mb-1">1,240</Typography>
-            </View>
-            <MaterialIcons name="model-training" size={40} color="#e2e8f0" />
-        </Card>
-        <Card className="w-full md:w-[48%] bg-surface border border-border p-4 mb-4 flex-row items-center justify-between">
-            <View>
-              <Typography variant="caption" color="muted" className="mb-1">Total Opportunities</Typography>
-              <Typography variant="h2" className="text-primary mb-1">850</Typography>
-            </View>
-            <MaterialIcons name="work" size={40} color="#e2e8f0" />
-        </Card>
-        <Card className="w-full md:w-[48%] bg-surface border border-border p-4 mb-4 flex-row items-center justify-between">
-            <View>
-              <Typography variant="caption" color="muted" className="mb-1">Community Posts</Typography>
-              <Typography variant="h2" className="text-primary mb-1">12.5k</Typography>
-            </View>
-            <MaterialIcons name="forum" size={40} color="#e2e8f0" />
-        </Card>
-      </View>
+      <Card className="mb-6">
+        <Typography variant="h3" className="mb-4">Engagement</Typography>
+        <View className="space-y-4">
+          <View className="flex-row justify-between items-center border-b border-border-strong pb-4">
+            <Typography variant="body" className="font-medium">Active Communities</Typography>
+            <Typography variant="h3" color="primary">{COMMUNITY_MOCKS.length}</Typography>
+          </View>
+          <View className="flex-row justify-between items-center border-b border-border-strong pb-4">
+            <Typography variant="body" className="font-medium">Job Postings</Typography>
+            <Typography variant="h3" color="primary">{OPPORTUNITY_MOCKS.length}</Typography>
+          </View>
+          <View className="flex-row justify-between items-center">
+            <Typography variant="body" className="font-medium">Mentorship Matches</Typography>
+            <Typography variant="h3" color="primary">45</Typography>
+          </View>
+        </View>
+      </Card>
     </ScreenContainer>
   );
 }

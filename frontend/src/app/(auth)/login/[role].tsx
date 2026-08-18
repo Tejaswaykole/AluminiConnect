@@ -48,10 +48,10 @@ export default function RoleScopedLoginScreen() {
     setTimeout(() => {
       setIsLoading(false);
       // Route based on the selected role to proper dashboard
-      if (role === 'student') router.replace('/(student)');
-      else if (role === 'alumni') router.replace('/(alumni)');
-      else if (role === 'institution') router.replace('/(admin)'); // or (placement)
-      else if (role === 'recruiter') router.replace('/(company)');
+      if (role === 'student') router.replace('/student');
+      else if (role === 'alumni') router.replace('/alumni');
+      else if (role === 'institution') router.replace('/(admin)'); // or /institute
+      else if (role === 'recruiter') router.replace('/company');
       else router.replace('/(public)');
     }, 1500);
   };

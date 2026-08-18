@@ -2,7 +2,7 @@ import { Text, TextProps } from 'react-native';
 
 interface TypographyProps extends TextProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body-lg' | 'body' | 'body-sm' | 'label-md' | 'caption';
-  color?: 'default' | 'muted' | 'inverse' | 'primary' | 'error';
+  color?: 'default' | 'muted' | 'inverse' | 'primary' | 'error' | 'status-success' | 'status-error';
   align?: 'left' | 'center' | 'right';
   className?: string;
 }
@@ -35,6 +35,8 @@ export function Typography({
     inverse: 'text-text-inverse',
     primary: 'text-primary',
     error: 'text-status-error',
+    'status-success': 'text-status-success',
+    'status-error': 'text-status-error',
   };
 
   const alignments = {

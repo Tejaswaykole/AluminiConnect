@@ -6,19 +6,19 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Badge } from '../../../components/Badge';
 
 const MOCK_ANNOUNCEMENTS = [
-  { id: 1, title: 'Platform Maintenance Notice', preview: 'The platform will be down for scheduled maintenance...', audience: 'Everyone', date: 'Oct 20, 2026', status: 'Published' },
-  { id: 2, title: 'New Student Guidelines', preview: 'Please review the updated guidelines for community conduct...', audience: 'Students', date: 'Oct 15, 2026', status: 'Published' },
-  { id: 3, title: 'Alumni Network Expansion', preview: 'We are expanding our professional network features...', audience: 'Alumni', date: '-', status: 'Draft' },
+  { id: 1, title: 'Annual Convocation 2026', preview: 'We are delighted to announce the convocation ceremony...', audience: 'Everyone', date: 'Oct 10, 2026', status: 'Published' },
+  { id: 2, title: 'Placement Drive Registration', preview: 'Final year students please register for the upcoming...', audience: 'Students', date: 'Oct 15, 2026', status: 'Published' },
+  { id: 3, title: 'Alumni Mentorship Reboot', preview: 'Join our new mentorship program targeting...', audience: 'Alumni', date: '-', status: 'Draft' },
 ];
 
-export default function PlatformAnnouncements() {
+export default function Announcements() {
   return (
     <ScreenContainer scrollable>
       {/* Header */}
       <View className="flex-row justify-between items-center mb-6 mt-2">
         <View>
           <Typography variant="body" color="muted">Communication</Typography>
-          <Typography variant="h1">Platform Announcements</Typography>
+          <Typography variant="h1">Announcements</Typography>
         </View>
         <TouchableOpacity className="flex-row items-center bg-primary px-4 py-2 rounded-md">
           <MaterialIcons name="add" size={20} color="white" />
@@ -51,10 +51,10 @@ export default function PlatformAnnouncements() {
               </View>
 
               <View className="flex-row items-center space-x-2">
-                <TouchableOpacity className="p-2 border border-border bg-surface rounded-md">
+                <TouchableOpacity className="p-2">
                   <MaterialIcons name="edit" size={20} color="#64748b" />
                 </TouchableOpacity>
-                <TouchableOpacity className="p-2 border border-border bg-surface rounded-md">
+                <TouchableOpacity className="p-2">
                   <MaterialIcons name="delete" size={20} color="#ef4444" />
                 </TouchableOpacity>
                 {ann.status === 'Draft' && (

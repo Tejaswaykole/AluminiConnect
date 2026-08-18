@@ -12,7 +12,7 @@ export default function SettingsScreen() {
   const [darkMode, setDarkMode] = useState(false);
   const [publicProfile, setPublicProfile] = useState(true);
 
-  const SETTINGS_SECTIONS = [
+  const SETTINGS_SECTIONS: any[] = [
     {
       title: "Account",
       items: [
@@ -48,7 +48,7 @@ export default function SettingsScreen() {
         <View key={idx} className="mb-6">
           <Typography variant="h3" className="mb-3 px-2">{section.title}</Typography>
           <Card className="p-0 overflow-hidden bg-surface border border-border">
-            {section.items.map((item, itemIdx) => (
+            {section.items.map((item: any, itemIdx: number) => (
               <View 
                 key={itemIdx} 
                 className={`flex-row justify-between items-center p-4 ${itemIdx !== section.items.length - 1 ? 'border-b border-border' : ''}`}
