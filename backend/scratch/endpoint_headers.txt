@@ -1,0 +1,453 @@
+
+--- applications.py ---
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from services.application_service import ApplicationService
+from api.dependencies.auth import get_current_user_id
+import uuid
+
+router = APIRouter()
+
+@router.get("/")
+async def get_my_applications(
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    applications = await ApplicationService.get_applications_by_user(db, user_id)
+    return StandardResponse(success=True, data=[a.__dict__ for a in applications])
+
+@router.post("/{opportunity_id}")
+async def apply_to_job(
+    opportunity_id: uuid.UUID,
+    resume_id: uuid.UUID | None = None,
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    application = await ApplicationService.apply_to_opportunity(db, user_id, opportunity_id, resume_id)
+    return StandardResponse(success=True, data=application.__dict__, message="Successfully applied to opportunity")
+
+--- audit_logs.py ---
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from services.audit_service import AuditService
+from api.dependencies.auth import get_current_user_id
+import uuid
+
+router = APIRouter()
+
+@router.get("/")
+async def get_recent_audit_logs(
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    # TODO: Add RBAC check for InstitutionAdmin only
+    logs = await AuditService.get_logs(db, limit=100)
+    return StandardResponse(success=True, data=[log.__dict__ for log in logs])
+
+--- auth.py ---
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+from sqlalchemy.exc import IntegrityError
+from pydantic import BaseModel, EmailStr
+import uuid
+
+from database.session import get_db
+from schemas.base import StandardResponse
+from models.user import User
+from models.enums import UserRole, VerificationStatus, AccountStatus
+from models.profiles import StudentProfile, AlumniProfile
+from core.security import get_password_hash, verify_password, create_access_token
+
+router = APIRouter()
+
+class StudentRegistration(BaseModel):
+    first_name: str
+    last_name: str
+    email: EmailStr
+    password: str
+    department_id: uuid.UUID | None = None
+    enrollment_number: str
+    academic_year: str
+    graduation_year: int
+
+class AlumniRegistration(BaseModel):
+    first_name: str
+    last_name: str
+    email: EmailStr
+
+--- communities.py ---
+import uuid
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+
+router = APIRouter()
+
+@router.get('/')
+async def list_communities(params: PaginationParams = Depends(), db: AsyncSession = Depends(get_db)):
+    return StandardResponse(success=True, data=[])
+
+--- contributions.py ---
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from services.contribution_service import ContributionService
+from api.dependencies.auth import get_current_user_id
+import uuid
+
+router = APIRouter()
+
+@router.get("/")
+async def get_my_contributions(
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    contributions = await ContributionService.get_contributions_by_user(db, user_id)
+    score = await ContributionService.get_total_contribution_score(db, user_id)
+    return StandardResponse(success=True, data={
+        "score": score,
+        "records": [c.__dict__ for c in contributions]
+    })
+
+--- events.py ---
+import uuid
+from datetime import datetime
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+from sqlalchemy.future import select
+from models.event import Event
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class EventCreate(BaseModel):
+    title: str
+    description: str | None = None
+    venue: str | None = None
+    event_date: datetime
+    capacity: int | None = None
+
+@router.get('/')
+async def list_events(params: PaginationParams = Depends(), db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Event).limit(params.limit).offset(params.skip))
+    events = result.scalars().all()
+    event_list = [
+        {
+            "id": str(e.id),
+            "title": e.title,
+            "description": e.description,
+
+--- files.py ---
+import uuid
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+
+router = APIRouter()
+
+@router.get('/')
+async def list_files(params: PaginationParams = Depends(), db: AsyncSession = Depends(get_db)):
+    return StandardResponse(success=True, data=[])
+
+--- health.py ---
+import time
+import logging
+from fastapi import APIRouter, Depends, status
+from fastapi.responses import JSONResponse
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
+from database.session import get_db
+from schemas.health import HealthResponse
+from schemas.base import StandardResponse
+
+router = APIRouter()
+logger = logging.getLogger(__name__)
+
+@router.get("/health", response_model=StandardResponse[dict])
+async def health_check(db: AsyncSession = Depends(get_db)):
+    start_time = time.time()
+    db_status = "connected"
+    migration = "unknown"
+    latency_ms = 0
+    success = True
+    message = "Database connected successfully."
+
+    try:
+        # Check basic connectivity
+        await db.execute(text("SELECT 1"))
+        
+        # Check alembic migration version
+        try:
+            result = await db.execute(text("SELECT version_num FROM alembic_version"))
+
+--- mentorship.py ---
+import uuid
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+from sqlalchemy.future import select
+from models.mentorship import MentorshipRequest
+from models.profiles import StudentProfile, AlumniProfile
+from models.enums import MentorshipStatus
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class MentorshipRequestCreate(BaseModel):
+    mentor_profile_id: uuid.UUID
+    notes: str | None = None
+
+@router.get('/')
+async def list_mentorship_requests(params: PaginationParams = Depends(), db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(MentorshipRequest).limit(params.limit).offset(params.skip))
+    reqs = result.scalars().all()
+    req_list = [
+        {
+            "id": str(r.id),
+            "mentor_id": str(r.mentor_id),
+            "student_id": str(r.student_id),
+            "status": r.status.value if hasattr(r.status, 'value') else r.status,
+            "notes": r.notes,
+
+--- messages.py ---
+import uuid
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+from sqlalchemy.future import select
+from sqlalchemy import or_
+from models.message import Message
+from models.enums import MessageContext
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class MessageCreate(BaseModel):
+    receiver_id: uuid.UUID
+    content: str
+
+@router.get('/')
+async def get_messages(
+    params: PaginationParams = Depends(),
+    user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db)
+):
+    # Fetch messages where the user is sender or receiver
+    result = await db.execute(
+        select(Message)
+        .where(or_(Message.sender_id == user_id, Message.receiver_id == user_id))
+        .order_by(Message.created_at.desc())
+
+--- notifications.py ---
+import uuid
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+from sqlalchemy.future import select
+from models.notification import Notification
+
+router = APIRouter()
+
+@router.get('/')
+async def list_notifications(
+    params: PaginationParams = Depends(),
+    user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db)
+):
+    result = await db.execute(
+        select(Notification)
+        .where(Notification.user_id == user_id)
+        .order_by(Notification.created_at.desc())
+        .limit(params.limit)
+        .offset(params.skip)
+    )
+    nots = result.scalars().all()
+    not_list = [
+        {
+            "id": str(n.id),
+            "title": n.title,
+
+--- opportunities.py ---
+import uuid
+from datetime import datetime
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user_id
+from sqlalchemy.future import select
+from models.opportunity import Opportunity
+from models.enums import OpportunityStatus
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class OpportunityCreate(BaseModel):
+    title: str
+    description: str
+    company: str
+    location: str | None = None
+    deadline: datetime | None = None
+
+@router.get('/')
+async def list_opportunities(params: PaginationParams = Depends(), db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Opportunity).limit(params.limit).offset(params.skip))
+    opps = result.scalars().all()
+    opp_list = [
+        {
+            "id": str(o.id),
+            "title": o.title,
+
+--- portfolios.py ---
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from services.portfolio_service import PortfolioService
+from api.dependencies.auth import get_current_user_id
+import uuid
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class PortfolioItemCreate(BaseModel):
+    title: str
+    item_type: str
+    description: str | None = None
+    link: str | None = None
+
+@router.get("/")
+async def get_my_portfolio(
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    items = await PortfolioService.get_portfolio_by_user(db, user_id)
+    return StandardResponse(success=True, data=[i.__dict__ for i in items])
+
+@router.post("/")
+async def add_portfolio_item(
+    data: PortfolioItemCreate,
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+
+--- recommendations.py ---
+import httpx
+import json
+from typing import List, Dict, Any
+from fastapi import APIRouter, HTTPException, Depends
+from pydantic import BaseModel
+from core.config import settings
+
+router = APIRouter()
+
+class MatchRequest(BaseModel):
+    source_profile: Dict[str, Any]
+    target_profiles: List[Dict[str, Any]]
+
+class MatchResponse(BaseModel):
+    id: str
+    match_score: int
+    reason: str
+
+@router.post("/match", response_model=List[MatchResponse])
+async def generate_matches(request: MatchRequest):
+    if not settings.GROQ_API_KEY:
+        raise HTTPException(status_code=500, detail="GROQ_API_KEY is not configured.")
+
+    prompt = f"""
+    You are an AI matchmaking assistant for a university alumni-student network.
+    Given a Source Profile and a list of Target Profiles, evaluate how well each target profile matches the source profile based on skills, career goals, and opportunities.
+    
+    Source Profile:
+    {json.dumps(request.source_profile, indent=2)}
+    
+
+--- resumes.py ---
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from services.resume_service import ResumeService
+from api.dependencies.auth import get_current_user_id
+import uuid
+
+router = APIRouter()
+
+@router.get("/")
+async def get_my_resumes(
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    resumes = await ResumeService.get_resumes_by_user(db, user_id)
+    return StandardResponse(success=True, data=[r.__dict__ for r in resumes])
+
+@router.post("/")
+async def upload_resume(
+    file_uri: str,
+    db: AsyncSession = Depends(get_db),
+    user_id: uuid.UUID = Depends(get_current_user_id)
+):
+    resume = await ResumeService.create_resume(db, user_id, file_uri)
+    # Trigger async AI analysis
+    await ResumeService.analyze_resume_with_ai(db, resume.id)
+    return StandardResponse(success=True, data=resume.__dict__, message="Resume uploaded and analysis started")
+
+--- users.py ---
+import uuid
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from database.session import get_db
+from schemas.base import StandardResponse
+from api.dependencies.pagination import PaginationParams
+from api.dependencies.auth import get_current_user, require_admin
+from sqlalchemy.future import select
+from models.user import User
+
+router = APIRouter()
+
+@router.get('/')
+async def list_users(
+    params: PaginationParams = Depends(),
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(require_admin())
+):
+    result = await db.execute(select(User).limit(params.limit).offset(params.skip))
+    users = result.scalars().all()
+    user_list = [
+        {
+            "id": str(u.id),
+            "email": u.email,
+            "first_name": u.first_name,
+            "last_name": u.last_name,
+            "name": f"{u.first_name} {u.last_name}".strip(),
+            "avatar": None,
+            "role": u.role.value if hasattr(u.role, 'value') else u.role
+        } for u in users
+
