@@ -26,7 +26,7 @@ export default function DeveloperPortal() {
       name: 'Institute UI',
       description: 'Verify users, view network analytics, and manage drives.',
       icon: 'account-balance',
-      route: '/institution',
+      route: '/institute',
       color: '#0b1c30',
       bg: '#f2f3f9',
     },

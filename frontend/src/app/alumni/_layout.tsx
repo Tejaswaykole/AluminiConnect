@@ -12,7 +12,7 @@ export default function AlumniLayout() {
   const navItems = [
     { name: 'Dashboard', icon: 'dashboard', href: '/alumni' },
     { name: 'Opportunities', icon: 'work', href: '/alumni/opportunities' },
-    { name: 'Profile', icon: 'account_circle', href: '/alumni/profile' },
+    { name: 'Profile', icon: 'account-circle', href: '/alumni/profile' },
   ];
 
   return (
@@ -126,14 +126,7 @@ export default function AlumniLayout() {
               tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
             }}
           />
-          <Tabs.Screen name="events" options={{ href: null }} />
           <Tabs.Screen name="settings" options={{ href: null }} />
-          <Tabs.Screen name="communities" options={{ href: null }} />
-          <Tabs.Screen name="contributions" options={{ href: null }} />
-          <Tabs.Screen name="notifications" options={{ href: null }} />
-          <Tabs.Screen name="discover" options={{ href: null }} />
-          <Tabs.Screen name="messages" options={{ href: null }} />
-          <Tabs.Screen name="mentorship" options={{ href: null }} />
         </Tabs>
       </View>
     </View>

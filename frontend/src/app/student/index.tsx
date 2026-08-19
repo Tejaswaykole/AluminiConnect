@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, Image, Platform } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image, Platform, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { STUDENT_USER } from '../../mocks';
@@ -113,7 +113,10 @@ export default function StudentDashboard() {
               <Text className="text-[16px] text-student-on-surface-variant">Software Engineer at Google</Text>
               <Text className="text-[12px] font-medium text-student-secondary mt-1">Class of '19 • CS Major</Text>
             </View>
-            <TouchableOpacity className="bg-student-surface border border-student-outline-variant px-4 py-2 rounded-lg hover:bg-student-surface-container-high transition-colors">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('Connect Request', 'Connection request sent to Sarah Jenkins!')}
+              className="bg-student-surface border border-student-outline-variant px-4 py-2 rounded-lg hover:bg-student-surface-container-high transition-colors"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">Connect</Text>
             </TouchableOpacity>
           </View>
@@ -129,7 +132,10 @@ export default function StudentDashboard() {
               <Text className="text-[16px] text-student-on-surface-variant">Product Manager at Stripe</Text>
               <Text className="text-[12px] font-medium text-student-secondary mt-1">Class of '17 • Business</Text>
             </View>
-            <TouchableOpacity className="bg-student-surface border border-student-outline-variant px-4 py-2 rounded-lg hover:bg-student-surface-container-high transition-colors">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('Connect Request', 'Connection request sent to Michael Chang!')}
+              className="bg-student-surface border border-student-outline-variant px-4 py-2 rounded-lg hover:bg-student-surface-container-high transition-colors"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">Connect</Text>
             </TouchableOpacity>
           </View>
@@ -170,7 +176,10 @@ export default function StudentDashboard() {
                 </View>
               </View>
             </View>
-            <TouchableOpacity className="w-full md:w-auto mt-4 md:mt-0 bg-student-surface border border-student-outline-variant px-6 py-2 rounded-lg font-medium text-student-on-surface hover:bg-student-surface-container-high transition-colors items-center justify-center">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('RSVP', 'You have successfully RSVP\'d to this event!')}
+              className="w-full md:w-auto mt-4 md:mt-0 bg-student-surface border border-student-outline-variant px-6 py-2 rounded-lg font-medium text-student-on-surface hover:bg-student-surface-container-high transition-colors items-center justify-center"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">RSVP</Text>
             </TouchableOpacity>
           </View>
@@ -200,7 +209,10 @@ export default function StudentDashboard() {
                 </View>
               </View>
             </View>
-            <TouchableOpacity className="w-full md:w-auto mt-4 md:mt-0 bg-student-surface border border-student-outline-variant px-6 py-2 rounded-lg font-medium text-student-on-surface hover:bg-student-surface-container-high transition-colors items-center justify-center">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('RSVP', 'You have successfully RSVP\'d to this event!')}
+              className="w-full md:w-auto mt-4 md:mt-0 bg-student-surface border border-student-outline-variant px-6 py-2 rounded-lg font-medium text-student-on-surface hover:bg-student-surface-container-high transition-colors items-center justify-center"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">RSVP</Text>
             </TouchableOpacity>
           </View>

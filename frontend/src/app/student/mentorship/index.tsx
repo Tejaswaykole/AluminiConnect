@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, Image, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useMentors, useRequestMentorship } from '../../../hooks/queries/useMentorship';
 
@@ -43,7 +43,10 @@ export default function StudentMentorshipCenter() {
             className="w-full bg-student-surface rounded-xl border border-student-outline-variant py-3.5 pl-12 pr-4 text-[16px] text-student-on-surface focus:border-student-primary transition-colors shadow-sm"
           />
         </View>
-        <TouchableOpacity className="bg-student-surface border border-student-outline-variant rounded-xl px-6 py-3.5 flex-row items-center justify-center gap-2 shadow-sm hover:bg-student-surface-container-high transition-colors">
+        <TouchableOpacity 
+          onPress={() => Alert.alert('Filters', 'Advanced filtering options coming soon!')}
+          className="bg-student-surface border border-student-outline-variant rounded-xl px-6 py-3.5 flex-row items-center justify-center gap-2 shadow-sm hover:bg-student-surface-container-high transition-colors"
+        >
           <MaterialIcons name="tune" size={20} color="#0b1c30" />
           <Text className="text-[16px] font-medium text-student-on-surface">Filters</Text>
         </TouchableOpacity>

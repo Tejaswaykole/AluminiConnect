@@ -15,7 +15,7 @@ export default function StudentLayout() {
     { name: 'Mentorship', icon: 'handshake', href: '/student/mentorship' },
     { name: 'Connections', icon: 'group', href: '/student/connections' },
     { name: 'Community', icon: 'forum', href: '/student/community' },
-    { name: 'Profile', icon: 'account_circle', href: '/student/profile' },
+    { name: 'Profile', icon: 'account-circle', href: '/student/profile' },
   ];
 
   return (

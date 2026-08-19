@@ -14,6 +14,30 @@ from api.dependencies.pagination import PaginationParams
 
 router = APIRouter()
 
+@router.get("/", response_model=StandardResponse)
+async def get_connections(
+    current_user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db)
+):
+    result = await db.execute(select(Connection).where(
+        or_(Connection.requester_id == current_user_id, Connection.target_id == current_user_id),
+        Connection.status == ConnectionStatus.ACCEPTED
+    ))
+    connections = result.scalars().all()
+    return StandardResponse(success=True, data=[ConnectionResponse.model_validate(c).model_dump(mode='json') for c in connections])
+
+@router.get("/requests", response_model=StandardResponse)
+async def get_connection_requests(
+    current_user_id: uuid.UUID = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db)
+):
+    result = await db.execute(select(Connection).where(
+        Connection.target_id == current_user_id,
+        Connection.status == ConnectionStatus.PENDING
+    ))
+    requests = result.scalars().all()
+    return StandardResponse(success=True, data=[ConnectionResponse.model_validate(r).model_dump(mode='json') for r in requests])
+
 @router.post("/request", response_model=StandardResponse)
 async def request_connection(
     payload: ConnectionRequest,

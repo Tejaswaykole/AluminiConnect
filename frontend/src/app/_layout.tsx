@@ -17,14 +17,11 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: '#ffffff' },
           }}
         >
-          {/* Navigation Route Groups */}
           <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(admin)" />
-          <Stack.Screen name="(placement)" />
+          <Stack.Screen name="admin" />
           <Stack.Screen name="student" />
           <Stack.Screen name="alumni" />
           <Stack.Screen name="institute" />
-          <Stack.Screen name="company" />
         </Stack>
       </QueryClientProvider>
     </SafeAreaProvider>

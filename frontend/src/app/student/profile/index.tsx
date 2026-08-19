@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, Platform, TextInput } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image, Platform, TextInput, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { STUDENT_USER } from '../../../mocks';
 
@@ -22,7 +22,14 @@ export default function StudentProfile() {
       <View className="mb-8 flex-row items-center justify-between">
         <Text className="text-[32px] md:text-[48px] font-bold text-student-on-surface tracking-tight">My Profile</Text>
         <TouchableOpacity 
-          onPress={() => setIsEditing(!isEditing)}
+          onPress={() => {
+            if (isEditing) {
+              Alert.alert("Success", "Profile updated successfully!");
+              setIsEditing(false);
+            } else {
+              setIsEditing(true);
+            }
+          }}
           className="bg-student-surface border border-student-outline-variant px-4 py-2 rounded-lg flex-row items-center gap-2 hover:bg-student-surface-container-high transition-colors"
         >
           <MaterialIcons name={isEditing ? 'check' : 'edit'} size={20} color="#0b1c30" />
@@ -73,7 +80,10 @@ export default function StudentProfile() {
               <View className="bg-student-primary-container h-full rounded-full w-[70%]" />
             </View>
             <Text className="text-[14px] text-student-on-surface-variant">Add your Resume to reach 100%.</Text>
-            <TouchableOpacity className="w-full mt-4 bg-student-surface border border-student-outline-variant py-2 rounded-lg items-center justify-center hover:bg-student-surface-container-high transition-colors">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('Upload Resume', 'Please select a PDF or DOCX file to upload.')}
+              className="w-full mt-4 bg-student-surface border border-student-outline-variant py-2 rounded-lg items-center justify-center hover:bg-student-surface-container-high transition-colors"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">Upload Resume</Text>
             </TouchableOpacity>
           </View>
@@ -102,7 +112,7 @@ export default function StudentProfile() {
             <View className="flex-row items-center justify-between mb-4">
               <Text className="text-[20px] font-semibold text-student-on-surface">Skills</Text>
               {isEditing && (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => Alert.alert('Add Skill', 'Enter a new skill name.')}>
                   <Text className="text-[14px] font-medium text-student-primary hover:underline">Add Skill</Text>
                 </TouchableOpacity>
               )}
@@ -125,7 +135,7 @@ export default function StudentProfile() {
             <View className="flex-row items-center justify-between mb-6">
               <Text className="text-[20px] font-semibold text-student-on-surface">Experience</Text>
               {isEditing && (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => Alert.alert('Add Experience', 'Enter details for your new experience.')}>
                   <Text className="text-[14px] font-medium text-student-primary hover:underline">Add Experience</Text>
                 </TouchableOpacity>
               )}

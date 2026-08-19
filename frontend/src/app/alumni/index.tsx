@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, ScrollView, Image, Text, Platform } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Image, Text, Platform, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ALUMNI_USER } from '../../mocks';
@@ -34,7 +34,10 @@ export default function AlumniDashboard() {
           <TouchableOpacity className="md:hidden p-2 rounded-full hover:bg-alumni-surface-container-high">
             <MaterialIcons name="search" size={24} color="#191c20" />
           </TouchableOpacity>
-          <TouchableOpacity className="relative p-2 rounded-full hover:bg-alumni-surface-container-high">
+          <TouchableOpacity 
+            onPress={() => Alert.alert('Notifications', 'You have no new notifications.')}
+            className="relative p-2 rounded-full hover:bg-alumni-surface-container-high"
+          >
             <MaterialIcons name="notifications" size={24} color="#191c20" />
             <View className="absolute top-1 right-1 w-2 h-2 bg-[#ba1a1a] rounded-full border-2 border-alumni-surface-card" />
           </TouchableOpacity>
@@ -116,7 +119,7 @@ export default function AlumniDashboard() {
           <View className="mb-6">
             <View className="flex-row items-center justify-between mb-4">
               <Text className="text-[20px] font-semibold text-alumni-on-surface">Mentorship Overview</Text>
-              <TouchableOpacity onPress={() => router.push('/alumni/mentorship')}>
+              <TouchableOpacity onPress={() => Alert.alert('Mentorship', 'Mentorship portal coming soon!')}>
                 <Text className="text-[14px] text-alumni-primary hover:underline">View All</Text>
               </TouchableOpacity>
             </View>
@@ -167,27 +170,36 @@ export default function AlumniDashboard() {
           {/* Stats Summary */}
           <View className="flex-row flex-wrap -mx-2 mb-6">
             <View className="w-1/2 px-2 mb-4">
-              <View className="bg-alumni-surface-card p-4 rounded-xl border border-alumni-border-subtle shadow-sm flex-col items-center text-center">
+              <TouchableOpacity 
+                onPress={() => Alert.alert('Connections', 'Viewing your 1,200 connections...')}
+                className="bg-alumni-surface-card p-4 rounded-xl border border-alumni-border-subtle shadow-sm flex-col items-center text-center hover:bg-alumni-surface-container-low transition-colors"
+              >
                 <MaterialIcons name="hub" size={24} color="#3525cd" className="mb-1" />
                 <Text className="text-[24px] font-bold text-alumni-on-surface">1.2k</Text>
                 <Text className="text-[12px] text-alumni-on-surface-variant">Connections</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             <View className="w-1/2 px-2 mb-4">
-              <View className="bg-alumni-surface-card p-4 rounded-xl border border-alumni-border-subtle shadow-sm flex-col items-center text-center">
+              <TouchableOpacity 
+                onPress={() => router.push('/alumni/opportunities')}
+                className="bg-alumni-surface-card p-4 rounded-xl border border-alumni-border-subtle shadow-sm flex-col items-center text-center hover:bg-alumni-surface-container-low transition-colors"
+              >
                 <MaterialIcons name="assignment" size={24} color="#5b598c" className="mb-1" />
                 <Text className="text-[24px] font-bold text-alumni-on-surface">12</Text>
                 <Text className="text-[12px] text-alumni-on-surface-variant">Jobs Posted</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             <View className="w-full px-2">
-              <View className="bg-alumni-surface-card p-4 rounded-xl border border-alumni-border-subtle shadow-sm flex-col items-center text-center">
+              <TouchableOpacity 
+                onPress={() => Alert.alert('Mentorship Requests', 'You have 3 active mentorship requests pending your review.')}
+                className="bg-alumni-surface-card p-4 rounded-xl border border-alumni-border-subtle shadow-sm flex-col items-center text-center hover:bg-alumni-surface-container-low transition-colors"
+              >
                 <View className="flex-row items-center gap-2 mb-1">
                   <MaterialIcons name="diversity-3" size={24} color="#3a495f" />
                   <Text className="text-[24px] font-bold text-alumni-on-surface">3</Text>
                 </View>
                 <Text className="text-[12px] text-alumni-on-surface-variant">Active Mentorship Requests</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -195,7 +207,10 @@ export default function AlumniDashboard() {
           <View className="bg-alumni-surface-card rounded-xl border border-alumni-border-subtle shadow-sm flex-col h-[400px]">
             <View className="p-4 border-b border-alumni-border-subtle flex-row items-center justify-between">
               <Text className="text-[20px] font-semibold text-alumni-on-surface">Recent Activity</Text>
-              <TouchableOpacity className="text-alumni-on-surface-variant hover:text-alumni-primary transition-colors">
+              <TouchableOpacity 
+                onPress={() => Alert.alert('Filters', 'Activity filters coming soon!')}
+                className="text-alumni-on-surface-variant hover:text-alumni-primary transition-colors"
+              >
                 <MaterialIcons name="filter-list" size={24} color="#464555" />
               </TouchableOpacity>
             </View>

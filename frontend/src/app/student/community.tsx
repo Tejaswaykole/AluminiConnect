@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useCommunities, useJoinCommunity } from '../../hooks/queries/useCommunity';
 
@@ -44,7 +44,10 @@ export default function StudentCommunity() {
             className="w-full bg-student-surface rounded-xl border border-student-outline-variant py-3.5 pl-12 pr-4 text-[16px] text-student-on-surface focus:border-student-primary transition-colors shadow-sm"
           />
         </View>
-        <TouchableOpacity className="bg-student-primary rounded-xl px-6 py-3.5 flex-row items-center justify-center shadow-sm hover:bg-student-primary/90 transition-colors">
+        <TouchableOpacity 
+          onPress={() => Alert.alert('Create Group', 'Group creation wizard coming soon!')}
+          className="bg-student-primary rounded-xl px-6 py-3.5 flex-row items-center justify-center shadow-sm hover:bg-student-primary/90 transition-colors"
+        >
           <Text className="text-[16px] font-medium text-student-on-primary">Create Group</Text>
         </TouchableOpacity>
       </View>

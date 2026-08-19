@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, Image, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function StudentOpportunitiesHub() {
@@ -39,7 +39,10 @@ export default function StudentOpportunitiesHub() {
             className="w-full bg-student-surface rounded-xl border border-student-outline-variant py-3.5 pl-12 pr-4 text-[16px] text-student-on-surface focus:border-student-primary transition-colors shadow-sm"
           />
         </View>
-        <TouchableOpacity className="bg-student-surface border border-student-outline-variant rounded-xl px-6 py-3.5 flex-row items-center justify-center gap-2 shadow-sm hover:bg-student-surface-container-high transition-colors">
+        <TouchableOpacity 
+          onPress={() => Alert.alert('Filters', 'Job filters coming soon!')}
+          className="bg-student-surface border border-student-outline-variant rounded-xl px-6 py-3.5 flex-row items-center justify-center gap-2 shadow-sm hover:bg-student-surface-container-high transition-colors"
+        >
           <MaterialIcons name="filter-list" size={20} color="#0b1c30" />
           <Text className="text-[16px] font-medium text-student-on-surface">Filters</Text>
         </TouchableOpacity>
@@ -62,7 +65,8 @@ export default function StudentOpportunitiesHub() {
 
       {/* Job Grid */}
       <View className="flex-col md:flex-row flex-wrap -mx-3">
-        {/* Job Card 1 */}
+        {/* Job Card 1 (Internship) */}
+        {(activeTab === 'All' || activeTab === 'Internships') && (
         <View className="w-full md:w-1/2 lg:w-1/3 px-3 mb-6">
           <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow h-full flex-col">
             <View className="flex-row items-start justify-between mb-4">
@@ -98,13 +102,18 @@ export default function StudentOpportunitiesHub() {
               </View>
             </View>
 
-            <TouchableOpacity className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('Job Details', 'Full job description and application portal coming soon.')}
+              className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">View Details</Text>
             </TouchableOpacity>
           </View>
         </View>
+        )}
 
-        {/* Job Card 2 */}
+        {/* Job Card 2 (Entry Level & Referral) */}
+        {(activeTab === 'All' || activeTab === 'Entry Level' || activeTab === 'Referrals') && (
         <View className="w-full md:w-1/2 lg:w-1/3 px-3 mb-6">
           <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow h-full flex-col">
             <View className="flex-row items-start justify-between mb-4">
@@ -139,11 +148,15 @@ export default function StudentOpportunitiesHub() {
               </View>
             </View>
 
-            <TouchableOpacity className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors">
+            <TouchableOpacity 
+              onPress={() => Alert.alert('Job Details', 'Full job description and application portal coming soon.')}
+              className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors"
+            >
               <Text className="text-[14px] font-medium text-student-on-surface">View Details</Text>
             </TouchableOpacity>
           </View>
         </View>
+        )}
       </View>
     </ScrollView>
   );
