@@ -11,15 +11,16 @@ export const apiClient = axios.create({
   timeout: 10000,
 });
 
+import { useAuthStore } from '../store/authStore';
+
 const USE_MOCK_BACKEND = false; // Set to true to prevent browser CORS/Network errors when backend is offline
 
 apiClient.interceptors.request.use(async (config) => {
   if (USE_MOCK_BACKEND) {
     throw new axios.Cancel("Backend mock mode active");
   }
-  // Logic to inject token from secure storage
-  // const token = await SecureStore.getItemAsync('userToken');
-  // if (token) config.headers.Authorization = `Bearer ${token}`;
+  const token = useAuthStore.getState().token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 

@@ -6,7 +6,7 @@ from sqlalchemy import desc
 from database.session import get_db
 from schemas.base import StandardResponse
 from schemas.community import CommunityCreate, CommunityResponse, CommunityPostCreate, CommunityPostResponse
-from models.foundation import Community, CommunityPost
+from models.community import Community, CommunityPost
 from api.dependencies.auth import get_current_user_id
 
 router = APIRouter()
