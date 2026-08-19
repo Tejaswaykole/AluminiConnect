@@ -7,7 +7,7 @@ from sqlalchemy import desc
 from database.session import get_db
 from schemas.base import StandardResponse
 from schemas.announcements import AnnouncementCreate, AnnouncementResponse
-from models.foundation import Announcement, AnnouncementStatus, AnnouncementScope
+from models.foundation import Announcement, AnnouncementStatus
 from api.dependencies.auth import get_current_user_id
 
 router = APIRouter()
@@ -18,7 +18,7 @@ async def create_announcement(payload: AnnouncementCreate, current_user_id: uuid
     ann = Announcement(
         title=payload.title,
         content=payload.content,
-        scope=AnnouncementScope[payload.scope],
+        scope=payload.scope,
         target_audience=payload.target_audience,
         author_id=current_user_id,
         status=AnnouncementStatus.PUBLISHED,

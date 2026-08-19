@@ -18,8 +18,8 @@ from models.enums import UserRole, VerificationStatus, OpportunityStatus
 import uuid
 from datetime import datetime, timedelta
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./almabridge.db")
-engine = create_async_engine(DATABASE_URL, connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {})
+DATABASE_URL = os.getenv("DATABASE_URL")
+engine = create_async_engine(DATABASE_URL)
 AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 async def seed_data():

@@ -18,5 +18,10 @@ api_router.include_router(portfolios.router, prefix="/portfolios", tags=["Portfo
 api_router.include_router(contributions.router, prefix="/contributions", tags=["Contributions"])
 api_router.include_router(audit_logs.router, prefix="/audit-logs", tags=["Audit"])
 api_router.include_router(drives.router, prefix="/drives", tags=["Placement Drives"])
-from .endpoints import recommendations
+from .endpoints import recommendations, connections, messaging, announcements, reports, community
 api_router.include_router(recommendations.router, prefix="/recommendations", tags=["Recommendations"])
+api_router.include_router(connections.router, prefix="/connections", tags=["Connections"])
+api_router.include_router(messaging.router, prefix="/messaging", tags=["Messaging"])
+api_router.include_router(announcements.router, prefix="/announcements", tags=["Announcements"])
+api_router.include_router(reports.router, prefix="/reports", tags=["Reports"])
+api_router.include_router(community.router, prefix="/community", tags=["Community"])
