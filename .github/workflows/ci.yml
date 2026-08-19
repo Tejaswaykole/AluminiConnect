@@ -9,6 +9,21 @@ on:
 jobs:
   backend-test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v3
     
@@ -24,10 +39,16 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-asyncio httpx
         
+    - name: Setup Database
+      working-directory: ./backend
+      env:
+        DATABASE_URL: "postgresql+asyncpg://postgres:postgres@localhost:5432/postgres"
+      run: python create_all.py
+
     - name: Run Backend Tests
       working-directory: ./backend
       env:
-        DATABASE_URL: "sqlite+aiosqlite:///:memory:"
+        DATABASE_URL: "postgresql+asyncpg://postgres:postgres@localhost:5432/postgres"
       run: pytest tests/
 
   frontend-test:
