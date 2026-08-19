@@ -1,45 +1,37 @@
 import { Tabs, useRouter, usePathname } from 'expo-router';
-import { View, useWindowDimensions, TouchableOpacity, Text, Platform, Image } from 'react-native';
+import { View, useWindowDimensions, TouchableOpacity, Text, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { ALUMNI_USER } from '../../mocks';
 
-export default function AlumniLayout() {
+export default function AdminLayout() {
   const { width } = useWindowDimensions();
   const isDesktop = width >= 1024;
   const router = useRouter();
   const pathname = usePathname();
 
   const navItems = [
-    { name: 'Dashboard', icon: 'dashboard', href: '/alumni' },
-    { name: 'Opportunities', icon: 'work', href: '/alumni/opportunities' },
-    { name: 'Profile', icon: 'account_circle', href: '/alumni/profile' },
+    { name: 'Platform Control', icon: 'dashboard', href: '/admin' },
+    { name: 'User Management', icon: 'people', href: '/admin/users' },
+    { name: 'System Settings', icon: 'settings', href: '/admin/settings' },
   ];
 
   return (
-    <View className="flex-1 flex-row bg-alumni-background w-full h-full">
+    <View className="flex-1 flex-row bg-admin-background w-full h-full">
       {/* Desktop Sidebar */}
       {isDesktop && (
         <View 
-          className="w-[280px] h-full bg-alumni-surface-container-low border-r border-alumni-outline-variant flex-col p-4 z-40"
+          className="w-[280px] h-full bg-admin-surface-container-low border-r border-admin-outline-variant flex-col p-4 z-40"
           style={Platform.OS === 'web' ? { position: 'sticky', top: 0, height: '100vh' } as any : {}}
         >
           {/* Header */}
-          <View className="flex-row items-center gap-4 mb-4">
-            <Image 
-              source={{ uri: ALUMNI_USER.avatar }} 
-              className="w-12 h-12 rounded-full border-2 border-alumni-surface"
-              resizeMode="cover"
-            />
-            <View className="flex-col">
-              <Text className="text-[20px] font-bold text-alumni-primary">{ALUMNI_USER.name}</Text>
-              <Text className="text-[12px] text-alumni-on-surface-variant">Class of '18</Text>
-            </View>
+          <View className="flex-col gap-1 mb-8 pt-4 px-2">
+            <Text className="text-[20px] font-bold text-admin-primary">System Admin</Text>
+            <Text className="text-[12px] text-admin-on-surface-variant">AlumniConnect Control</Text>
           </View>
 
           {/* Navigation Links */}
-          <View className="flex-col gap-2 flex-grow mt-4">
+          <View className="flex-col gap-2 flex-grow">
             {navItems.map((item) => {
-              const isActive = pathname === item.href || (item.href !== '/alumni' && pathname.startsWith(item.href));
+              const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
               
               return (
                 <TouchableOpacity
@@ -47,8 +39,8 @@ export default function AlumniLayout() {
                   onPress={() => router.push(item.href as any)}
                   className={`flex-row items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive 
-                      ? 'bg-alumni-primary-container' 
-                      : 'hover:bg-alumni-surface-container-high'
+                      ? 'bg-admin-primary-container' 
+                      : 'hover:bg-admin-surface-container-high'
                   }`}
                 >
                   <MaterialIcons 
@@ -58,7 +50,7 @@ export default function AlumniLayout() {
                   />
                   <Text 
                     className={`text-[14px] font-medium ${
-                      isActive ? 'text-alumni-on-primary-container font-bold' : 'text-alumni-secondary'
+                      isActive ? 'text-admin-on-primary-container font-bold' : 'text-admin-secondary'
                     }`}
                   >
                     {item.name}
@@ -69,20 +61,20 @@ export default function AlumniLayout() {
           </View>
 
           {/* Bottom Actions */}
-          <View className="mt-auto pt-4 border-t border-alumni-outline-variant">
+          <View className="mt-auto pt-4 border-t border-admin-outline-variant">
             <TouchableOpacity 
               onPress={() => router.push('/login')}
-              className="flex-row items-center gap-3 px-4 py-3 rounded-lg hover:bg-alumni-surface-container-high transition-colors"
+              className="flex-row items-center gap-3 px-4 py-3 rounded-lg hover:bg-admin-surface-container-high transition-colors"
             >
               <MaterialIcons name="logout" size={24} color="#5b598c" />
-              <Text className="text-[14px] font-medium text-alumni-secondary">Logout</Text>
+              <Text className="text-[14px] font-medium text-admin-secondary">Logout</Text>
             </TouchableOpacity>
           </View>
         </View>
       )}
 
       {/* Main Content Area with Mobile Bottom Tabs */}
-      <View className="flex-1 h-full w-full bg-alumni-background">
+      <View className="flex-1 h-full w-full bg-admin-background">
         <Tabs
           screenOptions={{
             headerShown: false,
@@ -108,32 +100,24 @@ export default function AlumniLayout() {
           <Tabs.Screen
             name="index"
             options={{
-              title: 'Home',
+              title: 'Dashboard',
               tabBarIcon: ({ color }) => <MaterialIcons name="dashboard" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
-            name="opportunities"
+            name="users"
             options={{
-              title: 'Jobs',
-              tabBarIcon: ({ color }) => <MaterialIcons name="work" size={24} color={color} />,
+              title: 'Users',
+              tabBarIcon: ({ color }) => <MaterialIcons name="people" size={24} color={color} />,
             }}
           />
           <Tabs.Screen
-            name="profile"
+            name="settings"
             options={{
-              title: 'Profile',
-              tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
+              title: 'Settings',
+              tabBarIcon: ({ color }) => <MaterialIcons name="settings" size={24} color={color} />,
             }}
           />
-          <Tabs.Screen name="events" options={{ href: null }} />
-          <Tabs.Screen name="settings" options={{ href: null }} />
-          <Tabs.Screen name="communities" options={{ href: null }} />
-          <Tabs.Screen name="contributions" options={{ href: null }} />
-          <Tabs.Screen name="notifications" options={{ href: null }} />
-          <Tabs.Screen name="discover" options={{ href: null }} />
-          <Tabs.Screen name="messages" options={{ href: null }} />
-          <Tabs.Screen name="mentorship" options={{ href: null }} />
         </Tabs>
       </View>
     </View>
