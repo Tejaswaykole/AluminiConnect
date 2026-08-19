@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, Platform, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { STUDENT_USER } from '../../../mocks';
+import { useUser } from '../../../hooks/useUser';
+import { ActivityIndicator, Text as RNText } from 'react-native';
 
 export default function StudentProfile() {
   const [isEditing, setIsEditing] = useState(false);
+  const { data: STUDENT_USER, isLoading } = useUser();
+  if (isLoading || !STUDENT_USER) return <ActivityIndicator className="m-auto" />;
 
   return (
     <ScrollView 
@@ -149,3 +152,5 @@ export default function StudentProfile() {
     </ScrollView>
   );
 }
+
+

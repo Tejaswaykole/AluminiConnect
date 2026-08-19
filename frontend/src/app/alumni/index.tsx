@@ -1,10 +1,13 @@
 import { View, TouchableOpacity, ScrollView, Image, Text, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import { ALUMNI_USER } from '../../mocks';
+import { useUser } from '../../hooks/useUser';
+import { ActivityIndicator, Text as RNText } from 'react-native';
 
 export default function AlumniDashboard() {
   const router = useRouter();
+  const { data: ALUMNI_USER, isLoading } = useUser();
+  if (isLoading || !ALUMNI_USER) return <ActivityIndicator className="m-auto" />;
 
   return (
     <ScrollView 
@@ -250,3 +253,4 @@ export default function AlumniDashboard() {
     </ScrollView>
   );
 }
+

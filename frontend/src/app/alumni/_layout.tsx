@@ -1,13 +1,19 @@
-import { Tabs, useRouter, usePathname } from 'expo-router';
+import { Tabs, useRouter, usePathname, Redirect } from 'expo-router';
 import { View, useWindowDimensions, TouchableOpacity, Text, Platform, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { ALUMNI_USER } from '../../mocks';
-
+import { useUser } from '../../hooks/useUser';
+import { ActivityIndicator, Text as RNText } from 'react-native';
 export default function AlumniLayout() {
-  const { width } = useWindowDimensions();
-  const isDesktop = width >= 1024;
   const router = useRouter();
+  const { data: ALUMNI_USER, isLoading } = useUser();
+  const { width } = useWindowDimensions();
   const pathname = usePathname();
+  const isDesktop = width >= 1024;
+  
+  if (isLoading) return <ActivityIndicator className="m-auto" />;
+  if (!ALUMNI_USER) {
+    return <Redirect href="/login" />;
+  }
 
   const navItems = [
     { name: 'Dashboard', icon: 'dashboard', href: '/alumni' },
@@ -126,14 +132,6 @@ export default function AlumniLayout() {
               tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
             }}
           />
-          <Tabs.Screen name="events" options={{ href: null }} />
-          <Tabs.Screen name="settings" options={{ href: null }} />
-          <Tabs.Screen name="communities" options={{ href: null }} />
-          <Tabs.Screen name="contributions" options={{ href: null }} />
-          <Tabs.Screen name="notifications" options={{ href: null }} />
-          <Tabs.Screen name="discover" options={{ href: null }} />
-          <Tabs.Screen name="messages" options={{ href: null }} />
-          <Tabs.Screen name="mentorship" options={{ href: null }} />
         </Tabs>
       </View>
     </View>

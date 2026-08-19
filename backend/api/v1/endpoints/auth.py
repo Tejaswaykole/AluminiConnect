@@ -100,7 +100,6 @@ async def register_alumni(data: AlumniRegistration, db: AsyncSession = Depends(g
             graduation_year=data.graduation_year,
             current_company=data.current_company,
             job_title=data.job_title,
-            department_id=data.department_id,
             mentorship_available=False
         )
         db.add(new_profile)

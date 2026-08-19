@@ -14,6 +14,10 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     resp = StandardResponse(success=False, message="Validation error", errors=errors)
     return JSONResponse(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, content=resp.model_dump())
 
+import logging
+logger = logging.getLogger(__name__)
+
 async def sqlalchemy_exception_handler(request: Request, exc: SQLAlchemyError):
+    logger.error(f"SQLAlchemy error: {exc}", exc_info=True)
     resp = StandardResponse(success=False, message="Database error occurred", errors=[str(exc)])
     return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content=resp.model_dump())

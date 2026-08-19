@@ -1,10 +1,23 @@
 import { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Platform, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useOpportunities } from '../../../hooks/useOpportunities';
+
+// Helper to format dates roughly
+const timeAgo = (dateStr: string) => {
+  const diffDays = Math.floor((new Date().getTime() - new Date(dateStr).getTime()) / (1000 * 3600 * 24));
+  if (diffDays === 0) return 'Today';
+  return `${diffDays}d ago`;
+};
 
 export default function StudentOpportunitiesHub() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('All');
+  
+  // Use the React Query hook to fetch live opportunities
+  const { data: opportunities, isLoading } = useOpportunities({ 
+    search: searchQuery || undefined 
+  });
 
   return (
     <ScrollView 
@@ -62,88 +75,69 @@ export default function StudentOpportunitiesHub() {
 
       {/* Job Grid */}
       <View className="flex-col md:flex-row flex-wrap -mx-3">
-        {/* Job Card 1 */}
-        <View className="w-full md:w-1/2 lg:w-1/3 px-3 mb-6">
-          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow h-full flex-col">
-            <View className="flex-row items-start justify-between mb-4">
-              <View className="w-12 h-12 bg-[#f8f9ff] border border-student-outline-variant rounded-lg flex items-center justify-center">
-                 <MaterialIcons name="business" size={28} color="#3525cd" />
-              </View>
-              <View className="bg-student-surface-container-high px-2 py-1 rounded">
-                <Text className="text-[12px] font-medium text-student-on-surface">1d ago</Text>
-              </View>
-            </View>
-            <Text className="text-[20px] font-semibold text-student-on-surface mb-1">Software Engineering Intern</Text>
-            <Text className="text-[16px] text-student-primary font-medium mb-3">Google</Text>
-            
-            <View className="flex-row items-center gap-4 mb-4 text-[14px]">
-              <View className="flex-row items-center gap-1">
-                <MaterialIcons name="location-on" size={16} color="#5c5f61" />
-                <Text className="text-student-secondary text-[14px]">Mountain View, CA</Text>
-              </View>
-              <View className="flex-row items-center gap-1">
-                <MaterialIcons name="work" size={16} color="#5c5f61" />
-                <Text className="text-student-secondary text-[14px]">Summer 2025</Text>
-              </View>
-            </View>
-
-            <View className="bg-student-surface-container-low rounded-lg p-3 mb-4 flex-row items-center gap-3 mt-auto">
-              <Image 
-                source={{ uri: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBgayeSHcBMoAtIOpWS24klStw0Vf64BsRHLNFHEmRMGR7H5zguzxCOekDn9YJEoFcJAxKRKClA62gZeomLFerwU2yVgiLRv6WhLXTg0fSmHvqB3T0D-t9w6vIyUnAmr0FuwRZzpdks7M4xI4haQCnKiQl7IRyFGrnqhzPDo3Vd0wczzKb98zqSBeLwuolYIUPH3JbsnnFGaP-hpG8bIa4dXvq9W2IDyTggBXpOZDfYI7z4uFoF8Qgb' }}
-                className="w-8 h-8 rounded-full border border-student-outline-variant"
-              />
-              <View>
-                <Text className="text-[12px] text-student-on-surface font-medium">Referred by Sarah Jenkins</Text>
-                <Text className="text-[10px] text-student-secondary">Alumni '19</Text>
-              </View>
-            </View>
-
-            <TouchableOpacity className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors">
-              <Text className="text-[14px] font-medium text-student-on-surface">View Details</Text>
-            </TouchableOpacity>
+        {isLoading ? (
+          <View className="w-full py-12 items-center justify-center">
+            <ActivityIndicator size="large" color="#3525cd" />
+            <Text className="mt-4 text-student-secondary font-medium">Loading opportunities...</Text>
           </View>
-        </View>
-
-        {/* Job Card 2 */}
-        <View className="w-full md:w-1/2 lg:w-1/3 px-3 mb-6">
-          <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow h-full flex-col">
-            <View className="flex-row items-start justify-between mb-4">
-              <View className="w-12 h-12 bg-[#f8f9ff] border border-student-outline-variant rounded-lg flex items-center justify-center">
-                 <MaterialIcons name="insights" size={28} color="#0f0069" />
-              </View>
-              <View className="bg-student-surface-container-high px-2 py-1 rounded">
-                <Text className="text-[12px] font-medium text-student-on-surface">3d ago</Text>
-              </View>
+        ) : !opportunities || opportunities.length === 0 ? (
+          <View className="w-full py-20 items-center justify-center">
+            <View className="w-16 h-16 bg-student-surface-container-high rounded-full items-center justify-center mb-4">
+              <MaterialIcons name="work-outline" size={32} color="#5c5f61" />
             </View>
-            <Text className="text-[20px] font-semibold text-student-on-surface mb-1">Data Science Analyst (Entry)</Text>
-            <Text className="text-[16px] text-student-primary font-medium mb-3">Bloomberg</Text>
-            
-            <View className="flex-row items-center gap-4 mb-4 text-[14px]">
-              <View className="flex-row items-center gap-1">
-                <MaterialIcons name="location-on" size={16} color="#5c5f61" />
-                <Text className="text-student-secondary text-[14px]">New York, NY</Text>
-              </View>
-              <View className="flex-row items-center gap-1">
-                <MaterialIcons name="work" size={16} color="#5c5f61" />
-                <Text className="text-student-secondary text-[14px]">Full-time</Text>
-              </View>
-            </View>
-
-            <View className="bg-student-surface-container-low rounded-lg p-3 mb-4 flex-row items-center gap-3 mt-auto">
-              <View className="w-8 h-8 rounded-full bg-student-tertiary-fixed border border-student-outline-variant items-center justify-center">
-                <Text className="text-student-on-tertiary-fixed font-bold">M</Text>
-              </View>
-              <View>
-                <Text className="text-[12px] text-student-on-surface font-medium">Referred by Mark T.</Text>
-                <Text className="text-[10px] text-student-secondary">Alumni '15</Text>
-              </View>
-            </View>
-
-            <TouchableOpacity className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors">
-              <Text className="text-[14px] font-medium text-student-on-surface">View Details</Text>
-            </TouchableOpacity>
+            <Text className="text-[18px] font-medium text-student-on-surface mb-2">No opportunities found</Text>
+            <Text className="text-[14px] text-student-secondary text-center max-w-sm">
+              {searchQuery ? "We couldn't find any opportunities matching your search." : "There are currently no open opportunities available."}
+            </Text>
           </View>
-        </View>
+        ) : (
+          opportunities.map((job) => (
+            <View key={job.id} className="w-full md:w-1/2 lg:w-1/3 px-3 mb-6">
+              <View className="bg-student-surface rounded-xl border border-student-outline-variant p-6 shadow-sm hover:shadow-md transition-shadow h-full flex-col">
+                <View className="flex-row items-start justify-between mb-4">
+                  <View className="w-12 h-12 bg-[#f8f9ff] border border-student-outline-variant rounded-lg flex items-center justify-center">
+                    <MaterialIcons name="business" size={28} color="#3525cd" />
+                  </View>
+                  <View className="bg-student-surface-container-high px-2 py-1 rounded">
+                    <Text className="text-[12px] font-medium text-student-on-surface">{timeAgo(job.created_at)}</Text>
+                  </View>
+                </View>
+                <Text className="text-[20px] font-semibold text-student-on-surface mb-1" numberOfLines={2}>
+                  {job.title}
+                </Text>
+                <Text className="text-[16px] text-student-primary font-medium mb-3">{job.company}</Text>
+                
+                <View className="flex-row items-center gap-4 mb-4 text-[14px]">
+                  {job.location && (
+                    <View className="flex-row items-center gap-1">
+                      <MaterialIcons name="location-on" size={16} color="#5c5f61" />
+                      <Text className="text-student-secondary text-[14px]" numberOfLines={1}>{job.location}</Text>
+                    </View>
+                  )}
+                  <View className="flex-row items-center gap-1">
+                    <MaterialIcons name="work" size={16} color="#5c5f61" />
+                    <Text className="text-student-secondary text-[14px]">Full-time</Text>
+                  </View>
+                </View>
+
+                {/* Just a static representation for referrers for now since backend doesn't attach them yet */}
+                <View className="bg-student-surface-container-low rounded-lg p-3 mb-4 flex-row items-center gap-3 mt-auto">
+                  <View className="w-8 h-8 rounded-full bg-student-tertiary-fixed border border-student-outline-variant items-center justify-center">
+                    <Text className="text-student-on-tertiary-fixed font-bold">A</Text>
+                  </View>
+                  <View>
+                    <Text className="text-[12px] text-student-on-surface font-medium">Shared by Alumni Network</Text>
+                    <Text className="text-[10px] text-student-secondary">AlumniConnect</Text>
+                  </View>
+                </View>
+
+                <TouchableOpacity className="w-full bg-student-surface border border-student-outline-variant rounded-lg py-2 items-center justify-center hover:bg-student-surface-container-high transition-colors">
+                  <Text className="text-[14px] font-medium text-student-on-surface">View Details</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))
+        )}
       </View>
     </ScrollView>
   );

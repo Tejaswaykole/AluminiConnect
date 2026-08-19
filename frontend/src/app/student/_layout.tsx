@@ -1,13 +1,19 @@
-import { Tabs, useRouter, usePathname } from 'expo-router';
+import { Tabs, useRouter, usePathname, Redirect } from 'expo-router';
 import { View, useWindowDimensions, TouchableOpacity, Text, Image, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { STUDENT_USER } from '../../mocks';
-
+import { useUser } from '../../hooks/useUser';
+import { ActivityIndicator, Text as RNText } from 'react-native';
 export default function StudentLayout() {
-  const { width } = useWindowDimensions();
-  const isDesktop = width >= 1024; // lg breakpoint
   const router = useRouter();
+  const { data: STUDENT_USER, isLoading } = useUser();
+  const { width } = useWindowDimensions();
   const pathname = usePathname();
+  const isDesktop = width >= 1024; // lg breakpoint
+  
+  if (isLoading) return <ActivityIndicator className="m-auto" />;
+  if (!STUDENT_USER) {
+    return <Redirect href="/login" />;
+  }
 
   const navItems = [
     { name: 'Dashboard', icon: 'dashboard', href: '/student' },
@@ -136,10 +142,6 @@ export default function StudentLayout() {
               tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
             }}
           />
-          {/* Hide these from bottom tabs to save space, accessible via other means or a 'More' tab if needed */}
-          <Tabs.Screen name="connections" options={{ href: null }} />
-          <Tabs.Screen name="community" options={{ href: null }} />
-          <Tabs.Screen name="settings" options={{ href: null }} />
         </Tabs>
       </View>
     </View>

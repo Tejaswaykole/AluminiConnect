@@ -1,35 +1,27 @@
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
-import { login } from '../../api/auth';
+import { devLogin } from '../../api/auth';
 import { useAuth } from '../../hooks/useAuth';
 
 export default function LoginScreen() {
   const router = useRouter();
   const { setToken } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loadingRole, setLoadingRole] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      setError('Please enter both email and password');
-      return;
-    }
-    
-    setLoading(true);
+  const handleRoleLogin = async (role: 'student' | 'alumni' | 'institute' | 'admin') => {
+    setLoadingRole(role);
     setError(null);
     
     try {
-      const response = await login(email, password);
+      const response = await devLogin(role);
       
-      if (response && response.access_token) {
-        setToken(response.access_token);
+      if (response && (response.access_token || response.token)) {
+        setToken(response.access_token || response.token);
         
         // Route based on role
-        const role = response.user?.role?.toLowerCase();
         if (role === 'student') router.replace('/student');
         else if (role === 'alumni') router.replace('/alumni');
         else if (role === 'admin') router.replace('/admin');
@@ -39,105 +31,83 @@ export default function LoginScreen() {
         setError('Invalid response from server');
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in. Please check your credentials.');
+      setError(err.message || 'Failed to sign in. Please check backend server.');
     } finally {
-      setLoading(false);
+      setLoadingRole(null);
     }
   };
 
-  return (
-    <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-student-surface items-center justify-center p-4 md:p-8"
+  const RoleButton = ({ role, title, icon, color, description }: any) => (
+    <TouchableOpacity 
+      onPress={() => handleRoleLogin(role)}
+      disabled={loadingRole !== null}
+      className={`w-full bg-student-surface-container-low rounded-xl p-6 border border-student-outline-variant shadow-sm hover:shadow-md transition-all flex-row items-center gap-4 group mb-4 ${loadingRole === role ? 'opacity-70' : ''}`}
     >
-      <View className="w-full max-w-[440px] bg-student-surface-card rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-student-border-subtle p-8 md:p-10">
+      <View className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: color + '20' }}>
+        <MaterialIcons name={icon} size={24} color={color} />
+      </View>
+      <View className="flex-1">
+        <Text className="text-[18px] font-semibold text-student-on-surface">{title}</Text>
+        <Text className="text-[14px] text-student-on-surface-variant mt-1">{description}</Text>
+      </View>
+      {loadingRole === role ? (
+        <ActivityIndicator color={color} size="small" />
+      ) : (
+        <MaterialIcons name="chevron-right" size={24} color={color} />
+      )}
+    </TouchableOpacity>
+  );
+
+  return (
+    <View className="flex-1 bg-student-background items-center justify-center p-4 md:p-8">
+      <View className="w-full max-w-[500px] bg-student-surface rounded-2xl shadow-sm border border-student-outline-variant p-8 md:p-10">
         
-        {/* Logo/Brand */}
         <View className="items-center mb-8">
-          <View className="w-16 h-16 bg-student-primary-container rounded-2xl items-center justify-center mb-4 transform rotate-3">
-             <MaterialIcons name="school" size={32} color="#ffffff" />
+          <View className="w-16 h-16 bg-[#3525cd] rounded-2xl items-center justify-center mb-4 transform rotate-3">
+             <MaterialIcons name="code" size={32} color="#ffffff" />
           </View>
-          <Text className="text-[28px] font-bold text-student-on-surface mb-2 tracking-tight">Welcome back</Text>
-          <Text className="text-[16px] text-student-on-surface-variant text-center">Enter your details to access your AlumniConnect account.</Text>
+          <Text className="text-[28px] font-bold text-student-on-surface mb-2 tracking-tight">Developer Login</Text>
+          <Text className="text-[16px] text-student-on-surface-variant text-center">Select a role below to instantly log in and test the application flows.</Text>
         </View>
 
         {error && (
           <View className="bg-student-error-container p-4 rounded-xl mb-6 flex-row items-center gap-3">
             <MaterialIcons name="error-outline" size={20} color="#ba1a1a" />
-            <Text className="text-[14px] text-student-error flex-1">{error}</Text>
+            <Text className="text-[14px] text-[#ba1a1a] flex-1">{error}</Text>
           </View>
         )}
 
-        <View className="space-y-5 flex-col">
-          {/* Email Input */}
-          <View>
-            <Text className="text-[14px] font-medium text-student-on-surface mb-2">Email Address</Text>
-            <View className="relative">
-              <View className="absolute left-4 top-3 z-10">
-                <MaterialIcons name="mail-outline" size={20} color="#777587" />
-              </View>
-              <TextInput
-                value={email}
-                onChangeText={setEmail}
-                placeholder="name@university.edu"
-                placeholderTextColor="#777587"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                className="w-full bg-student-surface-container-low border border-student-border-subtle rounded-xl py-3 pl-12 pr-4 text-[16px] text-student-on-surface focus:border-student-primary focus:bg-student-surface-card transition-colors"
-              />
-            </View>
-          </View>
-
-          {/* Password Input */}
-          <View className="mt-4">
-            <View className="flex-row justify-between items-center mb-2">
-              <Text className="text-[14px] font-medium text-student-on-surface">Password</Text>
-              <TouchableOpacity>
-                <Text className="text-[14px] font-medium text-student-primary hover:text-student-on-primary-fixed-variant">Forgot password?</Text>
-              </TouchableOpacity>
-            </View>
-            <View className="relative">
-              <View className="absolute left-4 top-3 z-10">
-                <MaterialIcons name="lock-outline" size={20} color="#777587" />
-              </View>
-              <TextInput
-                value={password}
-                onChangeText={setPassword}
-                placeholder="••••••••"
-                placeholderTextColor="#777587"
-                secureTextEntry
-                className="w-full bg-student-surface-container-low border border-student-border-subtle rounded-xl py-3 pl-12 pr-4 text-[16px] text-student-on-surface focus:border-student-primary focus:bg-student-surface-card transition-colors"
-              />
-            </View>
-          </View>
-
-          {/* Login Button */}
-          <TouchableOpacity 
-            onPress={handleLogin}
-            disabled={loading}
-            className={`w-full rounded-xl py-3.5 flex-row items-center justify-center mt-8 ${loading ? 'bg-student-primary/70' : 'bg-student-primary hover:bg-[#2c1ea3]'}`}
-          >
-            {loading ? (
-              <ActivityIndicator color="#ffffff" size="small" />
-            ) : (
-              <Text className="text-white text-[16px] font-semibold">Sign In</Text>
-            )}
-          </TouchableOpacity>
-        </View>
-
-        {/* Registration Links */}
-        <View className="mt-8 pt-6 border-t border-student-border-subtle items-center">
-          <Text className="text-[14px] text-student-on-surface-variant mb-4">Don't have an account?</Text>
-          <View className="flex-row flex-wrap justify-center gap-3">
-            <TouchableOpacity onPress={() => router.push('/register/student')} className="bg-student-surface-container-low px-4 py-2 rounded-lg border border-student-border-subtle hover:bg-student-surface-container-highest">
-              <Text className="text-[14px] font-medium text-student-on-surface">Join as Student</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push('/register/alumni')} className="bg-student-surface-container-low px-4 py-2 rounded-lg border border-student-border-subtle hover:bg-student-surface-container-highest">
-              <Text className="text-[14px] font-medium text-student-on-surface">Join as Alumni</Text>
-            </TouchableOpacity>
-          </View>
+        <View className="space-y-4">
+          <RoleButton 
+            role="student" 
+            title="Student" 
+            description="View jobs, connect with mentors, RSVP to events"
+            icon="school" 
+            color="#3525cd" 
+          />
+          <RoleButton 
+            role="alumni" 
+            title="Alumni" 
+            description="Post jobs, mentor students, network"
+            icon="workspace-premium" 
+            color="#006c4b" 
+          />
+          <RoleButton 
+            role="institute" 
+            title="Institution" 
+            description="Manage users, view analytics, broadcast"
+            icon="account-balance" 
+            color="#7a5200" 
+          />
+          <RoleButton 
+            role="admin" 
+            title="System Admin" 
+            description="Global settings, moderation, system health"
+            icon="admin-panel-settings" 
+            color="#ba1a1a" 
+          />
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
